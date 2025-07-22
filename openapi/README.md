@@ -45,17 +45,17 @@ All URIs are relative to *http://localhost*
 
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
-| *AuthApi* | [**apiV1AuthLoginPost**](docs/AuthApi.md#apiv1authloginpost) | **POST** /api/v1/auth/login |  |
-| *AuthApi* | [**apiV1AuthRegisterPost**](docs/AuthApi.md#apiv1authregisterpost) | **POST** /api/v1/auth/register |  |
+| *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
+| *AuthApi* | [**register**](docs/AuthApi.md#register) | **POST** /api/v1/auth/register |  |
 
 
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
- - [com.rizalanggoro.presensigo.openapi.models.AuthLoginRequest](docs/AuthLoginRequest.md)
- - [com.rizalanggoro.presensigo.openapi.models.AuthLoginResponse](docs/AuthLoginResponse.md)
- - [com.rizalanggoro.presensigo.openapi.models.AuthRegisterRequest](docs/AuthRegisterRequest.md)
- - [com.rizalanggoro.presensigo.openapi.models.AuthRegisterResponse](docs/AuthRegisterResponse.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsLoginRequest](docs/RequestsLoginRequest.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsRegisterRequest](docs/RequestsRegisterRequest.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesLoginResponse](docs/ResponsesLoginResponse.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesRegisterResponse](docs/ResponsesRegisterResponse.md)
 
 
 <a id="documentation-for-authorization"></a>

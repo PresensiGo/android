@@ -2,10 +2,10 @@
 README.md
 build.gradle
 docs/AuthApi.md
-docs/AuthLoginRequest.md
-docs/AuthLoginResponse.md
-docs/AuthRegisterRequest.md
-docs/AuthRegisterResponse.md
+docs/RequestsLoginRequest.md
+docs/RequestsRegisterRequest.md
+docs/ResponsesLoginResponse.md
+docs/ResponsesRegisterResponse.md
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 gradlew
@@ -22,7 +22,7 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/ApiClient.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/HttpResponse.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/RequestConfig.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/RequestMethod.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/AuthLoginRequest.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/AuthLoginResponse.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/AuthRegisterRequest.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/AuthRegisterResponse.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/RequestsLoginRequest.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/RequestsRegisterRequest.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesLoginResponse.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesRegisterResponse.kt

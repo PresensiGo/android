@@ -1,8 +1,9 @@
-package com.rizalanggoro.presensigo.internal.data.repositories
+package com.rizalanggoro.presensigo.data.repositories
 
 import android.util.Log
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
-import com.rizalanggoro.presensigo.openapi.models.AuthLoginRequest
+import com.rizalanggoro.presensigo.openapi.models.RequestsLoginRequest
+import com.rizalanggoro.presensigo.openapi.models.RequestsRegisterRequest
 
 class AuthRepository(
     private val authApi: AuthApi
@@ -12,8 +13,8 @@ class AuthRepository(
     }
 
     suspend fun login(email: String, password: String) = try {
-        val response = authApi.apiV1AuthLoginPost(
-            AuthLoginRequest(
+        val response = authApi.login(
+            RequestsLoginRequest(
                 email, password
             )
         )
@@ -30,7 +31,15 @@ class AuthRepository(
         e.printStackTrace()
     }
 
-    suspend fun register() {}
+    suspend fun register(name: String, email: String, password: String) = try {
+        val response = authApi.register(
+            RequestsRegisterRequest(
+                name = name, email = email, password = password
+            )
+        )
+    } catch (e: Exception) {
+        e.printStackTrace()
+    }
 
     suspend fun logout() {}
 

@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.pkg
+package com.rizalanggoro.presensigo.core
 
 import kotlinx.serialization.Serializable
 

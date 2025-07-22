@@ -1,6 +1,6 @@
-package com.rizalanggoro.presensigo.pkg.di
+package com.rizalanggoro.presensigo.core.di
 
-import com.rizalanggoro.presensigo.internal.presentation.auth.AuthViewModel
+import com.rizalanggoro.presensigo.presentation.auth.AuthViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 

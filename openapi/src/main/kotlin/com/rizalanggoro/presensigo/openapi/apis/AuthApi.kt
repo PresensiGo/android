@@ -15,10 +15,10 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.AuthLoginRequest
-import com.rizalanggoro.presensigo.openapi.models.AuthLoginResponse
-import com.rizalanggoro.presensigo.openapi.models.AuthRegisterRequest
-import com.rizalanggoro.presensigo.openapi.models.AuthRegisterResponse
+import com.rizalanggoro.presensigo.openapi.models.RequestsLoginRequest
+import com.rizalanggoro.presensigo.openapi.models.RequestsRegisterRequest
+import com.rizalanggoro.presensigo.openapi.models.ResponsesLoginResponse
+import com.rizalanggoro.presensigo.openapi.models.ResponsesRegisterResponse
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -46,10 +46,10 @@ import java.text.DateFormat
         * 
         * 
          * @param body Login request 
-         * @return AuthLoginResponse
+         * @return ResponsesLoginResponse
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun apiV1AuthLoginPost(body: AuthLoginRequest): HttpResponse<AuthLoginResponse> {
+        open suspend fun login(body: RequestsLoginRequest): HttpResponse<ResponsesLoginResponse> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -79,10 +79,10 @@ import java.text.DateFormat
         * 
         * 
          * @param body Login request 
-         * @return AuthRegisterResponse
+         * @return ResponsesRegisterResponse
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun apiV1AuthRegisterPost(body: AuthRegisterRequest): HttpResponse<AuthRegisterResponse> {
+        open suspend fun register(body: RequestsRegisterRequest): HttpResponse<ResponsesRegisterResponse> {
 
             val localVariableAuthNames = listOf<String>()
 

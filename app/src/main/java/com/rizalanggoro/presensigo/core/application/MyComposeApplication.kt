@@ -1,11 +1,11 @@
-package com.rizalanggoro.presensigo.pkg.application
+package com.rizalanggoro.presensigo.core.application
 
 import androidx.compose.runtime.Composable
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
-import com.rizalanggoro.presensigo.internal.presentation.auth.AuthScreen
-import com.rizalanggoro.presensigo.pkg.Routes
+import com.rizalanggoro.presensigo.core.Routes
+import com.rizalanggoro.presensigo.presentation.auth.AuthScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
 @Composable

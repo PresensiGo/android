@@ -1,9 +1,10 @@
-package com.rizalanggoro.presensigo.pkg.application
+package com.rizalanggoro.presensigo.core.application
 
 import android.app.Application
-import com.rizalanggoro.presensigo.pkg.di.repositoryModule
-import com.rizalanggoro.presensigo.pkg.di.serviceModule
-import com.rizalanggoro.presensigo.pkg.di.viewModelModule
+import com.rizalanggoro.presensigo.core.di.managerModule
+import com.rizalanggoro.presensigo.core.di.repositoryModule
+import com.rizalanggoro.presensigo.core.di.serviceModule
+import com.rizalanggoro.presensigo.core.di.viewModelModule
 import org.koin.core.context.startKoin
 
 class MyApplication : Application() {
@@ -12,6 +13,7 @@ class MyApplication : Application() {
 
         startKoin {
             modules(
+                managerModule,
                 serviceModule,
                 repositoryModule,
                 viewModelModule,

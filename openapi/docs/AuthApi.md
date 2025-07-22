@@ -4,13 +4,13 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**apiV1AuthLoginPost**](AuthApi.md#apiV1AuthLoginPost) | **POST** /api/v1/auth/login |  |
-| [**apiV1AuthRegisterPost**](AuthApi.md#apiV1AuthRegisterPost) | **POST** /api/v1/auth/register |  |
+| [**login**](AuthApi.md#login) | **POST** /api/v1/auth/login |  |
+| [**register**](AuthApi.md#register) | **POST** /api/v1/auth/register |  |
 
 
-<a id="apiV1AuthLoginPost"></a>
-# **apiV1AuthLoginPost**
-> AuthLoginResponse apiV1AuthLoginPost(body)
+<a id="login"></a>
+# **login**
+> ResponsesLoginResponse login(body)
 
 
 
@@ -21,15 +21,15 @@ All URIs are relative to *http://localhost*
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AuthApi()
-val body : AuthLoginRequest =  // AuthLoginRequest | Login request
+val body : RequestsLoginRequest =  // RequestsLoginRequest | Login request
 try {
-    val result : AuthLoginResponse = apiInstance.apiV1AuthLoginPost(body)
+    val result : ResponsesLoginResponse = apiInstance.login(body)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling AuthApi#apiV1AuthLoginPost")
+    println("4xx response calling AuthApi#login")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling AuthApi#apiV1AuthLoginPost")
+    println("5xx response calling AuthApi#login")
     e.printStackTrace()
 }
 ```
@@ -37,11 +37,11 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**AuthLoginRequest**](AuthLoginRequest.md)| Login request | |
+| **body** | [**RequestsLoginRequest**](RequestsLoginRequest.md)| Login request | |
 
 ### Return type
 
-[**AuthLoginResponse**](AuthLoginResponse.md)
+[**ResponsesLoginResponse**](ResponsesLoginResponse.md)
 
 ### Authorization
 
@@ -52,9 +52,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a id="apiV1AuthRegisterPost"></a>
-# **apiV1AuthRegisterPost**
-> AuthRegisterResponse apiV1AuthRegisterPost(body)
+<a id="register"></a>
+# **register**
+> ResponsesRegisterResponse register(body)
 
 
 
@@ -65,15 +65,15 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AuthApi()
-val body : AuthRegisterRequest =  // AuthRegisterRequest | Login request
+val body : RequestsRegisterRequest =  // RequestsRegisterRequest | Login request
 try {
-    val result : AuthRegisterResponse = apiInstance.apiV1AuthRegisterPost(body)
+    val result : ResponsesRegisterResponse = apiInstance.register(body)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling AuthApi#apiV1AuthRegisterPost")
+    println("4xx response calling AuthApi#register")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling AuthApi#apiV1AuthRegisterPost")
+    println("5xx response calling AuthApi#register")
     e.printStackTrace()
 }
 ```
@@ -81,11 +81,11 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**AuthRegisterRequest**](AuthRegisterRequest.md)| Login request | |
+| **body** | [**RequestsRegisterRequest**](RequestsRegisterRequest.md)| Login request | |
 
 ### Return type
 
-[**AuthRegisterResponse**](AuthRegisterResponse.md)
+[**ResponsesRegisterResponse**](ResponsesRegisterResponse.md)
 
 ### Authorization
 
