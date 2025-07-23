@@ -19,4 +19,9 @@ object Routes {
     data class Classroom(
         val majorId: Int
     )
+
+    @Serializable
+    data class Student(
+        val classroomId: Int
+    )
 }

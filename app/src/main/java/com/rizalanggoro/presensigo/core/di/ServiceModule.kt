@@ -7,6 +7,7 @@ import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassApi
 import com.rizalanggoro.presensigo.openapi.apis.ExcelApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
+import com.rizalanggoro.presensigo.openapi.apis.StudentApi
 import com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.auth.Auth
@@ -93,6 +94,12 @@ val serviceModule = module {
     }
     single {
         MajorApi(
+            API_BASE_URL,
+            httpClientConfig = get()
+        )
+    }
+    single {
+        StudentApi(
             API_BASE_URL,
             httpClientConfig = get()
         )
