@@ -5,12 +5,14 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**login**](AuthApi.md#login) | **POST** /api/v1/auth/login |  |
+| [**logout**](AuthApi.md#logout) | **GET** /api/v1/auth/logout |  |
+| [**refreshToken**](AuthApi.md#refreshToken) | **POST** /api/v1/auth/refresh-token |  |
 | [**register**](AuthApi.md#register) | **POST** /api/v1/auth/register |  |
 
 
 <a id="login"></a>
 # **login**
-> ResponsesLoginResponse login(body)
+> ResponsesLogin login(body)
 
 
 
@@ -21,9 +23,9 @@ All URIs are relative to *http://localhost*
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AuthApi()
-val body : RequestsLoginRequest =  // RequestsLoginRequest | Login request
+val body : RequestsLogin =  // RequestsLogin | Login request
 try {
-    val result : ResponsesLoginResponse = apiInstance.login(body)
+    val result : ResponsesLogin = apiInstance.login(body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling AuthApi#login")
@@ -37,11 +39,11 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**RequestsLoginRequest**](RequestsLoginRequest.md)| Login request | |
+| **body** | [**RequestsLogin**](RequestsLogin.md)| Login request | |
 
 ### Return type
 
-[**ResponsesLoginResponse**](ResponsesLoginResponse.md)
+[**ResponsesLogin**](ResponsesLogin.md)
 
 ### Authorization
 
@@ -52,9 +54,9 @@ No authorization required
  - **Content-Type**: application/json
  - **Accept**: application/json
 
-<a id="register"></a>
-# **register**
-> ResponsesRegisterResponse register(body)
+<a id="logout"></a>
+# **logout**
+> kotlin.Any logout()
 
 
 
@@ -65,9 +67,94 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AuthApi()
-val body : RequestsRegisterRequest =  // RequestsRegisterRequest | Login request
 try {
-    val result : ResponsesRegisterResponse = apiInstance.register(body)
+    val result : kotlin.Any = apiInstance.logout()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AuthApi#logout")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AuthApi#logout")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**kotlin.Any**](kotlin.Any.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="refreshToken"></a>
+# **refreshToken**
+> ResponsesRefreshToken refreshToken(body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AuthApi()
+val body : RequestsRefreshToken =  // RequestsRefreshToken | Refresh token req
+try {
+    val result : ResponsesRefreshToken = apiInstance.refreshToken(body)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AuthApi#refreshToken")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AuthApi#refreshToken")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**RequestsRefreshToken**](RequestsRefreshToken.md)| Refresh token req | |
+
+### Return type
+
+[**ResponsesRefreshToken**](ResponsesRefreshToken.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="register"></a>
+# **register**
+> ResponsesRegister register(body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AuthApi()
+val body : RequestsRegister =  // RequestsRegister | Login request
+try {
+    val result : ResponsesRegister = apiInstance.register(body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling AuthApi#register")
@@ -81,11 +168,11 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**RequestsRegisterRequest**](RequestsRegisterRequest.md)| Login request | |
+| **body** | [**RequestsRegister**](RequestsRegister.md)| Login request | |
 
 ### Return type
 
-[**ResponsesRegisterResponse**](ResponsesRegisterResponse.md)
+[**ResponsesRegister**](ResponsesRegister.md)
 
 ### Authorization
 

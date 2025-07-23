@@ -73,6 +73,10 @@ dependencies {
     implementation("io.ktor:ktor-client-cio:3.2.2")
     implementation("io.ktor:ktor-client-content-negotiation:3.2.2")
     implementation("io.ktor:ktor-serialization-gson:3.2.2")
+    implementation("io.ktor:ktor-client-auth:3.2.2")
+    implementation("io.ktor:ktor-client-logging:3.2.2")
 
     implementation("com.google.code.gson:gson:2.13.1")
+
+    implementation("io.arrow-kt:arrow-core:2.1.0")
 }

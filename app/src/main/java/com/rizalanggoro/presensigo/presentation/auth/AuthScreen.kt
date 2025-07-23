@@ -10,12 +10,15 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
+import com.rizalanggoro.presensigo.core.Routes
+import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -24,9 +27,19 @@ fun AuthScreen() {
     val viewModel = koinViewModel<AuthViewModel>()
     val uiState by viewModel.uiState.collectAsState()
 
-    var name by remember { mutableStateOf("") }
-    var email by remember { mutableStateOf("") }
-    var password by remember { mutableStateOf("") }
+    val navController = LocalNavController.current
+
+    LaunchedEffect(uiState.detail) {
+        if (uiState.detail is AuthState.Detail.Success) {
+            navController.navigate(Routes.Home) {
+                popUpTo<Routes.Auth>()
+            }
+        }
+    }
+
+    var name by remember { mutableStateOf("Rizal Dwi Anggoro") }
+    var email by remember { mutableStateOf("rizal@email.com") }
+    var password by remember { mutableStateOf("password") }
 
 
     Scaffold(
@@ -53,6 +66,10 @@ fun AuthScreen() {
 
             if (uiState.detail is AuthState.Detail.Loading)
                 CircularProgressIndicator()
+
+            Button(onClick = { viewModel.test() }) {
+                Text("test koin")
+            }
 
             Button(onClick = { viewModel.login(email, password) }) {
                 Text("Masuk")
