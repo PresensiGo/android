@@ -9,4 +9,9 @@ object Routes {
 
     @Serializable
     object Home
+
+    @Serializable
+    data class Major(
+        val batchId: Int
+    )
 }

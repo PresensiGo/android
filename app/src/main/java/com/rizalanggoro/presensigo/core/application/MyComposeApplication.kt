@@ -9,6 +9,7 @@ import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.auth.AuthScreen
 import com.rizalanggoro.presensigo.presentation.home.HomeScreen
+import com.rizalanggoro.presensigo.presentation.major.MajorScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
 @Composable
@@ -20,6 +21,7 @@ fun MyComposeApplication() {
             NavHost(navController, startDestination = Routes.Auth) {
                 composable<Routes.Auth> { AuthScreen() }
                 composable<Routes.Home> { HomeScreen() }
+                composable<Routes.Major> { MajorScreen() }
             }
         }
     }

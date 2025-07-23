@@ -5,6 +5,7 @@ import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ExcelApi
+import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.auth.Auth
@@ -79,6 +80,12 @@ val serviceModule = module {
     }
     single {
         ExcelApi(
+            API_BASE_URL,
+            httpClientConfig = get()
+        )
+    }
+    single {
+        MajorApi(
             API_BASE_URL,
             httpClientConfig = get()
         )
