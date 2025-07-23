@@ -8,6 +8,7 @@ import androidx.navigation.compose.rememberNavController
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.auth.AuthScreen
+import com.rizalanggoro.presensigo.presentation.classroom.ClassroomScreen
 import com.rizalanggoro.presensigo.presentation.home.HomeScreen
 import com.rizalanggoro.presensigo.presentation.major.MajorScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
@@ -22,6 +23,7 @@ fun MyComposeApplication() {
                 composable<Routes.Auth> { AuthScreen() }
                 composable<Routes.Home> { HomeScreen() }
                 composable<Routes.Major> { MajorScreen() }
+                composable<Routes.Classroom> { ClassroomScreen() }
             }
         }
     }

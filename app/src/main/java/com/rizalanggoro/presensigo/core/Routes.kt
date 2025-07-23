@@ -14,4 +14,9 @@ object Routes {
     data class Major(
         val batchId: Int
     )
+
+    @Serializable
+    data class Classroom(
+        val majorId: Int
+    )
 }

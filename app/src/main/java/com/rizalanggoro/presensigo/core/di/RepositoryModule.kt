@@ -2,6 +2,7 @@ package com.rizalanggoro.presensigo.core.di
 
 import com.rizalanggoro.presensigo.data.repositories.AuthRepository
 import com.rizalanggoro.presensigo.data.repositories.BatchRepository
+import com.rizalanggoro.presensigo.data.repositories.ClassroomRepository
 import com.rizalanggoro.presensigo.data.repositories.MajorRepository
 import org.koin.core.module.dsl.singleOf
 import org.koin.dsl.module
@@ -9,5 +10,6 @@ import org.koin.dsl.module
 val repositoryModule = module {
     singleOf(::AuthRepository)
     singleOf(::BatchRepository)
+    singleOf(::ClassroomRepository)
     singleOf(::MajorRepository)
 }

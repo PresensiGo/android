@@ -4,6 +4,7 @@ import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
+import com.rizalanggoro.presensigo.openapi.apis.ClassApi
 import com.rizalanggoro.presensigo.openapi.apis.ExcelApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken
@@ -74,6 +75,12 @@ val serviceModule = module {
     }
     single {
         BatchApi(
+            API_BASE_URL,
+            httpClientConfig = get()
+        )
+    }
+    single {
+        ClassApi(
             API_BASE_URL,
             httpClientConfig = get()
         )
