@@ -15,12 +15,18 @@ import com.rizalanggoro.presensigo.presentation.student.StudentScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
 @Composable
-fun MyComposeApplication() {
+fun MyComposeApplication(isAuthenticated: Boolean = false) {
     PresensiGoTheme(darkTheme = false) {
         val navController = rememberNavController()
 
         CompositionLocalProvider(LocalNavController provides navController) {
-            NavHost(navController, startDestination = Routes.Auth) {
+            NavHost(
+                navController = navController,
+                startDestination = when (isAuthenticated) {
+                    true -> Routes.Home
+                    else -> Routes.Auth
+                }
+            ) {
                 composable<Routes.Auth> { AuthScreen() }
                 composable<Routes.Home> { HomeScreen() }
                 composable<Routes.Major> { MajorScreen() }

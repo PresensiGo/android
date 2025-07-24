@@ -197,6 +197,10 @@
     "definitions": {
         "dto.Batch": {
             "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
             "properties": {
                 "id": {
                     "type": "integer"
@@ -208,6 +212,10 @@
         },
         "dto.Class": {
             "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
             "properties": {
                 "id": {
                     "type": "integer"
@@ -219,6 +227,10 @@
         },
         "dto.Major": {
             "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
             "properties": {
                 "id": {
                     "type": "integer"
@@ -230,6 +242,11 @@
         },
         "dto.Student": {
             "type": "object",
+            "required": [
+                "id",
+                "name",
+                "nis"
+            ],
             "properties": {
                 "id": {
                     "type": "integer"
@@ -295,6 +312,9 @@
         },
         "responses.GetAllClasses": {
             "type": "object",
+            "required": [
+                "classes"
+            ],
             "properties": {
                 "classes": {
                     "type": "array",
@@ -306,6 +326,9 @@
         },
         "responses.GetAllMajors": {
             "type": "object",
+            "required": [
+                "majors"
+            ],
             "properties": {
                 "majors": {
                     "type": "array",
@@ -317,6 +340,9 @@
         },
         "responses.GetAllStudents": {
             "type": "object",
+            "required": [
+                "students"
+            ],
             "properties": {
                 "students": {
                     "type": "array",
