@@ -1,0 +1,601 @@
+{
+    "schemes": [],
+    "swagger": "2.0",
+    "info": {
+        "description": "",
+        "title": "PresensiGo API",
+        "contact": {},
+        "version": "1.0"
+    },
+    "host": "",
+    "basePath": "",
+    "paths": {
+        "/api/v1/attendances/": {
+            "post": {
+                "tags": [
+                    "attendance"
+                ],
+                "operationId": "createAttendance",
+                "parameters": [
+                    {
+                        "description": "Body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/CreateAttendanceReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/attendances/class/{class_id}": {
+            "get": {
+                "tags": [
+                    "attendance"
+                ],
+                "operationId": "getAllAttendances",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Classroom ID",
+                        "name": "class_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllAttendances"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/login": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "login",
+                "parameters": [
+                    {
+                        "description": "Login request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Login"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Login"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/logout": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "logout",
+                "parameters": [
+                    {
+                        "description": "Logout Request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Logout"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Logout"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/refresh-token": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "refreshToken",
+                "parameters": [
+                    {
+                        "description": "Refresh token req",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.RefreshToken"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.RefreshToken"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/auth/register": {
+            "post": {
+                "tags": [
+                    "auth"
+                ],
+                "operationId": "register",
+                "parameters": [
+                    {
+                        "description": "Login request",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.Register"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.Register"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batch": {
+            "get": {
+                "tags": [
+                    "batch"
+                ],
+                "operationId": "getAllBatches",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllBatches"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/classrooms/batches/{batch_id}": {
+            "get": {
+                "tags": [
+                    "classroom"
+                ],
+                "operationId": "getAllClassroomWithMajors",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Batch ID",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllClassroomWithMajors"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/excel/import": {
+            "post": {
+                "tags": [
+                    "excel"
+                ],
+                "operationId": "importData",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/majors/batch/{batch_id}": {
+            "get": {
+                "tags": [
+                    "major"
+                ],
+                "operationId": "getAllMajors",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Batch ID",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllMajors"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/students/classrooms/{classroom_id}": {
+            "get": {
+                "tags": [
+                    "student"
+                ],
+                "operationId": "getAllStudents",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "Classroom ID",
+                        "name": "classroom_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllStudents"
+                        }
+                    }
+                }
+            }
+        }
+    },
+    "definitions": {
+        "CreateAttendanceItemReq": {
+            "type": "object",
+            "properties": {
+                "note": {
+                    "type": "string"
+                },
+                "status": {
+                    "$ref": "#/definitions/models.AttendanceStatus"
+                },
+                "student_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "CreateAttendanceReq": {
+            "type": "object",
+            "properties": {
+                "attendance_students": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/CreateAttendanceItemReq"
+                    }
+                },
+                "classroom_id": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Attendance": {
+            "type": "object",
+            "required": [
+                "classroom_id",
+                "date",
+                "id"
+            ],
+            "properties": {
+                "classroom_id": {
+                    "type": "integer"
+                },
+                "date": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.Batch": {
+            "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Classroom": {
+            "type": "object",
+            "required": [
+                "id",
+                "major_id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "major_id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Major": {
+            "type": "object",
+            "required": [
+                "id",
+                "name"
+            ],
+            "properties": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "dto.Student": {
+            "type": "object",
+            "required": [
+                "classroom_id",
+                "id",
+                "name",
+                "nis"
+            ],
+            "properties": {
+                "classroom_id": {
+                    "type": "integer"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                },
+                "nis": {
+                    "type": "string"
+                }
+            }
+        },
+        "models.AttendanceStatus": {
+            "type": "string",
+            "enum": [
+                "hadir",
+                "izin",
+                "sakit",
+                "alpha"
+            ],
+            "x-enum-varnames": [
+                "AttendancePresent",
+                "AttendancePermission",
+                "AttendanceSick",
+                "AttendanceAlpha"
+            ]
+        },
+        "requests.Login": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "default": "email@email.com"
+                },
+                "password": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Logout": {
+            "type": "object",
+            "required": [
+                "refresh_token"
+            ],
+            "properties": {
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.RefreshToken": {
+            "type": "object",
+            "properties": {
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.Register": {
+            "type": "object",
+            "properties": {
+                "email": {
+                    "type": "string",
+                    "default": "email@email.com"
+                },
+                "name": {
+                    "type": "string",
+                    "default": "John Doe"
+                },
+                "password": {
+                    "type": "string",
+                    "default": "password"
+                }
+            }
+        },
+        "responses.ClassroomMajor": {
+            "type": "object",
+            "required": [
+                "classroom",
+                "major"
+            ],
+            "properties": {
+                "classroom": {
+                    "$ref": "#/definitions/dto.Classroom"
+                },
+                "major": {
+                    "$ref": "#/definitions/dto.Major"
+                }
+            }
+        },
+        "responses.GetAllAttendances": {
+            "type": "object",
+            "required": [
+                "attendances"
+            ],
+            "properties": {
+                "attendances": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Attendance"
+                    }
+                }
+            }
+        },
+        "responses.GetAllBatches": {
+            "type": "object",
+            "required": [
+                "batches"
+            ],
+            "properties": {
+                "batches": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Batch"
+                    }
+                }
+            }
+        },
+        "responses.GetAllClassroomWithMajors": {
+            "type": "object",
+            "required": [
+                "data"
+            ],
+            "properties": {
+                "data": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/responses.ClassroomMajor"
+                    }
+                }
+            }
+        },
+        "responses.GetAllMajors": {
+            "type": "object",
+            "required": [
+                "majors"
+            ],
+            "properties": {
+                "majors": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Major"
+                    }
+                }
+            }
+        },
+        "responses.GetAllStudents": {
+            "type": "object",
+            "required": [
+                "students"
+            ],
+            "properties": {
+                "students": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/dto.Student"
+                    }
+                }
+            }
+        },
+        "responses.Login": {
+            "type": "object",
+            "required": [
+                "access_token",
+                "refresh_token"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.Logout": {
+            "type": "object"
+        },
+        "responses.RefreshToken": {
+            "type": "object",
+            "required": [
+                "access_token",
+                "refresh_token"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.Register": {
+            "type": "object",
+            "required": [
+                "access_token",
+                "refresh_token"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        }
+    }
+}
