@@ -16,8 +16,8 @@ class ClassroomViewModel(
     savedStateHandle: SavedStateHandle,
     private val classroomRepository: ClassroomRepository
 ) : ViewModel() {
-    private val _uiState = MutableStateFlow(ClassroomState())
-    val uiState get() = _uiState.asStateFlow()
+    private val _state = MutableStateFlow(ClassroomState())
+    val state get() = _state.asStateFlow()
 
     private val params = savedStateHandle.toRoute<Routes.Classroom>()
 
@@ -26,10 +26,10 @@ class ClassroomViewModel(
     }
 
     fun getAllClassrooms() = viewModelScope.launch {
-        _uiState.update { it.copy(status = StateStatus.Loading) }
+        _state.update { it.copy(status = StateStatus.Loading) }
         classroomRepository.getAllWithMajors(params.batchId)
             .onLeft { result ->
-                _uiState.update {
+                _state.update {
                     it.copy(
                         status = StateStatus.Success,
                         classrooms = result
@@ -37,7 +37,7 @@ class ClassroomViewModel(
                 }
             }
             .onRight {
-                _uiState.update { it.copy(status = StateStatus.Failure) }
+                _state.update { it.copy(status = StateStatus.Failure) }
             }
     }
 }

@@ -5,6 +5,8 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.Icon
+import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -13,6 +15,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.composables.icons.lucide.ArrowLeft
+import com.composables.icons.lucide.Lucide
+import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import org.koin.androidx.compose.koinViewModel
 
@@ -20,11 +25,21 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ClassroomScreen() {
     val viewModel = koinViewModel<ClassroomViewModel>()
-    val uiState by viewModel.uiState.collectAsState()
+    val state by viewModel.state.collectAsState()
+
+    val navController = LocalNavController.current
 
     Scaffold(
         topBar = {
             TopAppBar(
+                navigationIcon = {
+                    IconButton(onClick = { navController.popBackStack() }) {
+                        Icon(
+                            Lucide.ArrowLeft,
+                            contentDescription = null
+                        )
+                    }
+                },
                 title = {
                     Text("Classroom")
                 }
@@ -32,12 +47,12 @@ fun ClassroomScreen() {
         }
     ) {
         LazyColumn(modifier = Modifier.padding(it)) {
-            when (uiState.status) {
+            when (state.status) {
                 StateStatus.Loading -> item {
                     CircularProgressIndicator()
                 }
 
-                StateStatus.Success -> items(uiState.classrooms) {
+                StateStatus.Success -> items(state.classrooms) {
                     ListItem(
                         headlineContent = {
                             Text(it.classroom.name)
