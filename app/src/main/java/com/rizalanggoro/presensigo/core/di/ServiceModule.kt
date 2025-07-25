@@ -4,7 +4,7 @@ import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
-import com.rizalanggoro.presensigo.openapi.apis.ClassApi
+import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
 import com.rizalanggoro.presensigo.openapi.apis.ExcelApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.apis.StudentApi
@@ -53,55 +53,30 @@ val serviceModule = module {
                         )
 
                         if (response.success) {
-                            val body = response.body()
+                            val (token) = response.body()
                             tokenManager.set(
                                 Token(
-                                    accessToken = body.accessToken,
-                                    refreshToken = body.refreshToken
+                                    accessToken = token.accessToken,
+                                    refreshToken = token.refreshToken
                                 )
                             )
                         }
 
-                        BearerTokens("access token", "refresh token")
+                        val newToken = tokenManager.get()
+
+                        BearerTokens(
+                            accessToken = newToken.accessToken,
+                            refreshToken = newToken.refreshToken
+                        )
                     }
                 }
             }
         }
     }
-    single {
-        AuthApi(
-            API_BASE_URL,
-            httpClientConfig = get()
-        )
-    }
-    single {
-        BatchApi(
-            API_BASE_URL,
-            httpClientConfig = get()
-        )
-    }
-    single {
-        ClassApi(
-            API_BASE_URL,
-            httpClientConfig = get()
-        )
-    }
-    single {
-        ExcelApi(
-            API_BASE_URL,
-            httpClientConfig = get()
-        )
-    }
-    single {
-        MajorApi(
-            API_BASE_URL,
-            httpClientConfig = get()
-        )
-    }
-    single {
-        StudentApi(
-            API_BASE_URL,
-            httpClientConfig = get()
-        )
-    }
+    single { AuthApi(API_BASE_URL, httpClientConfig = get()) }
+    single { BatchApi(API_BASE_URL, httpClientConfig = get()) }
+    single { ClassroomApi(API_BASE_URL, httpClientConfig = get()) }
+    single { ExcelApi(API_BASE_URL, httpClientConfig = get()) }
+    single { MajorApi(API_BASE_URL, httpClientConfig = get()) }
+    single { StudentApi(API_BASE_URL, httpClientConfig = get()) }
 }

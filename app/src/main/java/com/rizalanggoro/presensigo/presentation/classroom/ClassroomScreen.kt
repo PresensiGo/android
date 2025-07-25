@@ -40,7 +40,10 @@ fun ClassroomScreen() {
                 StateStatus.Success -> items(uiState.classrooms) {
                     ListItem(
                         headlineContent = {
-                            Text(it.name)
+                            Text(it.classroom.name)
+                        },
+                        supportingContent = {
+                            Text(it.major.name)
                         }
                     )
                 }

@@ -25,11 +25,11 @@ class AuthRepository(
 
         when (response.success) {
             true -> {
-                val body = response.body()
+                val (token) = response.body()
                 tokenManager.set(
                     Token(
-                        accessToken = body.accessToken,
-                        refreshToken = body.refreshToken
+                        accessToken = token.accessToken,
+                        refreshToken = token.refreshToken
                     )
                 )
                 Either.Left(true)

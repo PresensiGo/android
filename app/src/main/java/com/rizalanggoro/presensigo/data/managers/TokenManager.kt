@@ -23,4 +23,8 @@ class TokenManager(
         if (json == null) return Token()
         return gson.fromJson(json, Token::class.java)
     }
+
+    fun clear() = preferences.edit {
+        remove("token")
+    }
 }

@@ -8,7 +8,7 @@ class StudentRepository(
     private val studentApi: StudentApi
 ) {
     suspend fun getAll(classroomId: Int): Either<List<Student>, Error> = try {
-        val response = studentApi.getAllStudents()
+        val response = studentApi.getAllStudents(classId = classroomId)
         when (response.success) {
             true -> Either.Left(response.body().students.map {
                 Student(

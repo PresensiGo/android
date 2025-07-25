@@ -11,13 +11,8 @@ object Routes {
     object Home
 
     @Serializable
-    data class Major(
-        val batchId: Int
-    )
-
-    @Serializable
     data class Classroom(
-        val majorId: Int
+        val batchId: Int
     )
 
     @Serializable

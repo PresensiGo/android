@@ -27,7 +27,7 @@ class ClassroomViewModel(
 
     fun getAllClassrooms() = viewModelScope.launch {
         _uiState.update { it.copy(status = StateStatus.Loading) }
-        classroomRepository.getAll(params.majorId)
+        classroomRepository.getAllWithMajors(params.batchId)
             .onLeft { result ->
                 _uiState.update {
                     it.copy(
