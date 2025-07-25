@@ -1,5 +1,5 @@
 
-# ResponsesGetAllAttendances
+# GetAllAttendancesRes
 
 ## Properties
 | Name | Type | Description | Notes |

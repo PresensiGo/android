@@ -5,6 +5,7 @@ import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
+import androidx.navigation.toRoute
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.attendance.AttendanceScreen
@@ -25,7 +26,7 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
             NavHost(
                 navController = navController,
                 startDestination = when (isAuthenticated) {
-                    true -> Routes.Attendance.Create(classroomId = 2)
+                    true -> Routes.Attendance.List(classroomID = 2)
                     else -> Routes.Auth
                 }
             ) {
@@ -34,7 +35,11 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
                 composable<Routes.Classroom> { ClassroomScreen() }
                 composable<Routes.Student> { StudentScreen() }
                 composable<Routes.Setting> { SettingScreen() }
-                composable<Routes.Attendance.List> { AttendanceScreen() }
+                composable<Routes.Attendance.List> {
+                    AttendanceScreen(
+                        classroomID = it.toRoute<Routes.Attendance.List>().classroomID
+                    )
+                }
                 composable<Routes.Attendance.Create> { CreateAttendanceScreen() }
             }
         }

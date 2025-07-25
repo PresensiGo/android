@@ -16,7 +16,7 @@
 package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllAttendances
+import com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -73,14 +73,14 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/attendances/class/{class_id}
+        * GET /api/v1/attendances/classrooms/{classroom_id}
         * 
         * 
-         * @param classId Classroom ID 
-         * @return ResponsesGetAllAttendances
+         * @param classroomId Classroom ID 
+         * @return GetAllAttendancesRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllAttendances(classId: kotlin.Int): HttpResponse<ResponsesGetAllAttendances> {
+        open suspend fun getAllAttendances(classroomId: kotlin.Int): HttpResponse<GetAllAttendancesRes> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -93,7 +93,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
-            "/api/v1/attendances/class/{class_id}".replace("{" + "class_id" + "}", "$classId"),
+            "/api/v1/attendances/classrooms/{classroom_id}".replace("{" + "classroom_id" + "}", "$classroomId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

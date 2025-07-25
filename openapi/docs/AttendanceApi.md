@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createAttendance**](AttendanceApi.md#createAttendance) | **POST** /api/v1/attendances/ |  |
-| [**getAllAttendances**](AttendanceApi.md#getAllAttendances) | **GET** /api/v1/attendances/class/{class_id} |  |
+| [**getAllAttendances**](AttendanceApi.md#getAllAttendances) | **GET** /api/v1/attendances/classrooms/{classroom_id} |  |
 
 
 <a id="createAttendance"></a>
@@ -54,7 +54,7 @@ No authorization required
 
 <a id="getAllAttendances"></a>
 # **getAllAttendances**
-> ResponsesGetAllAttendances getAllAttendances(classId)
+> GetAllAttendancesRes getAllAttendances(classroomId)
 
 
 
@@ -65,9 +65,9 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AttendanceApi()
-val classId : kotlin.Int = 56 // kotlin.Int | Classroom ID
+val classroomId : kotlin.Int = 56 // kotlin.Int | Classroom ID
 try {
-    val result : ResponsesGetAllAttendances = apiInstance.getAllAttendances(classId)
+    val result : GetAllAttendancesRes = apiInstance.getAllAttendances(classroomId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling AttendanceApi#getAllAttendances")
@@ -81,11 +81,11 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **classId** | **kotlin.Int**| Classroom ID | |
+| **classroomId** | **kotlin.Int**| Classroom ID | |
 
 ### Return type
 
-[**ResponsesGetAllAttendances**](ResponsesGetAllAttendances.md)
+[**GetAllAttendancesRes**](GetAllAttendancesRes.md)
 
 ### Authorization
 

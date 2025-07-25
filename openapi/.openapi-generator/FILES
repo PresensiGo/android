@@ -13,6 +13,7 @@ docs/DtoClassroom.md
 docs/DtoMajor.md
 docs/DtoStudent.md
 docs/ExcelApi.md
+docs/GetAllAttendancesRes.md
 docs/MajorApi.md
 docs/ModelsAttendanceStatus.md
 docs/RequestsLogin.md
@@ -20,7 +21,6 @@ docs/RequestsLogout.md
 docs/RequestsRefreshToken.md
 docs/RequestsRegister.md
 docs/ResponsesClassroomMajor.md
-docs/ResponsesGetAllAttendances.md
 docs/ResponsesGetAllBatches.md
 docs/ResponsesGetAllClassroomWithMajors.md
 docs/ResponsesGetAllMajors.md
@@ -58,13 +58,13 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DtoBatch.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DtoClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DtoMajor.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DtoStudent.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllAttendancesRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ModelsAttendanceStatus.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/RequestsLogin.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/RequestsLogout.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/RequestsRefreshToken.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/RequestsRegister.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesClassroomMajor.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllAttendances.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllBatches.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllClassroomWithMajors.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllMajors.kt

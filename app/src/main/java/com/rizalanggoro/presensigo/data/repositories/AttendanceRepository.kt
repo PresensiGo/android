@@ -38,8 +38,8 @@ class AttendanceRepository(
         Either.Right(Error(e.message))
     }
 
-    suspend fun getAll(classId: Int): Either<List<Attendance>, Error> = try {
-        val response = attendanceApi.getAllAttendances(classId)
+    suspend fun getAll(classroomID: Int): Either<List<Attendance>, Error> = try {
+        val response = attendanceApi.getAllAttendances(classroomID)
         when (response.success) {
             true -> Either.Left(response.body().attendances.map { it.toDomain() })
             false -> Either.Right(Error("Something went wrong"))

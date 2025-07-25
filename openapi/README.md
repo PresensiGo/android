@@ -46,7 +46,7 @@ All URIs are relative to *http://localhost*
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
 | *AttendanceApi* | [**createAttendance**](docs/AttendanceApi.md#createattendance) | **POST** /api/v1/attendances/ |  |
-| *AttendanceApi* | [**getAllAttendances**](docs/AttendanceApi.md#getallattendances) | **GET** /api/v1/attendances/class/{class_id} |  |
+| *AttendanceApi* | [**getAllAttendances**](docs/AttendanceApi.md#getallattendances) | **GET** /api/v1/attendances/classrooms/{classroom_id} |  |
 | *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
 | *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | *AuthApi* | [**refreshToken**](docs/AuthApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
@@ -68,13 +68,13 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.DtoClassroom](docs/DtoClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoMajor](docs/DtoMajor.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudent](docs/DtoStudent.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes](docs/GetAllAttendancesRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.ModelsAttendanceStatus](docs/ModelsAttendanceStatus.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsLogin](docs/RequestsLogin.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsLogout](docs/RequestsLogout.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken](docs/RequestsRefreshToken.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsRegister](docs/RequestsRegister.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesClassroomMajor](docs/ResponsesClassroomMajor.md)
- - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllAttendances](docs/ResponsesGetAllAttendances.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllBatches](docs/ResponsesGetAllBatches.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors](docs/ResponsesGetAllClassroomWithMajors.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajors](docs/ResponsesGetAllMajors.md)

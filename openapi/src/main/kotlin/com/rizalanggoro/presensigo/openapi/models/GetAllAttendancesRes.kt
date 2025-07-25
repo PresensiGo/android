@@ -26,7 +26,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class ResponsesGetAllAttendances (
+data class GetAllAttendancesRes (
 
     @SerializedName("attendances")
     val attendances: kotlin.collections.List<DtoAttendance>

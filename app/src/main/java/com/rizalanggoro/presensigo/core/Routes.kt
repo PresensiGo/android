@@ -11,12 +11,12 @@ object Routes {
     data object Attendance {
         @Serializable
         data class List(
-            val classroomId: Int
+            val classroomID: Int
         )
 
         @Serializable
         data class Create(
-            val classroomId: Int
+            val classroomID: Int
         )
     }
 

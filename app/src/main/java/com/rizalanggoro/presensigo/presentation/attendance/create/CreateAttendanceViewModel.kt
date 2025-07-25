@@ -50,7 +50,7 @@ class CreateAttendanceViewModel(
 
     fun getAllStudents() = viewModelScope.launch {
         _state.update { it.copy(status = StateStatus.Loading) }
-        studentRepository.getAll(params.classroomId)
+        studentRepository.getAll(params.classroomID)
             .onLeft { result ->
                 _state.update {
                     it.copy(
@@ -98,7 +98,7 @@ class CreateAttendanceViewModel(
         _state.update { it.copy(status = StateStatus.Loading) }
         attendanceRepository.create(
             attendance = Attendance(
-                classroomId = params.classroomId,
+                classroomId = params.classroomID,
                 date = "2025-07-25",
             ),
             attendanceStudents = state.value.students.map {
