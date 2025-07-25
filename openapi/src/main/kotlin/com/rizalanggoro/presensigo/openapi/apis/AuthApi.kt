@@ -16,6 +16,7 @@
 package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.RequestsLogin
+import com.rizalanggoro.presensigo.openapi.models.RequestsLogout
 import com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken
 import com.rizalanggoro.presensigo.openapi.models.RequestsRegister
 import com.rizalanggoro.presensigo.openapi.models.ResponsesLogin
@@ -77,32 +78,32 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/auth/logout
+        * POST /api/v1/auth/logout
         * 
         * 
+         * @param body Logout Request 
          * @return kotlin.Any
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun logout(): HttpResponse<kotlin.Any> {
+        open suspend fun logout(body: RequestsLogout): HttpResponse<kotlin.Any> {
 
             val localVariableAuthNames = listOf<String>()
 
-            val localVariableBody = 
-                    io.ktor.client.utils.EmptyContent
+            val localVariableBody = body
 
             val localVariableQuery = mutableMapOf<String, List<String>>()
 
             val localVariableHeaders = mutableMapOf<String, String>()
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.GET,
+            RequestMethod.POST,
             "/api/v1/auth/logout",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
             )
 
-            return request(
+            return jsonRequest(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames

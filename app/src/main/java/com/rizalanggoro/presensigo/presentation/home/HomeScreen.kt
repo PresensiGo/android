@@ -4,9 +4,6 @@ import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Delete
-import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
@@ -19,6 +16,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
+import com.composables.icons.lucide.Lucide
+import com.composables.icons.lucide.Settings
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import org.koin.androidx.compose.koinViewModel
@@ -39,18 +38,10 @@ fun HomeScreen() {
                 },
                 actions = {
                     IconButton(onClick = {
-                        viewModel.testLogout()
+                        navController.navigate(Routes.Setting)
                     }) {
                         Icon(
-                            Icons.Rounded.Delete,
-                            contentDescription = null
-                        )
-                    }
-                    IconButton(onClick = {
-                        viewModel.testExpireToken()
-                    }) {
-                        Icon(
-                            Icons.Rounded.Refresh,
+                            Lucide.Settings,
                             contentDescription = null
                         )
                     }

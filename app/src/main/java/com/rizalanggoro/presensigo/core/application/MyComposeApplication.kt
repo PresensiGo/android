@@ -10,6 +10,7 @@ import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.auth.AuthScreen
 import com.rizalanggoro.presensigo.presentation.classroom.ClassroomScreen
 import com.rizalanggoro.presensigo.presentation.home.HomeScreen
+import com.rizalanggoro.presensigo.presentation.setting.SettingScreen
 import com.rizalanggoro.presensigo.presentation.student.StudentScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
@@ -30,6 +31,7 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
                 composable<Routes.Home> { HomeScreen() }
                 composable<Routes.Classroom> { ClassroomScreen() }
                 composable<Routes.Student> { StudentScreen() }
+                composable<Routes.Setting> { SettingScreen() }
             }
         }
     }

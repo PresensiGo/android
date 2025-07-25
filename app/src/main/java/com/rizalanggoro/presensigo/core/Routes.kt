@@ -19,4 +19,7 @@ object Routes {
     data class Student(
         val classroomId: Int
     )
+
+    @Serializable
+    object Setting {}
 }

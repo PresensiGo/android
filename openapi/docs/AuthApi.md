@@ -5,7 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**login**](AuthApi.md#login) | **POST** /api/v1/auth/login |  |
-| [**logout**](AuthApi.md#logout) | **GET** /api/v1/auth/logout |  |
+| [**logout**](AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | [**refreshToken**](AuthApi.md#refreshToken) | **POST** /api/v1/auth/refresh-token |  |
 | [**register**](AuthApi.md#register) | **POST** /api/v1/auth/register |  |
 
@@ -51,12 +51,12 @@ No authorization required
 
 ### HTTP request headers
 
- - **Content-Type**: application/json
- - **Accept**: application/json
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
 <a id="logout"></a>
 # **logout**
-> kotlin.Any logout()
+> kotlin.Any logout(body)
 
 
 
@@ -67,8 +67,9 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AuthApi()
+val body : RequestsLogout =  // RequestsLogout | Logout Request
 try {
-    val result : kotlin.Any = apiInstance.logout()
+    val result : kotlin.Any = apiInstance.logout(body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling AuthApi#logout")
@@ -80,7 +81,9 @@ try {
 ```
 
 ### Parameters
-This endpoint does not need any parameter.
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**RequestsLogout**](RequestsLogout.md)| Logout Request | |
 
 ### Return type
 

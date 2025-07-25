@@ -53,11 +53,11 @@ val serviceModule = module {
                         )
 
                         if (response.success) {
-                            val (token) = response.body()
+                            val body = response.body()
                             tokenManager.set(
                                 Token(
-                                    accessToken = token.accessToken,
-                                    refreshToken = token.refreshToken
+                                    accessToken = body.accessToken,
+                                    refreshToken = body.refreshToken
                                 )
                             )
                         }

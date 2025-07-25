@@ -76,7 +76,12 @@ dependencies {
     implementation("io.ktor:ktor-client-auth:3.2.2")
     implementation("io.ktor:ktor-client-logging:3.2.2")
 
+    // gson serialization
     implementation("com.google.code.gson:gson:2.13.1")
 
+    // kotlin functional programming
     implementation("io.arrow-kt:arrow-core:2.1.0")
+
+    // lucide icons for jetpack compose
+    implementation("com.composables:icons-lucide:1.0.0")
 }

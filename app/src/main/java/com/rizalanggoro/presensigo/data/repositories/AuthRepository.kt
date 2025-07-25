@@ -5,6 +5,7 @@ import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.models.RequestsLogin
+import com.rizalanggoro.presensigo.openapi.models.RequestsLogout
 import com.rizalanggoro.presensigo.openapi.models.RequestsRegister
 
 class AuthRepository(
@@ -25,11 +26,11 @@ class AuthRepository(
 
         when (response.success) {
             true -> {
-                val (token) = response.body()
+                val body = response.body()
                 tokenManager.set(
                     Token(
-                        accessToken = token.accessToken,
-                        refreshToken = token.refreshToken
+                        accessToken = body.accessToken,
+                        refreshToken = body.refreshToken
                     )
                 )
                 Either.Left(true)
@@ -55,7 +56,19 @@ class AuthRepository(
         e.printStackTrace()
     }
 
-    suspend fun logout() {}
+    suspend fun logout(): Either<Unit, Error> = try {
+        val token = tokenManager.get()
+        val response = authApi.logout(RequestsLogout(refreshToken = token.refreshToken))
+        when (response.success) {
+            true -> {
+                tokenManager.clear()
+                Either.Left(Unit)
+            }
 
-    suspend fun refreshToken() {}
+            false -> Either.Right(Error("something went wrong"))
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Either.Right(Error(e.message))
+    }
 }

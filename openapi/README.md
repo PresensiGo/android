@@ -48,7 +48,7 @@ All URIs are relative to *http://localhost*
 | *AttendanceApi* | [**createAttendance**](docs/AttendanceApi.md#createattendance) | **POST** /api/v1/attendances |  |
 | *AttendanceApi* | [**getAllAttendances**](docs/AttendanceApi.md#getallattendances) | **GET** /api/v1/attendances/class/{class_id} |  |
 | *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
-| *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **GET** /api/v1/auth/logout |  |
+| *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | *AuthApi* | [**refreshToken**](docs/AuthApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
 | *AuthApi* | [**register**](docs/AuthApi.md#register) | **POST** /api/v1/auth/register |  |
 | *BatchApi* | [**getAllBatches**](docs/BatchApi.md#getallbatches) | **GET** /api/v1/batch |  |
@@ -66,11 +66,11 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.DtoClassroom](docs/DtoClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoMajor](docs/DtoMajor.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudent](docs/DtoStudent.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoToken](docs/DtoToken.md)
  - [com.rizalanggoro.presensigo.openapi.models.ModelsAttendanceStatus](docs/ModelsAttendanceStatus.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateAttendance](docs/RequestsCreateAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateAttendanceAttendanceStudentsInner](docs/RequestsCreateAttendanceAttendanceStudentsInner.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsLogin](docs/RequestsLogin.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsLogout](docs/RequestsLogout.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken](docs/RequestsRefreshToken.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsRegister](docs/RequestsRegister.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesClassroomMajor](docs/ResponsesClassroomMajor.md)
