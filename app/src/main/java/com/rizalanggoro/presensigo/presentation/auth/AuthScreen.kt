@@ -3,8 +3,8 @@ package com.rizalanggoro.presensigo.presentation.auth
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -19,40 +19,46 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.StateStatus
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun AuthScreen() {
     val viewModel = koinViewModel<AuthViewModel>()
-    val uiState by viewModel.uiState.collectAsState()
+    val state by viewModel.state.collectAsState()
 
     val navController = LocalNavController.current
 
-    LaunchedEffect(uiState.detail) {
-        if (uiState.detail is AuthState.Detail.Success) {
+    LaunchedEffect(state) {
+        if (state.status == StateStatus.Success)
             navController.navigate(Routes.Home) {
-                popUpTo<Routes.Auth>()
+                popUpTo<Routes.Auth> {
+                    inclusive = true
+                }
             }
-        }
     }
 
     var name by remember { mutableStateOf("Rizal Dwi Anggoro") }
     var email by remember { mutableStateOf("rizal@email.com") }
     var password by remember { mutableStateOf("password") }
 
-
     Scaffold(
         topBar = {
-            TopAppBar(title = { Text("Authentication") })
+            Column {
+                TopAppBar(title = { Text("Authentication") })
+                if (state.status == StateStatus.Loading)
+                    LinearProgressIndicator()
+            }
         }
     ) {
         Column(Modifier.padding(it)) {
-            TextField(
-                value = name,
-                onValueChange = { name = it },
-                placeholder = { Text("Masukkan Nama") }
-            )
+            if (false)
+                TextField(
+                    value = name,
+                    onValueChange = { name = it },
+                    placeholder = { Text("Masukkan Nama") }
+                )
             TextField(
                 value = email,
                 onValueChange = { email = it },
@@ -63,13 +69,6 @@ fun AuthScreen() {
                 onValueChange = { password = it },
                 placeholder = { Text("Masukkan Kata Sandi") }
             )
-
-            if (uiState.detail is AuthState.Detail.Loading)
-                CircularProgressIndicator()
-
-            Button(onClick = { viewModel.test() }) {
-                Text("test koin")
-            }
 
             Button(onClick = { viewModel.login(email, password) }) {
                 Text("Masuk")

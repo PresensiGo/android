@@ -16,7 +16,7 @@ class AuthRepository(
         private const val TAG = "AuthRepository"
     }
 
-    suspend fun login(email: String, password: String): Either<Boolean, Error> = try {
+    suspend fun login(email: String, password: String): Either<Unit, Error> = try {
         val response = authApi.login(
             RequestsLogin(
                 email = email,
@@ -33,7 +33,7 @@ class AuthRepository(
                         refreshToken = body.refreshToken
                     )
                 )
-                Either.Left(true)
+                Either.Left(Unit)
             }
 
             false -> {
