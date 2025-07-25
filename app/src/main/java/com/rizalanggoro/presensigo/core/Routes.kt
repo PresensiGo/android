@@ -8,6 +8,19 @@ object Routes {
     object Auth
 
     @Serializable
+    data object Attendance {
+        @Serializable
+        data class List(
+            val classroomId: Int
+        )
+
+        @Serializable
+        data class Create(
+            val classroomId: Int
+        )
+    }
+
+    @Serializable
     object Home
 
     @Serializable

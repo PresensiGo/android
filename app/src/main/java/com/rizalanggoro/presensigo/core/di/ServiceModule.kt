@@ -2,6 +2,7 @@ package com.rizalanggoro.presensigo.core.di
 
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
+import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
@@ -74,6 +75,7 @@ val serviceModule = module {
         }
     }
     single { AuthApi(API_BASE_URL, httpClientConfig = get()) }
+    single { AttendanceApi(API_BASE_URL, httpClientConfig = get()) }
     single { BatchApi(API_BASE_URL, httpClientConfig = get()) }
     single { ClassroomApi(API_BASE_URL, httpClientConfig = get()) }
     single { ExcelApi(API_BASE_URL, httpClientConfig = get()) }
