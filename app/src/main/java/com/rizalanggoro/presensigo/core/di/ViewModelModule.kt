@@ -2,6 +2,7 @@ package com.rizalanggoro.presensigo.core.di
 
 import com.rizalanggoro.presensigo.presentation.attendance.AttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.attendance.create.CreateAttendanceViewModel
+import com.rizalanggoro.presensigo.presentation.attendance.detail.DetailAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.auth.AuthViewModel
 import com.rizalanggoro.presensigo.presentation.classroom.ClassroomViewModel
 import com.rizalanggoro.presensigo.presentation.home.HomeViewModel
@@ -16,6 +17,8 @@ val viewModelModule = module {
     viewModelOf(::ClassroomViewModel)
     viewModelOf(::StudentViewModel)
     viewModelOf(::SettingViewModel)
+
     viewModelOf(::AttendanceViewModel)
     viewModelOf(::CreateAttendanceViewModel)
+    viewModelOf(::DetailAttendanceViewModel)
 }

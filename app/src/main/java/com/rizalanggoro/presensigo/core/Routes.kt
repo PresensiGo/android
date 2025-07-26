@@ -10,13 +10,18 @@ object Routes {
     @Serializable
     data object Attendance {
         @Serializable
+        data class Create(
+            val classroomID: Int
+        )
+
+        @Serializable
         data class List(
             val classroomID: Int
         )
 
         @Serializable
-        data class Create(
-            val classroomID: Int
+        data class Detail(
+            val attendanceId: Int
         )
     }
 

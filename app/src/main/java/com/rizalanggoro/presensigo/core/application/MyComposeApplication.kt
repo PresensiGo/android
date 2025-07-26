@@ -10,6 +10,7 @@ import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.attendance.AttendanceScreen
 import com.rizalanggoro.presensigo.presentation.attendance.create.CreateAttendanceScreen
+import com.rizalanggoro.presensigo.presentation.attendance.detail.DetailAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.auth.AuthScreen
 import com.rizalanggoro.presensigo.presentation.classroom.ClassroomScreen
 import com.rizalanggoro.presensigo.presentation.home.HomeScreen
@@ -26,7 +27,8 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
             NavHost(
                 navController = navController,
                 startDestination = when (isAuthenticated) {
-                    true -> Routes.Attendance.List(classroomID = 2)
+                    // true -> Routes.Attendance.Detail(attendanceId = 38)
+                    true -> Routes.Home
                     else -> Routes.Auth
                 }
             ) {
@@ -35,12 +37,15 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
                 composable<Routes.Classroom> { ClassroomScreen() }
                 composable<Routes.Student> { StudentScreen() }
                 composable<Routes.Setting> { SettingScreen() }
+
+                // attendance
+                composable<Routes.Attendance.Create> { CreateAttendanceScreen() }
                 composable<Routes.Attendance.List> {
                     AttendanceScreen(
                         classroomID = it.toRoute<Routes.Attendance.List>().classroomID
                     )
                 }
-                composable<Routes.Attendance.Create> { CreateAttendanceScreen() }
+                composable<Routes.Attendance.Detail> { DetailAttendanceScreen() }
             }
         }
     }

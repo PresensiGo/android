@@ -48,6 +48,7 @@ All URIs are relative to *http://localhost*
 | *AttendanceApi* | [**createAttendance**](docs/AttendanceApi.md#createattendance) | **POST** /api/v1/attendances |  |
 | *AttendanceApi* | [**deleteAttendance**](docs/AttendanceApi.md#deleteattendance) | **DELETE** /api/v1/attendances/{attendance_id} |  |
 | *AttendanceApi* | [**getAllAttendances**](docs/AttendanceApi.md#getallattendances) | **GET** /api/v1/attendances/classrooms/{classroom_id} |  |
+| *AttendanceApi* | [**getAttendance**](docs/AttendanceApi.md#getattendance) | **GET** /api/v1/attendances/{attendance_id} |  |
 | *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
 | *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | *AuthApi* | [**refreshToken**](docs/AuthApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
@@ -65,11 +66,14 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceItemReq](docs/CreateAttendanceItemReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq](docs/CreateAttendanceReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoAttendance](docs/DtoAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DtoAttendanceStudent](docs/DtoAttendanceStudent.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoBatch](docs/DtoBatch.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoClassroom](docs/DtoClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoMajor](docs/DtoMajor.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudent](docs/DtoStudent.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes](docs/GetAllAttendancesRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceItemRes](docs/GetAttendanceItemRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceRes](docs/GetAttendanceRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.ModelsAttendanceStatus](docs/ModelsAttendanceStatus.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsLogin](docs/RequestsLogin.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsLogout](docs/RequestsLogout.md)
