@@ -1,5 +1,5 @@
 
-# DtoAttendanceStudent
+# DtoAttendanceDetail
 
 ## Properties
 | Name | Type | Description | Notes |

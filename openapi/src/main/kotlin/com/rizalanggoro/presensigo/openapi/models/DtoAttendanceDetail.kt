@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class DtoAttendanceStudent (
+data class DtoAttendanceDetail (
 
     @SerializedName("attendance_id")
     val attendanceId: kotlin.Int,

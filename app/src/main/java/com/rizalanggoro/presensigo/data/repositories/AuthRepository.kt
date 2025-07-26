@@ -4,6 +4,7 @@ import arrow.core.Either
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenTTLReq
 import com.rizalanggoro.presensigo.openapi.models.RequestsLogin
 import com.rizalanggoro.presensigo.openapi.models.RequestsLogout
 import com.rizalanggoro.presensigo.openapi.models.RequestsRegister
@@ -66,6 +67,22 @@ class AuthRepository(
             }
 
             false -> Either.Right(Error("something went wrong"))
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Either.Right(Error(e.message))
+    }
+
+    suspend fun refreshTokenTTL(): Either<Unit, Error> = try {
+        val token = tokenManager.get()
+        val response = authApi.refreshTokenTTL(
+            RefreshTokenTTLReq(
+                refreshToken = token.refreshToken
+            )
+        )
+        when (response.success) {
+            true -> Either.Left(Unit)
+            else -> Either.Right(Error("something went wrong"))
         }
     } catch (e: Exception) {
         e.printStackTrace()

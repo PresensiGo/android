@@ -10,8 +10,8 @@ import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.data.repositories.AttendanceRepository
 import com.rizalanggoro.presensigo.data.repositories.StudentRepository
 import com.rizalanggoro.presensigo.domain.Attendance
+import com.rizalanggoro.presensigo.domain.AttendanceDetail
 import com.rizalanggoro.presensigo.domain.AttendanceStatus
-import com.rizalanggoro.presensigo.domain.AttendanceStudent
 import com.rizalanggoro.presensigo.domain.Student
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
@@ -116,8 +116,8 @@ class CreateAttendanceViewModel(
                 classroomId = params.classroomID,
                 date = "2025-07-25",
             ),
-            attendanceStudents = state.value.students.map {
-                AttendanceStudent(
+            attendanceDetails = state.value.students.map {
+                AttendanceDetail(
                     studentID = it.student.id,
                     status = it.status,
                     note = "no note"

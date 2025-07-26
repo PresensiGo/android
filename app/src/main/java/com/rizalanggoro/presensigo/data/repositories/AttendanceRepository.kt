@@ -2,7 +2,7 @@ package com.rizalanggoro.presensigo.data.repositories
 
 import arrow.core.Either
 import com.rizalanggoro.presensigo.domain.Attendance
-import com.rizalanggoro.presensigo.domain.AttendanceStudent
+import com.rizalanggoro.presensigo.domain.AttendanceDetail
 import com.rizalanggoro.presensigo.domain.AttendanceWithDetail
 import com.rizalanggoro.presensigo.domain.StudentWithAttendanceDetail
 import com.rizalanggoro.presensigo.domain.toDTO
@@ -16,13 +16,13 @@ class AttendanceRepository(
 ) {
     suspend fun create(
         attendance: Attendance,
-        attendanceStudents: List<AttendanceStudent>
+        attendanceDetails: List<AttendanceDetail>
     ): Either<Unit, Error> = try {
         val response = attendanceApi.createAttendance(
             CreateAttendanceReq(
                 date = attendance.date,
                 classroomId = attendance.classroomId,
-                attendanceStudents = attendanceStudents.map {
+                attendanceStudents = attendanceDetails.map {
                     CreateAttendanceItemReq(
                         studentId = it.studentID,
                         status = it.status.toDTO(),

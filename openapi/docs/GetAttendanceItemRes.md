@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **attendanceStudent** | [**DtoAttendanceStudent**](DtoAttendanceStudent.md) |  |  |
+| **attendanceStudent** | [**DtoAttendanceDetail**](DtoAttendanceDetail.md) |  |  |
 | **student** | [**DtoStudent**](DtoStudent.md) |  |  |
 
 

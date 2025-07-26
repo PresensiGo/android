@@ -1,8 +1,8 @@
 package com.rizalanggoro.presensigo.domain
 
-import com.rizalanggoro.presensigo.openapi.models.DtoAttendanceStudent
+import com.rizalanggoro.presensigo.openapi.models.DtoAttendanceDetail
 
-data class AttendanceStudent(
+data class AttendanceDetail(
     val id: Int = 0,
     val attendanceId: Int = 0,
     val studentID: Int = 0,
@@ -10,7 +10,7 @@ data class AttendanceStudent(
     val note: String = ""
 )
 
-fun DtoAttendanceStudent.toDomain() = AttendanceStudent(
+fun DtoAttendanceDetail.toDomain() = AttendanceDetail(
     id = this.id,
     attendanceId = this.attendanceId,
     studentID = this.studentId,

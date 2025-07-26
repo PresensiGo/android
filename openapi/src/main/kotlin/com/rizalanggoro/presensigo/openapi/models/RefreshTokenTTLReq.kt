@@ -15,26 +15,20 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DtoAttendanceDetail
-import com.rizalanggoro.presensigo.openapi.models.DtoStudent
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param attendanceStudent 
- * @param student 
+ * @param refreshToken 
  */
 
 
-data class GetAttendanceItemRes (
+data class RefreshTokenTTLReq (
 
-    @SerializedName("attendanceStudent")
-    val attendanceStudent: DtoAttendanceDetail,
-
-    @SerializedName("student")
-    val student: DtoStudent
+    @SerializedName("refresh_token")
+    val refreshToken: kotlin.String? = null
 
 ) {
 

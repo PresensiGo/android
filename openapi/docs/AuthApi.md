@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**login**](AuthApi.md#login) | **POST** /api/v1/auth/login |  |
 | [**logout**](AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | [**refreshToken**](AuthApi.md#refreshToken) | **POST** /api/v1/auth/refresh-token |  |
+| [**refreshTokenTTL**](AuthApi.md#refreshTokenTTL) | **POST** /api/v1/auth/refresh-token-ttl |  |
 | [**register**](AuthApi.md#register) | **POST** /api/v1/auth/register |  |
 
 
@@ -132,6 +133,50 @@ try {
 ### Return type
 
 [**ResponsesRefreshToken**](ResponsesRefreshToken.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="refreshTokenTTL"></a>
+# **refreshTokenTTL**
+> kotlin.String refreshTokenTTL(body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AuthApi()
+val body : RefreshTokenTTLReq =  // RefreshTokenTTLReq | Refresh token req
+try {
+    val result : kotlin.String = apiInstance.refreshTokenTTL(body)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AuthApi#refreshTokenTTL")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AuthApi#refreshTokenTTL")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**RefreshTokenTTLReq**](RefreshTokenTTLReq.md)| Refresh token req | |
+
+### Return type
+
+**kotlin.String**
 
 ### Authorization
 
