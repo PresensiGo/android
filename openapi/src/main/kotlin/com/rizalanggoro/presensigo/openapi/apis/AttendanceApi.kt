@@ -40,7 +40,7 @@ import java.text.DateFormat
     ) {
 
         /**
-        * POST /api/v1/attendances/
+        * POST /api/v1/attendances
         * 
         * 
          * @param body Body 
@@ -59,13 +59,47 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
-            "/api/v1/attendances/",
+            "/api/v1/attendances",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
             )
 
             return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * DELETE /api/v1/attendances/{attendance_id}
+        * 
+        * 
+         * @param attendanceId Attendance ID 
+         * @return kotlin.String
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun deleteAttendance(attendanceId: kotlin.Int): HttpResponse<kotlin.String> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.DELETE,
+            "/api/v1/attendances/{attendance_id}".replace("{" + "attendance_id" + "}", "$attendanceId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames

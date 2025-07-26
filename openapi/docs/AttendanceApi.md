@@ -4,7 +4,8 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**createAttendance**](AttendanceApi.md#createAttendance) | **POST** /api/v1/attendances/ |  |
+| [**createAttendance**](AttendanceApi.md#createAttendance) | **POST** /api/v1/attendances |  |
+| [**deleteAttendance**](AttendanceApi.md#deleteAttendance) | **DELETE** /api/v1/attendances/{attendance_id} |  |
 | [**getAllAttendances**](AttendanceApi.md#getAllAttendances) | **GET** /api/v1/attendances/classrooms/{classroom_id} |  |
 
 
@@ -38,6 +39,50 @@ try {
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **body** | [**CreateAttendanceReq**](CreateAttendanceReq.md)| Body | |
+
+### Return type
+
+**kotlin.String**
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="deleteAttendance"></a>
+# **deleteAttendance**
+> kotlin.String deleteAttendance(attendanceId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val attendanceId : kotlin.Int = 56 // kotlin.Int | Attendance ID
+try {
+    val result : kotlin.String = apiInstance.deleteAttendance(attendanceId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#deleteAttendance")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#deleteAttendance")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **attendanceId** | **kotlin.Int**| Attendance ID | |
 
 ### Return type
 

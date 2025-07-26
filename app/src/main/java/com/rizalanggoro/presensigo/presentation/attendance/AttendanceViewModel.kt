@@ -15,8 +15,13 @@ import kotlinx.coroutines.launch
 
 data class State(
     val status: StateStatus = StateStatus.Initial,
+    val action: Action = Action.Initial,
     val attendances: List<Attendance> = emptyList()
-)
+) {
+    enum class Action {
+        Initial, GetAll, Delete
+    }
+}
 
 class AttendanceViewModel(
     savedStateHandle: SavedStateHandle,
@@ -31,8 +36,15 @@ class AttendanceViewModel(
         getAllAttendances()
     }
 
+    fun resetState() = _state.update { it.copy(status = StateStatus.Initial) }
+
     fun getAllAttendances() = viewModelScope.launch {
-        _state.update { it.copy(status = StateStatus.Loading) }
+        _state.update {
+            it.copy(
+                status = StateStatus.Loading,
+                action = State.Action.GetAll
+            )
+        }
         attendanceRepository.getAll(params.classroomID)
             .onLeft { result ->
                 _state.update {
@@ -41,6 +53,22 @@ class AttendanceViewModel(
                         attendances = result
                     )
                 }
+            }
+            .onRight {
+                _state.update { it.copy(status = StateStatus.Failure) }
+            }
+    }
+
+    fun deleteAttendance(attendance: Attendance) = viewModelScope.launch {
+        _state.update {
+            it.copy(
+                status = StateStatus.Loading,
+                action = State.Action.Delete
+            )
+        }
+        attendanceRepository.delete(attendanceID = attendance.id)
+            .onLeft {
+                _state.update { it.copy(status = StateStatus.Success) }
             }
             .onRight {
                 _state.update { it.copy(status = StateStatus.Failure) }

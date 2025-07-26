@@ -48,4 +48,15 @@ class AttendanceRepository(
         e.printStackTrace()
         Either.Right(Error(e.message))
     }
+
+    suspend fun delete(attendanceID: Int): Either<Unit, Error> = try {
+        val response = attendanceApi.deleteAttendance(attendanceId = attendanceID)
+        when (response.success) {
+            true -> Either.Left(Unit)
+            false -> Either.Right(Error("something went wrong"))
+        }
+    } catch (e: Exception) {
+        e.printStackTrace()
+        Either.Right(Error(e.message))
+    }
 }

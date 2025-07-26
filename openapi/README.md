@@ -45,7 +45,8 @@ All URIs are relative to *http://localhost*
 
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
-| *AttendanceApi* | [**createAttendance**](docs/AttendanceApi.md#createattendance) | **POST** /api/v1/attendances/ |  |
+| *AttendanceApi* | [**createAttendance**](docs/AttendanceApi.md#createattendance) | **POST** /api/v1/attendances |  |
+| *AttendanceApi* | [**deleteAttendance**](docs/AttendanceApi.md#deleteattendance) | **DELETE** /api/v1/attendances/{attendance_id} |  |
 | *AttendanceApi* | [**getAllAttendances**](docs/AttendanceApi.md#getallattendances) | **GET** /api/v1/attendances/classrooms/{classroom_id} |  |
 | *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
 | *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
