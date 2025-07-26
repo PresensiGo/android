@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.presentation.classroom
 
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
@@ -17,6 +18,7 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
+import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import org.koin.androidx.compose.koinViewModel
@@ -59,6 +61,13 @@ fun ClassroomScreen() {
                         },
                         supportingContent = {
                             Text(it.major.name)
+                        },
+                        modifier = Modifier.clickable {
+                            navController.navigate(
+                                Routes.Attendance.List(
+                                    classroomID = it.classroom.id
+                                )
+                            )
                         }
                     )
                 }

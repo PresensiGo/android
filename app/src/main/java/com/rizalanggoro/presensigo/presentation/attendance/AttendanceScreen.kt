@@ -108,7 +108,13 @@ fun AttendanceScreen(classroomID: Int) {
                     headlineContent = { Text(it.date.toLocalDateString()) },
                     supportingContent = { Text(it.id.toString()) },
                     modifier = Modifier.combinedClickable(
-                        onClick = {},
+                        onClick = {
+                            navController.navigate(
+                                Routes.Attendance.Detail(
+                                    attendanceId = it.id
+                                )
+                            )
+                        },
                         onLongClick = {
                             isBottomSheetOpen = true
                             selectedAttendance = it
