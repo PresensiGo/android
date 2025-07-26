@@ -26,7 +26,16 @@ object Routes {
     }
 
     @Serializable
-    object Home
+    object Home {
+        @Serializable
+        object Attendance
+
+        @Serializable
+        object Lateness
+
+        @Serializable
+        object Setting
+    }
 
     @Serializable
     data class Classroom(
