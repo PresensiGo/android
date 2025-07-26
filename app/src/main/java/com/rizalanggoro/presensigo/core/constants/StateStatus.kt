@@ -6,3 +6,7 @@ enum class StateStatus {
     Success,
     Failure
 }
+
+fun StateStatus.isLoading() = this == StateStatus.Loading
+fun StateStatus.isSuccess() = this == StateStatus.Success
+fun StateStatus.isFailure() = this == StateStatus.Failure
