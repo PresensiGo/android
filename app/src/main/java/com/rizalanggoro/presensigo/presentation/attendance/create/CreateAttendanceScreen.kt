@@ -27,6 +27,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -54,6 +55,19 @@ fun CreateAttendanceScreen() {
     var isUpdateStatusDialogOpen by remember { mutableStateOf(false) }
 
     val navController = LocalNavController.current
+
+    LaunchedEffect(state.action, state.status) {
+        with(state) {
+            when (action) {
+                State.Action.Create -> {
+                    if (status == StateStatus.Success)
+                        navController.popBackStack()
+                }
+
+                else -> Unit
+            }
+        }
+    }
 
     Scaffold(
         topBar = {

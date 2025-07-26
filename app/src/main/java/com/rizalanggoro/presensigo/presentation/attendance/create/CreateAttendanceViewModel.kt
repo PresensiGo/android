@@ -20,9 +20,14 @@ import kotlinx.coroutines.launch
 
 data class State(
     val status: StateStatus = StateStatus.Initial,
+    val action: Action = Action.Initial,
     val students: List<StudentItem> = emptyList(),
     val selectedFilter: AttendanceStatus = AttendanceStatus.AttendanceAlpha
 ) {
+    enum class Action {
+        Initial, GetAll, Create
+    }
+
     data class StudentItem(
         val student: Student = Student(),
         val status: AttendanceStatus = AttendanceStatus.AttendanceAlpha,
@@ -49,7 +54,12 @@ class CreateAttendanceViewModel(
     }
 
     fun getAllStudents() = viewModelScope.launch {
-        _state.update { it.copy(status = StateStatus.Loading) }
+        _state.update {
+            it.copy(
+                status = StateStatus.Loading,
+                action = State.Action.GetAll
+            )
+        }
         studentRepository.getAll(params.classroomID)
             .onLeft { result ->
                 _state.update {
@@ -95,7 +105,12 @@ class CreateAttendanceViewModel(
     }
 
     fun create() = viewModelScope.launch {
-        _state.update { it.copy(status = StateStatus.Loading) }
+        _state.update {
+            it.copy(
+                status = StateStatus.Loading,
+                action = State.Action.Create
+            )
+        }
         attendanceRepository.create(
             attendance = Attendance(
                 classroomId = params.classroomID,
