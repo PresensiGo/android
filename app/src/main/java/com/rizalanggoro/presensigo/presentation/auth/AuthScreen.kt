@@ -1,10 +1,11 @@
 package com.rizalanggoro.presensigo.presentation.auth
 
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.fillMaxSize
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
@@ -16,10 +17,14 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
-import com.rizalanggoro.presensigo.core.constants.StateStatus
+import com.rizalanggoro.presensigo.core.constants.isLoading
+import com.rizalanggoro.presensigo.core.constants.isSuccess
+import com.rizalanggoro.presensigo.presentation.components.SmallCircularProgressIndicator
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -30,8 +35,8 @@ fun AuthScreen() {
 
     val navController = LocalNavController.current
 
-    LaunchedEffect(state) {
-        if (state.status == StateStatus.Success)
+    LaunchedEffect(state.status) {
+        if (state.status.isSuccess())
             navController.navigate(Routes.Home) {
                 popUpTo<Routes.Auth> {
                     inclusive = true
@@ -45,14 +50,15 @@ fun AuthScreen() {
 
     Scaffold(
         topBar = {
-            Column {
-                TopAppBar(title = { Text("Authentication") })
-                if (state.status == StateStatus.Loading)
-                    LinearProgressIndicator()
-            }
+            TopAppBar(title = { Text("Authentication") })
         }
     ) {
-        Column(Modifier.padding(it)) {
+        Column(
+            Modifier
+                .padding(it)
+                .padding(16.dp)
+                .fillMaxSize()
+        ) {
             if (false)
                 TextField(
                     value = name,
@@ -62,16 +68,27 @@ fun AuthScreen() {
             TextField(
                 value = email,
                 onValueChange = { email = it },
-                placeholder = { Text("Masukkan Alamat Email") }
+                placeholder = { Text("Masukkan Alamat Email") },
+                modifier = Modifier.fillMaxWidth()
             )
             TextField(
                 value = password,
                 onValueChange = { password = it },
-                placeholder = { Text("Masukkan Kata Sandi") }
+                placeholder = { Text("Masukkan Kata Sandi") },
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(top = 8.dp)
             )
 
-            Button(onClick = { viewModel.login(email, password) }) {
-                Text("Masuk")
+            Button(
+                onClick = { viewModel.login(email, password) },
+                enabled = !state.status.isLoading(),
+                modifier = Modifier
+                    .align(Alignment.End)
+                    .padding(top = 16.dp)
+            ) {
+                if (state.status.isLoading()) SmallCircularProgressIndicator()
+                else Text("Masuk")
             }
         }
     }

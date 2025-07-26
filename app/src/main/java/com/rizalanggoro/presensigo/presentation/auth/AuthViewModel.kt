@@ -9,6 +9,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
+data class State(
+    val status: StateStatus = StateStatus.Initial
+)
+
 class AuthViewModel(
     private val authRepository: AuthRepository
 ) : ViewModel() {
@@ -16,7 +20,7 @@ class AuthViewModel(
         const val TAG = "AuthViewModel"
     }
 
-    private var _state = MutableStateFlow(AuthState())
+    private var _state = MutableStateFlow(State())
     val state get() = _state.asStateFlow()
 
     fun login(email: String, password: String) = viewModelScope.launch {
