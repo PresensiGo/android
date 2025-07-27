@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.core.di
 
+import com.rizalanggoro.presensigo.BuildConfig
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
@@ -20,7 +21,7 @@ import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
 import org.koin.dsl.module
 
-private const val API_BASE_URL = "http://192.168.1.8:8080"
+private const val API_BASE_URL = BuildConfig.API_BASE_URL
 
 val serviceModule = module {
     single<((HttpClientConfig<*>) -> Unit)> {
