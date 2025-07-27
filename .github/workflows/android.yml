@@ -24,3 +24,22 @@ jobs:
       run: chmod +x gradlew
     - name: Build with Gradle
       run: ./gradlew build
+    - name: Get current date and commit hash
+      id: date_and_hash
+      run: |
+        echo "date=$(date +'%Y-%m-%d-%H-%M')" >> "$GITHUB_OUTPUT"
+        echo "hash=$(git rev-parse --short HEAD)" >> "$GITHUB_OUTPUT"
+
+    - name: Create Release using gh CLI
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        TAG_NAME="build-${{ steps.date_and_hash.outputs.date }}-${{ steps.date_and_hash.outputs.hash }}"
+        RELEASE_NAME="Continuous Integration Build"
+
+        gh release create "$TAG_NAME" \
+          --repo "$GITHUB_REPOSITORY" \
+          --title "$RELEASE_NAME" \
+          --notes "Automated release from commit ${{ github.sha }}" \
+          --target "$GITHUB_SHA" \
+          "app/build/outputs/apk/release/*.apk"
