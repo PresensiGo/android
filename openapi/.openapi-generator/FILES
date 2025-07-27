@@ -24,6 +24,7 @@ docs/RequestsLogin.md
 docs/RequestsLogout.md
 docs/RequestsRefreshToken.md
 docs/RequestsRegister.md
+docs/ResetApi.md
 docs/ResponsesClassroomMajor.md
 docs/ResponsesGetAllBatches.md
 docs/ResponsesGetAllClassroomWithMajors.md
@@ -44,6 +45,7 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/BatchApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/ClassroomApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/ExcelApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/MajorApi.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/ResetApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/StudentApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/auth/ApiKeyAuth.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/auth/Authentication.kt

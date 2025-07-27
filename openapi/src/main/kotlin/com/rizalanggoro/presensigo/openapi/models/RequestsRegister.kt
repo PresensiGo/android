@@ -21,6 +21,7 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param code 
  * @param email 
  * @param name 
  * @param password 
@@ -28,6 +29,9 @@ import com.google.gson.annotations.SerializedName
 
 
 data class RequestsRegister (
+
+    @SerializedName("code")
+    val code: kotlin.String? = null,
 
     @SerializedName("email")
     val email: kotlin.String? = "email@email.com",

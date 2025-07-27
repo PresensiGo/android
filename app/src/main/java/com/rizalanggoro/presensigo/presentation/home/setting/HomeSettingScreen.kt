@@ -1,13 +1,22 @@
 package com.rizalanggoro.presensigo.presentation.home.setting
 
+import android.widget.Toast
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
+import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
@@ -19,9 +28,17 @@ import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
 import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.LogOut
 import com.composables.icons.lucide.Lucide
+import com.composables.icons.lucide.RefreshCw
+import com.composables.icons.lucide.Upload
+import com.composables.icons.lucide.User
+import com.rizalanggoro.presensigo.BuildConfig
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
@@ -36,7 +53,9 @@ fun HomeSettingScreen() {
     val state by viewModel.state.collectAsState()
 
     var isLogoutDialogOpen by remember { mutableStateOf(false) }
+    var isResetDialogOpen by remember { mutableStateOf(false) }
 
+    val context = LocalContext.current
     val navController = LocalNavController.current
 
     LaunchedEffect(state.status, state.action) {
@@ -51,6 +70,14 @@ fun HomeSettingScreen() {
                     }
                 }
 
+                State.Action.Reset -> {
+                    if (status.isSuccess()) {
+                        isResetDialogOpen = false
+                        viewModel.resetState()
+                        Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
+                    }
+                }
+
                 else -> Unit
             }
         }
@@ -62,6 +89,65 @@ fun HomeSettingScreen() {
         }
     ) {
         Column(modifier = Modifier.padding(it)) {
+            // payload
+            Row(
+                horizontalArrangement = Arrangement.spacedBy(16.dp),
+                verticalAlignment = Alignment.CenterVertically,
+                modifier = Modifier.padding(horizontal = 16.dp)
+            ) {
+                Box(
+                    modifier = Modifier
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.primaryContainer)
+                        .size(48.dp)
+                ) {
+                    Icon(
+                        Lucide.User,
+                        contentDescription = null,
+                        tint = MaterialTheme.colorScheme.onPrimaryContainer,
+                        modifier = Modifier.align(Alignment.Center)
+                    )
+                }
+                with(state.payload) {
+                    Column {
+                        Text(name, style = MaterialTheme.typography.titleMedium)
+                        Text(email, style = MaterialTheme.typography.bodySmall)
+                        Text(
+                            "$schoolName - [$schoolCode]",
+                            style = MaterialTheme.typography.bodySmall
+                        )
+                    }
+                }
+            }
+            HorizontalDivider(modifier = Modifier.padding(top = 16.dp, bottom = 8.dp))
+
+            ListItem(
+                leadingContent = {
+                    Icon(
+                        Lucide.Upload,
+                        contentDescription = null
+                    )
+                },
+                headlineContent = { Text("Import data") },
+                supportingContent = { Text("Unggah data excel angkatan, kelas, dan siswa") },
+                modifier = Modifier.clickable {
+                }
+            )
+
+            ListItem(
+                leadingContent = {
+                    Icon(
+                        Lucide.RefreshCw,
+                        contentDescription = null,
+                    )
+                },
+                headlineContent = { Text("Reset") },
+                supportingContent = { Text("Hapus semua data sekolah saat ini") },
+                modifier = Modifier.clickable {
+                    isResetDialogOpen = true
+                }
+            )
+
             ListItem(
                 leadingContent = {
                     Icon(
@@ -74,8 +160,54 @@ fun HomeSettingScreen() {
                     isLogoutDialogOpen = true
                 }
             )
+
+            HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+
+            Text(
+                "Lainnya",
+                style = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.primary
+                ),
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp)
+            )
+            ListItem(
+                headlineContent = { Text("Release tag") },
+                supportingContent = { Text(BuildConfig.RELEASE_TAG) }
+            )
         }
     }
+
+    if (isResetDialogOpen)
+        AlertDialog(
+            onDismissRequest = {
+                if (!state.status.isLoading())
+                    isResetDialogOpen = false
+            },
+            title = { Text("Reset") },
+            text = {
+                Text(
+                    "Apakah Anda yakin akan mereset seluruh data? Beberapa data yang akan " +
+                            "dihapus meliputi angkatan, jurusan, kelas, siswa, dan presensi siswa."
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = { viewModel.reset() },
+                    enabled = !state.status.isLoading()
+                ) {
+                    if (state.status.isLoading()) SmallCircularProgressIndicator()
+                    else Text("Reset")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { isResetDialogOpen = false },
+                    enabled = !state.status.isLoading()
+                ) {
+                    Text("Batal")
+                }
+            }
+        )
 
     if (isLogoutDialogOpen)
         AlertDialog(
