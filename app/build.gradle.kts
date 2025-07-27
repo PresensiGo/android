@@ -1,3 +1,5 @@
+import org.jetbrains.kotlin.konan.properties.Properties
+
 plugins {
     alias(libs.plugins.android.application)
     alias(libs.plugins.kotlin.android)
@@ -25,7 +27,16 @@ android {
     }
 
     buildTypes {
+        val properties = Properties()
+        properties.load(rootProject.file(".env").inputStream())
+
+        debug {
+            buildConfigField("String", "API_BASE_URL", properties.getProperty("API_BASE_URL"))
+        }
+
         release {
+            buildConfigField("String", "API_BASE_URL", properties.getProperty("API_BASE_URL"))
+
             isMinifyEnabled = false
             proguardFiles(
                 getDefaultProguardFile("proguard-android-optimize.txt"),
@@ -42,6 +53,7 @@ android {
     }
     buildFeatures {
         compose = true
+        buildConfig = true
     }
 }
 
