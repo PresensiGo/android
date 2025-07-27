@@ -110,7 +110,7 @@ fun AttendanceScreen(classroomID: Int) {
             }
         }
     ) {
-        if (false)
+        if (state.attendances.isNotEmpty())
             LazyColumn(modifier = Modifier.padding(it)) {
                 items(state.attendances) {
                     ListItem(
@@ -132,27 +132,28 @@ fun AttendanceScreen(classroomID: Int) {
                     )
                 }
             }
-        Column(
-            modifier = Modifier
-                .padding(it)
-                .fillMaxSize()
-                .padding(16.dp),
-            horizontalAlignment = Alignment.CenterHorizontally,
-            verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
-        ) {
-            Icon(
-                Lucide.Box,
-                contentDescription = null,
-                modifier = Modifier.size(96.dp),
-                tint = MaterialTheme.colorScheme.outlineVariant
-            )
-            Text(
-                "Belum ada data kehadiran. Tambahkan data kehadiran " +
-                        "baru dengan menekan tombol + pada pojok kanan bawah",
-                style = MaterialTheme.typography.bodyMedium,
-                textAlign = TextAlign.Center
-            )
-        }
+        else
+            Column(
+                modifier = Modifier
+                    .padding(it)
+                    .fillMaxSize()
+                    .padding(16.dp),
+                horizontalAlignment = Alignment.CenterHorizontally,
+                verticalArrangement = Arrangement.spacedBy(16.dp, Alignment.CenterVertically)
+            ) {
+                Icon(
+                    Lucide.Box,
+                    contentDescription = null,
+                    modifier = Modifier.size(96.dp),
+                    tint = MaterialTheme.colorScheme.outlineVariant
+                )
+                Text(
+                    "Belum ada data kehadiran. Tambahkan data kehadiran " +
+                            "baru dengan menekan tombol + pada pojok kanan bawah",
+                    style = MaterialTheme.typography.bodyMedium,
+                    textAlign = TextAlign.Center
+                )
+            }
     }
 
     if (isBottomSheetOpen)
