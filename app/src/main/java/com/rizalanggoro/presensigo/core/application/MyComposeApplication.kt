@@ -26,7 +26,7 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
             NavHost(
                 navController = navController,
                 startDestination = when (isAuthenticated) {
-                    // true -> Routes.Attendance.Detail(attendanceId = 38)
+//                    true -> Routes.Attendance.Create(classroomID = 3)
                     true -> Routes.Home
                     else -> Routes.Auth
                 }

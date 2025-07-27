@@ -41,6 +41,7 @@ android {
 
         debug {
             buildConfigField("String", "API_BASE_URL", properties.getProperty("API_BASE_URL"))
+            buildConfigField("String", "RELEASE_TAG", properties.getProperty("RELEASE_TAG"))
 
             applicationIdSuffix = ".debug"
             resValue("string", "app_name", "PresensiGo Debug")
@@ -48,6 +49,7 @@ android {
 
         release {
             buildConfigField("String", "API_BASE_URL", properties.getProperty("API_BASE_URL"))
+            buildConfigField("String", "RELEASE_TAG", properties.getProperty("RELEASE_TAG"))
 
             isMinifyEnabled = false
             proguardFiles(

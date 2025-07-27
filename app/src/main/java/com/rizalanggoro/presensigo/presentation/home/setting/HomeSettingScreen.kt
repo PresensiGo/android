@@ -38,6 +38,7 @@ import com.composables.icons.lucide.Lucide
 import com.composables.icons.lucide.RefreshCw
 import com.composables.icons.lucide.Upload
 import com.composables.icons.lucide.User
+import com.rizalanggoro.presensigo.BuildConfig
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
@@ -158,6 +159,20 @@ fun HomeSettingScreen() {
                 modifier = Modifier.clickable {
                     isLogoutDialogOpen = true
                 }
+            )
+
+            HorizontalDivider(modifier = Modifier.padding(top = 8.dp))
+
+            Text(
+                "Lainnya",
+                style = MaterialTheme.typography.labelLarge.copy(
+                    color = MaterialTheme.colorScheme.primary
+                ),
+                modifier = Modifier.padding(start = 16.dp, top = 16.dp)
+            )
+            ListItem(
+                headlineContent = { Text("Release tag") },
+                supportingContent = { Text(BuildConfig.RELEASE_TAG) }
             )
         }
     }

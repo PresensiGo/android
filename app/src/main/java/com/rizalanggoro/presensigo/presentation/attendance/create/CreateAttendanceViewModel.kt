@@ -7,6 +7,7 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.constants.StateStatus
+import com.rizalanggoro.presensigo.core.extensions.toApiFormatString
 import com.rizalanggoro.presensigo.data.repositories.AttendanceRepository
 import com.rizalanggoro.presensigo.data.repositories.StudentRepository
 import com.rizalanggoro.presensigo.domain.Attendance
@@ -14,15 +15,19 @@ import com.rizalanggoro.presensigo.domain.AttendanceDetail
 import com.rizalanggoro.presensigo.domain.AttendanceStatus
 import com.rizalanggoro.presensigo.domain.Student
 import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.SharingStarted
+import kotlinx.coroutines.flow.StateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.map
+import kotlinx.coroutines.flow.stateIn
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class State(
     val status: StateStatus = StateStatus.Initial,
     val action: Action = Action.Initial,
-    val students: List<StudentItem> = emptyList(),
-    val selectedFilter: AttendanceStatus = AttendanceStatus.AttendanceAlpha
+    val items: List<StudentItem> = emptyList(),
+    val selectedFilter: AttendanceStatus = AttendanceStatus.AttendancePresent
 ) {
     enum class Action {
         Initial, GetAll, Create
@@ -30,7 +35,7 @@ data class State(
 
     data class StudentItem(
         val student: Student = Student(),
-        val status: AttendanceStatus = AttendanceStatus.AttendanceAlpha,
+        val status: AttendanceStatus = AttendanceStatus.AttendancePresent,
         val isSelected: Boolean = false
     )
 }
@@ -49,6 +54,29 @@ class CreateAttendanceViewModel(
 
     private val params = savedStateHandle.toRoute<Routes.Attendance.Create>()
 
+    val filteredItems: StateFlow<List<State.StudentItem>> = _state
+        .map { state ->
+            state.items.filter { item ->
+                item.status == state.selectedFilter
+            }
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Lazily,
+            initialValue = emptyList()
+        )
+    val selectedItemsCount: StateFlow<Int> = _state
+        .map { state ->
+            state.items.filter { item ->
+                item.status == state.selectedFilter && item.isSelected
+            }.size
+        }
+        .stateIn(
+            scope = viewModelScope,
+            started = SharingStarted.Lazily,
+            initialValue = 0
+        )
+
     init {
         getAllStudents()
     }
@@ -65,7 +93,7 @@ class CreateAttendanceViewModel(
                 _state.update {
                     it.copy(
                         status = StateStatus.Success,
-                        students = result.map {
+                        items = result.map {
                             State.StudentItem(student = it)
                         }
                     )
@@ -81,8 +109,17 @@ class CreateAttendanceViewModel(
     }
 
     fun changeSelected(student: Student, isSelected: Boolean) = _state.update {
-        it.copy(students = it.students.map { item ->
+        it.copy(items = it.items.map { item ->
             when (item.student.id == student.id) {
+                true -> item.copy(isSelected = isSelected)
+                else -> item
+            }
+        })
+    }
+
+    fun changeSelectedAll(isSelected: Boolean) = _state.update {
+        it.copy(items = it.items.map { item ->
+            when (item.status == it.selectedFilter) {
                 true -> item.copy(isSelected = isSelected)
                 else -> item
             }
@@ -91,7 +128,7 @@ class CreateAttendanceViewModel(
 
     fun updateStatusBatch(status: AttendanceStatus) = _state.update {
         it.copy(
-            students = it.students.map {
+            items = it.items.map {
                 when (it.isSelected) {
                     true -> it.copy(
                         status = status,
@@ -104,7 +141,7 @@ class CreateAttendanceViewModel(
         )
     }
 
-    fun create() = viewModelScope.launch {
+    fun create(date: Long) = viewModelScope.launch {
         _state.update {
             it.copy(
                 status = StateStatus.Loading,
@@ -114,9 +151,9 @@ class CreateAttendanceViewModel(
         attendanceRepository.create(
             attendance = Attendance(
                 classroomId = params.classroomID,
-                date = "2025-07-25",
+                date = date.toApiFormatString(),
             ),
-            attendanceDetails = state.value.students.map {
+            attendanceDetails = state.value.items.map {
                 AttendanceDetail(
                     studentID = it.student.id,
                     status = it.status,
