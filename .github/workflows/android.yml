@@ -28,7 +28,7 @@ jobs:
       env:
         SIGNING_KEY_BASE64: ${{ secrets.SIGNING_KEY_BASE64 }}
       run: |
-        mkdir -p android/app/
+        mkdir -p app/
         echo $SIGNING_KEY_BASE64 | base64 --decode > android/app/release.jks
     - name: Build with Gradle
       run: ./gradlew assembleRelease
@@ -55,3 +55,25 @@ jobs:
           --notes "Automated release from commit ${{ github.sha }}" \
           --target "$GITHUB_SHA" \
           "app/build/outputs/apk/release/*.apk"
+    - name: Cleanup old releases
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      run: |
+        # Dapatkan semua release, urutkan, dan simpan 3 yang terbaru
+        # Ganti `3` dengan jumlah release yang ingin Anda pertahankan
+        LATEST_RELEASES=$(gh release list --limit 100 --exclude-drafts --json tagName -q '.[].tagName' | head -n 3)
+        
+        # Dapatkan semua release kecuali 3 yang terbaru
+        RELEASES_TO_DELETE=$(gh release list --limit 100 --exclude-drafts --json tagName -q '.[].tagName')
+        
+        for tag in $LATEST_RELEASES; do
+          RELEASES_TO_DELETE=$(echo "$RELEASES_TO_DELETE" | grep -v "$tag")
+        done
+
+        # Hapus release lama satu per satu
+        if [ -n "$RELEASES_TO_DELETE" ]; then
+          echo "Menghapus release lama..."
+          echo "$RELEASES_TO_DELETE" | xargs -n 1 gh release delete -y
+        else
+          echo "Tidak ada release lama untuk dihapus."
+        fi
