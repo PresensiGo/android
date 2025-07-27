@@ -58,6 +58,7 @@ All URIs are relative to *http://localhost*
 | *ClassroomApi* | [**getAllClassroomWithMajors**](docs/ClassroomApi.md#getallclassroomwithmajors) | **GET** /api/v1/classrooms/batches/{batch_id} |  |
 | *ExcelApi* | [**importData**](docs/ExcelApi.md#importdata) | **POST** /api/v1/excel/import |  |
 | *MajorApi* | [**getAllMajors**](docs/MajorApi.md#getallmajors) | **GET** /api/v1/majors/batch/{batch_id} |  |
+| *ResetApi* | [**reset**](docs/ResetApi.md#reset) | **GET** /api/v1/reset |  |
 | *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students/classrooms/{classroom_id} |  |
 
 

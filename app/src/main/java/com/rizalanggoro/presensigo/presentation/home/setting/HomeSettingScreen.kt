@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.presentation.home.setting
 
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -30,6 +31,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.unit.dp
 import com.composables.icons.lucide.LogOut
 import com.composables.icons.lucide.Lucide
@@ -50,7 +52,9 @@ fun HomeSettingScreen() {
     val state by viewModel.state.collectAsState()
 
     var isLogoutDialogOpen by remember { mutableStateOf(false) }
+    var isResetDialogOpen by remember { mutableStateOf(false) }
 
+    val context = LocalContext.current
     val navController = LocalNavController.current
 
     LaunchedEffect(state.status, state.action) {
@@ -62,6 +66,14 @@ fun HomeSettingScreen() {
                         navController.navigate(Routes.Auth) {
                             popUpTo<Routes.Home> { inclusive = true }
                         }
+                    }
+                }
+
+                State.Action.Reset -> {
+                    if (status.isSuccess()) {
+                        isResetDialogOpen = false
+                        viewModel.resetState()
+                        Toast.makeText(context, "success", Toast.LENGTH_SHORT).show()
                     }
                 }
 
@@ -131,6 +143,7 @@ fun HomeSettingScreen() {
                 headlineContent = { Text("Reset") },
                 supportingContent = { Text("Hapus semua data sekolah saat ini") },
                 modifier = Modifier.clickable {
+                    isResetDialogOpen = true
                 }
             )
 
@@ -148,6 +161,38 @@ fun HomeSettingScreen() {
             )
         }
     }
+
+    if (isResetDialogOpen)
+        AlertDialog(
+            onDismissRequest = {
+                if (!state.status.isLoading())
+                    isResetDialogOpen = false
+            },
+            title = { Text("Reset") },
+            text = {
+                Text(
+                    "Apakah Anda yakin akan mereset seluruh data? Beberapa data yang akan " +
+                            "dihapus meliputi angkatan, jurusan, kelas, siswa, dan presensi siswa."
+                )
+            },
+            confirmButton = {
+                Button(
+                    onClick = { viewModel.reset() },
+                    enabled = !state.status.isLoading()
+                ) {
+                    if (state.status.isLoading()) SmallCircularProgressIndicator()
+                    else Text("Reset")
+                }
+            },
+            dismissButton = {
+                TextButton(
+                    onClick = { isResetDialogOpen = false },
+                    enabled = !state.status.isLoading()
+                ) {
+                    Text("Batal")
+                }
+            }
+        )
 
     if (isLogoutDialogOpen)
         AlertDialog(
