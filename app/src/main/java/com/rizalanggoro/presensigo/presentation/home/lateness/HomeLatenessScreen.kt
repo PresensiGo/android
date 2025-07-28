@@ -39,6 +39,8 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.rizalanggoro.presensigo.core.Routes
+import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.toLocalDateString
@@ -51,6 +53,7 @@ fun HomeLatenessScreen() {
     val viewModel = koinViewModel<HomeLatenessViewModel>()
     val state by viewModel.state.collectAsState()
 
+    val navController = LocalNavController.current
     val datePickerState = rememberDatePickerState()
 
     var isDatePickerDialogOpen by remember { mutableStateOf(false) }
@@ -104,7 +107,13 @@ fun HomeLatenessScreen() {
                         .padding(horizontal = 16.dp)
                         .clip(CardDefaults.shape)
                         .fillMaxWidth()
-                        .clickable {}
+                        .clickable {
+                            navController.navigate(
+                                Routes.Lateness.Detail.Index(
+                                    latenessId = it.id
+                                )
+                            )
+                        }
                 ) {
                     Box(modifier = Modifier.padding(16.dp)) {
                         Text(
