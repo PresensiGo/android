@@ -46,4 +46,20 @@ object Routes {
     data class Student(
         val classroomId: Int
     )
+
+    @Serializable
+    object Lateness {
+        @Serializable
+        object Detail {
+            @Serializable
+            data class Index(
+                val latenessId: Int
+            )
+
+            @Serializable
+            data class Create(
+                val latenessId: Int
+            )
+        }
+    }
 }

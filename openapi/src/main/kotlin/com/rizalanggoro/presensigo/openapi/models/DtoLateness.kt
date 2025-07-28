@@ -21,19 +21,19 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param date 
  * @param id 
- * @param name 
  * @param schoolId 
  */
 
 
-data class DtoBatch (
+data class DtoLateness (
+
+    @SerializedName("date")
+    val date: kotlin.String,
 
     @SerializedName("id")
     val id: kotlin.Int,
-
-    @SerializedName("name")
-    val name: kotlin.String,
 
     @SerializedName("school_id")
     val schoolId: kotlin.Int

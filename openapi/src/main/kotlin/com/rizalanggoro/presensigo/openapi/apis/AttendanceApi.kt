@@ -77,7 +77,7 @@ import java.text.DateFormat
         * DELETE /api/v1/attendances/{attendance_id}
         * 
         * 
-         * @param attendanceId Attendance ID 
+         * @param attendanceId Attendance Id 
          * @return kotlin.String
         */
             @Suppress("UNCHECKED_CAST")
@@ -111,7 +111,7 @@ import java.text.DateFormat
         * GET /api/v1/attendances/classrooms/{classroom_id}
         * 
         * 
-         * @param classroomId Classroom ID 
+         * @param classroomId Classroom Id 
          * @return GetAllAttendancesRes
         */
             @Suppress("UNCHECKED_CAST")
@@ -145,7 +145,7 @@ import java.text.DateFormat
         * GET /api/v1/attendances/{attendance_id}
         * 
         * 
-         * @param attendanceId Attendance ID 
+         * @param attendanceId Attendance Id 
          * @return GetAttendanceRes
         */
             @Suppress("UNCHECKED_CAST")

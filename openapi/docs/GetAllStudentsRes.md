@@ -1,5 +1,5 @@
 
-# ResponsesGetAllStudents
+# GetAllStudentsRes
 
 ## Properties
 | Name | Type | Description | Notes |

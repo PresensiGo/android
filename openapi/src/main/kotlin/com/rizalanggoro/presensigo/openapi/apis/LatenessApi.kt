@@ -15,8 +15,9 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes
-import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes
+import com.rizalanggoro.presensigo.openapi.models.CreateLatenessDetailReq
+import com.rizalanggoro.presensigo.openapi.models.CreateLatenessReq
+import com.rizalanggoro.presensigo.openapi.models.GetAllLatenessesRes
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -27,7 +28,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.text.DateFormat
 
-    open class StudentApi(
+    open class LatenessApi(
     baseUrl: String = ApiClient.BASE_URL,
     httpClientEngine: HttpClientEngine? = null,
     httpClientConfig: ((HttpClientConfig<*>) -> Unit)? = null,
@@ -40,34 +41,32 @@ import java.text.DateFormat
     ) {
 
         /**
-        * GET /api/v1/students
+        * POST /api/v1/latenesses
         * 
         * 
-         * @param keyword Keyword 
-         * @return GetAllStudentsRes
+         * @param body Payload 
+         * @return kotlin.String
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllStudents(keyword: kotlin.String): HttpResponse<GetAllStudentsRes> {
+        open suspend fun createLateness(body: CreateLatenessReq): HttpResponse<kotlin.String> {
 
             val localVariableAuthNames = listOf<String>()
 
-            val localVariableBody = 
-                    io.ktor.client.utils.EmptyContent
+            val localVariableBody = body
 
             val localVariableQuery = mutableMapOf<String, List<String>>()
-            keyword?.apply { localVariableQuery["keyword"] = listOf("$keyword") }
 
             val localVariableHeaders = mutableMapOf<String, String>()
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.GET,
-            "/api/v1/students",
+            RequestMethod.POST,
+            "/api/v1/latenesses",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
             )
 
-            return request(
+            return jsonRequest(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames
@@ -75,14 +74,47 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/students/classrooms/{classroom_id}
+        * POST /api/v1/latenesses/{lateness_id}
         * 
         * 
-         * @param classroomId Classroom Id 
-         * @return GetAllStudentsByClassroomIdRes
+         * @param latenessId Payload 
+         * @param body Payload 
+         * @return kotlin.String
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllStudentsByClassroomId(classroomId: kotlin.Int): HttpResponse<GetAllStudentsByClassroomIdRes> {
+        open suspend fun createLatenessDetail(latenessId: kotlin.Int, body: CreateLatenessDetailReq): HttpResponse<kotlin.String> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/latenesses/{lateness_id}".replace("{" + "lateness_id" + "}", "$latenessId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/latenesses
+        * 
+        * 
+         * @return GetAllLatenessesRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAllLatenesses(): HttpResponse<GetAllLatenessesRes> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -95,7 +127,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
-            "/api/v1/students/classrooms/{classroom_id}".replace("{" + "classroom_id" + "}", "$classroomId"),
+            "/api/v1/latenesses",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

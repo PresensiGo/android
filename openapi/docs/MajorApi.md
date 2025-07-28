@@ -20,7 +20,7 @@ All URIs are relative to *http://localhost*
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = MajorApi()
-val batchId : kotlin.Int = 56 // kotlin.Int | Batch ID
+val batchId : kotlin.Int = 56 // kotlin.Int | Batch Id
 try {
     val result : ResponsesGetAllMajors = apiInstance.getAllMajors(batchId)
     println(result)
@@ -36,7 +36,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **batchId** | **kotlin.Int**| Batch ID | |
+| **batchId** | **kotlin.Int**| Batch Id | |
 
 ### Return type
 

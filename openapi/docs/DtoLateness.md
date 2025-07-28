@@ -1,12 +1,12 @@
 
-# DtoMajor
+# DtoLateness
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **batchId** | **kotlin.Int** |  |  |
+| **date** | **kotlin.String** |  |  |
 | **id** | **kotlin.Int** |  |  |
-| **name** | **kotlin.String** |  |  |
+| **schoolId** | **kotlin.Int** |  |  |
 
 
 

@@ -88,7 +88,7 @@ class CreateAttendanceViewModel(
                 action = State.Action.GetAll
             )
         }
-        studentRepository.getAll(params.classroomID)
+        studentRepository.getAllByClassroomId(params.classroomID)
             .onLeft { result ->
                 _state.update {
                     it.copy(
