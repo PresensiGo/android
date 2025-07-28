@@ -112,4 +112,5 @@ dependencies {
 
     // lucide icons for jetpack compose
     implementation("com.composables:icons-lucide:1.0.0")
+    implementation("androidx.compose.material:material-icons-extended:1.7.8")
 }

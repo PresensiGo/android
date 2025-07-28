@@ -42,7 +42,7 @@ import java.text.DateFormat
         * GET /api/v1/classrooms/batches/{batch_id}
         * 
         * 
-         * @param batchId Batch ID 
+         * @param batchId Batch Id 
          * @return ResponsesGetAllClassroomWithMajors
         */
             @Suppress("UNCHECKED_CAST")

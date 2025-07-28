@@ -15,28 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
+import com.rizalanggoro.presensigo.openapi.models.DtoLateness
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param id 
- * @param name 
- * @param schoolId 
+ * @param latenesses 
  */
 
 
-data class DtoBatch (
+data class GetAllLatenessesRes (
 
-    @SerializedName("id")
-    val id: kotlin.Int,
-
-    @SerializedName("name")
-    val name: kotlin.String,
-
-    @SerializedName("school_id")
-    val schoolId: kotlin.Int
+    @SerializedName("latenesses")
+    val latenesses: kotlin.collections.List<DtoLateness>
 
 ) {
 

@@ -20,7 +20,7 @@ All URIs are relative to *http://localhost*
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = StudentApi()
-val classroomId : kotlin.Int = 56 // kotlin.Int | Classroom ID
+val classroomId : kotlin.Int = 56 // kotlin.Int | Classroom Id
 try {
     val result : ResponsesGetAllStudents = apiInstance.getAllStudents(classroomId)
     println(result)
@@ -36,7 +36,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **classroomId** | **kotlin.Int**| Classroom ID | |
+| **classroomId** | **kotlin.Int**| Classroom Id | |
 
 ### Return type
 

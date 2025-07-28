@@ -57,6 +57,9 @@ All URIs are relative to *http://localhost*
 | *BatchApi* | [**getAllBatches**](docs/BatchApi.md#getallbatches) | **GET** /api/v1/batch |  |
 | *ClassroomApi* | [**getAllClassroomWithMajors**](docs/ClassroomApi.md#getallclassroomwithmajors) | **GET** /api/v1/classrooms/batches/{batch_id} |  |
 | *ExcelApi* | [**importData**](docs/ExcelApi.md#importdata) | **POST** /api/v1/excel/import |  |
+| *LatenessApi* | [**createLateness**](docs/LatenessApi.md#createlateness) | **POST** /api/v1/latenesses |  |
+| *LatenessApi* | [**createLatenessDetail**](docs/LatenessApi.md#createlatenessdetail) | **POST** /api/v1/latenesses/{lateness_id} |  |
+| *LatenessApi* | [**getAllLatenesses**](docs/LatenessApi.md#getalllatenesses) | **GET** /api/v1/latenesses |  |
 | *MajorApi* | [**getAllMajors**](docs/MajorApi.md#getallmajors) | **GET** /api/v1/majors/batch/{batch_id} |  |
 | *ResetApi* | [**reset**](docs/ResetApi.md#reset) | **GET** /api/v1/reset |  |
 | *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students/classrooms/{classroom_id} |  |
@@ -67,13 +70,17 @@ All URIs are relative to *http://localhost*
 
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceItemReq](docs/CreateAttendanceItemReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq](docs/CreateAttendanceReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.CreateLatenessDetailReq](docs/CreateLatenessDetailReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.CreateLatenessReq](docs/CreateLatenessReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoAttendance](docs/DtoAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoAttendanceDetail](docs/DtoAttendanceDetail.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoBatch](docs/DtoBatch.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoClassroom](docs/DtoClassroom.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DtoLateness](docs/DtoLateness.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoMajor](docs/DtoMajor.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudent](docs/DtoStudent.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes](docs/GetAllAttendancesRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllLatenessesRes](docs/GetAllLatenessesRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceItemRes](docs/GetAttendanceItemRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceRes](docs/GetAttendanceRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.ModelsAttendanceStatus](docs/ModelsAttendanceStatus.md)

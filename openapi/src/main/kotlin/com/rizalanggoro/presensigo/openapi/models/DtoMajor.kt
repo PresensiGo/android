@@ -21,12 +21,16 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param batchId 
  * @param id 
  * @param name 
  */
 
 
 data class DtoMajor (
+
+    @SerializedName("batch_id")
+    val batchId: kotlin.Int,
 
     @SerializedName("id")
     val id: kotlin.Int,

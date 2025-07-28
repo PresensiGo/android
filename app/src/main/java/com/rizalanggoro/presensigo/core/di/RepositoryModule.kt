@@ -4,6 +4,7 @@ import com.rizalanggoro.presensigo.data.repositories.AttendanceRepository
 import com.rizalanggoro.presensigo.data.repositories.AuthRepository
 import com.rizalanggoro.presensigo.data.repositories.BatchRepository
 import com.rizalanggoro.presensigo.data.repositories.ClassroomRepository
+import com.rizalanggoro.presensigo.data.repositories.LatenessRepository
 import com.rizalanggoro.presensigo.data.repositories.MajorRepository
 import com.rizalanggoro.presensigo.data.repositories.ResetRepository
 import com.rizalanggoro.presensigo.data.repositories.StudentRepository
@@ -15,6 +16,7 @@ val repositoryModule = module {
     singleOf(::AttendanceRepository)
     singleOf(::BatchRepository)
     singleOf(::ClassroomRepository)
+    singleOf(::LatenessRepository)
     singleOf(::MajorRepository)
     singleOf(::ResetRepository)
     singleOf(::StudentRepository)

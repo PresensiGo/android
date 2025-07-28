@@ -21,22 +21,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param id 
- * @param name 
- * @param schoolId 
+ * @param date 
  */
 
 
-data class DtoBatch (
+data class CreateLatenessReq (
 
-    @SerializedName("id")
-    val id: kotlin.Int,
-
-    @SerializedName("name")
-    val name: kotlin.String,
-
-    @SerializedName("school_id")
-    val schoolId: kotlin.Int
+    @SerializedName("date")
+    val date: kotlin.String
 
 ) {
 

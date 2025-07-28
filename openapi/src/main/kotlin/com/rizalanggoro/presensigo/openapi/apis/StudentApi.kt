@@ -42,7 +42,7 @@ import java.text.DateFormat
         * GET /api/v1/students/classrooms/{classroom_id}
         * 
         * 
-         * @param classroomId Classroom ID 
+         * @param classroomId Classroom Id 
          * @return ResponsesGetAllStudents
         */
             @Suppress("UNCHECKED_CAST")

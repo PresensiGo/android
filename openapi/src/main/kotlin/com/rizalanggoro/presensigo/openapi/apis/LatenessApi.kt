@@ -15,9 +15,9 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq
-import com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes
-import com.rizalanggoro.presensigo.openapi.models.GetAttendanceRes
+import com.rizalanggoro.presensigo.openapi.models.CreateLatenessDetailReq
+import com.rizalanggoro.presensigo.openapi.models.CreateLatenessReq
+import com.rizalanggoro.presensigo.openapi.models.GetAllLatenessesRes
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -28,7 +28,7 @@ import com.google.gson.Gson
 import com.google.gson.GsonBuilder
 import java.text.DateFormat
 
-    open class AttendanceApi(
+    open class LatenessApi(
     baseUrl: String = ApiClient.BASE_URL,
     httpClientEngine: HttpClientEngine? = null,
     httpClientConfig: ((HttpClientConfig<*>) -> Unit)? = null,
@@ -41,14 +41,14 @@ import java.text.DateFormat
     ) {
 
         /**
-        * POST /api/v1/attendances
+        * POST /api/v1/latenesses
         * 
         * 
-         * @param body Body 
+         * @param body Payload 
          * @return kotlin.String
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createAttendance(body: CreateAttendanceReq): HttpResponse<kotlin.String> {
+        open suspend fun createLateness(body: CreateLatenessReq): HttpResponse<kotlin.String> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -60,7 +60,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
-            "/api/v1/attendances",
+            "/api/v1/latenesses",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -74,33 +74,33 @@ import java.text.DateFormat
             }
 
         /**
-        * DELETE /api/v1/attendances/{attendance_id}
+        * POST /api/v1/latenesses/{lateness_id}
         * 
         * 
-         * @param attendanceId Attendance Id 
+         * @param latenessId Payload 
+         * @param body Payload 
          * @return kotlin.String
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun deleteAttendance(attendanceId: kotlin.Int): HttpResponse<kotlin.String> {
+        open suspend fun createLatenessDetail(latenessId: kotlin.Int, body: CreateLatenessDetailReq): HttpResponse<kotlin.String> {
 
             val localVariableAuthNames = listOf<String>()
 
-            val localVariableBody = 
-                    io.ktor.client.utils.EmptyContent
+            val localVariableBody = body
 
             val localVariableQuery = mutableMapOf<String, List<String>>()
 
             val localVariableHeaders = mutableMapOf<String, String>()
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.DELETE,
-            "/api/v1/attendances/{attendance_id}".replace("{" + "attendance_id" + "}", "$attendanceId"),
+            RequestMethod.POST,
+            "/api/v1/latenesses/{lateness_id}".replace("{" + "lateness_id" + "}", "$latenessId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
             )
 
-            return request(
+            return jsonRequest(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames
@@ -108,14 +108,13 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/attendances/classrooms/{classroom_id}
+        * GET /api/v1/latenesses
         * 
         * 
-         * @param classroomId Classroom Id 
-         * @return GetAllAttendancesRes
+         * @return GetAllLatenessesRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllAttendances(classroomId: kotlin.Int): HttpResponse<GetAllAttendancesRes> {
+        open suspend fun getAllLatenesses(): HttpResponse<GetAllLatenessesRes> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -128,41 +127,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
-            "/api/v1/attendances/classrooms/{classroom_id}".replace("{" + "classroom_id" + "}", "$classroomId"),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return request(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
-
-        /**
-        * GET /api/v1/attendances/{attendance_id}
-        * 
-        * 
-         * @param attendanceId Attendance Id 
-         * @return GetAttendanceRes
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun getAttendance(attendanceId: kotlin.Int): HttpResponse<GetAttendanceRes> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = 
-                    io.ktor.client.utils.EmptyContent
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.GET,
-            "/api/v1/attendances/{attendance_id}".replace("{" + "attendance_id" + "}", "$attendanceId"),
+            "/api/v1/latenesses",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

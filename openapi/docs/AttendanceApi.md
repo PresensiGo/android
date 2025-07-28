@@ -67,7 +67,7 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AttendanceApi()
-val attendanceId : kotlin.Int = 56 // kotlin.Int | Attendance ID
+val attendanceId : kotlin.Int = 56 // kotlin.Int | Attendance Id
 try {
     val result : kotlin.String = apiInstance.deleteAttendance(attendanceId)
     println(result)
@@ -83,7 +83,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **attendanceId** | **kotlin.Int**| Attendance ID | |
+| **attendanceId** | **kotlin.Int**| Attendance Id | |
 
 ### Return type
 
@@ -111,7 +111,7 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AttendanceApi()
-val classroomId : kotlin.Int = 56 // kotlin.Int | Classroom ID
+val classroomId : kotlin.Int = 56 // kotlin.Int | Classroom Id
 try {
     val result : GetAllAttendancesRes = apiInstance.getAllAttendances(classroomId)
     println(result)
@@ -127,7 +127,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **classroomId** | **kotlin.Int**| Classroom ID | |
+| **classroomId** | **kotlin.Int**| Classroom Id | |
 
 ### Return type
 
@@ -155,7 +155,7 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AttendanceApi()
-val attendanceId : kotlin.Int = 56 // kotlin.Int | Attendance ID
+val attendanceId : kotlin.Int = 56 // kotlin.Int | Attendance Id
 try {
     val result : GetAttendanceRes = apiInstance.getAttendance(attendanceId)
     println(result)
@@ -171,7 +171,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **attendanceId** | **kotlin.Int**| Attendance ID | |
+| **attendanceId** | **kotlin.Int**| Attendance Id | |
 
 ### Return type
 
