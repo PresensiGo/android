@@ -62,7 +62,8 @@ All URIs are relative to *http://localhost*
 | *LatenessApi* | [**getAllLatenesses**](docs/LatenessApi.md#getalllatenesses) | **GET** /api/v1/latenesses |  |
 | *MajorApi* | [**getAllMajors**](docs/MajorApi.md#getallmajors) | **GET** /api/v1/majors/batch/{batch_id} |  |
 | *ResetApi* | [**reset**](docs/ResetApi.md#reset) | **GET** /api/v1/reset |  |
-| *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students/classrooms/{classroom_id} |  |
+| *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students |  |
+| *StudentApi* | [**getAllStudentsByClassroomId**](docs/StudentApi.md#getallstudentsbyclassroomid) | **GET** /api/v1/students/classrooms/{classroom_id} |  |
 
 
 <a id="documentation-for-models"></a>
@@ -81,6 +82,8 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudent](docs/DtoStudent.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes](docs/GetAllAttendancesRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllLatenessesRes](docs/GetAllLatenessesRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes](docs/GetAllStudentsByClassroomIdRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes](docs/GetAllStudentsRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceItemRes](docs/GetAttendanceItemRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceRes](docs/GetAttendanceRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.ModelsAttendanceStatus](docs/ModelsAttendanceStatus.md)
@@ -93,7 +96,6 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllBatches](docs/ResponsesGetAllBatches.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors](docs/ResponsesGetAllClassroomWithMajors.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajors](docs/ResponsesGetAllMajors.md)
- - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllStudents](docs/ResponsesGetAllStudents.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesLogin](docs/ResponsesLogin.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesRefreshToken](docs/ResponsesRefreshToken.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesRegister](docs/ResponsesRegister.md)

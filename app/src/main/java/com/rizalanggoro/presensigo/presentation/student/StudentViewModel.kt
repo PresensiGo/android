@@ -27,7 +27,7 @@ class StudentViewModel(
 
     fun getAllStudents() = viewModelScope.launch {
         _uiState.update { it.copy(status = StateStatus.Loading) }
-        studentRepository.getAll(params.classroomId)
+        studentRepository.getAllByClassroomId(params.classroomId)
             .onLeft { result ->
                 _uiState.update {
                     it.copy(

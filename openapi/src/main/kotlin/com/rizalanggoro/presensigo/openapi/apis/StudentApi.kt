@@ -15,7 +15,8 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllStudents
+import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes
+import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -39,14 +40,49 @@ import java.text.DateFormat
     ) {
 
         /**
+        * GET /api/v1/students
+        * 
+        * 
+         * @param keyword Keyword 
+         * @return GetAllStudentsRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAllStudents(keyword: kotlin.String): HttpResponse<GetAllStudentsRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+            keyword?.apply { localVariableQuery["keyword"] = listOf("$keyword") }
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/students",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
         * GET /api/v1/students/classrooms/{classroom_id}
         * 
         * 
          * @param classroomId Classroom Id 
-         * @return ResponsesGetAllStudents
+         * @return GetAllStudentsByClassroomIdRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllStudents(classroomId: kotlin.Int): HttpResponse<ResponsesGetAllStudents> {
+        open suspend fun getAllStudentsByClassroomId(classroomId: kotlin.Int): HttpResponse<GetAllStudentsByClassroomIdRes> {
 
             val localVariableAuthNames = listOf<String>()
 
