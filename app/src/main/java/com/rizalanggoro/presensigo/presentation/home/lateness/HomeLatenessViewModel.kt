@@ -5,6 +5,7 @@ import androidx.lifecycle.viewModelScope
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.extensions.toApiFormatString
 import com.rizalanggoro.presensigo.data.repositories.LatenessRepository
+import com.rizalanggoro.presensigo.domain.Lateness
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -12,7 +13,8 @@ import kotlinx.coroutines.launch
 
 data class State(
     val status: StateStatus = StateStatus.Initial,
-    val action: Action = State.Action.Initial
+    val action: Action = State.Action.Initial,
+    val latenesses: List<Lateness> = emptyList()
 ) {
     enum class Action {
         Initial, Create, GetAll
@@ -37,12 +39,24 @@ class HomeLatenessViewModel(
     }
 
     fun getAllLatenesses() = viewModelScope.launch {
-//        _state.update {
-//            it.copy(
-//                status = StateStatus.Loading,
-//                action = State.Action.GetAll
-//            )
-//        }
+        _state.update {
+            it.copy(
+                status = StateStatus.Loading,
+                action = State.Action.GetAll
+            )
+        }
+        latenessRepository.getAll()
+            .onLeft { result ->
+                _state.update {
+                    it.copy(
+                        status = StateStatus.Success,
+                        latenesses = result
+                    )
+                }
+            }
+            .onRight {
+                _state.update { it.copy(status = StateStatus.Failure) }
+            }
     }
 
     fun create(date: Long) = viewModelScope.launch {
