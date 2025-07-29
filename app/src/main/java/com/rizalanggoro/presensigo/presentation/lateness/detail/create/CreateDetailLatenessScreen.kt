@@ -34,6 +34,7 @@ import androidx.compose.material3.Text
 import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.runtime.mutableStateOf
@@ -45,6 +46,7 @@ import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
+import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.presentation.components.SelectedAvatars
 import com.rizalanggoro.presensigo.ui.theme.CardCornerShape
 import org.koin.androidx.compose.koinViewModel
@@ -59,6 +61,21 @@ fun CreateDetailLatenessScreen() {
     val navController = LocalNavController.current
 
     var keyword by remember { mutableStateOf("") }
+
+    LaunchedEffect(state.action, state.status) {
+        with(state) {
+            when (action) {
+                State.Action.Create -> {
+                    if (status.isSuccess()) {
+                        viewModel.resetState()
+                        navController.popBackStack()
+                    }
+                }
+
+                else -> Unit
+            }
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -142,7 +159,7 @@ fun CreateDetailLatenessScreen() {
                 }
                 Button(
                     modifier = Modifier.fillMaxWidth(),
-                    onClick = {},
+                    onClick = { if (state.selectedStudentIds.isNotEmpty()) viewModel.create() },
                     enabled = !(state.action == State.Action.Create && state.status.isLoading()),
                     contentPadding = when (state.action == State.Action.Create && state.status.isLoading()) {
                         true -> ButtonDefaults.ButtonWithIconContentPadding

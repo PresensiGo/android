@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **studentId** | **kotlin.Int** |  |  |
+| **studentIds** | **kotlin.collections.List&lt;kotlin.Int&gt;** |  |  |
 
 
 

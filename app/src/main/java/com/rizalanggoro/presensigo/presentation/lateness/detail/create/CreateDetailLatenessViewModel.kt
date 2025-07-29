@@ -95,4 +95,23 @@ class CreateDetailLatenessViewModel(
                 _state.update { it.copy(status = StateStatus.Failure) }
             }
     }
+
+    fun create() = viewModelScope.launch {
+        _state.update {
+            it.copy(
+                action = State.Action.Create,
+                status = StateStatus.Loading
+            )
+        }
+        latenessRepository.createDetail(
+            latenessId = params.latenessId,
+            studentIds = state.value.selectedStudentIds,
+        )
+            .onLeft {
+                _state.update { it.copy(status = StateStatus.Success) }
+            }
+            .onRight {
+                _state.update { it.copy(status = StateStatus.Failure) }
+            }
+    }
 }

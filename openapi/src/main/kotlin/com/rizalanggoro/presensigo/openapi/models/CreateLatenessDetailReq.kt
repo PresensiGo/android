@@ -21,14 +21,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param studentId 
+ * @param studentIds 
  */
 
 
 data class CreateLatenessDetailReq (
 
-    @SerializedName("student_id")
-    val studentId: kotlin.Int
+    @SerializedName("student_ids")
+    val studentIds: kotlin.collections.List<kotlin.Int>
 
 ) {
 
