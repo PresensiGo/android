@@ -18,6 +18,7 @@ package com.rizalanggoro.presensigo.openapi.apis
 import com.rizalanggoro.presensigo.openapi.models.CreateLatenessDetailReq
 import com.rizalanggoro.presensigo.openapi.models.CreateLatenessReq
 import com.rizalanggoro.presensigo.openapi.models.GetAllLatenessesRes
+import com.rizalanggoro.presensigo.openapi.models.GetLatenessRes
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -128,6 +129,40 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/latenesses",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/latenesses/{lateness_id}
+        * 
+        * 
+         * @param latenessId Lateness ID 
+         * @return GetLatenessRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getLateness(latenessId: kotlin.Int): HttpResponse<GetLatenessRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/latenesses/{lateness_id}".replace("{" + "lateness_id" + "}", "$latenessId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

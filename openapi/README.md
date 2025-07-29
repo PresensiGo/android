@@ -60,6 +60,7 @@ All URIs are relative to *http://localhost*
 | *LatenessApi* | [**createLateness**](docs/LatenessApi.md#createlateness) | **POST** /api/v1/latenesses |  |
 | *LatenessApi* | [**createLatenessDetail**](docs/LatenessApi.md#createlatenessdetail) | **POST** /api/v1/latenesses/{lateness_id} |  |
 | *LatenessApi* | [**getAllLatenesses**](docs/LatenessApi.md#getalllatenesses) | **GET** /api/v1/latenesses |  |
+| *LatenessApi* | [**getLateness**](docs/LatenessApi.md#getlateness) | **GET** /api/v1/latenesses/{lateness_id} |  |
 | *MajorApi* | [**getAllMajors**](docs/MajorApi.md#getallmajors) | **GET** /api/v1/majors/batch/{batch_id} |  |
 | *ResetApi* | [**reset**](docs/ResetApi.md#reset) | **GET** /api/v1/reset |  |
 | *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students |  |
@@ -69,6 +70,7 @@ All URIs are relative to *http://localhost*
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [com.rizalanggoro.presensigo.openapi.models.CombinedStudentMajorClassroom](docs/CombinedStudentMajorClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceItemReq](docs/CreateAttendanceItemReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq](docs/CreateAttendanceReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateLatenessDetailReq](docs/CreateLatenessDetailReq.md)
@@ -86,6 +88,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes](docs/GetAllStudentsRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceItemRes](docs/GetAttendanceItemRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceRes](docs/GetAttendanceRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetLatenessRes](docs/GetLatenessRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.ModelsAttendanceStatus](docs/ModelsAttendanceStatus.md)
  - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenTTLReq](docs/RefreshTokenTTLReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsLogin](docs/RequestsLogin.md)

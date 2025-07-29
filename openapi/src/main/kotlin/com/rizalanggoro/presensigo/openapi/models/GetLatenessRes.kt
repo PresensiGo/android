@@ -15,20 +15,26 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
+import com.rizalanggoro.presensigo.openapi.models.CombinedStudentMajorClassroom
+import com.rizalanggoro.presensigo.openapi.models.DtoLateness
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param studentIds 
+ * @param items 
+ * @param lateness 
  */
 
 
-data class CreateLatenessDetailReq (
+data class GetLatenessRes (
 
-    @SerializedName("student_ids")
-    val studentIds: kotlin.collections.List<kotlin.Int>
+    @SerializedName("items")
+    val items: kotlin.collections.List<CombinedStudentMajorClassroom>,
+
+    @SerializedName("lateness")
+    val lateness: DtoLateness
 
 ) {
 
