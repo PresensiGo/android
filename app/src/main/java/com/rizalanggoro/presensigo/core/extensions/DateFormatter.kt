@@ -14,9 +14,10 @@ fun String.toLocalDateString(): String {
             val isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
             val zonedDateTime = ZonedDateTime.parse(this, isoFormatter)
 
+            val locale = Locale("id", "ID")
             val dayOfWeek =
-                zonedDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, Locale("id", "ID"))
-            val outputFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+                zonedDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, locale)
+            val outputFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", locale)
 
             return "$dayOfWeek, ${zonedDateTime.format(outputFormatter)}"
         } else {
@@ -32,8 +33,9 @@ fun Long.toLocalDateString(): String = try {
         val instant = Instant.ofEpochMilli(this)
         val zonedDateTime = instant.atZone(ZoneId.systemDefault())
 
-        val dayOfWeek = zonedDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, Locale("id", "ID"))
-        val outputFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy")
+        val locale = Locale("id", "ID")
+        val dayOfWeek = zonedDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, locale)
+        val outputFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", locale)
 
         "$dayOfWeek, ${zonedDateTime.format(outputFormatter)}"
     } else {

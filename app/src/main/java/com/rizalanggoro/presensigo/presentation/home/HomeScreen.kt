@@ -106,7 +106,7 @@ fun HomeScreen() {
         NavHost(
             modifier = Modifier.padding(it),
             navController = homeNavController,
-            startDestination = Routes.Home.Setting
+            startDestination = Routes.Home.Lateness
         ) {
             composable<Routes.Home.Attendance> { HomeAttendanceScreen() }
             composable<Routes.Home.Lateness> { HomeLatenessScreen() }

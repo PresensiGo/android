@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.core.application
 
+import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
 import androidx.navigation.compose.NavHost
@@ -21,35 +22,37 @@ import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
 @Composable
 fun MyComposeApplication(isAuthenticated: Boolean = false) {
-    PresensiGoTheme(darkTheme = false) {
-        val navController = rememberNavController()
+    PresensiGoTheme(darkTheme = true) {
+        Surface {
+            val navController = rememberNavController()
 
-        CompositionLocalProvider(LocalNavController provides navController) {
-            NavHost(
-                navController = navController,
-                startDestination = when (isAuthenticated) {
+            CompositionLocalProvider(LocalNavController provides navController) {
+                NavHost(
+                    navController = navController,
+                    startDestination = when (isAuthenticated) {
 //                    true -> Routes.Lateness.Detail.Create(latenessId = 1)
-                    true -> Routes.Home
-                    else -> Routes.Auth
-                }
-            ) {
-                composable<Routes.Auth> { AuthScreen() }
-                composable<Routes.Home> { HomeScreen() }
-                composable<Routes.Classroom> { ClassroomScreen() }
-                composable<Routes.Student> { StudentScreen() }
+                        true -> Routes.Home
+                        else -> Routes.Auth
+                    }
+                ) {
+                    composable<Routes.Auth> { AuthScreen() }
+                    composable<Routes.Home> { HomeScreen() }
+                    composable<Routes.Classroom> { ClassroomScreen() }
+                    composable<Routes.Student> { StudentScreen() }
 
-                // attendance
-                composable<Routes.Attendance.Create> { CreateAttendanceScreen() }
-                composable<Routes.Attendance.List> {
-                    AttendanceScreen(
-                        classroomID = it.toRoute<Routes.Attendance.List>().classroomID
-                    )
-                }
-                composable<Routes.Attendance.Detail> { DetailAttendanceScreen() }
+                    // attendance
+                    composable<Routes.Attendance.Create> { CreateAttendanceScreen() }
+                    composable<Routes.Attendance.List> {
+                        AttendanceScreen(
+                            classroomID = it.toRoute<Routes.Attendance.List>().classroomID
+                        )
+                    }
+                    composable<Routes.Attendance.Detail> { DetailAttendanceScreen() }
 
-                // lateness
-                composable<Routes.Lateness.Detail.Index> { DetailLatenessScreen() }
-                composable<Routes.Lateness.Detail.Create> { CreateDetailLatenessScreen() }
+                    // lateness
+                    composable<Routes.Lateness.Detail.Index> { DetailLatenessScreen() }
+                    composable<Routes.Lateness.Detail.Create> { CreateDetailLatenessScreen() }
+                }
             }
         }
     }
