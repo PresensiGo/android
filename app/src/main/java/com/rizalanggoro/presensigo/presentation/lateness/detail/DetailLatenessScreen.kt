@@ -6,32 +6,40 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.itemsIndexed
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.PersonAdd
+import androidx.compose.material.icons.rounded.Refresh
 import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
+import androidx.compose.material3.LinearProgressIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.isLoading
+import com.rizalanggoro.presensigo.domain.combined.StudentMajorClassroom
 import com.rizalanggoro.presensigo.ui.theme.CardCornerShape
 import org.koin.androidx.compose.koinViewModel
 
@@ -39,19 +47,29 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun DetailLatenessScreen() {
     val viewModel = koinViewModel<DetailLatenessViewModel>()
+    val state by viewModel.state.collectAsState()
 
     val navController = LocalNavController.current
 
     Scaffold(
         topBar = {
-            TopAppBar(
-                navigationIcon = {
-                    IconButton(onClick = { navController.popBackStack() }) {
-                        Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = null)
+            Column {
+                TopAppBar(
+                    navigationIcon = {
+                        IconButton(onClick = { navController.popBackStack() }) {
+                            Icon(Icons.AutoMirrored.Rounded.ArrowBack, contentDescription = null)
+                        }
+                    },
+                    title = { Text("Detail Keterlambatan") },
+                    actions = {
+                        IconButton(onClick = { viewModel.getLateness() }) {
+                            Icon(Icons.Rounded.Refresh, contentDescription = null)
+                        }
                     }
-                },
-                title = { Text("Detail Keterlambatan") }
-            )
+                )
+                if (state.status.isLoading())
+                    LinearProgressIndicator(modifier = Modifier.fillMaxWidth())
+            }
         },
         floatingActionButton = {
             FloatingActionButton(
@@ -68,11 +86,17 @@ fun DetailLatenessScreen() {
         }
     ) {
         LazyColumn(
-            modifier = Modifier.padding(it),
+            modifier = Modifier
+                .padding(it)
+                .fillMaxSize(),
             verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            items(10) {
-                StudentItem(index = it, totalCount = 10)
+            itemsIndexed(state.items) { index, item ->
+                StudentItem(
+                    index = index,
+                    totalCount = state.items.size,
+                    item = item
+                )
             }
             item {
                 Spacer(modifier = Modifier.height((56 + 32).dp))
@@ -82,7 +106,7 @@ fun DetailLatenessScreen() {
 }
 
 @Composable
-fun StudentItem(index: Int, totalCount: Int) {
+fun StudentItem(index: Int, totalCount: Int, item: StudentMajorClassroom) {
     val shape = CardCornerShape.getShape(CardCornerShape.getPosition(index, totalCount))
 
     ElevatedCard(
@@ -110,8 +134,11 @@ fun StudentItem(index: Int, totalCount: Int) {
                 )
             }
             Column {
-                Text("Rizal Dwi Anggoro", style = MaterialTheme.typography.titleMedium)
-                Text("130603 - MIPA 1", style = MaterialTheme.typography.bodyMedium)
+                Text(item.student.name, style = MaterialTheme.typography.titleMedium)
+                Text(
+                    "${item.student.nis} - ${item.major.name} ${item.classroom.name}",
+                    style = MaterialTheme.typography.bodyMedium
+                )
             }
         }
     }

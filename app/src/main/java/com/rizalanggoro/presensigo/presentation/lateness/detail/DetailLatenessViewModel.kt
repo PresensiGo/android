@@ -7,12 +7,17 @@ import androidx.navigation.toRoute
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.data.repositories.LatenessRepository
+import com.rizalanggoro.presensigo.domain.Lateness
+import com.rizalanggoro.presensigo.domain.combined.StudentMajorClassroom
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
+import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class State(
-    val status: StateStatus = StateStatus.Initial
+    val status: StateStatus = StateStatus.Initial,
+    val lateness: Lateness = Lateness(),
+    val items: List<StudentMajorClassroom> = emptyList()
 )
 
 class DetailLatenessViewModel(
@@ -28,5 +33,20 @@ class DetailLatenessViewModel(
         getLateness()
     }
 
-    fun getLateness() = viewModelScope.launch { }
+    fun getLateness() = viewModelScope.launch {
+        _state.update { it.copy(status = StateStatus.Loading) }
+        latenessRepository.getDetail(latenessId = params.latenessId)
+            .onLeft { result ->
+                _state.update {
+                    it.copy(
+                        status = StateStatus.Success,
+                        lateness = result.lateness,
+                        items = result.items
+                    )
+                }
+            }
+            .onRight {
+                _state.update { it.copy(status = StateStatus.Failure) }
+            }
+    }
 }

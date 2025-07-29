@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**createLateness**](LatenessApi.md#createLateness) | **POST** /api/v1/latenesses |  |
 | [**createLatenessDetail**](LatenessApi.md#createLatenessDetail) | **POST** /api/v1/latenesses/{lateness_id} |  |
 | [**getAllLatenesses**](LatenessApi.md#getAllLatenesses) | **GET** /api/v1/latenesses |  |
+| [**getLateness**](LatenessApi.md#getLateness) | **GET** /api/v1/latenesses/{lateness_id} |  |
 
 
 <a id="createLateness"></a>
@@ -130,6 +131,50 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**GetAllLatenessesRes**](GetAllLatenessesRes.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getLateness"></a>
+# **getLateness**
+> GetLatenessRes getLateness(latenessId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = LatenessApi()
+val latenessId : kotlin.Int = 56 // kotlin.Int | Lateness ID
+try {
+    val result : GetLatenessRes = apiInstance.getLateness(latenessId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling LatenessApi#getLateness")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling LatenessApi#getLateness")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **latenessId** | **kotlin.Int**| Lateness ID | |
+
+### Return type
+
+[**GetLatenessRes**](GetLatenessRes.md)
 
 ### Authorization
 
