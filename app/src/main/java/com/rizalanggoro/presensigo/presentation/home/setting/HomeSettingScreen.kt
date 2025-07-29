@@ -10,7 +10,6 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.CircleShape
-import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.Logout
 import androidx.compose.material.icons.rounded.DeleteForever
@@ -19,7 +18,7 @@ import androidx.compose.material.icons.rounded.Tag
 import androidx.compose.material.icons.rounded.Upload
 import androidx.compose.material3.AlertDialog
 import androidx.compose.material3.Button
-import androidx.compose.material3.Card
+import androidx.compose.material3.ElevatedCard
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -41,6 +40,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.BuildConfig
 import com.rizalanggoro.presensigo.core.Routes
@@ -48,6 +48,7 @@ import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.presentation.components.SmallCircularProgressIndicator
+import com.rizalanggoro.presensigo.ui.theme.CardCornerShape
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -131,13 +132,8 @@ fun HomeSettingScreen() {
                 modifier = Modifier.padding(horizontal = 16.dp),
                 verticalArrangement = Arrangement.spacedBy(4.dp)
             ) {
-                Card(
-                    shape = RoundedCornerShape(
-                        topStart = MaterialTheme.shapes.large.topStart,
-                        topEnd = MaterialTheme.shapes.large.topEnd,
-                        bottomStart = MaterialTheme.shapes.small.bottomStart,
-                        bottomEnd = MaterialTheme.shapes.extraSmall.bottomEnd
-                    )
+                ElevatedCard(
+                    shape = CardCornerShape.getShape(CardCornerShape.Position.Top)
                 ) {
                     ListItem(
                         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
@@ -159,13 +155,8 @@ fun HomeSettingScreen() {
                     )
                 }
 
-                Card(
-                    shape = RoundedCornerShape(
-                        bottomStart = MaterialTheme.shapes.large.bottomStart,
-                        bottomEnd = MaterialTheme.shapes.large.bottomEnd,
-                        topStart = MaterialTheme.shapes.small.topStart,
-                        topEnd = MaterialTheme.shapes.extraSmall.topEnd
-                    )
+                ElevatedCard(
+                    shape = CardCornerShape.getShape(CardCornerShape.Position.Bottom)
                 ) {
                     ListItem(
                         colors = ListItemDefaults.colors(containerColor = Color.Transparent),
@@ -184,9 +175,9 @@ fun HomeSettingScreen() {
                 }
             }
 
-            Card(
+            ElevatedCard(
                 modifier = Modifier.padding(horizontal = 16.dp),
-                shape = MaterialTheme.shapes.large
+                shape = CardCornerShape.getShape(CardCornerShape.Position.Single)
             ) {
                 ListItem(
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
@@ -203,10 +194,14 @@ fun HomeSettingScreen() {
                 )
             }
 
-            Card(
-                modifier = Modifier.padding(horizontal = 16.dp),
-                shape = MaterialTheme.shapes.large
-            ) {
+            Column {
+                Text(
+                    "Lainnya",
+                    style = MaterialTheme.typography.labelMedium,
+                    fontWeight = FontWeight.SemiBold,
+                    modifier = Modifier.padding(start = 16.dp, bottom = 4.dp),
+                    color = MaterialTheme.colorScheme.primary
+                )
                 ListItem(
                     colors = ListItemDefaults.colors(containerColor = Color.Transparent),
                     leadingContent = { Icon(Icons.Rounded.Tag, contentDescription = null) },

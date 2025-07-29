@@ -30,8 +30,8 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
                 NavHost(
                     navController = navController,
                     startDestination = when (isAuthenticated) {
-//                    true -> Routes.Lateness.Detail.Create(latenessId = 1)
-                        true -> Routes.Home
+                        true -> Routes.Lateness.Detail.Create(latenessId = 1)
+//                        true -> Routes.Home
                         else -> Routes.Auth
                     }
                 ) {
