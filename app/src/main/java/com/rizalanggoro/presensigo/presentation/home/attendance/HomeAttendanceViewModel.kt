@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.data.repositories.BatchRepository
-import com.rizalanggoro.presensigo.domain.Batch
+import com.rizalanggoro.presensigo.domain.combined.BatchInfo
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
@@ -12,7 +12,7 @@ import kotlinx.coroutines.launch
 
 data class State(
     val status: StateStatus = StateStatus.Initial,
-    val batches: List<Batch> = emptyList()
+    val batches: List<BatchInfo> = emptyList()
 )
 
 class HomeAttendanceViewModel(

@@ -8,7 +8,7 @@ import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.data.repositories.LatenessRepository
 import com.rizalanggoro.presensigo.data.repositories.StudentRepository
-import com.rizalanggoro.presensigo.domain.Student
+import com.rizalanggoro.presensigo.domain.combined.StudentMajorClassroom
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.SharingStarted
 import kotlinx.coroutines.flow.StateFlow
@@ -21,7 +21,7 @@ import kotlinx.coroutines.launch
 data class State(
     val status: StateStatus = StateStatus.Initial,
     val action: Action = Action.Initial,
-    val students: List<Student> = emptyList(),
+    val students: List<StudentMajorClassroom> = emptyList(),
     val selectedStudentIds: List<Int> = emptyList()
 ) {
     enum class Action {
@@ -30,7 +30,7 @@ data class State(
 
     data class Item(
         val isSelected: Boolean,
-        val student: Student
+        val data: StudentMajorClassroom
     )
 }
 
@@ -46,8 +46,8 @@ class CreateDetailLatenessViewModel(
         .map { state ->
             state.students.map {
                 State.Item(
-                    isSelected = state.selectedStudentIds.contains(it.id),
-                    student = it
+                    isSelected = state.selectedStudentIds.contains(it.student.id),
+                    data = it
                 )
             }
         }

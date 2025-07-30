@@ -5,6 +5,7 @@ docs/AttendanceApi.md
 docs/AuthApi.md
 docs/BatchApi.md
 docs/ClassroomApi.md
+docs/CombinedBatchInfo.md
 docs/CombinedStudentMajorClassroom.md
 docs/CreateAttendanceItemReq.md
 docs/CreateAttendanceReq.md
@@ -66,6 +67,7 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/ApiClient.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/HttpResponse.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/RequestConfig.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/RequestMethod.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CombinedBatchInfo.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CombinedStudentMajorClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateAttendanceItemReq.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateAttendanceReq.kt

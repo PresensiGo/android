@@ -70,6 +70,7 @@ All URIs are relative to *http://localhost*
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
+ - [com.rizalanggoro.presensigo.openapi.models.CombinedBatchInfo](docs/CombinedBatchInfo.md)
  - [com.rizalanggoro.presensigo.openapi.models.CombinedStudentMajorClassroom](docs/CombinedStudentMajorClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceItemReq](docs/CreateAttendanceItemReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq](docs/CreateAttendanceReq.md)
