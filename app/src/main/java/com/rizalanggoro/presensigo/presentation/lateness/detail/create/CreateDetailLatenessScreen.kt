@@ -135,7 +135,7 @@ fun CreateDetailLatenessScreen() {
                         item = item,
                         onClick = {
                             viewModel.selectStudent(
-                                studentId = item.student.id,
+                                studentId = item.data.student.id,
                                 isSelected = !item.isSelected
                             )
                         }
@@ -222,8 +222,8 @@ private fun StudentItem(index: Int, itemsSize: Int, item: State.Item, onClick: (
                 )
             }
             Column {
-                Text(item.student.name, style = MaterialTheme.typography.titleMedium)
-                Text(item.student.nis, style = MaterialTheme.typography.bodyMedium)
+                Text(item.data.student.name, style = MaterialTheme.typography.titleMedium)
+                Text(item.data.student.nis, style = MaterialTheme.typography.bodyMedium)
             }
         }
     }

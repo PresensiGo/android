@@ -600,7 +600,7 @@
                 "students": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/dto.Student"
+                        "$ref": "#/definitions/combined.StudentMajorClassroom"
                     }
                 }
             }
@@ -661,6 +661,25 @@
             "properties": {
                 "refresh_token": {
                     "type": "string"
+                }
+            }
+        },
+        "combined.BatchInfo": {
+            "type": "object",
+            "required": [
+                "batch",
+                "classrooms_count",
+                "majors_count"
+            ],
+            "properties": {
+                "batch": {
+                    "$ref": "#/definitions/dto.Batch"
+                },
+                "classrooms_count": {
+                    "type": "integer"
+                },
+                "majors_count": {
+                    "type": "integer"
                 }
             }
         },
@@ -918,7 +937,7 @@
                 "batches": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/dto.Batch"
+                        "$ref": "#/definitions/combined.BatchInfo"
                     }
                 }
             }
