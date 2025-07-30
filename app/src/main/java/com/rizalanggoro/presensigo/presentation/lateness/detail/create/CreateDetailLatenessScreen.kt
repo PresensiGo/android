@@ -104,7 +104,9 @@ fun CreateDetailLatenessScreen() {
                     value = keyword,
                     onValueChange = { keyword = it },
                     modifier = Modifier.weight(1f),
-                    placeholder = { Text("Masukkan nama atau NIS") }
+                    placeholder = { Text("Masukkan nama atau NIS") },
+                    maxLines = 1,
+                    singleLine = true
                 )
                 FilledTonalIconButton(
                     enabled = !state.status.isLoading(),
@@ -221,9 +223,16 @@ private fun StudentItem(index: Int, itemsSize: Int, item: State.Item, onClick: (
                     modifier = Modifier.align(Alignment.Center)
                 )
             }
-            Column {
+            Column(verticalArrangement = Arrangement.spacedBy(2.dp)) {
                 Text(item.data.student.name, style = MaterialTheme.typography.titleMedium)
-                Text(item.data.student.nis, style = MaterialTheme.typography.bodyMedium)
+                Text(item.data.student.nis.let {
+                    if (it.isNotBlank()) it
+                    else "Tidak ada NIS"
+                }, style = MaterialTheme.typography.bodySmall)
+                Text(
+                    "${item.data.classroom.name} ${item.data.major.name}",
+                    style = MaterialTheme.typography.bodySmall
+                )
             }
         }
     }
