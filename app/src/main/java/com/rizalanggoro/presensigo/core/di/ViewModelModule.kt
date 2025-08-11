@@ -8,6 +8,7 @@ import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessVi
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.HomeViewModel
+import com.rizalanggoro.presensigo.presentation.pages.home.StudentHomeViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.attendance.HomeAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.lateness.HomeLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.setting.HomeSettingViewModel
@@ -21,6 +22,7 @@ val viewModelModule = module {
     viewModelOf(::StudentViewModel)
 
     viewModelOf(::HomeViewModel)
+    viewModelOf(::StudentHomeViewModel)
     viewModelOf(::HomeAttendanceViewModel)
     viewModelOf(::HomeLatenessViewModel)
     viewModelOf(::HomeSettingViewModel)

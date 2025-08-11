@@ -1,11 +1,11 @@
 package com.rizalanggoro.presensigo.domain
 
 enum class TokenType {
-    Teacher, Student
+    Unset, Teacher, Student
 }
 
 data class Token(
-    val tokenType: TokenType = TokenType.Teacher,
+    val tokenType: TokenType = TokenType.Unset,
     val accessToken: String = "",
     val refreshToken: String = ""
 )

@@ -3,7 +3,6 @@ package com.rizalanggoro.presensigo.presentation.pages.auth
 import android.annotation.SuppressLint
 import android.app.Application
 import android.provider.Settings
-import android.util.Log
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rizalanggoro.presensigo.core.constants.StateStatus
@@ -43,7 +42,6 @@ class AuthViewModel(
             application.contentResolver,
             Settings.Secure.ANDROID_ID
         )
-        Log.d(TAG, "loginStudent: $androidId")
         val response = studentApi.loginStudent(
             LoginStudentReq(
                 deviceId = androidId,

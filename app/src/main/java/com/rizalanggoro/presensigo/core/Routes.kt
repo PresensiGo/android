@@ -38,6 +38,9 @@ object Routes {
     }
 
     @Serializable
+    object StudentHome
+
+    @Serializable
     data class Classroom(
         val batchId: Int
     )
