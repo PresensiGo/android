@@ -7,12 +7,10 @@ import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
-import com.rizalanggoro.presensigo.openapi.apis.ExcelApi
-import com.rizalanggoro.presensigo.openapi.apis.LatenessApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.apis.ResetApi
 import com.rizalanggoro.presensigo.openapi.apis.StudentApi
-import com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
@@ -51,7 +49,7 @@ val serviceModule = module {
 
                         val client = get<AuthApi>()
                         val response = client.refreshToken(
-                            RequestsRefreshToken(
+                            RefreshTokenReq(
                                 refreshToken = oldToken.refreshToken
                             )
                         )
@@ -81,8 +79,8 @@ val serviceModule = module {
     single { AttendanceApi(API_BASE_URL, httpClientConfig = get()) }
     single { BatchApi(API_BASE_URL, httpClientConfig = get()) }
     single { ClassroomApi(API_BASE_URL, httpClientConfig = get()) }
-    single { ExcelApi(API_BASE_URL, httpClientConfig = get()) }
-    single { LatenessApi(API_BASE_URL, httpClientConfig = get()) }
+//    single { ExcelApi(API_BASE_URL, httpClientConfig = get()) }
+//    single { LatenessApi(API_BASE_URL, httpClientConfig = get()) }
     single { MajorApi(API_BASE_URL, httpClientConfig = get()) }
     single { ResetApi(API_BASE_URL, httpClientConfig = get()) }
     single { StudentApi(API_BASE_URL, httpClientConfig = get()) }

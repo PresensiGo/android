@@ -10,101 +10,16 @@
     "host": "",
     "basePath": "",
     "paths": {
-        "/api/v1/attendances": {
-            "post": {
-                "tags": [
-                    "attendance"
-                ],
-                "operationId": "createAttendance",
-                "parameters": [
-                    {
-                        "description": "Body",
-                        "name": "body",
-                        "in": "body",
-                        "required": true,
-                        "schema": {
-                            "$ref": "#/definitions/CreateAttendanceReq"
-                        }
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/attendances/classrooms/{classroom_id}": {
+        "/api/v1/accounts": {
             "get": {
                 "tags": [
-                    "attendance"
-                ],
-                "operationId": "getAllAttendances",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Classroom Id",
-                        "name": "classroom_id",
-                        "in": "path",
-                        "required": true
-                    }
+                    "account"
                 ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/GetAllAttendancesRes"
-                        }
-                    }
-                }
-            }
-        },
-        "/api/v1/attendances/{attendance_id}": {
-            "get": {
-                "tags": [
-                    "attendance"
-                ],
-                "operationId": "getAttendance",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Attendance Id",
-                        "name": "attendance_id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "$ref": "#/definitions/GetAttendanceRes"
-                        }
-                    }
-                }
-            },
-            "delete": {
-                "tags": [
-                    "attendance"
-                ],
-                "operationId": "deleteAttendance",
-                "parameters": [
-                    {
-                        "type": "integer",
-                        "description": "Attendance Id",
-                        "name": "attendance_id",
-                        "in": "path",
-                        "required": true
-                    }
-                ],
-                "responses": {
-                    "200": {
-                        "description": "OK",
-                        "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/responses.GetAllUsers"
                         }
                     }
                 }
@@ -118,12 +33,12 @@
                 "operationId": "login",
                 "parameters": [
                     {
-                        "description": "Login request",
+                        "description": "body",
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.Login"
+                            "$ref": "#/definitions/LoginReq"
                         }
                     }
                 ],
@@ -131,7 +46,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.Login"
+                            "$ref": "#/definitions/LoginRes"
                         }
                     }
                 }
@@ -150,7 +65,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.Logout"
+                            "$ref": "#/definitions/LogoutReq"
                         }
                     }
                 ],
@@ -177,7 +92,7 @@
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.RefreshToken"
+                            "$ref": "#/definitions/RefreshTokenReq"
                         }
                     }
                 ],
@@ -185,7 +100,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.RefreshToken"
+                            "$ref": "#/definitions/RefreshTokenRes"
                         }
                     }
                 }
@@ -218,20 +133,20 @@
                 }
             }
         },
-        "/api/v1/auth/register": {
+        "/api/v1/auth/students/login": {
             "post": {
                 "tags": [
-                    "auth"
+                    "student"
                 ],
-                "operationId": "register",
+                "operationId": "loginStudent",
                 "parameters": [
                     {
-                        "description": "Login request",
+                        "description": "body",
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/requests.Register"
+                            "$ref": "#/definitions/LoginStudentReq"
                         }
                     }
                 ],
@@ -239,13 +154,40 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.Register"
+                            "$ref": "#/definitions/LoginStudentRes"
                         }
                     }
                 }
             }
         },
-        "/api/v1/batch": {
+        "/api/v1/auth/students/refresh-token": {
+            "post": {
+                "tags": [
+                    "student"
+                ],
+                "operationId": "refreshTokenStudent",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/RefreshTokenStudentReq"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/RefreshTokenStudentRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches": {
             "get": {
                 "tags": [
                     "batch"
@@ -256,6 +198,502 @@
                         "description": "OK",
                         "schema": {
                             "$ref": "#/definitions/responses.GetAllBatches"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "batch"
+                ],
+                "operationId": "createBatch",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api_internal_features_batch_dto_requests.Create"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.Batch"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}": {
+            "get": {
+                "tags": [
+                    "batch"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetBatch"
+                        }
+                    }
+                }
+            },
+            "put": {
+                "tags": [
+                    "batch"
+                ],
+                "operationId": "updateBatch",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api_internal_features_batch_dto_requests.Update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.Batch"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "batch"
+                ],
+                "operationId": "deleteBatch",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "string"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}/majors": {
+            "get": {
+                "tags": [
+                    "major"
+                ],
+                "operationId": "getAllMajorsByBatchId",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllMajorsByBatchId"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms": {
+            "get": {
+                "tags": [
+                    "classroom"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllClassroomsByMajorId"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "classroom"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateClassroom"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.CreateClassroom"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}": {
+            "put": {
+                "tags": [
+                    "classroom"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "classroom id",
+                        "name": "classroom_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateClassroom"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.UpdateClassroom"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students": {
+            "get": {
+                "tags": [
+                    "student"
+                ],
+                "operationId": "getAllStudentsByClassroomId",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "classroom id",
+                        "name": "classroom_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GetAllStudentsByClassroomIdRes"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances": {
+            "get": {
+                "tags": [
+                    "attendance"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "classroom id",
+                        "name": "classroom_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllSubjectAttendances"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "attendance"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "classroom id",
+                        "name": "classroom_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateSubjectAttendance"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.CreateSubjectAttendance"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/records/student": {
+            "post": {
+                "tags": [
+                    "attendance"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "classroom id",
+                        "name": "classroom_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateSubjectAttendanceRecordStudent"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.CreateSubjectAttendanceRecordStudent"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}": {
+            "get": {
+                "tags": [
+                    "attendance"
+                ],
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "classroom id",
+                        "name": "classroom_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "subject attendance id",
+                        "name": "subject_attendance_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetSubjectAttendance"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/classrooms": {
+            "get": {
+                "tags": [
+                    "classroom"
+                ],
+                "operationId": "getAllClassrooms",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAll"
                         }
                     }
                 }
@@ -286,50 +724,60 @@
                 }
             }
         },
-        "/api/v1/excel/import": {
+        "/api/v1/general-attendances/records/student": {
             "post": {
                 "tags": [
-                    "excel"
+                    "attendance"
                 ],
-                "operationId": "importData",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateGeneralAttendanceRecordStudent"
+                        }
+                    }
+                ],
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/responses.CreateGeneralAttendanceRecordStudent"
                         }
                     }
                 }
             }
         },
-        "/api/v1/latenesses": {
+        "/api/v1/general_attendances": {
             "get": {
                 "tags": [
-                    "lateness"
+                    "attendance"
                 ],
-                "operationId": "getAllLatenesses",
+                "operationId": "getAllGeneralAttendances",
                 "responses": {
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/GetAllLatenessesRes"
+                            "$ref": "#/definitions/responses.GetAllGeneralAttendances"
                         }
                     }
                 }
             },
             "post": {
                 "tags": [
-                    "lateness"
+                    "attendance"
                 ],
-                "operationId": "createLateness",
+                "operationId": "createGeneralAttendance",
                 "parameters": [
                     {
-                        "description": "Payload",
+                        "description": "body",
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/CreateLatenessReq"
+                            "$ref": "#/definitions/requests.CreateGeneralAttendance"
                         }
                     }
                 ],
@@ -337,23 +785,23 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/responses.CreateGeneralAttendance"
                         }
                     }
                 }
             }
         },
-        "/api/v1/latenesses/{lateness_id}": {
+        "/api/v1/general_attendances/{general_attendance_id}": {
             "get": {
                 "tags": [
-                    "lateness"
+                    "attendance"
                 ],
-                "operationId": "getLateness",
+                "operationId": "getGeneralAttendance",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Lateness ID",
-                        "name": "lateness_id",
+                        "description": "general attendance id",
+                        "name": "general_attendance_id",
                         "in": "path",
                         "required": true
                     }
@@ -362,31 +810,31 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/GetLatenessRes"
+                            "$ref": "#/definitions/responses.GetGeneralAttendance"
                         }
                     }
                 }
             },
-            "post": {
+            "put": {
                 "tags": [
-                    "lateness"
+                    "attendance"
                 ],
-                "operationId": "createLatenessDetail",
+                "operationId": "updateGeneralAttendance",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Payload",
-                        "name": "lateness_id",
+                        "description": "general attendance id",
+                        "name": "general_attendance_id",
                         "in": "path",
                         "required": true
                     },
                     {
-                        "description": "Payload",
+                        "description": "body",
                         "name": "body",
                         "in": "body",
                         "required": true,
                         "schema": {
-                            "$ref": "#/definitions/CreateLatenessDetailReq"
+                            "$ref": "#/definitions/requests.UpdateGeneralAttendance"
                         }
                     }
                 ],
@@ -394,23 +842,122 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "type": "string"
+                            "$ref": "#/definitions/responses.UpdateGeneralAttendance"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "attendance"
+                ],
+                "operationId": "deleteGeneralAttendance",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "general attendance id",
+                        "name": "general_attendance_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.DeleteGeneralAttendance"
                         }
                     }
                 }
             }
         },
-        "/api/v1/majors/batch/{batch_id}": {
+        "/api/v1/majors": {
             "get": {
                 "tags": [
                     "major"
                 ],
                 "operationId": "getAllMajors",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "type": "array",
+                            "items": {
+                                "$ref": "#/definitions/domains.Major"
+                            }
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "major"
+                ],
+                "operationId": "createMajor",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api_internal_features_major_dto_requests.Create"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.Major"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/majors/{major_id}": {
+            "put": {
+                "tags": [
+                    "major"
+                ],
+                "operationId": "updateMajor",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Batch Id",
-                        "name": "batch_id",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/api_internal_features_major_dto_requests.Update"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/domains.Major"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "major"
+                ],
+                "operationId": "deleteMajor",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
                         "in": "path",
                         "required": true
                     }
@@ -419,7 +966,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.GetAllMajors"
+                            "type": "string"
                         }
                     }
                 }
@@ -466,17 +1013,90 @@
                 }
             }
         },
-        "/api/v1/students/classrooms/{classroom_id}": {
+        "/api/v1/subjects": {
             "get": {
                 "tags": [
-                    "student"
+                    "subject"
                 ],
-                "operationId": "getAllStudentsByClassroomId",
+                "operationId": "getAllSubjects",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.GetAllSubjects"
+                        }
+                    }
+                }
+            },
+            "post": {
+                "tags": [
+                    "subject"
+                ],
+                "operationId": "createSubject",
+                "parameters": [
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.CreateSubject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.CreateSubject"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/subjects/{subject_id}": {
+            "put": {
+                "tags": [
+                    "subject"
+                ],
+                "operationId": "updateSubject",
                 "parameters": [
                     {
                         "type": "integer",
-                        "description": "Classroom Id",
-                        "name": "classroom_id",
+                        "description": "subject id",
+                        "name": "subject_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "description": "body",
+                        "name": "body",
+                        "in": "body",
+                        "required": true,
+                        "schema": {
+                            "$ref": "#/definitions/requests.UpdateSubject"
+                        }
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.UpdateSubject"
+                        }
+                    }
+                }
+            },
+            "delete": {
+                "tags": [
+                    "subject"
+                ],
+                "operationId": "deleteSubject",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "subject id",
+                        "name": "subject_id",
                         "in": "path",
                         "required": true
                     }
@@ -485,7 +1105,31 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/GetAllStudentsByClassroomIdRes"
+                            "$ref": "#/definitions/responses.DeleteSubject"
+                        }
+                    }
+                }
+            }
+        },
+        "/api/v1/teachers/import": {
+            "post": {
+                "consumes": [
+                    "multipart/form-data"
+                ],
+                "parameters": [
+                    {
+                        "type": "file",
+                        "description": "file",
+                        "name": "file",
+                        "in": "formData",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/responses.ImportTeacher"
                         }
                     }
                 }
@@ -493,90 +1137,6 @@
         }
     },
     "definitions": {
-        "CreateAttendanceItemReq": {
-            "type": "object",
-            "properties": {
-                "note": {
-                    "type": "string"
-                },
-                "status": {
-                    "$ref": "#/definitions/models.AttendanceStatus"
-                },
-                "student_id": {
-                    "type": "integer"
-                }
-            }
-        },
-        "CreateAttendanceReq": {
-            "type": "object",
-            "properties": {
-                "attendance_students": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/CreateAttendanceItemReq"
-                    }
-                },
-                "classroom_id": {
-                    "type": "integer"
-                },
-                "date": {
-                    "type": "string"
-                }
-            }
-        },
-        "CreateLatenessDetailReq": {
-            "type": "object",
-            "required": [
-                "student_ids"
-            ],
-            "properties": {
-                "student_ids": {
-                    "type": "array",
-                    "items": {
-                        "type": "integer"
-                    }
-                }
-            }
-        },
-        "CreateLatenessReq": {
-            "type": "object",
-            "required": [
-                "date"
-            ],
-            "properties": {
-                "date": {
-                    "type": "string"
-                }
-            }
-        },
-        "GetAllAttendancesRes": {
-            "type": "object",
-            "required": [
-                "attendances"
-            ],
-            "properties": {
-                "attendances": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/dto.Attendance"
-                    }
-                }
-            }
-        },
-        "GetAllLatenessesRes": {
-            "type": "object",
-            "required": [
-                "latenesses"
-            ],
-            "properties": {
-                "latenesses": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/dto.Lateness"
-                    }
-                }
-            }
-        },
         "GetAllStudentsByClassroomIdRes": {
             "type": "object",
             "required": [
@@ -586,7 +1146,7 @@
                 "students": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/dto.Student"
+                        "$ref": "#/definitions/domains.Student"
                     }
                 }
             }
@@ -600,59 +1160,129 @@
                 "students": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/combined.StudentMajorClassroom"
+                        "$ref": "#/definitions/domains.StudentMajorClassroom"
                     }
                 }
             }
         },
-        "GetAttendanceItemRes": {
+        "LoginReq": {
             "type": "object",
-            "required": [
-                "attendanceStudent",
-                "student"
-            ],
             "properties": {
-                "attendanceStudent": {
-                    "$ref": "#/definitions/dto.AttendanceDetail"
+                "email": {
+                    "type": "string",
+                    "default": "email@email.com"
                 },
-                "student": {
-                    "$ref": "#/definitions/dto.Student"
+                "password": {
+                    "type": "string"
                 }
             }
         },
-        "GetAttendanceRes": {
+        "LoginRes": {
             "type": "object",
             "required": [
-                "attendance",
-                "items"
+                "access_token",
+                "refresh_token"
             ],
             "properties": {
-                "attendance": {
-                    "$ref": "#/definitions/dto.Attendance"
+                "access_token": {
+                    "type": "string"
                 },
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/GetAttendanceItemRes"
-                    }
+                "refresh_token": {
+                    "type": "string"
                 }
             }
         },
-        "GetLatenessRes": {
+        "LoginStudentReq": {
             "type": "object",
             "required": [
-                "items",
-                "lateness"
+                "device_id",
+                "nis",
+                "school_code"
             ],
             "properties": {
-                "items": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/combined.StudentMajorClassroom"
-                    }
+                "device_id": {
+                    "type": "string"
                 },
-                "lateness": {
-                    "$ref": "#/definitions/dto.Lateness"
+                "nis": {
+                    "type": "string"
+                },
+                "school_code": {
+                    "type": "string"
+                }
+            }
+        },
+        "LoginStudentRes": {
+            "type": "object",
+            "required": [
+                "access_token",
+                "refresh_token"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "LogoutReq": {
+            "type": "object",
+            "required": [
+                "refresh_token"
+            ],
+            "properties": {
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "RefreshTokenReq": {
+            "type": "object",
+            "properties": {
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "RefreshTokenRes": {
+            "type": "object",
+            "required": [
+                "access_token",
+                "refresh_token"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "RefreshTokenStudentReq": {
+            "type": "object",
+            "required": [
+                "refresh_token"
+            ],
+            "properties": {
+                "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "RefreshTokenStudentRes": {
+            "type": "object",
+            "required": [
+                "access_token",
+                "refresh_token"
+            ],
+            "properties": {
+                "access_token": {
+                    "type": "string"
+                },
+                "refresh_token": {
+                    "type": "string"
                 }
             }
         },
@@ -664,91 +1294,53 @@
                 }
             }
         },
-        "combined.BatchInfo": {
+        "api_internal_features_batch_dto_requests.Create": {
             "type": "object",
-            "required": [
-                "batch",
-                "classrooms_count",
-                "majors_count"
-            ],
             "properties": {
-                "batch": {
-                    "$ref": "#/definitions/dto.Batch"
-                },
-                "classrooms_count": {
-                    "type": "integer"
-                },
-                "majors_count": {
-                    "type": "integer"
-                }
-            }
-        },
-        "combined.StudentMajorClassroom": {
-            "type": "object",
-            "required": [
-                "classroom",
-                "major",
-                "student"
-            ],
-            "properties": {
-                "classroom": {
-                    "$ref": "#/definitions/dto.Classroom"
-                },
-                "major": {
-                    "$ref": "#/definitions/dto.Major"
-                },
-                "student": {
-                    "$ref": "#/definitions/dto.Student"
-                }
-            }
-        },
-        "dto.Attendance": {
-            "type": "object",
-            "required": [
-                "classroom_id",
-                "date",
-                "id"
-            ],
-            "properties": {
-                "classroom_id": {
-                    "type": "integer"
-                },
-                "date": {
+                "name": {
                     "type": "string"
-                },
-                "id": {
-                    "type": "integer"
                 }
             }
         },
-        "dto.AttendanceDetail": {
+        "api_internal_features_batch_dto_requests.Update": {
+            "type": "object",
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "api_internal_features_major_dto_requests.Create": {
             "type": "object",
             "required": [
-                "attendance_id",
-                "id",
-                "note",
-                "status",
-                "student_id"
+                "batch_id",
+                "name"
             ],
             "properties": {
-                "attendance_id": {
+                "batch_id": {
                     "type": "integer"
                 },
-                "id": {
-                    "type": "integer"
-                },
-                "note": {
+                "name": {
                     "type": "string"
-                },
-                "status": {
-                    "$ref": "#/definitions/models.AttendanceStatus"
-                },
-                "student_id": {
-                    "type": "integer"
                 }
             }
         },
-        "dto.Batch": {
+        "api_internal_features_major_dto_requests.Update": {
+            "type": "object",
+            "required": [
+                "batch_id",
+                "name"
+            ],
+            "properties": {
+                "batch_id": {
+                    "type": "integer"
+                },
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "domains.Batch": {
             "type": "object",
             "required": [
                 "id",
@@ -767,7 +1359,7 @@
                 }
             }
         },
-        "dto.Classroom": {
+        "domains.Classroom": {
             "type": "object",
             "required": [
                 "id",
@@ -786,26 +1378,34 @@
                 }
             }
         },
-        "dto.Lateness": {
+        "domains.GeneralAttendance": {
             "type": "object",
             "required": [
-                "date",
+                "code",
+                "datetime",
                 "id",
+                "note",
                 "school_id"
             ],
             "properties": {
-                "date": {
+                "code": {
+                    "type": "string"
+                },
+                "datetime": {
                     "type": "string"
                 },
                 "id": {
                     "type": "integer"
+                },
+                "note": {
+                    "type": "string"
                 },
                 "school_id": {
                     "type": "integer"
                 }
             }
         },
-        "dto.Major": {
+        "domains.Major": {
             "type": "object",
             "required": [
                 "batch_id",
@@ -824,13 +1424,14 @@
                 }
             }
         },
-        "dto.Student": {
+        "domains.Student": {
             "type": "object",
             "required": [
                 "classroom_id",
                 "id",
                 "name",
-                "nis"
+                "nis",
+                "school_id"
             ],
             "properties": {
                 "classroom_id": {
@@ -844,72 +1445,250 @@
                 },
                 "nis": {
                     "type": "string"
-                }
-            }
-        },
-        "models.AttendanceStatus": {
-            "type": "string",
-            "enum": [
-                "hadir",
-                "izin",
-                "sakit",
-                "alpha"
-            ],
-            "x-enum-varnames": [
-                "AttendancePresent",
-                "AttendancePermission",
-                "AttendanceSick",
-                "AttendanceAlpha"
-            ]
-        },
-        "requests.Login": {
-            "type": "object",
-            "properties": {
-                "email": {
-                    "type": "string",
-                    "default": "email@email.com"
                 },
-                "password": {
-                    "type": "string"
+                "school_id": {
+                    "type": "integer"
                 }
             }
         },
-        "requests.Logout": {
+        "domains.StudentMajorClassroom": {
             "type": "object",
             "required": [
-                "refresh_token"
+                "classroom",
+                "major",
+                "student"
             ],
             "properties": {
-                "refresh_token": {
-                    "type": "string"
+                "classroom": {
+                    "$ref": "#/definitions/domains.Classroom"
+                },
+                "major": {
+                    "$ref": "#/definitions/domains.Major"
+                },
+                "student": {
+                    "$ref": "#/definitions/domains.Student"
                 }
             }
         },
-        "requests.RefreshToken": {
+        "domains.Subject": {
             "type": "object",
+            "required": [
+                "id",
+                "name",
+                "school_id"
+            ],
             "properties": {
-                "refresh_token": {
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
                     "type": "string"
+                },
+                "school_id": {
+                    "type": "integer"
                 }
             }
         },
-        "requests.Register": {
+        "domains.SubjectAttendance": {
             "type": "object",
+            "required": [
+                "classroom_id",
+                "code",
+                "date_time",
+                "id",
+                "note",
+                "subject_id"
+            ],
             "properties": {
+                "classroom_id": {
+                    "type": "integer"
+                },
                 "code": {
                     "type": "string"
                 },
+                "date_time": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "subject_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "domains.SubjectAttendanceSubject": {
+            "type": "object",
+            "required": [
+                "subject",
+                "subject_attendance"
+            ],
+            "properties": {
+                "subject": {
+                    "$ref": "#/definitions/domains.Subject"
+                },
+                "subject_attendance": {
+                    "$ref": "#/definitions/domains.SubjectAttendance"
+                }
+            }
+        },
+        "domains.User": {
+            "type": "object",
+            "required": [
+                "email",
+                "id",
+                "name",
+                "password",
+                "role",
+                "school_id"
+            ],
+            "properties": {
                 "email": {
-                    "type": "string",
-                    "default": "email@email.com"
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
                 },
                 "name": {
-                    "type": "string",
-                    "default": "John Doe"
+                    "type": "string"
                 },
                 "password": {
-                    "type": "string",
-                    "default": "password"
+                    "type": "string"
+                },
+                "role": {
+                    "type": "string"
+                },
+                "school_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "dto.BatchInfo": {
+            "type": "object",
+            "required": [
+                "batch",
+                "classrooms_count",
+                "majors_count"
+            ],
+            "properties": {
+                "batch": {
+                    "$ref": "#/definitions/domains.Batch"
+                },
+                "classrooms_count": {
+                    "type": "integer"
+                },
+                "majors_count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.CreateClassroom": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.CreateGeneralAttendance": {
+            "type": "object",
+            "properties": {
+                "datetime": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.CreateGeneralAttendanceRecordStudent": {
+            "type": "object",
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.CreateSubject": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.CreateSubjectAttendance": {
+            "type": "object",
+            "required": [
+                "datetime",
+                "note",
+                "subject_id"
+            ],
+            "properties": {
+                "datetime": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "subject_id": {
+                    "type": "integer"
+                }
+            }
+        },
+        "requests.CreateSubjectAttendanceRecordStudent": {
+            "type": "object",
+            "required": [
+                "code"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateClassroom": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateGeneralAttendance": {
+            "type": "object",
+            "properties": {
+                "datetime": {
+                    "type": "string"
+                },
+                "note": {
+                    "type": "string"
+                }
+            }
+        },
+        "requests.UpdateSubject": {
+            "type": "object",
+            "required": [
+                "name"
+            ],
+            "properties": {
+                "name": {
+                    "type": "string"
                 }
             }
         },
@@ -921,10 +1700,109 @@
             ],
             "properties": {
                 "classroom": {
-                    "$ref": "#/definitions/dto.Classroom"
+                    "$ref": "#/definitions/domains.Classroom"
                 },
                 "major": {
-                    "$ref": "#/definitions/dto.Major"
+                    "$ref": "#/definitions/domains.Major"
+                }
+            }
+        },
+        "responses.CreateClassroom": {
+            "type": "object",
+            "required": [
+                "classroom"
+            ],
+            "properties": {
+                "classroom": {
+                    "$ref": "#/definitions/domains.Classroom"
+                }
+            }
+        },
+        "responses.CreateGeneralAttendance": {
+            "type": "object",
+            "required": [
+                "general_attendance"
+            ],
+            "properties": {
+                "general_attendance": {
+                    "$ref": "#/definitions/domains.GeneralAttendance"
+                }
+            }
+        },
+        "responses.CreateGeneralAttendanceRecordStudent": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.CreateSubject": {
+            "type": "object",
+            "required": [
+                "subject"
+            ],
+            "properties": {
+                "subject": {
+                    "$ref": "#/definitions/domains.Subject"
+                }
+            }
+        },
+        "responses.CreateSubjectAttendance": {
+            "type": "object",
+            "required": [
+                "subject_attendance"
+            ],
+            "properties": {
+                "subject_attendance": {
+                    "$ref": "#/definitions/domains.SubjectAttendance"
+                }
+            }
+        },
+        "responses.CreateSubjectAttendanceRecordStudent": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.DeleteGeneralAttendance": {
+            "type": "object",
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.DeleteSubject": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
+                    "type": "string"
+                }
+            }
+        },
+        "responses.GetAll": {
+            "type": "object",
+            "required": [
+                "classrooms"
+            ],
+            "properties": {
+                "classrooms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domains.Classroom"
+                    }
                 }
             }
         },
@@ -937,7 +1815,7 @@
                 "batches": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/combined.BatchInfo"
+                        "$ref": "#/definitions/dto.BatchInfo"
                     }
                 }
             }
@@ -956,7 +1834,35 @@
                 }
             }
         },
-        "responses.GetAllMajors": {
+        "responses.GetAllClassroomsByMajorId": {
+            "type": "object",
+            "required": [
+                "classrooms"
+            ],
+            "properties": {
+                "classrooms": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domains.Classroom"
+                    }
+                }
+            }
+        },
+        "responses.GetAllGeneralAttendances": {
+            "type": "object",
+            "required": [
+                "general_attendances"
+            ],
+            "properties": {
+                "general_attendances": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domains.GeneralAttendance"
+                    }
+                }
+            }
+        },
+        "responses.GetAllMajorsByBatchId": {
             "type": "object",
             "required": [
                 "majors"
@@ -965,22 +1871,93 @@
                 "majors": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/dto.Major"
+                        "$ref": "#/definitions/domains.Major"
                     }
                 }
             }
         },
-        "responses.Login": {
+        "responses.GetAllSubjectAttendances": {
             "type": "object",
             "required": [
-                "access_token",
-                "refresh_token"
+                "items"
             ],
             "properties": {
-                "access_token": {
-                    "type": "string"
-                },
-                "refresh_token": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domains.SubjectAttendanceSubject"
+                    }
+                }
+            }
+        },
+        "responses.GetAllSubjects": {
+            "type": "object",
+            "required": [
+                "subjects"
+            ],
+            "properties": {
+                "subjects": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domains.Subject"
+                    }
+                }
+            }
+        },
+        "responses.GetAllUsers": {
+            "type": "object",
+            "required": [
+                "users"
+            ],
+            "properties": {
+                "users": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/domains.User"
+                    }
+                }
+            }
+        },
+        "responses.GetBatch": {
+            "type": "object",
+            "required": [
+                "batch"
+            ],
+            "properties": {
+                "batch": {
+                    "$ref": "#/definitions/domains.Batch"
+                }
+            }
+        },
+        "responses.GetGeneralAttendance": {
+            "type": "object",
+            "required": [
+                "general_attendance"
+            ],
+            "properties": {
+                "general_attendance": {
+                    "$ref": "#/definitions/domains.GeneralAttendance"
+                }
+            }
+        },
+        "responses.GetSubjectAttendance": {
+            "type": "object",
+            "required": [
+                "subject_attendance"
+            ],
+            "properties": {
+                "subject_attendance": {
+                    "$ref": "#/definitions/domains.SubjectAttendance"
+                }
+            }
+        },
+        "responses.ImportTeacher": {
+            "type": "object",
+            "required": [
+                "message"
+            ],
+            "properties": {
+                "message": {
                     "type": "string"
                 }
             }
@@ -988,33 +1965,36 @@
         "responses.Logout": {
             "type": "object"
         },
-        "responses.RefreshToken": {
+        "responses.UpdateClassroom": {
             "type": "object",
             "required": [
-                "access_token",
-                "refresh_token"
+                "classroom"
             ],
             "properties": {
-                "access_token": {
-                    "type": "string"
-                },
-                "refresh_token": {
-                    "type": "string"
+                "classroom": {
+                    "$ref": "#/definitions/domains.Classroom"
                 }
             }
         },
-        "responses.Register": {
+        "responses.UpdateGeneralAttendance": {
             "type": "object",
             "required": [
-                "access_token",
-                "refresh_token"
+                "general_attendance"
             ],
             "properties": {
-                "access_token": {
-                    "type": "string"
-                },
-                "refresh_token": {
-                    "type": "string"
+                "general_attendance": {
+                    "$ref": "#/definitions/domains.GeneralAttendance"
+                }
+            }
+        },
+        "responses.UpdateSubject": {
+            "type": "object",
+            "required": [
+                "subject"
+            ],
+            "properties": {
+                "subject": {
+                    "$ref": "#/definitions/domains.Subject"
                 }
             }
         }

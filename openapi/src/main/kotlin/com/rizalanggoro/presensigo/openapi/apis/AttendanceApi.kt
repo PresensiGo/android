@@ -15,9 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq
-import com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes
-import com.rizalanggoro.presensigo.openapi.models.GetAttendanceRes
+import com.rizalanggoro.presensigo.openapi.models.RequestsCreateGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.RequestsCreateGeneralAttendanceRecordStudent
+import com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubjectAttendance
+import com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubjectAttendanceRecordStudent
+import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent
+import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecordStudent
+import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendances
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendances
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetSubjectAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -41,14 +53,53 @@ import java.text.DateFormat
     ) {
 
         /**
-        * POST /api/v1/attendances
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances
         * 
         * 
-         * @param body Body 
-         * @return kotlin.String
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @return ResponsesGetAllSubjectAttendances
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createAttendance(body: CreateAttendanceReq): HttpResponse<kotlin.String> {
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<ResponsesGetAllSubjectAttendances> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param body body 
+         * @return ResponsesCreateSubjectAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, body: RequestsCreateSubjectAttendance): HttpResponse<ResponsesCreateSubjectAttendance> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -60,7 +111,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
-            "/api/v1/attendances",
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -74,14 +125,153 @@ import java.text.DateFormat
             }
 
         /**
-        * DELETE /api/v1/attendances/{attendance_id}
+        * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/records/student
         * 
         * 
-         * @param attendanceId Attendance Id 
-         * @return kotlin.String
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param body body 
+         * @return ResponsesCreateSubjectAttendanceRecordStudent
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun deleteAttendance(attendanceId: kotlin.Int): HttpResponse<kotlin.String> {
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesRecordsStudentPost(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, body: RequestsCreateSubjectAttendanceRecordStudent): HttpResponse<ResponsesCreateSubjectAttendanceRecordStudent> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/records/student".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param subjectAttendanceId subject attendance id 
+         * @return ResponsesGetSubjectAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesSubjectAttendanceIdGet(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, subjectAttendanceId: kotlin.Int): HttpResponse<ResponsesGetSubjectAttendance> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId").replace("{" + "subject_attendance_id" + "}", "$subjectAttendanceId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/general-attendances/records/student
+        * 
+        * 
+         * @param body body 
+         * @return ResponsesCreateGeneralAttendanceRecordStudent
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1GeneralAttendancesRecordsStudentPost(body: RequestsCreateGeneralAttendanceRecordStudent): HttpResponse<ResponsesCreateGeneralAttendanceRecordStudent> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/general-attendances/records/student",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/general_attendances
+        * 
+        * 
+         * @param body body 
+         * @return ResponsesCreateGeneralAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun createGeneralAttendance(body: RequestsCreateGeneralAttendance): HttpResponse<ResponsesCreateGeneralAttendance> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/general_attendances",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * DELETE /api/v1/general_attendances/{general_attendance_id}
+        * 
+        * 
+         * @param generalAttendanceId general attendance id 
+         * @return ResponsesDeleteGeneralAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun deleteGeneralAttendance(generalAttendanceId: kotlin.Int): HttpResponse<ResponsesDeleteGeneralAttendance> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -94,7 +284,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.DELETE,
-            "/api/v1/attendances/{attendance_id}".replace("{" + "attendance_id" + "}", "$attendanceId"),
+            "/api/v1/general_attendances/{general_attendance_id}".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -108,14 +298,13 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/attendances/classrooms/{classroom_id}
+        * GET /api/v1/general_attendances
         * 
         * 
-         * @param classroomId Classroom Id 
-         * @return GetAllAttendancesRes
+         * @return ResponsesGetAllGeneralAttendances
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllAttendances(classroomId: kotlin.Int): HttpResponse<GetAllAttendancesRes> {
+        open suspend fun getAllGeneralAttendances(): HttpResponse<ResponsesGetAllGeneralAttendances> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -128,7 +317,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
-            "/api/v1/attendances/classrooms/{classroom_id}".replace("{" + "classroom_id" + "}", "$classroomId"),
+            "/api/v1/general_attendances",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -142,14 +331,14 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/attendances/{attendance_id}
+        * GET /api/v1/general_attendances/{general_attendance_id}
         * 
         * 
-         * @param attendanceId Attendance Id 
-         * @return GetAttendanceRes
+         * @param generalAttendanceId general attendance id 
+         * @return ResponsesGetGeneralAttendance
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAttendance(attendanceId: kotlin.Int): HttpResponse<GetAttendanceRes> {
+        open suspend fun getGeneralAttendance(generalAttendanceId: kotlin.Int): HttpResponse<ResponsesGetGeneralAttendance> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -162,13 +351,47 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
-            "/api/v1/attendances/{attendance_id}".replace("{" + "attendance_id" + "}", "$attendanceId"),
+            "/api/v1/general_attendances/{general_attendance_id}".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
             )
 
             return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * PUT /api/v1/general_attendances/{general_attendance_id}
+        * 
+        * 
+         * @param generalAttendanceId general attendance id 
+         * @param body body 
+         * @return ResponsesUpdateGeneralAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun updateGeneralAttendance(generalAttendanceId: kotlin.Int, body: RequestsUpdateGeneralAttendance): HttpResponse<ResponsesUpdateGeneralAttendance> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.PUT,
+            "/api/v1/general_attendances/{general_attendance_id}".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames

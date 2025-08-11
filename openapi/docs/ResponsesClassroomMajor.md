@@ -4,8 +4,8 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **classroom** | [**DtoClassroom**](DtoClassroom.md) |  |  |
-| **major** | [**DtoMajor**](DtoMajor.md) |  |  |
+| **classroom** | [**DomainsClassroom**](DomainsClassroom.md) |  |  |
+| **major** | [**DomainsMajor**](DomainsMajor.md) |  |  |
 
 
 

@@ -15,7 +15,13 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.RequestsCreateClassroom
+import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateClassroom
+import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateClassroom
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAll
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomsByMajorId
+import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateClassroom
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -39,6 +45,115 @@ import java.text.DateFormat
     ) {
 
         /**
+        * PUT /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param majorId2 major id 
+         * @param classroomId classroom id 
+         * @param body body 
+         * @return ResponsesUpdateClassroom
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut(batchId: kotlin.Int, majorId: kotlin.Int, majorId2: kotlin.Int, classroomId: kotlin.Int, body: RequestsUpdateClassroom): HttpResponse<ResponsesUpdateClassroom> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.PUT,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "major_id" + "}", "$majorId2").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param majorId2 major id 
+         * @return ResponsesGetAllClassroomsByMajorId
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsGet(batchId: kotlin.Int, majorId: kotlin.Int, majorId2: kotlin.Int): HttpResponse<ResponsesGetAllClassroomsByMajorId> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "major_id" + "}", "$majorId2"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param majorId2 major id 
+         * @param body body 
+         * @return ResponsesCreateClassroom
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsPost(batchId: kotlin.Int, majorId: kotlin.Int, majorId2: kotlin.Int, body: RequestsCreateClassroom): HttpResponse<ResponsesCreateClassroom> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "major_id" + "}", "$majorId2"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
         * GET /api/v1/classrooms/batches/{batch_id}
         * 
         * 
@@ -60,6 +175,39 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/classrooms/batches/{batch_id}".replace("{" + "batch_id" + "}", "$batchId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/classrooms
+        * 
+        * 
+         * @return ResponsesGetAll
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAllClassrooms(): HttpResponse<ResponsesGetAll> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/classrooms",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

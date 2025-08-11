@@ -12,11 +12,11 @@ import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.attendance.AttendanceScreen
 import com.rizalanggoro.presensigo.presentation.attendance.create.CreateAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.attendance.detail.DetailAttendanceScreen
-import com.rizalanggoro.presensigo.presentation.auth.AuthScreen
 import com.rizalanggoro.presensigo.presentation.classroom.ClassroomScreen
-import com.rizalanggoro.presensigo.presentation.home.HomeScreen
 import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessScreen
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessScreen
+import com.rizalanggoro.presensigo.presentation.pages.auth.AuthScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.HomeScreen
 import com.rizalanggoro.presensigo.presentation.student.StudentScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
@@ -31,7 +31,7 @@ fun MyComposeApplication(isAuthenticated: Boolean = false) {
                     navController = navController,
                     startDestination = when (isAuthenticated) {
 //                        true -> Routes.Lateness.Detail.Create(latenessId = 1)
-                        true -> Routes.Home
+                        true -> Routes.Auth
                         else -> Routes.Auth
                     }
                 ) {

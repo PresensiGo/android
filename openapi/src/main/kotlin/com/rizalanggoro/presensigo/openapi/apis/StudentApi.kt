@@ -17,6 +17,10 @@ package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes
 import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes
+import com.rizalanggoro.presensigo.openapi.models.LoginStudentReq
+import com.rizalanggoro.presensigo.openapi.models.LoginStudentRes
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentRes
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -75,14 +79,16 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/students/classrooms/{classroom_id}
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students
         * 
         * 
-         * @param classroomId Classroom Id 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
          * @return GetAllStudentsByClassroomIdRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllStudentsByClassroomId(classroomId: kotlin.Int): HttpResponse<GetAllStudentsByClassroomIdRes> {
+        open suspend fun getAllStudentsByClassroomId(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<GetAllStudentsByClassroomIdRes> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -95,13 +101,79 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
-            "/api/v1/students/classrooms/{classroom_id}".replace("{" + "classroom_id" + "}", "$classroomId"),
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
             )
 
             return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/auth/students/login
+        * 
+        * 
+         * @param body body 
+         * @return LoginStudentRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun loginStudent(body: LoginStudentReq): HttpResponse<LoginStudentRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/auth/students/login",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/auth/students/refresh-token
+        * 
+        * 
+         * @param body body 
+         * @return RefreshTokenStudentRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun refreshTokenStudent(body: RefreshTokenStudentReq): HttpResponse<RefreshTokenStudentRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/auth/students/refresh-token",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames

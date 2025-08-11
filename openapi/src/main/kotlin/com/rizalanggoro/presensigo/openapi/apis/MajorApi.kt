@@ -15,7 +15,10 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajors
+import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsCreate
+import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate
+import com.rizalanggoro.presensigo.openapi.models.DomainsMajor
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -39,14 +42,80 @@ import java.text.DateFormat
     ) {
 
         /**
-        * GET /api/v1/majors/batch/{batch_id}
+        * POST /api/v1/majors
         * 
         * 
-         * @param batchId Batch Id 
-         * @return ResponsesGetAllMajors
+         * @param body body 
+         * @return DomainsMajor
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllMajors(batchId: kotlin.Int): HttpResponse<ResponsesGetAllMajors> {
+        open suspend fun createMajor(body: ApiInternalFeaturesMajorDtoRequestsCreate): HttpResponse<DomainsMajor> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/majors",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * DELETE /api/v1/majors/{major_id}
+        * 
+        * 
+         * @param majorId major id 
+         * @return kotlin.String
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun deleteMajor(majorId: kotlin.Int): HttpResponse<kotlin.String> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.DELETE,
+            "/api/v1/majors/{major_id}".replace("{" + "major_id" + "}", "$majorId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/majors
+        * 
+        * 
+         * @return kotlin.collections.List<DomainsMajor>
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAllMajors(): HttpResponse<kotlin.collections.List<DomainsMajor>> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -59,13 +128,81 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
-            "/api/v1/majors/batch/{batch_id}".replace("{" + "batch_id" + "}", "$batchId"),
+            "/api/v1/majors",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
             )
 
             return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}/majors
+        * 
+        * 
+         * @param batchId batch id 
+         * @return ResponsesGetAllMajorsByBatchId
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAllMajorsByBatchId(batchId: kotlin.Int): HttpResponse<ResponsesGetAllMajorsByBatchId> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors".replace("{" + "batch_id" + "}", "$batchId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * PUT /api/v1/majors/{major_id}
+        * 
+        * 
+         * @param majorId major id 
+         * @param body body 
+         * @return DomainsMajor
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun updateMajor(majorId: kotlin.Int, body: ApiInternalFeaturesMajorDtoRequestsUpdate): HttpResponse<DomainsMajor> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.PUT,
+            "/api/v1/majors/{major_id}".replace("{" + "major_id" + "}", "$majorId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames
