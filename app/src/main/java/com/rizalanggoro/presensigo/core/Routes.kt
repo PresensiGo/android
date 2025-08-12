@@ -41,6 +41,9 @@ object Routes {
     object StudentHome
 
     @Serializable
+    object QrScanner
+
+    @Serializable
     data class Classroom(
         val batchId: Int
     )

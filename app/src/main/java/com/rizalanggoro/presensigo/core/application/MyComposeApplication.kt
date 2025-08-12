@@ -18,7 +18,8 @@ import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessSc
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessScreen
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthScreen
 import com.rizalanggoro.presensigo.presentation.pages.home.HomeScreen
-import com.rizalanggoro.presensigo.presentation.pages.home.StudentHomeScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeScreen
+import com.rizalanggoro.presensigo.presentation.pages.qrscanner.QRScannerScreen
 import com.rizalanggoro.presensigo.presentation.student.StudentScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
@@ -50,6 +51,7 @@ fun MyComposeApplication(
                     composable<Routes.StudentHome> { StudentHomeScreen() }
                     composable<Routes.Classroom> { ClassroomScreen() }
                     composable<Routes.Student> { StudentScreen() }
+                    composable<Routes.QrScanner> { QRScannerScreen() }
 
                     // attendance
                     composable<Routes.Attendance.Create> { CreateAttendanceScreen() }

@@ -8,10 +8,10 @@ import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessVi
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.HomeViewModel
-import com.rizalanggoro.presensigo.presentation.pages.home.StudentHomeViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.attendance.HomeAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.lateness.HomeLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.setting.HomeSettingViewModel
+import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeViewModel
 import com.rizalanggoro.presensigo.presentation.student.StudentViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
