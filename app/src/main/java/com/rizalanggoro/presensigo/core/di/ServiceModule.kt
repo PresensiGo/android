@@ -3,6 +3,7 @@ package com.rizalanggoro.presensigo.core.di
 import com.rizalanggoro.presensigo.BuildConfig
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
+import com.rizalanggoro.presensigo.domain.TokenType
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
@@ -11,6 +12,7 @@ import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.apis.ResetApi
 import com.rizalanggoro.presensigo.openapi.apis.StudentApi
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq
 import io.ktor.client.HttpClientConfig
 import io.ktor.client.plugins.auth.Auth
 import io.ktor.client.plugins.auth.providers.BearerTokens
@@ -26,6 +28,8 @@ private const val API_BASE_URL = BuildConfig.API_BASE_URL
 val serviceModule = module {
     single<((HttpClientConfig<*>) -> Unit)> {
         {
+            it.expectSuccess = true
+
             it.install(Logging) {
                 logger = Logger.DEFAULT
                 level = LogLevel.ALL
@@ -47,21 +51,42 @@ val serviceModule = module {
                         val tokenManager = get<TokenManager>()
                         val oldToken = tokenManager.get()
 
-                        val client = get<AuthApi>()
-                        val response = client.refreshToken(
-                            RefreshTokenReq(
-                                refreshToken = oldToken.refreshToken
-                            )
-                        )
-
-                        if (response.success) {
-                            val body = response.body()
-                            tokenManager.set(
-                                Token(
-                                    accessToken = body.accessToken,
-                                    refreshToken = body.refreshToken
+                        if (oldToken.tokenType == TokenType.Teacher) {
+                            val client = get<AuthApi>()
+                            val response = client.refreshToken(
+                                RefreshTokenReq(
+                                    refreshToken = oldToken.refreshToken
                                 )
                             )
+
+                            if (response.success) {
+                                val body = response.body()
+                                tokenManager.set(
+                                    Token(
+                                        tokenType = TokenType.Teacher,
+                                        accessToken = body.accessToken,
+                                        refreshToken = body.refreshToken
+                                    )
+                                )
+                            }
+                        } else {
+                            val client = get<StudentApi>()
+                            val response = client.refreshTokenStudent(
+                                RefreshTokenStudentReq(
+                                    refreshToken = oldToken.refreshToken
+                                )
+                            )
+
+                            if (response.success) {
+                                val body = response.body()
+                                tokenManager.set(
+                                    Token(
+                                        tokenType = TokenType.Student,
+                                        accessToken = body.accessToken,
+                                        refreshToken = body.refreshToken
+                                    )
+                                )
+                            }
                         }
 
                         val newToken = tokenManager.get()

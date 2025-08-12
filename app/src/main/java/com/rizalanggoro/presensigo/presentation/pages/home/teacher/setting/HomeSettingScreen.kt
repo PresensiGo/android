@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.home.setting
+package com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting
 
 import android.widget.Toast
 import androidx.compose.foundation.background

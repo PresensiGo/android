@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.presentation.pages.auth
 
+import android.widget.Toast
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
@@ -27,10 +28,12 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.isFailure
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import org.koin.androidx.compose.koinViewModel
@@ -42,6 +45,7 @@ fun AuthScreen() {
     val state by viewModel.state.collectAsState()
 
     val navController = LocalNavController.current
+    val context = LocalContext.current
 
     LaunchedEffect(state.status) {
         if (state.status.isSuccess())
@@ -50,6 +54,8 @@ fun AuthScreen() {
                     inclusive = true
                 }
             }
+        else if (state.status.isFailure())
+            Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
     }
 
     var isLoginAsTeacher by remember { mutableStateOf(false) }

@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.home.attendance
+package com.rizalanggoro.presensigo.presentation.pages.home.teacher.attendance
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

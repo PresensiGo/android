@@ -1,5 +1,5 @@
 
-# RequestsCreateSubjectAttendanceRecordStudent
+# CreateSubjectAttendanceRecordStudentReq
 
 ## Properties
 | Name | Type | Description | Notes |

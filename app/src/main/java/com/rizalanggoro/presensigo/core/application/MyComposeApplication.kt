@@ -17,8 +17,8 @@ import com.rizalanggoro.presensigo.presentation.classroom.ClassroomScreen
 import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessScreen
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessScreen
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthScreen
-import com.rizalanggoro.presensigo.presentation.pages.home.HomeScreen
 import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.HomeScreen
 import com.rizalanggoro.presensigo.presentation.pages.qrscanner.QRScannerScreen
 import com.rizalanggoro.presensigo.presentation.student.StudentScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme

@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.home.setting
+package com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope

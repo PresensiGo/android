@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.home
+package com.rizalanggoro.presensigo.presentation.pages.home.teacher
 
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
@@ -28,9 +28,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.rizalanggoro.presensigo.core.Routes
-import com.rizalanggoro.presensigo.presentation.pages.home.attendance.HomeAttendanceScreen
-import com.rizalanggoro.presensigo.presentation.pages.home.lateness.HomeLatenessScreen
-import com.rizalanggoro.presensigo.presentation.pages.home.setting.HomeSettingScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.attendance.HomeAttendanceScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.lateness.HomeLatenessScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting.HomeSettingScreen
 
 private data class NavigationItem<T : Any>(
     val title: String,

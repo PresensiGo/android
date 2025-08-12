@@ -26,6 +26,7 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.qr.QrCodeAnalyzer
+import kotlinx.coroutines.delay
 
 @Composable
 fun QRScannerScreen() {
@@ -42,6 +43,7 @@ fun QRScannerScreen() {
         )
     }
     val cameraProviderFuture = remember { ProcessCameraProvider.getInstance(context) }
+    var isScanCompleted by remember { mutableStateOf(false) }
 
     val launcher = rememberLauncherForActivityResult(
         contract = ActivityResultContracts.RequestPermission(),
@@ -54,7 +56,7 @@ fun QRScannerScreen() {
 
     Scaffold {
         Column(modifier = Modifier.padding(it)) {
-            if (hasCameraPermission) {
+            if (hasCameraPermission && !isScanCompleted) {
                 AndroidView(
                     factory = { context ->
                         val previewView = PreviewView(context)
@@ -72,11 +74,11 @@ fun QRScannerScreen() {
                         imageAnalysis.setAnalyzer(
                             ContextCompat.getMainExecutor(context),
                             QrCodeAnalyzer {
+                                isScanCompleted = true
                                 navController.previousBackStackEntry?.savedStateHandle?.set<String>(
                                     "qrcode",
                                     it
                                 )
-                                navController.popBackStack()
                             }
                         )
 
@@ -97,6 +99,13 @@ fun QRScannerScreen() {
                         .fillMaxWidth()
                         .weight(1f)
                 )
+            } else {
+                LaunchedEffect(isScanCompleted) {
+                    if (isScanCompleted) {
+                        delay(100)
+                        navController.popBackStack()
+                    }
+                }
             }
         }
     }

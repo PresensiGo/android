@@ -21,6 +21,8 @@ import com.rizalanggoro.presensigo.openapi.models.LoginStudentReq
 import com.rizalanggoro.presensigo.openapi.models.LoginStudentRes
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentRes
+import com.rizalanggoro.presensigo.openapi.models.ResponsesEjectStudentToken
+import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllStudentAccountsByClassroomId
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -42,6 +44,76 @@ import java.text.DateFormat
         httpClientConfig,
         jsonBlock,
     ) {
+
+        /**
+        * POST /api/v1/auth/students/accounts/{student_token_id}/eject
+        * 
+        * 
+         * @param studentTokenId student token id 
+         * @return ResponsesEjectStudentToken
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1AuthStudentsAccountsStudentTokenIdEjectPost(studentTokenId: kotlin.Int): HttpResponse<ResponsesEjectStudentToken> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/auth/students/accounts/{student_token_id}/eject".replace("{" + "student_token_id" + "}", "$studentTokenId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/student-accounts
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @return ResponsesGetAllStudentAccountsByClassroomId
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentAccountsGet(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<ResponsesGetAllStudentAccountsByClassroomId> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/student-accounts".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
 
         /**
         * GET /api/v1/students

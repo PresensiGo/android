@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.home
+package com.rizalanggoro.presensigo.presentation.pages.home.teacher
 
 import androidx.lifecycle.ViewModel
 import com.rizalanggoro.presensigo.data.managers.TokenManager

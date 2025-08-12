@@ -25,7 +25,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class RequestsCreateSubjectAttendanceRecordStudent (
+data class CreateSubjectAttendanceRecordStudentReq (
 
     @SerializedName("code")
     val code: kotlin.String

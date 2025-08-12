@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.home.lateness
+package com.rizalanggoro.presensigo.presentation.pages.home.teacher.lateness
 
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement

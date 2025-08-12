@@ -15,20 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
+import com.rizalanggoro.presensigo.openapi.models.DtoStudentAccount
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param code 
+ * @param items 
  */
 
 
-data class RequestsCreateGeneralAttendanceRecordStudent (
+data class ResponsesGetAllStudentAccountsByClassroomId (
 
-    @SerializedName("code")
-    val code: kotlin.String
+    @SerializedName("items")
+    val items: kotlin.collections.List<DtoStudentAccount>
 
 ) {
 
