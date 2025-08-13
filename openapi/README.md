@@ -46,6 +46,9 @@ All URIs are relative to *http://localhost*
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
 | *AccountApi* | [**apiV1AccountsGet**](docs/AccountApi.md#apiv1accountsget) | **GET** /api/v1/accounts |  |
+| *AccountApi* | [**login**](docs/AccountApi.md#login) | **POST** /api/v1/auth/login |  |
+| *AccountApi* | [**logout**](docs/AccountApi.md#logout) | **POST** /api/v1/auth/logout |  |
+| *AccountApi* | [**refreshToken**](docs/AccountApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
 | *AttendanceApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**](docs/AttendanceApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidsubjectattendancespost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | *AttendanceApi* | [**createGeneralAttendance**](docs/AttendanceApi.md#creategeneralattendance) | **POST** /api/v1/general-attendances |  |
 | *AttendanceApi* | [**createGeneralAttendanceRecordStudent**](docs/AttendanceApi.md#creategeneralattendancerecordstudent) | **POST** /api/v1/general-attendances/records/student |  |
@@ -58,9 +61,6 @@ All URIs are relative to *http://localhost*
 | *AttendanceApi* | [**getGeneralAttendance**](docs/AttendanceApi.md#getgeneralattendance) | **GET** /api/v1/general-attendances/{general_attendance_id} |  |
 | *AttendanceApi* | [**getSubjectAttendance**](docs/AttendanceApi.md#getsubjectattendance) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | *AttendanceApi* | [**updateGeneralAttendance**](docs/AttendanceApi.md#updategeneralattendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
-| *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
-| *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
-| *AuthApi* | [**refreshToken**](docs/AuthApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
 | *BatchApi* | [**apiV1BatchesBatchIdGet**](docs/BatchApi.md#apiv1batchesbatchidget) | **GET** /api/v1/batches/{batch_id} |  |
 | *BatchApi* | [**createBatch**](docs/BatchApi.md#createbatch) | **POST** /api/v1/batches |  |
 | *BatchApi* | [**deleteBatch**](docs/BatchApi.md#deletebatch) | **DELETE** /api/v1/batches/{batch_id} |  |
@@ -158,6 +158,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetGeneralAttendance](docs/ResponsesGetGeneralAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetSubjectAttendance](docs/ResponsesGetSubjectAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesImportTeacher](docs/ResponsesImportTeacher.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesLogout](docs/ResponsesLogout.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateClassroom](docs/ResponsesUpdateClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance](docs/ResponsesUpdateGeneralAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateSubject](docs/ResponsesUpdateSubject.md)

@@ -10,7 +10,7 @@ import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.domain.TokenType
-import com.rizalanggoro.presensigo.openapi.apis.AuthApi
+import com.rizalanggoro.presensigo.openapi.apis.AccountApi
 import com.rizalanggoro.presensigo.openapi.apis.StudentApi
 import com.rizalanggoro.presensigo.openapi.models.LoginReq
 import com.rizalanggoro.presensigo.openapi.models.LoginStudentReq
@@ -28,7 +28,7 @@ data class State(
 
 class AuthViewModel(
     private val application: Application,
-    private val authApi: AuthApi,
+    private val accountApi: AccountApi,
     private val studentApi: StudentApi,
     private val tokenManager: TokenManager
 ) : ViewModel() {
@@ -91,7 +91,7 @@ class AuthViewModel(
         try {
             _state.update { it.copy(status = StateStatus.Loading) }
 
-            val response = authApi.login(LoginReq(email = email, password = password))
+            val response = accountApi.login(LoginReq(email = email, password = password))
             val body = response.body()
 
             tokenManager.set(

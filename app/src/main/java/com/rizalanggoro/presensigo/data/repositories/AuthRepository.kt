@@ -2,10 +2,10 @@ package com.rizalanggoro.presensigo.data.repositories
 
 import arrow.core.Either
 import com.rizalanggoro.presensigo.data.managers.TokenManager
-import com.rizalanggoro.presensigo.openapi.apis.AuthApi
+import com.rizalanggoro.presensigo.openapi.apis.AccountApi
 
 class AuthRepository(
-    private val authApi: AuthApi,
+    private val authApi: AccountApi,
     private val tokenManager: TokenManager
 ) {
     companion object {

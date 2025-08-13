@@ -7,7 +7,6 @@ docs/ApiInternalFeaturesBatchDtoRequestsUpdate.md
 docs/ApiInternalFeaturesMajorDtoRequestsCreate.md
 docs/ApiInternalFeaturesMajorDtoRequestsUpdate.md
 docs/AttendanceApi.md
-docs/AuthApi.md
 docs/Batch.md
 docs/BatchApi.md
 docs/Classroom.md
@@ -74,6 +73,7 @@ docs/ResponsesGetBatch.md
 docs/ResponsesGetGeneralAttendance.md
 docs/ResponsesGetSubjectAttendance.md
 docs/ResponsesImportTeacher.md
+docs/ResponsesLogout.md
 docs/ResponsesUpdateClassroom.md
 docs/ResponsesUpdateGeneralAttendance.md
 docs/ResponsesUpdateSubject.md
@@ -87,7 +87,6 @@ gradlew.bat
 settings.gradle
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/AccountApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/AttendanceApi.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/AuthApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/BatchApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/ClassroomApi.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/apis/DefaultApi.kt
@@ -170,6 +169,7 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetBatch.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetGeneralAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetSubjectAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesImportTeacher.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesLogout.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateGeneralAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateSubject.kt

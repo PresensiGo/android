@@ -15,7 +15,13 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.LoginReq
+import com.rizalanggoro.presensigo.openapi.models.LoginRes
+import com.rizalanggoro.presensigo.openapi.models.LogoutReq
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenRes
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllUsers
+import com.rizalanggoro.presensigo.openapi.models.ResponsesLogout
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -65,6 +71,105 @@ import java.text.DateFormat
             )
 
             return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/auth/login
+        * 
+        * 
+         * @param body body 
+         * @return LoginRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun login(body: LoginReq): HttpResponse<LoginRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/auth/login",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/auth/logout
+        * 
+        * 
+         * @param body Logout Request 
+         * @return ResponsesLogout
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun logout(body: LogoutReq): HttpResponse<ResponsesLogout> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/auth/logout",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/auth/refresh-token
+        * 
+        * 
+         * @param body body 
+         * @return RefreshTokenRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun refreshToken(body: RefreshTokenReq): HttpResponse<RefreshTokenRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/auth/refresh-token",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
             localVariableConfig,
             localVariableBody,
             localVariableAuthNames
