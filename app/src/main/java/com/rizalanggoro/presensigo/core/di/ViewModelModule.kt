@@ -5,6 +5,7 @@ import com.rizalanggoro.presensigo.presentation.attendance.create.CreateAttendan
 import com.rizalanggoro.presensigo.presentation.attendance.detail.DetailAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessViewModel
+import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.DetailGeneralAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.DetailSubjectAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.index.SubjectAttendanceViewModel
@@ -20,11 +21,14 @@ import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val viewModelModule = module {
-    // attendance
+    // attendance - subject
     viewModelOf(::MajorViewModel)
     viewModelOf(::ClassroomViewModel)
     viewModelOf(::SubjectAttendanceViewModel)
     viewModelOf(::DetailSubjectAttendanceViewModel)
+
+    // attendance - general
+    viewModelOf(::DetailGeneralAttendanceViewModel)
 
     // auth
     viewModelOf(::AuthViewModel)
@@ -40,8 +44,6 @@ val viewModelModule = module {
 
     viewModelOf(::StudentViewModel)
 
-//    viewModelOf(::HomeAttendanceViewModel)
-//    viewModelOf(::HomeLatenessViewModel)
 
     viewModelOf(::AttendanceViewModel)
     viewModelOf(::CreateAttendanceViewModel)

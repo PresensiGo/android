@@ -10,6 +10,7 @@ import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.domain.TokenType
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.CreateGeneralAttendanceScreen
+import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.DetailGeneralAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.CreateSubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.DetailSubjectAttendanceScreen
@@ -65,6 +66,7 @@ fun MyComposeApplication(
                     composable<Routes.Attendance.Subject.Create> { CreateSubjectAttendanceScreen() }
 
                     // attendance - general
+                    composable<Routes.Attendance.General.Detail> { DetailGeneralAttendanceScreen() }
                     composable<Routes.Attendance.General.Create> { CreateGeneralAttendanceScreen() }
 
                     composable<Routes.Student> { StudentScreen() }
