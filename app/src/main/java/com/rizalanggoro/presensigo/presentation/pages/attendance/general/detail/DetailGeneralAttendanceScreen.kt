@@ -20,6 +20,7 @@ import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.sections.Section1
+import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.sections.Section2
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -59,7 +60,7 @@ fun DetailGeneralAttendanceScreen() {
             }
             when (selectedTabIndex) {
                 0 -> Section1()
-                1 -> Unit
+                1 -> Section2()
                 2 -> Unit
             }
         }

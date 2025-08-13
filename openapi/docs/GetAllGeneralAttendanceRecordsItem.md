@@ -1,5 +1,5 @@
 
-# DtoGeneralAttendanceStudentItem
+# GetAllGeneralAttendanceRecordsItem
 
 ## Properties
 | Name | Type | Description | Notes |

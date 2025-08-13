@@ -13,6 +13,7 @@ import com.rizalanggoro.presensigo.core.qr.QrGenerator
 import com.rizalanggoro.presensigo.domain.QrData
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.models.GeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsItem
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -26,6 +27,7 @@ data class State(
     val message: String = "",
 
     val attendance: GeneralAttendance? = null,
+    val records: List<GetAllGeneralAttendanceRecordsItem> = emptyList(),
     val qrCodeBitmap: Bitmap? = null
 ) {
     enum class Action {
@@ -44,6 +46,7 @@ class DetailGeneralAttendanceViewModel(
 
     init {
         getGeneralAttendance()
+        getAllGeneralAttendanceRecords()
     }
 
     fun getGeneralAttendance() = viewModelScope.launch {
@@ -89,6 +92,47 @@ class DetailGeneralAttendanceViewModel(
                 action = State.Action.GetGeneralAttendance,
                 message = "Terjadi kesalahan tak terduga!"
             )
+        }
+    }
+
+    fun getAllGeneralAttendanceRecords() = viewModelScope.launch {
+        try {
+            _state.update {
+                it.copy(
+                    status = StateStatus.Loading,
+                    action = State.Action.GetAllGeneralAttendanceRecords
+                )
+            }
+
+            val body = attendanceApi.getAllGeneralAttendanceRecords(
+                generalAttendanceId = params.attendanceId
+            ).body()
+
+            _state.update {
+                it.copy(
+                    status = StateStatus.Success,
+                    action = State.Action.GetAllGeneralAttendanceRecords,
+                    records = body.items
+                )
+            }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _state.update {
+                it.copy(
+                    status = StateStatus.Failure,
+                    action = State.Action.GetAllGeneralAttendanceRecords,
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _state.update {
+                it.copy(
+                    status = StateStatus.Failure,
+                    action = State.Action.GetAllGeneralAttendanceRecords,
+                    message = "Terjadi kesalahan tak terduga!"
+                )
+            }
         }
     }
 }

@@ -47,11 +47,11 @@ All URIs are relative to *http://localhost*
 | ------------ | ------------- | ------------- | ------------- |
 | *AccountApi* | [**apiV1AccountsGet**](docs/AccountApi.md#apiv1accountsget) | **GET** /api/v1/accounts |  |
 | *AttendanceApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**](docs/AttendanceApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidsubjectattendancespost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
-| *AttendanceApi* | [**apiV1GeneralAttendancesGeneralAttendanceIdStudentsGet**](docs/AttendanceApi.md#apiv1generalattendancesgeneralattendanceidstudentsget) | **GET** /api/v1/general-attendances/{general_attendance_id}/students |  |
 | *AttendanceApi* | [**createGeneralAttendance**](docs/AttendanceApi.md#creategeneralattendance) | **POST** /api/v1/general-attendances |  |
 | *AttendanceApi* | [**createGeneralAttendanceRecordStudent**](docs/AttendanceApi.md#creategeneralattendancerecordstudent) | **POST** /api/v1/general-attendances/records/student |  |
 | *AttendanceApi* | [**createSubjectAttendanceRecordStudent**](docs/AttendanceApi.md#createsubjectattendancerecordstudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | *AttendanceApi* | [**deleteGeneralAttendance**](docs/AttendanceApi.md#deletegeneralattendance) | **DELETE** /api/v1/general_attendances/{general_attendance_id} |  |
+| *AttendanceApi* | [**getAllGeneralAttendanceRecords**](docs/AttendanceApi.md#getallgeneralattendancerecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | *AttendanceApi* | [**getAllGeneralAttendances**](docs/AttendanceApi.md#getallgeneralattendances) | **GET** /api/v1/general-attendances |  |
 | *AttendanceApi* | [**getAllSubjectAttendanceRecords**](docs/AttendanceApi.md#getallsubjectattendancerecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | *AttendanceApi* | [**getAllSubjectAttendances**](docs/AttendanceApi.md#getallsubjectattendances) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
@@ -108,9 +108,9 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.DomainsSubject](docs/DomainsSubject.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendanceRecord](docs/DomainsSubjectAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsUser](docs/DomainsUser.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoGeneralAttendanceStudentItem](docs/DtoGeneralAttendanceStudentItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudentAccount](docs/DtoStudentAccount.md)
  - [com.rizalanggoro.presensigo.openapi.models.GeneralAttendance](docs/GeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsItem](docs/GetAllGeneralAttendanceRecordsItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes](docs/GetAllStudentsByClassroomIdRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes](docs/GetAllStudentsRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem](docs/GetAllSubjectAttendanceRecordsItem.md)
@@ -146,7 +146,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllBatches](docs/ResponsesGetAllBatches.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors](docs/ResponsesGetAllClassroomWithMajors.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomsByMajorId](docs/ResponsesGetAllClassroomsByMajorId.md)
- - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceStudents](docs/ResponsesGetAllGeneralAttendanceStudents.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceRecords](docs/ResponsesGetAllGeneralAttendanceRecords.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendances](docs/ResponsesGetAllGeneralAttendances.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId](docs/ResponsesGetAllMajorsByBatchId.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllStudentAccountsByClassroomId](docs/ResponsesGetAllStudentAccountsByClassroomId.md)

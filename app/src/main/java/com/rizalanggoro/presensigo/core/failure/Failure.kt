@@ -6,5 +6,9 @@ data class Failure(
     val message: String
 )
 
-fun String.toFailure() =
+fun String.toFailure(): Failure = try {
     Gson().fromJson(this, Failure::class.java)
+} catch (e: Exception) {
+    e.printStackTrace()
+    Failure(message = "Terjadi kesalahan tak terduga!")
+}
