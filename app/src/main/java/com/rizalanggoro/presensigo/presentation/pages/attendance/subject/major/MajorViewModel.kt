@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.attendance.subject
+package com.rizalanggoro.presensigo.presentation.pages.attendance.subject.major
 
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel

@@ -5,8 +5,8 @@ import com.rizalanggoro.presensigo.presentation.attendance.create.CreateAttendan
 import com.rizalanggoro.presensigo.presentation.attendance.detail.DetailAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessViewModel
-import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.MajorViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomViewModel
+import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.major.MajorViewModel
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.TeacherHomeViewModel

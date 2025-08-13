@@ -12,9 +12,9 @@ import com.rizalanggoro.presensigo.domain.TokenType
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.CreateGeneralAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.CreateSubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.DetailSubjectAttendanceScreen
-import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.MajorScreen
-import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.SubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomScreen
+import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.index.SubjectAttendanceScreen
+import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.major.MajorScreen
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthScreen
 import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeScreen
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.TeacherHomeScreen
@@ -40,7 +40,11 @@ fun MyComposeApplication(
 //                            TokenType.Teacher -> Routes.Home.Teacher
 //                            TokenType.Student -> Routes.Home.Student
 //                        }
-                        true -> Routes.Attendance.Subject.Classroom(batchId = 3, majorId = 6)
+                        true -> Routes.Attendance.Subject.Index(
+                            batchId = 3,
+                            majorId = 6,
+                            classroomId = 14
+                        )
 
                         else -> Routes.Auth
                     }

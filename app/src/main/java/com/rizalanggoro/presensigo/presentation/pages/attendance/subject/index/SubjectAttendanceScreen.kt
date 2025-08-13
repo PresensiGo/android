@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.presentation.pages.attendance.subject
+package com.rizalanggoro.presensigo.presentation.pages.attendance.subject.index
 
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
