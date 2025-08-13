@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsBatch
+import com.rizalanggoro.presensigo.openapi.models.Batch
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponsesGetBatch (
 
     @SerializedName("batch")
-    val batch: DomainsBatch
+    val batch: Batch
 
 ) {
 

@@ -3,7 +3,6 @@ package com.rizalanggoro.presensigo.data.repositories
 import arrow.core.Either
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.openapi.apis.AuthApi
-import com.rizalanggoro.presensigo.openapi.models.RefreshTokenTTLReq
 
 class AuthRepository(
     private val authApi: AuthApi,
@@ -72,16 +71,17 @@ class AuthRepository(
     }
 
     suspend fun refreshTokenTTL(): Either<Unit, Error> = try {
-        val token = tokenManager.get()
-        val response = authApi.refreshTokenTTL(
-            RefreshTokenTTLReq(
-                refreshToken = token.refreshToken
-            )
-        )
-        when (response.success) {
-            true -> Either.Left(Unit)
-            else -> Either.Right(Error("something went wrong"))
-        }
+//        val token = tokenManager.get()
+//        val response = authApi.refreshTokenTTL(
+//            RefreshTokenTTLReq(
+//                refreshToken = token.refreshToken
+//            )
+//        )
+//        when (response.success) {
+//            true -> Either.Left(Unit)
+//            else ->
+//        }
+        Either.Right(Error("something went wrong"))
     } catch (e: Exception) {
         e.printStackTrace()
         Either.Right(Error(e.message))

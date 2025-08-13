@@ -17,7 +17,7 @@ package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsCreate
 import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsUpdate
-import com.rizalanggoro.presensigo.openapi.models.DomainsBatch
+import com.rizalanggoro.presensigo.openapi.models.Batch
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllBatches
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetBatch
 
@@ -81,10 +81,10 @@ import java.text.DateFormat
         * 
         * 
          * @param body body 
-         * @return DomainsBatch
+         * @return Batch
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createBatch(body: ApiInternalFeaturesBatchDtoRequestsCreate): HttpResponse<DomainsBatch> {
+        open suspend fun createBatch(body: ApiInternalFeaturesBatchDtoRequestsCreate): HttpResponse<Batch> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -182,10 +182,10 @@ import java.text.DateFormat
         * 
          * @param batchId batch id 
          * @param body body 
-         * @return DomainsBatch
+         * @return Batch
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun updateBatch(batchId: kotlin.Int, body: ApiInternalFeaturesBatchDtoRequestsUpdate): HttpResponse<DomainsBatch> {
+        open suspend fun updateBatch(batchId: kotlin.Int, body: ApiInternalFeaturesBatchDtoRequestsUpdate): HttpResponse<Batch> {
 
             val localVariableAuthNames = listOf<String>()
 

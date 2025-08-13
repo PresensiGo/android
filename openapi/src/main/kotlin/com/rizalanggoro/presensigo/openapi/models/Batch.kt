@@ -15,21 +15,28 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.Batch
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param batches 
+ * @param id 
+ * @param name 
+ * @param schoolId 
  */
 
 
-data class ResponsesGetAllBatches (
+data class Batch (
 
-    @SerializedName("batches")
-    val batches: kotlin.collections.List<Batch>
+    @SerializedName("id")
+    val id: kotlin.Int,
+
+    @SerializedName("name")
+    val name: kotlin.String,
+
+    @SerializedName("school_id")
+    val schoolId: kotlin.Int
 
 ) {
 

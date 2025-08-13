@@ -1,10 +1,12 @@
 
-# RefreshTokenTTLReq
+# Batch
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **refreshToken** | **kotlin.String** |  |  [optional] |
+| **id** | **kotlin.Int** |  |  |
+| **name** | **kotlin.String** |  |  |
+| **schoolId** | **kotlin.Int** |  |  |
 
 
 

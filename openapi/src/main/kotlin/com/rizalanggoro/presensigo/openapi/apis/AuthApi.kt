@@ -20,7 +20,6 @@ import com.rizalanggoro.presensigo.openapi.models.LoginRes
 import com.rizalanggoro.presensigo.openapi.models.LogoutReq
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenRes
-import com.rizalanggoro.presensigo.openapi.models.RefreshTokenTTLReq
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -113,7 +112,7 @@ import java.text.DateFormat
         * POST /api/v1/auth/refresh-token
         * 
         * 
-         * @param body Refresh token req 
+         * @param body body 
          * @return RefreshTokenRes
         */
             @Suppress("UNCHECKED_CAST")
@@ -130,39 +129,6 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
             "/api/v1/auth/refresh-token",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return jsonRequest(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
-
-        /**
-        * POST /api/v1/auth/refresh-token-ttl
-        * 
-        * 
-         * @param body Refresh token req 
-         * @return kotlin.String
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun refreshTokenTTL(body: RefreshTokenTTLReq): HttpResponse<kotlin.String> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = body
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.POST,
-            "/api/v1/auth/refresh-token-ttl",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

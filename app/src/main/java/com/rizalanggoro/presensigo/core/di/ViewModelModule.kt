@@ -9,20 +9,28 @@ import com.rizalanggoro.presensigo.presentation.pages.auth.AuthViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.TeacherHomeViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting.HomeSettingViewModel
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.subject.TeacherHomeSubjectAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.student.StudentViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
 val viewModelModule = module {
+    // auth
     viewModelOf(::AuthViewModel)
-//    viewModelOf(::ClassroomViewModel)
+
+    // home - teacher
+    viewModelOf(::TeacherHomeViewModel)
+    viewModelOf(::TeacherHomeSubjectAttendanceViewModel)
+    viewModelOf(::HomeSettingViewModel)
+
+    // home - student
+    viewModelOf(::StudentHomeViewModel)
+
+
     viewModelOf(::StudentViewModel)
 
-    viewModelOf(::TeacherHomeViewModel)
-    viewModelOf(::StudentHomeViewModel)
 //    viewModelOf(::HomeAttendanceViewModel)
 //    viewModelOf(::HomeLatenessViewModel)
-    viewModelOf(::HomeSettingViewModel)
 
     viewModelOf(::AttendanceViewModel)
     viewModelOf(::CreateAttendanceViewModel)

@@ -21,14 +21,26 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param refreshToken 
+ * @param createdAt 
+ * @param id 
+ * @param studentId 
+ * @param subjectAttendanceId 
  */
 
 
-data class RefreshTokenTTLReq (
+data class DomainsSubjectAttendanceRecord (
 
-    @SerializedName("refresh_token")
-    val refreshToken: kotlin.String? = null
+    @SerializedName("created_at")
+    val createdAt: kotlin.String,
+
+    @SerializedName("id")
+    val id: kotlin.Int,
+
+    @SerializedName("student_id")
+    val studentId: kotlin.Int,
+
+    @SerializedName("subject_attendance_id")
+    val subjectAttendanceId: kotlin.Int
 
 ) {
 

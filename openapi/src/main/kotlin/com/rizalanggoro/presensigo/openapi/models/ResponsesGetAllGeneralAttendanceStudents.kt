@@ -15,28 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
+import com.rizalanggoro.presensigo.openapi.models.DtoGeneralAttendanceStudentItem
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param id 
- * @param name 
- * @param schoolId 
+ * @param items 
  */
 
 
-data class DomainsBatch (
+data class ResponsesGetAllGeneralAttendanceStudents (
 
-    @SerializedName("id")
-    val id: kotlin.Int,
-
-    @SerializedName("name")
-    val name: kotlin.String,
-
-    @SerializedName("school_id")
-    val schoolId: kotlin.Int
+    @SerializedName("items")
+    val items: kotlin.collections.List<DtoGeneralAttendanceStudentItem>
 
 ) {
 

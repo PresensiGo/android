@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **batches** | [**kotlin.collections.List&lt;DtoBatchInfo&gt;**](DtoBatchInfo.md) |  |  |
+| **batches** | [**kotlin.collections.List&lt;Batch&gt;**](Batch.md) |  |  |
 
 
 

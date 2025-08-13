@@ -49,17 +49,18 @@ All URIs are relative to *http://localhost*
 | *AttendanceApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet**](docs/AttendanceApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidsubjectattendancesget) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | *AttendanceApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**](docs/AttendanceApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidsubjectattendancespost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | *AttendanceApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesSubjectAttendanceIdGet**](docs/AttendanceApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidsubjectattendancessubjectattendanceidget) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
-| *AttendanceApi* | [**createGeneralAttendance**](docs/AttendanceApi.md#creategeneralattendance) | **POST** /api/v1/general_attendances |  |
+| *AttendanceApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesSubjectAttendanceIdRecordsGet**](docs/AttendanceApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidsubjectattendancessubjectattendanceidrecordsget) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
+| *AttendanceApi* | [**apiV1GeneralAttendancesGeneralAttendanceIdStudentsGet**](docs/AttendanceApi.md#apiv1generalattendancesgeneralattendanceidstudentsget) | **GET** /api/v1/general-attendances/{general_attendance_id}/students |  |
+| *AttendanceApi* | [**createGeneralAttendance**](docs/AttendanceApi.md#creategeneralattendance) | **POST** /api/v1/general-attendances |  |
 | *AttendanceApi* | [**createGeneralAttendanceRecordStudent**](docs/AttendanceApi.md#creategeneralattendancerecordstudent) | **POST** /api/v1/general-attendances/records/student |  |
 | *AttendanceApi* | [**createSubjectAttendanceRecordStudent**](docs/AttendanceApi.md#createsubjectattendancerecordstudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | *AttendanceApi* | [**deleteGeneralAttendance**](docs/AttendanceApi.md#deletegeneralattendance) | **DELETE** /api/v1/general_attendances/{general_attendance_id} |  |
-| *AttendanceApi* | [**getAllGeneralAttendances**](docs/AttendanceApi.md#getallgeneralattendances) | **GET** /api/v1/general_attendances |  |
-| *AttendanceApi* | [**getGeneralAttendance**](docs/AttendanceApi.md#getgeneralattendance) | **GET** /api/v1/general_attendances/{general_attendance_id} |  |
+| *AttendanceApi* | [**getAllGeneralAttendances**](docs/AttendanceApi.md#getallgeneralattendances) | **GET** /api/v1/general-attendances |  |
+| *AttendanceApi* | [**getGeneralAttendance**](docs/AttendanceApi.md#getgeneralattendance) | **GET** /api/v1/general-attendances/{general_attendance_id} |  |
 | *AttendanceApi* | [**updateGeneralAttendance**](docs/AttendanceApi.md#updategeneralattendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
 | *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
 | *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | *AuthApi* | [**refreshToken**](docs/AuthApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
-| *AuthApi* | [**refreshTokenTTL**](docs/AuthApi.md#refreshtokenttl) | **POST** /api/v1/auth/refresh-token-ttl |  |
 | *BatchApi* | [**apiV1BatchesBatchIdGet**](docs/BatchApi.md#apiv1batchesbatchidget) | **GET** /api/v1/batches/{batch_id} |  |
 | *BatchApi* | [**createBatch**](docs/BatchApi.md#createbatch) | **POST** /api/v1/batches |  |
 | *BatchApi* | [**deleteBatch**](docs/BatchApi.md#deletebatch) | **DELETE** /api/v1/batches/{batch_id} |  |
@@ -96,21 +97,24 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsUpdate](docs/ApiInternalFeaturesBatchDtoRequestsUpdate.md)
  - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsCreate](docs/ApiInternalFeaturesMajorDtoRequestsCreate.md)
  - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate](docs/ApiInternalFeaturesMajorDtoRequestsUpdate.md)
+ - [com.rizalanggoro.presensigo.openapi.models.Batch](docs/Batch.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq](docs/CreateGeneralAttendanceRecordStudentReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq](docs/CreateSubjectAttendanceRecordStudentReq.md)
- - [com.rizalanggoro.presensigo.openapi.models.DomainsBatch](docs/DomainsBatch.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsClassroom](docs/DomainsClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendance](docs/DomainsGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendanceRecord](docs/DomainsGeneralAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsMajor](docs/DomainsMajor.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsStudent](docs/DomainsStudent.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsStudentMajorClassroom](docs/DomainsStudentMajorClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsStudentToken](docs/DomainsStudentToken.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsSubject](docs/DomainsSubject.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendance](docs/DomainsSubjectAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendanceRecord](docs/DomainsSubjectAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendanceSubject](docs/DomainsSubjectAttendanceSubject.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsUser](docs/DomainsUser.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoBatchInfo](docs/DtoBatchInfo.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DtoGeneralAttendanceStudentItem](docs/DtoGeneralAttendanceStudentItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudentAccount](docs/DtoStudentAccount.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DtoSubjectAttendanceRecordItem](docs/DtoSubjectAttendanceRecordItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes](docs/GetAllStudentsByClassroomIdRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes](docs/GetAllStudentsRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.LoginReq](docs/LoginReq.md)
@@ -122,7 +126,6 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenRes](docs/RefreshTokenRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq](docs/RefreshTokenStudentReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentRes](docs/RefreshTokenStudentRes.md)
- - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenTTLReq](docs/RefreshTokenTTLReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateClassroom](docs/RequestsCreateClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateGeneralAttendance](docs/RequestsCreateGeneralAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubject](docs/RequestsCreateSubject.md)
@@ -144,9 +147,11 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllBatches](docs/ResponsesGetAllBatches.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors](docs/ResponsesGetAllClassroomWithMajors.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomsByMajorId](docs/ResponsesGetAllClassroomsByMajorId.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceStudents](docs/ResponsesGetAllGeneralAttendanceStudents.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendances](docs/ResponsesGetAllGeneralAttendances.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId](docs/ResponsesGetAllMajorsByBatchId.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllStudentAccountsByClassroomId](docs/ResponsesGetAllStudentAccountsByClassroomId.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendanceRecords](docs/ResponsesGetAllSubjectAttendanceRecords.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendances](docs/ResponsesGetAllSubjectAttendances.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjects](docs/ResponsesGetAllSubjects.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllUsers](docs/ResponsesGetAllUsers.md)

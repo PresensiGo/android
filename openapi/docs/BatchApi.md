@@ -57,7 +57,7 @@ No authorization required
 
 <a id="createBatch"></a>
 # **createBatch**
-> DomainsBatch createBatch(body)
+> Batch createBatch(body)
 
 
 
@@ -70,7 +70,7 @@ No authorization required
 val apiInstance = BatchApi()
 val body : ApiInternalFeaturesBatchDtoRequestsCreate =  // ApiInternalFeaturesBatchDtoRequestsCreate | body
 try {
-    val result : DomainsBatch = apiInstance.createBatch(body)
+    val result : Batch = apiInstance.createBatch(body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling BatchApi#createBatch")
@@ -88,7 +88,7 @@ try {
 
 ### Return type
 
-[**DomainsBatch**](DomainsBatch.md)
+[**Batch**](Batch.md)
 
 ### Authorization
 
@@ -186,7 +186,7 @@ No authorization required
 
 <a id="updateBatch"></a>
 # **updateBatch**
-> DomainsBatch updateBatch(batchId, body)
+> Batch updateBatch(batchId, body)
 
 
 
@@ -200,7 +200,7 @@ val apiInstance = BatchApi()
 val batchId : kotlin.Int = 56 // kotlin.Int | batch id
 val body : ApiInternalFeaturesBatchDtoRequestsUpdate =  // ApiInternalFeaturesBatchDtoRequestsUpdate | body
 try {
-    val result : DomainsBatch = apiInstance.updateBatch(batchId, body)
+    val result : Batch = apiInstance.updateBatch(batchId, body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling BatchApi#updateBatch")
@@ -219,7 +219,7 @@ try {
 
 ### Return type
 
-[**DomainsBatch**](DomainsBatch.md)
+[**Batch**](Batch.md)
 
 ### Authorization
 

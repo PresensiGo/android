@@ -15,29 +15,26 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsBatch
+import com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendanceRecord
+import com.rizalanggoro.presensigo.openapi.models.DomainsStudent
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param batch 
- * @param classroomsCount 
- * @param majorsCount 
+ * @param record 
+ * @param student 
  */
 
 
-data class DtoBatchInfo (
+data class DtoGeneralAttendanceStudentItem (
 
-    @SerializedName("batch")
-    val batch: DomainsBatch,
+    @SerializedName("record")
+    val record: DomainsGeneralAttendanceRecord,
 
-    @SerializedName("classrooms_count")
-    val classroomsCount: kotlin.Int,
-
-    @SerializedName("majors_count")
-    val majorsCount: kotlin.Int
+    @SerializedName("student")
+    val student: DomainsStudent
 
 ) {
 
