@@ -4,7 +4,6 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet**](AttendanceApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**](AttendanceApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesSubjectAttendanceIdGet**](AttendanceApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesSubjectAttendanceIdGet) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesSubjectAttendanceIdRecordsGet**](AttendanceApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesSubjectAttendanceIdRecordsGet) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
@@ -14,57 +13,10 @@ All URIs are relative to *http://localhost*
 | [**createSubjectAttendanceRecordStudent**](AttendanceApi.md#createSubjectAttendanceRecordStudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | [**deleteGeneralAttendance**](AttendanceApi.md#deleteGeneralAttendance) | **DELETE** /api/v1/general_attendances/{general_attendance_id} |  |
 | [**getAllGeneralAttendances**](AttendanceApi.md#getAllGeneralAttendances) | **GET** /api/v1/general-attendances |  |
+| [**getAllSubjectAttendances**](AttendanceApi.md#getAllSubjectAttendances) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | [**getGeneralAttendance**](AttendanceApi.md#getGeneralAttendance) | **GET** /api/v1/general-attendances/{general_attendance_id} |  |
 | [**updateGeneralAttendance**](AttendanceApi.md#updateGeneralAttendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
 
-
-<a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet"></a>
-# **apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet**
-> ResponsesGetAllSubjectAttendances apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet(batchId, majorId, classroomId)
-
-
-
-### Example
-```kotlin
-// Import classes:
-//import com.rizalanggoro.presensigo.openapi.infrastructure.*
-//import com.rizalanggoro.presensigo.openapi.models.*
-
-val apiInstance = AttendanceApi()
-val batchId : kotlin.Int = 56 // kotlin.Int | batch id
-val majorId : kotlin.Int = 56 // kotlin.Int | major id
-val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
-try {
-    val result : ResponsesGetAllSubjectAttendances = apiInstance.apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet(batchId, majorId, classroomId)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling AttendanceApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling AttendanceApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-| **batchId** | **kotlin.Int**| batch id | |
-| **majorId** | **kotlin.Int**| major id | |
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **classroomId** | **kotlin.Int**| classroom id | |
-
-### Return type
-
-[**ResponsesGetAllSubjectAttendances**](ResponsesGetAllSubjectAttendances.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
 
 <a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost"></a>
 # **apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**
@@ -467,6 +419,54 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ResponsesGetAllGeneralAttendances**](ResponsesGetAllGeneralAttendances.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getAllSubjectAttendances"></a>
+# **getAllSubjectAttendances**
+> ResponsesGetAllSubjectAttendances getAllSubjectAttendances(batchId, majorId, classroomId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+try {
+    val result : ResponsesGetAllSubjectAttendances = apiInstance.getAllSubjectAttendances(batchId, majorId, classroomId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#getAllSubjectAttendances")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#getAllSubjectAttendances")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| **majorId** | **kotlin.Int**| major id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **classroomId** | **kotlin.Int**| classroom id | |
+
+### Return type
+
+[**ResponsesGetAllSubjectAttendances**](ResponsesGetAllSubjectAttendances.md)
 
 ### Authorization
 

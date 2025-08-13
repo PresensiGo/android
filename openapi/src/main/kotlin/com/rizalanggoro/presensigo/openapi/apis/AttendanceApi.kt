@@ -55,42 +55,6 @@ import java.text.DateFormat
     ) {
 
         /**
-        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances
-        * 
-        * 
-         * @param batchId batch id 
-         * @param majorId major id 
-         * @param classroomId classroom id 
-         * @return ResponsesGetAllSubjectAttendances
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesGet(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<ResponsesGetAllSubjectAttendances> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = 
-                    io.ktor.client.utils.EmptyContent
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.GET,
-            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return request(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
-
-        /**
         * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances
         * 
         * 
@@ -388,6 +352,42 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/general-attendances",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @return ResponsesGetAllSubjectAttendances
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAllSubjectAttendances(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<ResponsesGetAllSubjectAttendances> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

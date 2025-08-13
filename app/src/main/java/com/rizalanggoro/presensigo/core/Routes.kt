@@ -39,7 +39,8 @@ object Routes {
             data class Detail(
                 val batchId: Int,
                 val majorId: Int,
-                val classroomId: Int
+                val classroomId: Int,
+                val attendanceId: Int
             )
 
             @Serializable

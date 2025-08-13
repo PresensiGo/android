@@ -1,5 +1,5 @@
 
-# DomainsSubjectAttendanceSubject
+# GetAllSubjectAttendancesItem
 
 ## Properties
 | Name | Type | Description | Notes |

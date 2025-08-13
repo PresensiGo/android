@@ -6,6 +6,7 @@ import com.rizalanggoro.presensigo.presentation.attendance.detail.DetailAttendan
 import com.rizalanggoro.presensigo.presentation.lateness.detail.DetailLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDetailLatenessViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomViewModel
+import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.index.SubjectAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.major.MajorViewModel
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeViewModel
@@ -20,6 +21,7 @@ val viewModelModule = module {
     // attendance
     viewModelOf(::MajorViewModel)
     viewModelOf(::ClassroomViewModel)
+    viewModelOf(::SubjectAttendanceViewModel)
 
     // auth
     viewModelOf(::AuthViewModel)
