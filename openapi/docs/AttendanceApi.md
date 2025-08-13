@@ -4,9 +4,9 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**](AttendanceApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | [**createGeneralAttendance**](AttendanceApi.md#createGeneralAttendance) | **POST** /api/v1/general-attendances |  |
 | [**createGeneralAttendanceRecordStudent**](AttendanceApi.md#createGeneralAttendanceRecordStudent) | **POST** /api/v1/general-attendances/records/student |  |
+| [**createSubjectAttendance**](AttendanceApi.md#createSubjectAttendance) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | [**createSubjectAttendanceRecordStudent**](AttendanceApi.md#createSubjectAttendanceRecordStudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | [**deleteGeneralAttendance**](AttendanceApi.md#deleteGeneralAttendance) | **DELETE** /api/v1/general_attendances/{general_attendance_id} |  |
 | [**getAllGeneralAttendanceRecords**](AttendanceApi.md#getAllGeneralAttendanceRecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
@@ -17,56 +17,6 @@ All URIs are relative to *http://localhost*
 | [**getSubjectAttendance**](AttendanceApi.md#getSubjectAttendance) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | [**updateGeneralAttendance**](AttendanceApi.md#updateGeneralAttendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
 
-
-<a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost"></a>
-# **apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**
-> ResponsesCreateSubjectAttendance apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost(batchId, majorId, classroomId, body)
-
-
-
-### Example
-```kotlin
-// Import classes:
-//import com.rizalanggoro.presensigo.openapi.infrastructure.*
-//import com.rizalanggoro.presensigo.openapi.models.*
-
-val apiInstance = AttendanceApi()
-val batchId : kotlin.Int = 56 // kotlin.Int | batch id
-val majorId : kotlin.Int = 56 // kotlin.Int | major id
-val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
-val body : RequestsCreateSubjectAttendance =  // RequestsCreateSubjectAttendance | body
-try {
-    val result : ResponsesCreateSubjectAttendance = apiInstance.apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost(batchId, majorId, classroomId, body)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling AttendanceApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling AttendanceApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-| **batchId** | **kotlin.Int**| batch id | |
-| **majorId** | **kotlin.Int**| major id | |
-| **classroomId** | **kotlin.Int**| classroom id | |
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **body** | [**RequestsCreateSubjectAttendance**](RequestsCreateSubjectAttendance.md)| body | |
-
-### Return type
-
-[**ResponsesCreateSubjectAttendance**](ResponsesCreateSubjectAttendance.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
 
 <a id="createGeneralAttendance"></a>
 # **createGeneralAttendance**
@@ -81,7 +31,7 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AttendanceApi()
-val body : RequestsCreateGeneralAttendance =  // RequestsCreateGeneralAttendance | body
+val body : CreateGeneralAttendanceReq =  // CreateGeneralAttendanceReq | body
 try {
     val result : ResponsesCreateGeneralAttendance = apiInstance.createGeneralAttendance(body)
     println(result)
@@ -97,7 +47,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**RequestsCreateGeneralAttendance**](RequestsCreateGeneralAttendance.md)| body | |
+| **body** | [**CreateGeneralAttendanceReq**](CreateGeneralAttendanceReq.md)| body | |
 
 ### Return type
 
@@ -146,6 +96,56 @@ try {
 ### Return type
 
 [**ResponsesCreateGeneralAttendanceRecordStudent**](ResponsesCreateGeneralAttendanceRecordStudent.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="createSubjectAttendance"></a>
+# **createSubjectAttendance**
+> ResponsesCreateSubjectAttendance createSubjectAttendance(batchId, majorId, classroomId, body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+val body : CreateSubjectAttendanceReq =  // CreateSubjectAttendanceReq | body
+try {
+    val result : ResponsesCreateSubjectAttendance = apiInstance.createSubjectAttendance(batchId, majorId, classroomId, body)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#createSubjectAttendance")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#createSubjectAttendance")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| **majorId** | **kotlin.Int**| major id | |
+| **classroomId** | **kotlin.Int**| classroom id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**CreateSubjectAttendanceReq**](CreateSubjectAttendanceReq.md)| body | |
+
+### Return type
+
+[**ResponsesCreateSubjectAttendance**](ResponsesCreateSubjectAttendance.md)
 
 ### Authorization
 

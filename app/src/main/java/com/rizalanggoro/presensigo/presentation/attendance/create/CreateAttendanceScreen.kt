@@ -59,7 +59,7 @@ import com.composables.icons.lucide.User
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.constants.isLoading
-import com.rizalanggoro.presensigo.core.extensions.formatDateTime
+import com.rizalanggoro.presensigo.core.extensions.oldFormatDateTime
 import com.rizalanggoro.presensigo.domain.AttendanceStatus
 import com.rizalanggoro.presensigo.presentation.components.SmallCircularProgressIndicator
 import org.koin.androidx.compose.koinViewModel
@@ -295,7 +295,7 @@ fun CreateAttendanceScreen() {
                         Text(datePickerState.selectedDateMillis.let {
                             when (it == null) {
                                 true -> "Pilih tanggal kehadiran"
-                                else -> it.formatDateTime()
+                                else -> it.oldFormatDateTime()
                             }
                         })
                     },

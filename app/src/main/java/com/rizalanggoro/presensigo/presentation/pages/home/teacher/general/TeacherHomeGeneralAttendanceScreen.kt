@@ -21,12 +21,14 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
@@ -40,6 +42,15 @@ fun TeacherHomeGeneralAttendanceScreen() {
     val state by viewModel.state.collectAsState()
 
     val navController = LocalNavController.current
+    val currentBackStackEntry by navController.currentBackStackEntryAsState()
+
+    LaunchedEffect(currentBackStackEntry?.savedStateHandle) {
+        val savedStateHandle = currentBackStackEntry?.savedStateHandle
+        if (savedStateHandle != null && savedStateHandle.contains("success")) {
+            viewModel.getAllGeneralAttendances()
+            savedStateHandle.remove<Boolean>("success")
+        }
+    }
 
     Scaffold(
         contentWindowInsets = WindowInsets.statusBars,

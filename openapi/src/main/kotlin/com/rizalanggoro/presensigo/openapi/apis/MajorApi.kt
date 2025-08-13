@@ -15,8 +15,8 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsCreate
 import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate
+import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.Major
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId
 
@@ -49,7 +49,7 @@ import java.text.DateFormat
          * @return Major
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createMajor(body: ApiInternalFeaturesMajorDtoRequestsCreate): HttpResponse<Major> {
+        open suspend fun createMajor(body: CreateGeneralAttendanceReq): HttpResponse<Major> {
 
             val localVariableAuthNames = listOf<String>()
 

@@ -21,18 +21,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param batchId 
- * @param name 
+ * @param message 
  */
 
 
-data class ApiInternalFeaturesMajorDtoRequestsCreate (
+data class ResponsesLogout (
 
-    @SerializedName("batch_id")
-    val batchId: kotlin.Int,
-
-    @SerializedName("name")
-    val name: kotlin.String
+    @SerializedName("message")
+    val message: kotlin.String
 
 ) {
 

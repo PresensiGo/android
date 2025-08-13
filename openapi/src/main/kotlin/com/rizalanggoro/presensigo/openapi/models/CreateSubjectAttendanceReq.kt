@@ -23,16 +23,20 @@ import com.google.gson.annotations.SerializedName
  *
  * @param datetime 
  * @param note 
+ * @param subjectId 
  */
 
 
-data class RequestsCreateGeneralAttendance (
+data class CreateSubjectAttendanceReq (
 
     @SerializedName("datetime")
-    val datetime: kotlin.String? = null,
+    val datetime: kotlin.String,
 
     @SerializedName("note")
-    val note: kotlin.String? = null
+    val note: kotlin.String,
+
+    @SerializedName("subject_id")
+    val subjectId: kotlin.Int
 
 ) {
 

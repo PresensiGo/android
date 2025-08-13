@@ -4,13 +4,14 @@ import com.rizalanggoro.presensigo.BuildConfig
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
 import com.rizalanggoro.presensigo.domain.TokenType
+import com.rizalanggoro.presensigo.openapi.apis.AccountApi
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
-import com.rizalanggoro.presensigo.openapi.apis.AuthApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.apis.ResetApi
 import com.rizalanggoro.presensigo.openapi.apis.StudentApi
+import com.rizalanggoro.presensigo.openapi.apis.SubjectApi
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq
 import io.ktor.client.HttpClientConfig
@@ -54,49 +55,46 @@ val serviceModule = module {
 
                         try {
                             if (oldToken.tokenType == TokenType.Teacher) {
-                                val client = get<AuthApi>()
-                                val response = client.refreshToken(
+                                val client = get<AccountApi>()
+                                val body = client.refreshToken(
                                     RefreshTokenReq(
                                         refreshToken = oldToken.refreshToken
                                     )
+                                ).body()
+
+                                tokenManager.set(
+                                    Token(
+                                        tokenType = TokenType.Teacher,
+                                        accessToken = body.accessToken,
+                                        refreshToken = body.refreshToken
+                                    )
                                 )
 
-                                if (response.success) {
-                                    val body = response.body()
-                                    tokenManager.set(
-                                        Token(
-                                            tokenType = TokenType.Teacher,
-                                            accessToken = body.accessToken,
-                                            refreshToken = body.refreshToken
-                                        )
-                                    )
-                                }
+                                BearerTokens(
+                                    accessToken = body.accessToken,
+                                    refreshToken = body.refreshToken
+                                )
                             } else {
                                 val client = get<StudentApi>()
-                                val response = client.refreshTokenStudent(
+                                val body = client.refreshTokenStudent(
                                     RefreshTokenStudentReq(
                                         refreshToken = oldToken.refreshToken
                                     )
+                                ).body()
+
+                                tokenManager.set(
+                                    Token(
+                                        tokenType = TokenType.Student,
+                                        accessToken = body.accessToken,
+                                        refreshToken = body.refreshToken
+                                    )
                                 )
 
-                                if (response.success) {
-                                    val body = response.body()
-                                    tokenManager.set(
-                                        Token(
-                                            tokenType = TokenType.Student,
-                                            accessToken = body.accessToken,
-                                            refreshToken = body.refreshToken
-                                        )
-                                    )
-                                }
+                                BearerTokens(
+                                    accessToken = body.accessToken,
+                                    refreshToken = body.refreshToken
+                                )
                             }
-
-                            val newToken = tokenManager.get()
-
-                            BearerTokens(
-                                accessToken = newToken.accessToken,
-                                refreshToken = newToken.refreshToken
-                            )
                         } catch (e: ResponseException) {
                             e.printStackTrace()
                             tokenManager.clear()
@@ -107,7 +105,8 @@ val serviceModule = module {
             }
         }
     }
-    single { AuthApi(API_BASE_URL, httpClientConfig = get()) }
+//    single { AuthApi(API_BASE_URL, httpClientConfig = get()) }
+    single { AccountApi(API_BASE_URL, httpClientConfig = get()) }
     single { AttendanceApi(API_BASE_URL, httpClientConfig = get()) }
     single { BatchApi(API_BASE_URL, httpClientConfig = get()) }
     single { ClassroomApi(API_BASE_URL, httpClientConfig = get()) }
@@ -116,4 +115,5 @@ val serviceModule = module {
     single { MajorApi(API_BASE_URL, httpClientConfig = get()) }
     single { ResetApi(API_BASE_URL, httpClientConfig = get()) }
     single { StudentApi(API_BASE_URL, httpClientConfig = get()) }
+    single { SubjectApi(API_BASE_URL, httpClientConfig = get()) }
 }

@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class DomainsSubject (
+data class Subject (
 
     @SerializedName("id")
     val id: kotlin.Int,

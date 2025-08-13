@@ -1,5 +1,5 @@
 
-# DomainsSubject
+# Subject
 
 ## Properties
 | Name | Type | Description | Notes |

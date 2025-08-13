@@ -7,7 +7,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
+import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.OutlinedCard
@@ -15,10 +17,12 @@ import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
+import androidx.navigation.compose.currentBackStackEntryAsState
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesItem
@@ -31,6 +35,15 @@ fun SubjectAttendanceScreen() {
     val state by viewModel.state.collectAsState()
 
     val navController = LocalNavController.current
+    val backStackEntry by navController.currentBackStackEntryAsState()
+
+    LaunchedEffect(backStackEntry?.savedStateHandle) {
+        val savedStateHandle = backStackEntry?.savedStateHandle
+        if (savedStateHandle != null && savedStateHandle.contains("success")) {
+            viewModel.getAllAttendances()
+            savedStateHandle.remove<Boolean>("success")
+        }
+    }
 
     Scaffold(
         topBar = {
@@ -44,6 +57,19 @@ fun SubjectAttendanceScreen() {
                     }
                 }
             )
+        },
+        floatingActionButton = {
+            FloatingActionButton(onClick = {
+                navController.navigate(
+                    Routes.Attendance.Subject.Create(
+                        batchId = viewModel.params.batchId,
+                        majorId = viewModel.params.majorId,
+                        classroomId = viewModel.params.classroomId
+                    )
+                )
+            }) {
+                Icon(Icons.Rounded.Add, contentDescription = null)
+            }
         }
     ) {
         LazyColumn(modifier = Modifier.padding(it)) {
