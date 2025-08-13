@@ -23,21 +23,10 @@ import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.sections.Section2
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.sections.Section3
 
-private data class Destination(
-    val title: String,
-    val content: @Composable () -> Unit
-)
-
-private val destinations = listOf(
-    Destination(title = "Kode Akses", content = { Section1() }),
-    Destination(title = "Daftar Siswa", content = { Section2() }),
-    Destination(title = "Lainnya", content = { Section3() }),
-)
-
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailSubjectAttendanceScreen() {
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(1) }
 
     val navController = LocalNavController.current
 
@@ -59,15 +48,21 @@ fun DetailSubjectAttendanceScreen() {
             PrimaryTabRow(
                 selectedTabIndex = selectedTabIndex
             ) {
-                destinations.mapIndexed { index, item ->
+                listOf("Kode Akses", "Daftar Siswa", "Lainnya").mapIndexed { index, item ->
                     Tab(
-                        selected = false,
+                        selected = index == selectedTabIndex,
                         onClick = { selectedTabIndex = index },
-                        text = { Text(item.title) }
+                        text = { Text(item) }
                     )
                 }
             }
-            destinations[selectedTabIndex].content()
+
+            // content
+            when (selectedTabIndex) {
+                0 -> Section1()
+                1 -> Section2()
+                2 -> Section3()
+            }
         }
     }
 }

@@ -28,7 +28,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class DtoSubjectAttendanceRecordItem (
+data class GetAllSubjectAttendanceRecordsItem (
 
     @SerializedName("record")
     val record: DomainsSubjectAttendanceRecord,

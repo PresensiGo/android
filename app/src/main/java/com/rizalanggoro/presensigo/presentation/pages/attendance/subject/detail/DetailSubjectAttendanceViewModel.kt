@@ -12,6 +12,7 @@ import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.core.qr.QrGenerator
 import com.rizalanggoro.presensigo.domain.QrData
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
+import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
 import com.rizalanggoro.presensigo.openapi.models.SubjectAttendance
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.statement.bodyAsText
@@ -22,11 +23,18 @@ import kotlinx.coroutines.launch
 
 data class State(
     val status: StateStatus = StateStatus.Initial,
-    val attendance: SubjectAttendance? = null,
+    val action: Action = Action.Initial,
     val message: String = "",
 
+    val attendance: SubjectAttendance? = null,
+    val records: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
+
     val qrCodeBitmap: Bitmap? = null
-)
+) {
+    enum class Action {
+        Initial, GetSubjectAttendance, GetAllSubjectAttendanceRecords
+    }
+}
 
 class DetailSubjectAttendanceViewModel(
     savedStateHandle: SavedStateHandle,
@@ -39,11 +47,17 @@ class DetailSubjectAttendanceViewModel(
 
     init {
         getSubjectAttendance()
+        getAllSubjectAttendanceRecords()
     }
 
     fun getSubjectAttendance() = viewModelScope.launch {
         try {
-            _state.update { it.copy(status = StateStatus.Loading) }
+            _state.update {
+                it.copy(
+                    status = StateStatus.Loading,
+                    action = State.Action.GetSubjectAttendance
+                )
+            }
 
             val body = attendanceApi.getSubjectAttendance(
                 batchId = params.batchId,
@@ -63,6 +77,7 @@ class DetailSubjectAttendanceViewModel(
             _state.update {
                 it.copy(
                     status = StateStatus.Success,
+                    action = State.Action.GetSubjectAttendance,
                     attendance = body.subjectAttendance,
                     qrCodeBitmap = QrGenerator.generateBitmap(qrCodeData)
                 )
@@ -72,6 +87,7 @@ class DetailSubjectAttendanceViewModel(
             _state.update {
                 it.copy(
                     status = StateStatus.Failure,
+                    action = State.Action.GetSubjectAttendance,
                     message = e.response.bodyAsText().toFailure().message
                 )
             }
@@ -80,6 +96,51 @@ class DetailSubjectAttendanceViewModel(
             _state.update {
                 it.copy(
                     status = StateStatus.Failure,
+                    action = State.Action.GetSubjectAttendance,
+                    message = "Terjadi kesalahan tak terduga!"
+                )
+            }
+        }
+    }
+
+    fun getAllSubjectAttendanceRecords() = viewModelScope.launch {
+        try {
+            _state.update {
+                it.copy(
+                    status = StateStatus.Loading,
+                    action = State.Action.GetAllSubjectAttendanceRecords
+                )
+            }
+
+            val body = attendanceApi.getAllSubjectAttendanceRecords(
+                batchId = params.batchId,
+                majorId = params.majorId,
+                classroomId = params.classroomId,
+                subjectAttendanceId = params.attendanceId
+            ).body()
+
+            _state.update {
+                it.copy(
+                    status = StateStatus.Success,
+                    action = State.Action.GetAllSubjectAttendanceRecords,
+                    records = body.items
+                )
+            }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _state.update {
+                it.copy(
+                    status = StateStatus.Failure,
+                    action = State.Action.GetAllSubjectAttendanceRecords,
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _state.update {
+                it.copy(
+                    status = StateStatus.Failure,
+                    action = State.Action.GetAllSubjectAttendanceRecords,
                     message = "Terjadi kesalahan tak terduga!"
                 )
             }

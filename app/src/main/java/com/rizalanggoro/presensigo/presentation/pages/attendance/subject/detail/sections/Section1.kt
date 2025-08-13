@@ -22,7 +22,10 @@ fun Section1() {
     val viewModel = koinViewModel<DetailSubjectAttendanceViewModel>()
     val state by viewModel.state.collectAsState()
 
-    Column(horizontalAlignment = Alignment.CenterHorizontally) {
+    Column(
+        horizontalAlignment = Alignment.CenterHorizontally,
+        modifier = Modifier.fillMaxWidth()
+    ) {
         state.qrCodeBitmap.let {
             if (it != null)
                 Image(

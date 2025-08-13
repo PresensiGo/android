@@ -8,18 +8,19 @@ import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 
-fun String.toLocalDateString(): String {
+fun String.formatDateTime(pattern: String = "EEEE, dd MMMM yyyy"): String {
     try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.isNotEmpty()) {
-            val isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+//            val isoFormatter = DateTimeFormatter.ofPattern("yyyy-MM-dd'T'HH:mm:ssXXX")
+            val isoFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
             val zonedDateTime = ZonedDateTime.parse(this, isoFormatter)
 
-            val locale = Locale("id", "ID")
-            val dayOfWeek =
-                zonedDateTime.dayOfWeek.getDisplayName(TextStyle.FULL, locale)
-            val outputFormatter = DateTimeFormatter.ofPattern("dd MMMM yyyy", locale)
+            val outputFormatter = DateTimeFormatter.ofPattern(
+                pattern,
+                Locale("id", "ID")
+            )
 
-            return "$dayOfWeek, ${zonedDateTime.format(outputFormatter)}"
+            return zonedDateTime.format(outputFormatter).toString()
         } else {
             return this
         }
@@ -28,7 +29,7 @@ fun String.toLocalDateString(): String {
     }
 }
 
-fun Long.toLocalDateString(): String = try {
+fun Long.formatDateTime(): String = try {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val instant = Instant.ofEpochMilli(this)
         val zonedDateTime = instant.atZone(ZoneId.systemDefault())

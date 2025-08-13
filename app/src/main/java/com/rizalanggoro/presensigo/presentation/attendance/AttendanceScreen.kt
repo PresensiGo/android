@@ -44,7 +44,7 @@ import com.composables.icons.lucide.Trash2
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.StateStatus
-import com.rizalanggoro.presensigo.core.extensions.toLocalDateString
+import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.domain.Attendance
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -114,7 +114,7 @@ fun AttendanceScreen(classroomID: Int) {
             LazyColumn(modifier = Modifier.padding(it)) {
                 items(state.attendances) {
                     ListItem(
-                        headlineContent = { Text(it.date.toLocalDateString()) },
+                        headlineContent = { Text(it.date.formatDateTime()) },
                         supportingContent = { Text(it.id.toString()) },
                         modifier = Modifier.combinedClickable(
                             onClick = {

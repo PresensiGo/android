@@ -1,5 +1,5 @@
 
-# DtoSubjectAttendanceRecordItem
+# GetAllSubjectAttendanceRecordsItem
 
 ## Properties
 | Name | Type | Description | Notes |
