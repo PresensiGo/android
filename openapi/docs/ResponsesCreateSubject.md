@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **subject** | [**DomainsSubject**](DomainsSubject.md) |  |  |
+| **subject** | [**Subject**](Subject.md) |  |  |
 
 
 

@@ -11,8 +11,8 @@ import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.domain.TokenType
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.create.CreateGeneralAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.DetailGeneralAttendanceScreen
-import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.CreateSubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomScreen
+import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.create.CreateSubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.DetailSubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.index.SubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.major.MajorScreen
@@ -41,11 +41,11 @@ fun MyComposeApplication(
                             TokenType.Teacher -> Routes.Home.Teacher
                             TokenType.Student -> Routes.Home.Student
                         }
-//                        true -> Routes.Attendance.Subject.Detail(
+//                        true -> Routes.Attendance.Subject.Create(
 //                            batchId = 3,
 //                            majorId = 6,
 //                            classroomId = 14,
-//                            attendanceId = 1
+////                            attendanceId = 1
 //                        )
 
                         else -> Routes.Auth

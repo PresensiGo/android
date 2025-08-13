@@ -8,6 +8,7 @@ import com.rizalanggoro.presensigo.presentation.lateness.detail.create.CreateDet
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.create.CreateGeneralAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.DetailGeneralAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomViewModel
+import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.create.CreateSubjectAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.DetailSubjectAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.index.SubjectAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.major.MajorViewModel
@@ -27,6 +28,7 @@ val viewModelModule = module {
     viewModelOf(::ClassroomViewModel)
     viewModelOf(::SubjectAttendanceViewModel)
     viewModelOf(::DetailSubjectAttendanceViewModel)
+    viewModelOf(::CreateSubjectAttendanceViewModel)
 
     // attendance - general
     viewModelOf(::DetailGeneralAttendanceViewModel)

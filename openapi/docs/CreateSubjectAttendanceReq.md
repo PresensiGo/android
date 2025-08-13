@@ -1,5 +1,5 @@
 
-# RequestsCreateSubjectAttendance
+# CreateSubjectAttendanceReq
 
 ## Properties
 | Name | Type | Description | Notes |

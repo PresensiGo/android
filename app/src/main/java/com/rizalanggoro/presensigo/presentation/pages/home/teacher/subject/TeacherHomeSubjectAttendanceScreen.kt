@@ -33,6 +33,7 @@ fun TeacherHomeSubjectAttendanceScreen() {
 
     val navController = LocalNavController.current
 
+
     Scaffold(
         contentWindowInsets = WindowInsets.statusBars,
         topBar = {

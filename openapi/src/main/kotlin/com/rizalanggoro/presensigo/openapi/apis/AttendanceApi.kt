@@ -18,7 +18,7 @@ package com.rizalanggoro.presensigo.openapi.apis
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq
-import com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubjectAttendance
+import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent
@@ -53,42 +53,6 @@ import java.text.DateFormat
         httpClientConfig,
         jsonBlock,
     ) {
-
-        /**
-        * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances
-        * 
-        * 
-         * @param batchId batch id 
-         * @param majorId major id 
-         * @param classroomId classroom id 
-         * @param body body 
-         * @return ResponsesCreateSubjectAttendance
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, body: RequestsCreateSubjectAttendance): HttpResponse<ResponsesCreateSubjectAttendance> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = body
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.POST,
-            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return jsonRequest(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
 
         /**
         * POST /api/v1/general-attendances
@@ -144,6 +108,42 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
             "/api/v1/general-attendances/records/student",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param body body 
+         * @return ResponsesCreateSubjectAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun createSubjectAttendance(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, body: CreateSubjectAttendanceReq): HttpResponse<ResponsesCreateSubjectAttendance> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
