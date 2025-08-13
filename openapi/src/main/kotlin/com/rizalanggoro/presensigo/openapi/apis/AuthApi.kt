@@ -15,14 +15,11 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.RefreshTokenTTLReq
-import com.rizalanggoro.presensigo.openapi.models.RequestsLogin
-import com.rizalanggoro.presensigo.openapi.models.RequestsLogout
-import com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken
-import com.rizalanggoro.presensigo.openapi.models.RequestsRegister
-import com.rizalanggoro.presensigo.openapi.models.ResponsesLogin
-import com.rizalanggoro.presensigo.openapi.models.ResponsesRefreshToken
-import com.rizalanggoro.presensigo.openapi.models.ResponsesRegister
+import com.rizalanggoro.presensigo.openapi.models.LoginReq
+import com.rizalanggoro.presensigo.openapi.models.LoginRes
+import com.rizalanggoro.presensigo.openapi.models.LogoutReq
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
+import com.rizalanggoro.presensigo.openapi.models.RefreshTokenRes
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -49,11 +46,11 @@ import java.text.DateFormat
         * POST /api/v1/auth/login
         * 
         * 
-         * @param body Login request 
-         * @return ResponsesLogin
+         * @param body body 
+         * @return LoginRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun login(body: RequestsLogin): HttpResponse<ResponsesLogin> {
+        open suspend fun login(body: LoginReq): HttpResponse<LoginRes> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -86,7 +83,7 @@ import java.text.DateFormat
          * @return kotlin.Any
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun logout(body: RequestsLogout): HttpResponse<kotlin.Any> {
+        open suspend fun logout(body: LogoutReq): HttpResponse<kotlin.Any> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -115,11 +112,11 @@ import java.text.DateFormat
         * POST /api/v1/auth/refresh-token
         * 
         * 
-         * @param body Refresh token req 
-         * @return ResponsesRefreshToken
+         * @param body body 
+         * @return RefreshTokenRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun refreshToken(body: RequestsRefreshToken): HttpResponse<ResponsesRefreshToken> {
+        open suspend fun refreshToken(body: RefreshTokenReq): HttpResponse<RefreshTokenRes> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -132,72 +129,6 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
             "/api/v1/auth/refresh-token",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return jsonRequest(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
-
-        /**
-        * POST /api/v1/auth/refresh-token-ttl
-        * 
-        * 
-         * @param body Refresh token req 
-         * @return kotlin.String
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun refreshTokenTTL(body: RefreshTokenTTLReq): HttpResponse<kotlin.String> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = body
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.POST,
-            "/api/v1/auth/refresh-token-ttl",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return jsonRequest(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
-
-        /**
-        * POST /api/v1/auth/register
-        * 
-        * 
-         * @param body Login request 
-         * @return ResponsesRegister
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun register(body: RequestsRegister): HttpResponse<ResponsesRegister> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = body
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.POST,
-            "/api/v1/auth/register",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

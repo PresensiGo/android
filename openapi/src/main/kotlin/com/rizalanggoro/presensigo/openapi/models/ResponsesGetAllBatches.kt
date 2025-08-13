@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.CombinedBatchInfo
+import com.rizalanggoro.presensigo.openapi.models.Batch
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponsesGetAllBatches (
 
     @SerializedName("batches")
-    val batches: kotlin.collections.List<CombinedBatchInfo>
+    val batches: kotlin.collections.List<Batch>
 
 ) {
 

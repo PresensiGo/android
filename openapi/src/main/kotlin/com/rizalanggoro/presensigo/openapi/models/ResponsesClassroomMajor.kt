@@ -15,8 +15,8 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DtoClassroom
-import com.rizalanggoro.presensigo.openapi.models.DtoMajor
+import com.rizalanggoro.presensigo.openapi.models.Classroom
+import com.rizalanggoro.presensigo.openapi.models.Major
 
 import com.google.gson.annotations.SerializedName
 
@@ -31,10 +31,10 @@ import com.google.gson.annotations.SerializedName
 data class ResponsesClassroomMajor (
 
     @SerializedName("classroom")
-    val classroom: DtoClassroom,
+    val classroom: Classroom,
 
     @SerializedName("major")
-    val major: DtoMajor
+    val major: Major
 
 ) {
 

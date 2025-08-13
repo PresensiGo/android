@@ -24,7 +24,7 @@ import com.composables.icons.lucide.ArrowLeft
 import com.composables.icons.lucide.Lucide
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.StateStatus
-import com.rizalanggoro.presensigo.core.extensions.toLocalDateString
+import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.domain.AttendanceStatus
 import org.koin.androidx.compose.koinViewModel
 
@@ -60,7 +60,7 @@ fun DetailAttendanceScreen() {
             ListItem(
                 headlineContent = { Text("Tanggal") },
                 supportingContent = {
-                    Text(state.attendance.attendance.date.toLocalDateString())
+                    Text(state.attendance.attendance.date.formatDateTime())
                 }
             )
             SingleChoiceSegmentedButtonRow(

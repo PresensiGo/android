@@ -45,64 +45,123 @@ All URIs are relative to *http://localhost*
 
 | Class | Method | HTTP request | Description |
 | ------------ | ------------- | ------------- | ------------- |
-| *AttendanceApi* | [**createAttendance**](docs/AttendanceApi.md#createattendance) | **POST** /api/v1/attendances |  |
-| *AttendanceApi* | [**deleteAttendance**](docs/AttendanceApi.md#deleteattendance) | **DELETE** /api/v1/attendances/{attendance_id} |  |
-| *AttendanceApi* | [**getAllAttendances**](docs/AttendanceApi.md#getallattendances) | **GET** /api/v1/attendances/classrooms/{classroom_id} |  |
-| *AttendanceApi* | [**getAttendance**](docs/AttendanceApi.md#getattendance) | **GET** /api/v1/attendances/{attendance_id} |  |
+| *AccountApi* | [**apiV1AccountsGet**](docs/AccountApi.md#apiv1accountsget) | **GET** /api/v1/accounts |  |
+| *AttendanceApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesPost**](docs/AttendanceApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidsubjectattendancespost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
+| *AttendanceApi* | [**createGeneralAttendance**](docs/AttendanceApi.md#creategeneralattendance) | **POST** /api/v1/general-attendances |  |
+| *AttendanceApi* | [**createGeneralAttendanceRecordStudent**](docs/AttendanceApi.md#creategeneralattendancerecordstudent) | **POST** /api/v1/general-attendances/records/student |  |
+| *AttendanceApi* | [**createSubjectAttendanceRecordStudent**](docs/AttendanceApi.md#createsubjectattendancerecordstudent) | **POST** /api/v1/subject-attendances/records/student |  |
+| *AttendanceApi* | [**deleteGeneralAttendance**](docs/AttendanceApi.md#deletegeneralattendance) | **DELETE** /api/v1/general_attendances/{general_attendance_id} |  |
+| *AttendanceApi* | [**getAllGeneralAttendanceRecords**](docs/AttendanceApi.md#getallgeneralattendancerecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
+| *AttendanceApi* | [**getAllGeneralAttendances**](docs/AttendanceApi.md#getallgeneralattendances) | **GET** /api/v1/general-attendances |  |
+| *AttendanceApi* | [**getAllSubjectAttendanceRecords**](docs/AttendanceApi.md#getallsubjectattendancerecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
+| *AttendanceApi* | [**getAllSubjectAttendances**](docs/AttendanceApi.md#getallsubjectattendances) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
+| *AttendanceApi* | [**getGeneralAttendance**](docs/AttendanceApi.md#getgeneralattendance) | **GET** /api/v1/general-attendances/{general_attendance_id} |  |
+| *AttendanceApi* | [**getSubjectAttendance**](docs/AttendanceApi.md#getsubjectattendance) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
+| *AttendanceApi* | [**updateGeneralAttendance**](docs/AttendanceApi.md#updategeneralattendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
 | *AuthApi* | [**login**](docs/AuthApi.md#login) | **POST** /api/v1/auth/login |  |
 | *AuthApi* | [**logout**](docs/AuthApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | *AuthApi* | [**refreshToken**](docs/AuthApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
-| *AuthApi* | [**refreshTokenTTL**](docs/AuthApi.md#refreshtokenttl) | **POST** /api/v1/auth/refresh-token-ttl |  |
-| *AuthApi* | [**register**](docs/AuthApi.md#register) | **POST** /api/v1/auth/register |  |
-| *BatchApi* | [**getAllBatches**](docs/BatchApi.md#getallbatches) | **GET** /api/v1/batch |  |
+| *BatchApi* | [**apiV1BatchesBatchIdGet**](docs/BatchApi.md#apiv1batchesbatchidget) | **GET** /api/v1/batches/{batch_id} |  |
+| *BatchApi* | [**createBatch**](docs/BatchApi.md#createbatch) | **POST** /api/v1/batches |  |
+| *BatchApi* | [**deleteBatch**](docs/BatchApi.md#deletebatch) | **DELETE** /api/v1/batches/{batch_id} |  |
+| *BatchApi* | [**getAllBatches**](docs/BatchApi.md#getallbatches) | **GET** /api/v1/batches |  |
+| *BatchApi* | [**updateBatch**](docs/BatchApi.md#updatebatch) | **PUT** /api/v1/batches/{batch_id} |  |
+| *ClassroomApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut**](docs/ClassroomApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidput) | **PUT** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id} |  |
+| *ClassroomApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsPost**](docs/ClassroomApi.md#apiv1batchesbatchidmajorsmajoridclassroomspost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | *ClassroomApi* | [**getAllClassroomWithMajors**](docs/ClassroomApi.md#getallclassroomwithmajors) | **GET** /api/v1/classrooms/batches/{batch_id} |  |
-| *ExcelApi* | [**importData**](docs/ExcelApi.md#importdata) | **POST** /api/v1/excel/import |  |
-| *LatenessApi* | [**createLateness**](docs/LatenessApi.md#createlateness) | **POST** /api/v1/latenesses |  |
-| *LatenessApi* | [**createLatenessDetail**](docs/LatenessApi.md#createlatenessdetail) | **POST** /api/v1/latenesses/{lateness_id} |  |
-| *LatenessApi* | [**getAllLatenesses**](docs/LatenessApi.md#getalllatenesses) | **GET** /api/v1/latenesses |  |
-| *LatenessApi* | [**getLateness**](docs/LatenessApi.md#getlateness) | **GET** /api/v1/latenesses/{lateness_id} |  |
-| *MajorApi* | [**getAllMajors**](docs/MajorApi.md#getallmajors) | **GET** /api/v1/majors/batch/{batch_id} |  |
+| *ClassroomApi* | [**getAllClassrooms**](docs/ClassroomApi.md#getallclassrooms) | **GET** /api/v1/classrooms |  |
+| *ClassroomApi* | [**getAllClassroomsByMajorId**](docs/ClassroomApi.md#getallclassroomsbymajorid) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
+| *DefaultApi* | [**apiV1TeachersImportPost**](docs/DefaultApi.md#apiv1teachersimportpost) | **POST** /api/v1/teachers/import |  |
+| *MajorApi* | [**createMajor**](docs/MajorApi.md#createmajor) | **POST** /api/v1/majors |  |
+| *MajorApi* | [**deleteMajor**](docs/MajorApi.md#deletemajor) | **DELETE** /api/v1/majors/{major_id} |  |
+| *MajorApi* | [**getAllMajors**](docs/MajorApi.md#getallmajors) | **GET** /api/v1/majors |  |
+| *MajorApi* | [**getAllMajorsByBatchId**](docs/MajorApi.md#getallmajorsbybatchid) | **GET** /api/v1/batches/{batch_id}/majors |  |
+| *MajorApi* | [**updateMajor**](docs/MajorApi.md#updatemajor) | **PUT** /api/v1/majors/{major_id} |  |
 | *ResetApi* | [**reset**](docs/ResetApi.md#reset) | **GET** /api/v1/reset |  |
+| *StudentApi* | [**apiV1AuthStudentsAccountsStudentTokenIdEjectPost**](docs/StudentApi.md#apiv1authstudentsaccountsstudenttokenidejectpost) | **POST** /api/v1/auth/students/accounts/{student_token_id}/eject |  |
+| *StudentApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentAccountsGet**](docs/StudentApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidstudentaccountsget) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/student-accounts |  |
 | *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students |  |
-| *StudentApi* | [**getAllStudentsByClassroomId**](docs/StudentApi.md#getallstudentsbyclassroomid) | **GET** /api/v1/students/classrooms/{classroom_id} |  |
+| *StudentApi* | [**getAllStudentsByClassroomId**](docs/StudentApi.md#getallstudentsbyclassroomid) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students |  |
+| *StudentApi* | [**loginStudent**](docs/StudentApi.md#loginstudent) | **POST** /api/v1/auth/students/login |  |
+| *StudentApi* | [**refreshTokenStudent**](docs/StudentApi.md#refreshtokenstudent) | **POST** /api/v1/auth/students/refresh-token |  |
+| *SubjectApi* | [**createSubject**](docs/SubjectApi.md#createsubject) | **POST** /api/v1/subjects |  |
+| *SubjectApi* | [**deleteSubject**](docs/SubjectApi.md#deletesubject) | **DELETE** /api/v1/subjects/{subject_id} |  |
+| *SubjectApi* | [**getAllSubjects**](docs/SubjectApi.md#getallsubjects) | **GET** /api/v1/subjects |  |
+| *SubjectApi* | [**updateSubject**](docs/SubjectApi.md#updatesubject) | **PUT** /api/v1/subjects/{subject_id} |  |
 
 
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
- - [com.rizalanggoro.presensigo.openapi.models.CombinedBatchInfo](docs/CombinedBatchInfo.md)
- - [com.rizalanggoro.presensigo.openapi.models.CombinedStudentMajorClassroom](docs/CombinedStudentMajorClassroom.md)
- - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceItemReq](docs/CreateAttendanceItemReq.md)
- - [com.rizalanggoro.presensigo.openapi.models.CreateAttendanceReq](docs/CreateAttendanceReq.md)
- - [com.rizalanggoro.presensigo.openapi.models.CreateLatenessDetailReq](docs/CreateLatenessDetailReq.md)
- - [com.rizalanggoro.presensigo.openapi.models.CreateLatenessReq](docs/CreateLatenessReq.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoAttendance](docs/DtoAttendance.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoAttendanceDetail](docs/DtoAttendanceDetail.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoBatch](docs/DtoBatch.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoClassroom](docs/DtoClassroom.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoLateness](docs/DtoLateness.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoMajor](docs/DtoMajor.md)
- - [com.rizalanggoro.presensigo.openapi.models.DtoStudent](docs/DtoStudent.md)
- - [com.rizalanggoro.presensigo.openapi.models.GetAllAttendancesRes](docs/GetAllAttendancesRes.md)
- - [com.rizalanggoro.presensigo.openapi.models.GetAllLatenessesRes](docs/GetAllLatenessesRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsCreate](docs/ApiInternalFeaturesBatchDtoRequestsCreate.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsUpdate](docs/ApiInternalFeaturesBatchDtoRequestsUpdate.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsCreate](docs/ApiInternalFeaturesMajorDtoRequestsCreate.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate](docs/ApiInternalFeaturesMajorDtoRequestsUpdate.md)
+ - [com.rizalanggoro.presensigo.openapi.models.Batch](docs/Batch.md)
+ - [com.rizalanggoro.presensigo.openapi.models.Classroom](docs/Classroom.md)
+ - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq](docs/CreateGeneralAttendanceRecordStudentReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq](docs/CreateSubjectAttendanceRecordStudentReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendanceRecord](docs/DomainsGeneralAttendanceRecord.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsStudent](docs/DomainsStudent.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsStudentMajorClassroom](docs/DomainsStudentMajorClassroom.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsStudentToken](docs/DomainsStudentToken.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsSubject](docs/DomainsSubject.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendanceRecord](docs/DomainsSubjectAttendanceRecord.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DomainsUser](docs/DomainsUser.md)
+ - [com.rizalanggoro.presensigo.openapi.models.DtoStudentAccount](docs/DtoStudentAccount.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GeneralAttendance](docs/GeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsItem](docs/GetAllGeneralAttendanceRecordsItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes](docs/GetAllStudentsByClassroomIdRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes](docs/GetAllStudentsRes.md)
- - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceItemRes](docs/GetAttendanceItemRes.md)
- - [com.rizalanggoro.presensigo.openapi.models.GetAttendanceRes](docs/GetAttendanceRes.md)
- - [com.rizalanggoro.presensigo.openapi.models.GetLatenessRes](docs/GetLatenessRes.md)
- - [com.rizalanggoro.presensigo.openapi.models.ModelsAttendanceStatus](docs/ModelsAttendanceStatus.md)
- - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenTTLReq](docs/RefreshTokenTTLReq.md)
- - [com.rizalanggoro.presensigo.openapi.models.RequestsLogin](docs/RequestsLogin.md)
- - [com.rizalanggoro.presensigo.openapi.models.RequestsLogout](docs/RequestsLogout.md)
- - [com.rizalanggoro.presensigo.openapi.models.RequestsRefreshToken](docs/RequestsRefreshToken.md)
- - [com.rizalanggoro.presensigo.openapi.models.RequestsRegister](docs/RequestsRegister.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem](docs/GetAllSubjectAttendanceRecordsItem.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesItem](docs/GetAllSubjectAttendancesItem.md)
+ - [com.rizalanggoro.presensigo.openapi.models.LoginReq](docs/LoginReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.LoginRes](docs/LoginRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.LoginStudentReq](docs/LoginStudentReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.LoginStudentRes](docs/LoginStudentRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.LogoutReq](docs/LogoutReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.Major](docs/Major.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq](docs/RefreshTokenReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenRes](docs/RefreshTokenRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq](docs/RefreshTokenStudentReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentRes](docs/RefreshTokenStudentRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateClassroom](docs/RequestsCreateClassroom.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateGeneralAttendance](docs/RequestsCreateGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubject](docs/RequestsCreateSubject.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubjectAttendance](docs/RequestsCreateSubjectAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsUpdateClassroom](docs/RequestsUpdateClassroom.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance](docs/RequestsUpdateGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.RequestsUpdateSubject](docs/RequestsUpdateSubject.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesClassroomMajor](docs/ResponsesClassroomMajor.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateClassroom](docs/ResponsesCreateClassroom.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance](docs/ResponsesCreateGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent](docs/ResponsesCreateGeneralAttendanceRecordStudent.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubject](docs/ResponsesCreateSubject.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendance](docs/ResponsesCreateSubjectAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecordStudent](docs/ResponsesCreateSubjectAttendanceRecordStudent.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendance](docs/ResponsesDeleteGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubject](docs/ResponsesDeleteSubject.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesEjectStudentToken](docs/ResponsesEjectStudentToken.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAll](docs/ResponsesGetAll.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllBatches](docs/ResponsesGetAllBatches.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors](docs/ResponsesGetAllClassroomWithMajors.md)
- - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajors](docs/ResponsesGetAllMajors.md)
- - [com.rizalanggoro.presensigo.openapi.models.ResponsesLogin](docs/ResponsesLogin.md)
- - [com.rizalanggoro.presensigo.openapi.models.ResponsesRefreshToken](docs/ResponsesRefreshToken.md)
- - [com.rizalanggoro.presensigo.openapi.models.ResponsesRegister](docs/ResponsesRegister.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomsByMajorId](docs/ResponsesGetAllClassroomsByMajorId.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceRecords](docs/ResponsesGetAllGeneralAttendanceRecords.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendances](docs/ResponsesGetAllGeneralAttendances.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId](docs/ResponsesGetAllMajorsByBatchId.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllStudentAccountsByClassroomId](docs/ResponsesGetAllStudentAccountsByClassroomId.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendanceRecords](docs/ResponsesGetAllSubjectAttendanceRecords.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendances](docs/ResponsesGetAllSubjectAttendances.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjects](docs/ResponsesGetAllSubjects.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllUsers](docs/ResponsesGetAllUsers.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetBatch](docs/ResponsesGetBatch.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetGeneralAttendance](docs/ResponsesGetGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesGetSubjectAttendance](docs/ResponsesGetSubjectAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesImportTeacher](docs/ResponsesImportTeacher.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateClassroom](docs/ResponsesUpdateClassroom.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance](docs/ResponsesUpdateGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateSubject](docs/ResponsesUpdateSubject.md)
+ - [com.rizalanggoro.presensigo.openapi.models.SubjectAttendance](docs/SubjectAttendance.md)
 
 
 <a id="documentation-for-authorization"></a>

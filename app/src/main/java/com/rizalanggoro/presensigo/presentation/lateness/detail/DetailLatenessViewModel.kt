@@ -3,8 +3,6 @@ package com.rizalanggoro.presensigo.presentation.lateness.detail
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
-import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.data.repositories.LatenessRepository
 import com.rizalanggoro.presensigo.domain.Lateness
@@ -27,7 +25,7 @@ class DetailLatenessViewModel(
     private val _state = MutableStateFlow(State())
     val state get() = _state.asStateFlow()
 
-    val params = savedStateHandle.toRoute<Routes.Lateness.Detail.Index>()
+//    val params = savedStateHandle.toRoute<Routes.Lateness.Detail.Index>()
 
     init {
         getLateness()
@@ -35,18 +33,18 @@ class DetailLatenessViewModel(
 
     fun getLateness() = viewModelScope.launch {
         _state.update { it.copy(status = StateStatus.Loading) }
-        latenessRepository.getDetail(latenessId = params.latenessId)
-            .onLeft { result ->
-                _state.update {
-                    it.copy(
-                        status = StateStatus.Success,
-                        lateness = result.lateness,
-                        items = result.items
-                    )
-                }
-            }
-            .onRight {
-                _state.update { it.copy(status = StateStatus.Failure) }
-            }
+//        latenessRepository.getDetail(latenessId = params.latenessId)
+//            .onLeft { result ->
+//                _state.update {
+//                    it.copy(
+//                        status = StateStatus.Success,
+//                        lateness = result.lateness,
+//                        items = result.items
+//                    )
+//                }
+//            }
+//            .onRight {
+//                _state.update { it.copy(status = StateStatus.Failure) }
+//            }
     }
 }

@@ -113,4 +113,13 @@ dependencies {
     // lucide icons for jetpack compose
     implementation("com.composables:icons-lucide:1.0.0")
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
+
+    // zxing
+    implementation("com.google.zxing:core:3.5.3")
+
+    // camera x
+    val camerax_version = "1.5.0-beta02"
+    implementation("androidx.camera:camera-camera2:${camerax_version}")
+    implementation("androidx.camera:camera-view:${camerax_version}")
+    implementation("androidx.camera:camera-lifecycle:${camerax_version}")
 }
