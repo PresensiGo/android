@@ -81,7 +81,7 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = AttendanceApi()
-val body : RequestsCreateGeneralAttendance =  // RequestsCreateGeneralAttendance | body
+val body : CreateGeneralAttendanceReq =  // CreateGeneralAttendanceReq | body
 try {
     val result : ResponsesCreateGeneralAttendance = apiInstance.createGeneralAttendance(body)
     println(result)
@@ -97,7 +97,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**RequestsCreateGeneralAttendance**](RequestsCreateGeneralAttendance.md)| body | |
+| **body** | [**CreateGeneralAttendanceReq**](CreateGeneralAttendanceReq.md)| body | |
 
 ### Return type
 

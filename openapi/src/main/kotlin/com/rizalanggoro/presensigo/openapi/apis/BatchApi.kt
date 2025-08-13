@@ -15,9 +15,9 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsCreate
 import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsUpdate
 import com.rizalanggoro.presensigo.openapi.models.Batch
+import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllBatches
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetBatch
 
@@ -84,7 +84,7 @@ import java.text.DateFormat
          * @return Batch
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createBatch(body: ApiInternalFeaturesBatchDtoRequestsCreate): HttpResponse<Batch> {
+        open suspend fun createBatch(body: CreateGeneralAttendanceReq): HttpResponse<Batch> {
 
             val localVariableAuthNames = listOf<String>()
 

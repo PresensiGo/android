@@ -24,7 +24,7 @@ All URIs are relative to *http://localhost*
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = MajorApi()
-val body : ApiInternalFeaturesMajorDtoRequestsCreate =  // ApiInternalFeaturesMajorDtoRequestsCreate | body
+val body : CreateGeneralAttendanceReq =  // CreateGeneralAttendanceReq | body
 try {
     val result : Major = apiInstance.createMajor(body)
     println(result)
@@ -40,7 +40,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**ApiInternalFeaturesMajorDtoRequestsCreate**](ApiInternalFeaturesMajorDtoRequestsCreate.md)| body | |
+| **body** | [**CreateGeneralAttendanceReq**](CreateGeneralAttendanceReq.md)| body | |
 
 ### Return type
 

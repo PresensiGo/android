@@ -21,18 +21,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param batchId 
- * @param name 
+ * @param datetime 
+ * @param note 
  */
 
 
-data class ApiInternalFeaturesMajorDtoRequestsCreate (
+data class CreateGeneralAttendanceReq (
 
-    @SerializedName("batch_id")
-    val batchId: kotlin.Int,
+    @SerializedName("datetime")
+    val datetime: kotlin.String? = null,
 
-    @SerializedName("name")
-    val name: kotlin.String
+    @SerializedName("note")
+    val note: kotlin.String? = null
 
 ) {
 

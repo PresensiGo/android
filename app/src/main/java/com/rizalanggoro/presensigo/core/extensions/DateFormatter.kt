@@ -29,7 +29,26 @@ fun String.formatDateTime(pattern: String = "EEEE, dd MMMM yyyy"): String {
     }
 }
 
-fun Long.formatDateTime(): String = try {
+fun Long.formatDateTime(pattern: String = "EEEE, dd MMMM yyyy"): String = try {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
+        val instant = Instant.ofEpochMilli(this)
+        val zonedDateTime = instant.atZone(ZoneId.systemDefault())
+
+        val outputFormatter = DateTimeFormatter.ofPattern(
+            pattern,
+            Locale("id", "ID")
+        )
+
+        zonedDateTime.format(outputFormatter).toString()
+    } else {
+        this.toString()
+    }
+} catch (_: Exception) {
+    this.toString()
+}
+
+@Deprecated("use oldFormatDateTime instead")
+fun Long.oldFormatDateTime(): String = try {
     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
         val instant = Instant.ofEpochMilli(this)
         val zonedDateTime = instant.atZone(ZoneId.systemDefault())

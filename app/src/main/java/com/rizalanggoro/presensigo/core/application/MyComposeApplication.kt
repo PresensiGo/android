@@ -9,7 +9,7 @@ import androidx.navigation.compose.rememberNavController
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.domain.TokenType
-import com.rizalanggoro.presensigo.presentation.pages.attendance.general.CreateGeneralAttendanceScreen
+import com.rizalanggoro.presensigo.presentation.pages.attendance.general.create.CreateGeneralAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.DetailGeneralAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.CreateSubjectAttendanceScreen
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.classroom.ClassroomScreen
@@ -38,7 +38,7 @@ fun MyComposeApplication(
                     startDestination = when (isAuthenticated) {
                         true -> when (tokenType) {
                             TokenType.Unset -> Routes.Auth
-                            TokenType.Teacher -> Routes.Home.Teacher
+                            TokenType.Teacher -> Routes.Attendance.General.Create
                             TokenType.Student -> Routes.Home.Student
                         }
 //                        true -> Routes.Attendance.Subject.Detail(

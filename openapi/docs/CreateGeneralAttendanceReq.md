@@ -1,5 +1,5 @@
 
-# RequestsCreateGeneralAttendance
+# CreateGeneralAttendanceReq
 
 ## Properties
 | Name | Type | Description | Notes |

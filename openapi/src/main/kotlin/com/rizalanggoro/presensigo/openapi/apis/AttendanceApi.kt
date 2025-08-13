@@ -16,8 +16,8 @@
 package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq
+import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq
-import com.rizalanggoro.presensigo.openapi.models.RequestsCreateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
@@ -98,7 +98,7 @@ import java.text.DateFormat
          * @return ResponsesCreateGeneralAttendance
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createGeneralAttendance(body: RequestsCreateGeneralAttendance): HttpResponse<ResponsesCreateGeneralAttendance> {
+        open suspend fun createGeneralAttendance(body: CreateGeneralAttendanceReq): HttpResponse<ResponsesCreateGeneralAttendance> {
 
             val localVariableAuthNames = listOf<String>()
 

@@ -93,13 +93,12 @@ All URIs are relative to *http://localhost*
 <a id="documentation-for-models"></a>
 ## Documentation for Models
 
- - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsCreate](docs/ApiInternalFeaturesBatchDtoRequestsCreate.md)
  - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesBatchDtoRequestsUpdate](docs/ApiInternalFeaturesBatchDtoRequestsUpdate.md)
- - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsCreate](docs/ApiInternalFeaturesMajorDtoRequestsCreate.md)
  - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate](docs/ApiInternalFeaturesMajorDtoRequestsUpdate.md)
  - [com.rizalanggoro.presensigo.openapi.models.Batch](docs/Batch.md)
  - [com.rizalanggoro.presensigo.openapi.models.Classroom](docs/Classroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq](docs/CreateGeneralAttendanceRecordStudentReq.md)
+ - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq](docs/CreateGeneralAttendanceReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq](docs/CreateSubjectAttendanceRecordStudentReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendanceRecord](docs/DomainsGeneralAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsStudent](docs/DomainsStudent.md)
@@ -126,7 +125,6 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq](docs/RefreshTokenStudentReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentRes](docs/RefreshTokenStudentRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateClassroom](docs/RequestsCreateClassroom.md)
- - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateGeneralAttendance](docs/RequestsCreateGeneralAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubject](docs/RequestsCreateSubject.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubjectAttendance](docs/RequestsCreateSubjectAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.RequestsUpdateClassroom](docs/RequestsUpdateClassroom.md)

@@ -68,7 +68,7 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = BatchApi()
-val body : ApiInternalFeaturesBatchDtoRequestsCreate =  // ApiInternalFeaturesBatchDtoRequestsCreate | body
+val body : CreateGeneralAttendanceReq =  // CreateGeneralAttendanceReq | body
 try {
     val result : Batch = apiInstance.createBatch(body)
     println(result)
@@ -84,7 +84,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**ApiInternalFeaturesBatchDtoRequestsCreate**](ApiInternalFeaturesBatchDtoRequestsCreate.md)| body | |
+| **body** | [**CreateGeneralAttendanceReq**](CreateGeneralAttendanceReq.md)| body | |
 
 ### Return type
 
