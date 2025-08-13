@@ -56,6 +56,7 @@ fun CreateGeneralAttendanceScreen() {
 
     LaunchedEffect(state.status) {
         if (state.status.isSuccess()) {
+            navController.previousBackStackEntry?.savedStateHandle?.set("success", true)
             navController.popBackStack()
         }
     }

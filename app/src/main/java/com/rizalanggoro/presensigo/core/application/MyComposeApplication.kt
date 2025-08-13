@@ -38,7 +38,7 @@ fun MyComposeApplication(
                     startDestination = when (isAuthenticated) {
                         true -> when (tokenType) {
                             TokenType.Unset -> Routes.Auth
-                            TokenType.Teacher -> Routes.Attendance.General.Create
+                            TokenType.Teacher -> Routes.Home.Teacher
                             TokenType.Student -> Routes.Home.Student
                         }
 //                        true -> Routes.Attendance.Subject.Detail(
