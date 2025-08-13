@@ -5,7 +5,7 @@
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
 | **subject** | [**DomainsSubject**](DomainsSubject.md) |  |  |
-| **subjectAttendance** | [**DomainsSubjectAttendance**](DomainsSubjectAttendance.md) |  |  |
+| **subjectAttendance** | [**SubjectAttendance**](SubjectAttendance.md) |  |  |
 
 
 

@@ -21,7 +21,6 @@ docs/DomainsStudent.md
 docs/DomainsStudentMajorClassroom.md
 docs/DomainsStudentToken.md
 docs/DomainsSubject.md
-docs/DomainsSubjectAttendance.md
 docs/DomainsSubjectAttendanceRecord.md
 docs/DomainsUser.md
 docs/DtoGeneralAttendanceStudentItem.md
@@ -80,6 +79,7 @@ docs/ResponsesUpdateGeneralAttendance.md
 docs/ResponsesUpdateSubject.md
 docs/StudentApi.md
 docs/SubjectApi.md
+docs/SubjectAttendance.md
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 gradlew
@@ -119,7 +119,6 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsStudent.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsStudentMajorClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsStudentToken.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsSubject.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsSubjectAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsSubjectAttendanceRecord.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsUser.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DtoGeneralAttendanceStudentItem.kt
@@ -174,3 +173,4 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesImportTeache
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateGeneralAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateSubject.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/SubjectAttendance.kt

@@ -1,5 +1,5 @@
 
-# DomainsSubjectAttendance
+# SubjectAttendance
 
 ## Properties
 | Name | Type | Description | Notes |

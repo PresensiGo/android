@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendance
+import com.rizalanggoro.presensigo.openapi.models.SubjectAttendance
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponsesGetSubjectAttendance (
 
     @SerializedName("subject_attendance")
-    val subjectAttendance: DomainsSubjectAttendance
+    val subjectAttendance: SubjectAttendance
 
 ) {
 
