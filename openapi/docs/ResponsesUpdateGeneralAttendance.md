@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **generalAttendance** | [**DomainsGeneralAttendance**](DomainsGeneralAttendance.md) |  |  |
+| **generalAttendance** | [**GeneralAttendance**](GeneralAttendance.md) |  |  |
 
 
 

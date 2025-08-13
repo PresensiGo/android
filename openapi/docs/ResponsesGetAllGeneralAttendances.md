@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **generalAttendances** | [**kotlin.collections.List&lt;DomainsGeneralAttendance&gt;**](DomainsGeneralAttendance.md) |  |  |
+| **generalAttendances** | [**kotlin.collections.List&lt;GeneralAttendance&gt;**](GeneralAttendance.md) |  |  |
 
 
 

@@ -12,6 +12,11 @@ object Routes {
         @Serializable
         object General {
             @Serializable
+            data class Detail(
+                val attendanceId: Int
+            )
+
+            @Serializable
             data object Create
         }
 

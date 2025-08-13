@@ -1,5 +1,5 @@
 
-# DomainsGeneralAttendance
+# GeneralAttendance
 
 ## Properties
 | Name | Type | Description | Notes |

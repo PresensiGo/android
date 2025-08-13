@@ -759,7 +759,7 @@
                 "tags": [
                     "attendance"
                 ],
-                "operationId": "getAllGeneralAttendances",
+                "operationId": "GetAllGeneralAttendances",
                 "responses": {
                     "200": {
                         "description": "OK",
@@ -1243,6 +1243,33 @@
                 }
             }
         },
+        "GeneralAttendance": {
+            "type": "object",
+            "required": [
+                "code",
+                "datetime",
+                "id",
+                "note",
+                "school_id"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "datetime": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "note": {
+                    "type": "string"
+                },
+                "school_id": {
+                    "type": "integer"
+                }
+            }
+        },
         "GetAllStudentsByClassroomIdRes": {
             "type": "object",
             "required": [
@@ -1534,33 +1561,6 @@
                 },
                 "name": {
                     "type": "string"
-                }
-            }
-        },
-        "domains.GeneralAttendance": {
-            "type": "object",
-            "required": [
-                "code",
-                "datetime",
-                "id",
-                "note",
-                "school_id"
-            ],
-            "properties": {
-                "code": {
-                    "type": "string"
-                },
-                "datetime": {
-                    "type": "string"
-                },
-                "id": {
-                    "type": "integer"
-                },
-                "note": {
-                    "type": "string"
-                },
-                "school_id": {
-                    "type": "integer"
                 }
             }
         },
@@ -1900,7 +1900,7 @@
             ],
             "properties": {
                 "general_attendance": {
-                    "$ref": "#/definitions/domains.GeneralAttendance"
+                    "$ref": "#/definitions/GeneralAttendance"
                 }
             }
         },
@@ -2057,7 +2057,7 @@
                 "general_attendances": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/domains.GeneralAttendance"
+                        "$ref": "#/definitions/GeneralAttendance"
                     }
                 }
             }
@@ -2164,7 +2164,7 @@
             ],
             "properties": {
                 "general_attendance": {
-                    "$ref": "#/definitions/domains.GeneralAttendance"
+                    "$ref": "#/definitions/GeneralAttendance"
                 }
             }
         },
@@ -2211,7 +2211,7 @@
             ],
             "properties": {
                 "general_attendance": {
-                    "$ref": "#/definitions/domains.GeneralAttendance"
+                    "$ref": "#/definitions/GeneralAttendance"
                 }
             }
         },

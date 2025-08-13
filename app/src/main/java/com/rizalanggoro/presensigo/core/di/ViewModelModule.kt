@@ -12,6 +12,7 @@ import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.major.M
 import com.rizalanggoro.presensigo.presentation.pages.auth.AuthViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.TeacherHomeViewModel
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.general.TeacherHomeGeneralAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting.HomeSettingViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.subject.TeacherHomeSubjectAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.student.StudentViewModel
@@ -31,6 +32,7 @@ val viewModelModule = module {
     // home - teacher
     viewModelOf(::TeacherHomeViewModel)
     viewModelOf(::TeacherHomeSubjectAttendanceViewModel)
+    viewModelOf(::TeacherHomeGeneralAttendanceViewModel)
     viewModelOf(::HomeSettingViewModel)
 
     // home - student

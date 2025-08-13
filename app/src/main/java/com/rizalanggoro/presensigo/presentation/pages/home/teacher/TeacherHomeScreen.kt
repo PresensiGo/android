@@ -68,9 +68,7 @@ fun TeacherHomeScreen() {
     val currentDestination = navBackStackEntry?.destination
 
     Scaffold(
-        contentWindowInsets = WindowInsets(
-            top = 0.dp
-        ),
+        contentWindowInsets = WindowInsets(top = 0.dp),
         bottomBar = {
             NavigationBar {
                 navigationItems.map { item ->
@@ -106,7 +104,7 @@ fun TeacherHomeScreen() {
         NavHost(
             modifier = Modifier.padding(it),
             navController = homeNavController,
-            startDestination = Routes.Home.Teacher.SubjectAttendance
+            startDestination = Routes.Home.Teacher.GeneralAttendance
         ) {
             composable<Routes.Home.Teacher.SubjectAttendance> { TeacherHomeSubjectAttendanceScreen() }
             composable<Routes.Home.Teacher.GeneralAttendance> { TeacherHomeGeneralAttendanceScreen() }

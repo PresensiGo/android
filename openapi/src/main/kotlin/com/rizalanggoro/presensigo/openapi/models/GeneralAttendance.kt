@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class DomainsGeneralAttendance (
+data class GeneralAttendance (
 
     @SerializedName("code")
     val code: kotlin.String,
