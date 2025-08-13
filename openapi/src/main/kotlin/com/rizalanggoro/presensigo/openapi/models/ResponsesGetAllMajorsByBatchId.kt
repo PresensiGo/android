@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsMajor
+import com.rizalanggoro.presensigo.openapi.models.Major
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponsesGetAllMajorsByBatchId (
 
     @SerializedName("majors")
-    val majors: kotlin.collections.List<DomainsMajor>
+    val majors: kotlin.collections.List<Major>
 
 ) {
 

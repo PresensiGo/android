@@ -27,7 +27,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class DomainsMajor (
+data class Major (
 
     @SerializedName("batch_id")
     val batchId: kotlin.Int,

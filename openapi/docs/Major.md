@@ -1,5 +1,5 @@
 
-# DomainsMajor
+# Major
 
 ## Properties
 | Name | Type | Description | Notes |

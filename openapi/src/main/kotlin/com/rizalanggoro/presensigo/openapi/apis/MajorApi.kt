@@ -17,7 +17,7 @@ package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsCreate
 import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate
-import com.rizalanggoro.presensigo.openapi.models.DomainsMajor
+import com.rizalanggoro.presensigo.openapi.models.Major
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
@@ -46,10 +46,10 @@ import java.text.DateFormat
         * 
         * 
          * @param body body 
-         * @return DomainsMajor
+         * @return Major
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createMajor(body: ApiInternalFeaturesMajorDtoRequestsCreate): HttpResponse<DomainsMajor> {
+        open suspend fun createMajor(body: ApiInternalFeaturesMajorDtoRequestsCreate): HttpResponse<Major> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -112,10 +112,10 @@ import java.text.DateFormat
         * GET /api/v1/majors
         * 
         * 
-         * @return kotlin.collections.List<DomainsMajor>
+         * @return kotlin.collections.List<Major>
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllMajors(): HttpResponse<kotlin.collections.List<DomainsMajor>> {
+        open suspend fun getAllMajors(): HttpResponse<kotlin.collections.List<Major>> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -181,10 +181,10 @@ import java.text.DateFormat
         * 
          * @param majorId major id 
          * @param body body 
-         * @return DomainsMajor
+         * @return Major
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun updateMajor(majorId: kotlin.Int, body: ApiInternalFeaturesMajorDtoRequestsUpdate): HttpResponse<DomainsMajor> {
+        open suspend fun updateMajor(majorId: kotlin.Int, body: ApiInternalFeaturesMajorDtoRequestsUpdate): HttpResponse<Major> {
 
             val localVariableAuthNames = listOf<String>()
 

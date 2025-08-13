@@ -13,7 +13,7 @@ All URIs are relative to *http://localhost*
 
 <a id="createMajor"></a>
 # **createMajor**
-> DomainsMajor createMajor(body)
+> Major createMajor(body)
 
 
 
@@ -26,7 +26,7 @@ All URIs are relative to *http://localhost*
 val apiInstance = MajorApi()
 val body : ApiInternalFeaturesMajorDtoRequestsCreate =  // ApiInternalFeaturesMajorDtoRequestsCreate | body
 try {
-    val result : DomainsMajor = apiInstance.createMajor(body)
+    val result : Major = apiInstance.createMajor(body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MajorApi#createMajor")
@@ -44,7 +44,7 @@ try {
 
 ### Return type
 
-[**DomainsMajor**](DomainsMajor.md)
+[**Major**](Major.md)
 
 ### Authorization
 
@@ -101,7 +101,7 @@ No authorization required
 
 <a id="getAllMajors"></a>
 # **getAllMajors**
-> kotlin.collections.List&lt;DomainsMajor&gt; getAllMajors()
+> kotlin.collections.List&lt;Major&gt; getAllMajors()
 
 
 
@@ -113,7 +113,7 @@ No authorization required
 
 val apiInstance = MajorApi()
 try {
-    val result : kotlin.collections.List<DomainsMajor> = apiInstance.getAllMajors()
+    val result : kotlin.collections.List<Major> = apiInstance.getAllMajors()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MajorApi#getAllMajors")
@@ -129,7 +129,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**kotlin.collections.List&lt;DomainsMajor&gt;**](DomainsMajor.md)
+[**kotlin.collections.List&lt;Major&gt;**](Major.md)
 
 ### Authorization
 
@@ -186,7 +186,7 @@ No authorization required
 
 <a id="updateMajor"></a>
 # **updateMajor**
-> DomainsMajor updateMajor(majorId, body)
+> Major updateMajor(majorId, body)
 
 
 
@@ -200,7 +200,7 @@ val apiInstance = MajorApi()
 val majorId : kotlin.Int = 56 // kotlin.Int | major id
 val body : ApiInternalFeaturesMajorDtoRequestsUpdate =  // ApiInternalFeaturesMajorDtoRequestsUpdate | body
 try {
-    val result : DomainsMajor = apiInstance.updateMajor(majorId, body)
+    val result : Major = apiInstance.updateMajor(majorId, body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MajorApi#updateMajor")
@@ -219,7 +219,7 @@ try {
 
 ### Return type
 
-[**DomainsMajor**](DomainsMajor.md)
+[**Major**](Major.md)
 
 ### Authorization
 
