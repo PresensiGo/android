@@ -67,10 +67,10 @@ All URIs are relative to *http://localhost*
 | *BatchApi* | [**getAllBatches**](docs/BatchApi.md#getallbatches) | **GET** /api/v1/batches |  |
 | *BatchApi* | [**updateBatch**](docs/BatchApi.md#updatebatch) | **PUT** /api/v1/batches/{batch_id} |  |
 | *ClassroomApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut**](docs/ClassroomApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidput) | **PUT** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id} |  |
-| *ClassroomApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsGet**](docs/ClassroomApi.md#apiv1batchesbatchidmajorsmajoridclassroomsget) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | *ClassroomApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsPost**](docs/ClassroomApi.md#apiv1batchesbatchidmajorsmajoridclassroomspost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | *ClassroomApi* | [**getAllClassroomWithMajors**](docs/ClassroomApi.md#getallclassroomwithmajors) | **GET** /api/v1/classrooms/batches/{batch_id} |  |
 | *ClassroomApi* | [**getAllClassrooms**](docs/ClassroomApi.md#getallclassrooms) | **GET** /api/v1/classrooms |  |
+| *ClassroomApi* | [**getAllClassroomsByMajorId**](docs/ClassroomApi.md#getallclassroomsbymajorid) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | *DefaultApi* | [**apiV1TeachersImportPost**](docs/DefaultApi.md#apiv1teachersimportpost) | **POST** /api/v1/teachers/import |  |
 | *MajorApi* | [**createMajor**](docs/MajorApi.md#createmajor) | **POST** /api/v1/majors |  |
 | *MajorApi* | [**deleteMajor**](docs/MajorApi.md#deletemajor) | **DELETE** /api/v1/majors/{major_id} |  |
@@ -98,9 +98,9 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsCreate](docs/ApiInternalFeaturesMajorDtoRequestsCreate.md)
  - [com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate](docs/ApiInternalFeaturesMajorDtoRequestsUpdate.md)
  - [com.rizalanggoro.presensigo.openapi.models.Batch](docs/Batch.md)
+ - [com.rizalanggoro.presensigo.openapi.models.Classroom](docs/Classroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq](docs/CreateGeneralAttendanceRecordStudentReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq](docs/CreateSubjectAttendanceRecordStudentReq.md)
- - [com.rizalanggoro.presensigo.openapi.models.DomainsClassroom](docs/DomainsClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendance](docs/DomainsGeneralAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendanceRecord](docs/DomainsGeneralAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsStudent](docs/DomainsStudent.md)

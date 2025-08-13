@@ -5,10 +5,10 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut**](ClassroomApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut) | **PUT** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id} |  |
-| [**apiV1BatchesBatchIdMajorsMajorIdClassroomsGet**](ClassroomApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsGet) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsPost**](ClassroomApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsPost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | [**getAllClassroomWithMajors**](ClassroomApi.md#getAllClassroomWithMajors) | **GET** /api/v1/classrooms/batches/{batch_id} |  |
 | [**getAllClassrooms**](ClassroomApi.md#getAllClassrooms) | **GET** /api/v1/classrooms |  |
+| [**getAllClassroomsByMajorId**](ClassroomApi.md#getAllClassroomsByMajorId) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 
 
 <a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut"></a>
@@ -53,54 +53,6 @@ try {
 ### Return type
 
 [**ResponsesUpdateClassroom**](ResponsesUpdateClassroom.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
-
-<a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsGet"></a>
-# **apiV1BatchesBatchIdMajorsMajorIdClassroomsGet**
-> ResponsesGetAllClassroomsByMajorId apiV1BatchesBatchIdMajorsMajorIdClassroomsGet(batchId, majorId, majorId2)
-
-
-
-### Example
-```kotlin
-// Import classes:
-//import com.rizalanggoro.presensigo.openapi.infrastructure.*
-//import com.rizalanggoro.presensigo.openapi.models.*
-
-val apiInstance = ClassroomApi()
-val batchId : kotlin.Int = 56 // kotlin.Int | batch id
-val majorId : kotlin.Int = 56 // kotlin.Int | major id
-val majorId2 : kotlin.Int = 56 // kotlin.Int | major id
-try {
-    val result : ResponsesGetAllClassroomsByMajorId = apiInstance.apiV1BatchesBatchIdMajorsMajorIdClassroomsGet(batchId, majorId, majorId2)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling ClassroomApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsGet")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling ClassroomApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsGet")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-| **batchId** | **kotlin.Int**| batch id | |
-| **majorId** | **kotlin.Int**| major id | |
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **majorId2** | **kotlin.Int**| major id | |
-
-### Return type
-
-[**ResponsesGetAllClassroomsByMajorId**](ResponsesGetAllClassroomsByMajorId.md)
 
 ### Authorization
 
@@ -236,6 +188,52 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ResponsesGetAll**](ResponsesGetAll.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getAllClassroomsByMajorId"></a>
+# **getAllClassroomsByMajorId**
+> ResponsesGetAllClassroomsByMajorId getAllClassroomsByMajorId(batchId, majorId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = ClassroomApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+try {
+    val result : ResponsesGetAllClassroomsByMajorId = apiInstance.getAllClassroomsByMajorId(batchId, majorId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling ClassroomApi#getAllClassroomsByMajorId")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling ClassroomApi#getAllClassroomsByMajorId")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **majorId** | **kotlin.Int**| major id | |
+
+### Return type
+
+[**ResponsesGetAllClassroomsByMajorId**](ResponsesGetAllClassroomsByMajorId.md)
 
 ### Authorization
 

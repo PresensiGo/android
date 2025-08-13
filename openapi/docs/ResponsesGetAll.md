@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **classrooms** | [**kotlin.collections.List&lt;DomainsClassroom&gt;**](DomainsClassroom.md) |  |  |
+| **classrooms** | [**kotlin.collections.List&lt;Classroom&gt;**](Classroom.md) |  |  |
 
 
 

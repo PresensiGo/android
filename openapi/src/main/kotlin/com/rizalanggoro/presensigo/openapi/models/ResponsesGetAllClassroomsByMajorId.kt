@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsClassroom
+import com.rizalanggoro.presensigo.openapi.models.Classroom
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponsesGetAllClassroomsByMajorId (
 
     @SerializedName("classrooms")
-    val classrooms: kotlin.collections.List<DomainsClassroom>
+    val classrooms: kotlin.collections.List<Classroom>
 
 ) {
 

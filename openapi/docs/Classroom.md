@@ -1,5 +1,5 @@
 
-# DomainsClassroom
+# Classroom
 
 ## Properties
 | Name | Type | Description | Notes |

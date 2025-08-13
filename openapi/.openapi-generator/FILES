@@ -10,11 +10,11 @@ docs/AttendanceApi.md
 docs/AuthApi.md
 docs/Batch.md
 docs/BatchApi.md
+docs/Classroom.md
 docs/ClassroomApi.md
 docs/CreateGeneralAttendanceRecordStudentReq.md
 docs/CreateSubjectAttendanceRecordStudentReq.md
 docs/DefaultApi.md
-docs/DomainsClassroom.md
 docs/DomainsGeneralAttendance.md
 docs/DomainsGeneralAttendanceRecord.md
 docs/DomainsStudent.md
@@ -110,9 +110,9 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ApiInternalFeaturesBa
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ApiInternalFeaturesMajorDtoRequestsCreate.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ApiInternalFeaturesMajorDtoRequestsUpdate.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/Batch.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/Classroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateGeneralAttendanceRecordStudentReq.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateSubjectAttendanceRecordStudentReq.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsGeneralAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsGeneralAttendanceRecord.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsStudent.kt

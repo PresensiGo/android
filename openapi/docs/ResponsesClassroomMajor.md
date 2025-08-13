@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **classroom** | [**DomainsClassroom**](DomainsClassroom.md) |  |  |
+| **classroom** | [**Classroom**](Classroom.md) |  |  |
 | **major** | [**Major**](Major.md) |  |  |
 
 

@@ -334,18 +334,12 @@
                 "tags": [
                     "classroom"
                 ],
+                "operationId": "getAllClassroomsByMajorId",
                 "parameters": [
                     {
                         "type": "integer",
                         "description": "batch id",
                         "name": "batch_id",
-                        "in": "path",
-                        "required": true
-                    },
-                    {
-                        "type": "integer",
-                        "description": "major id",
-                        "name": "major_id",
                         "in": "path",
                         "required": true
                     },
@@ -1460,7 +1454,7 @@
                 }
             }
         },
-        "domains.Classroom": {
+        "classroom": {
             "type": "object",
             "required": [
                 "id",
@@ -1565,7 +1559,7 @@
             ],
             "properties": {
                 "classroom": {
-                    "$ref": "#/definitions/domains.Classroom"
+                    "$ref": "#/definitions/classroom"
                 },
                 "major": {
                     "$ref": "#/definitions/major"
@@ -1878,7 +1872,7 @@
             ],
             "properties": {
                 "classroom": {
-                    "$ref": "#/definitions/domains.Classroom"
+                    "$ref": "#/definitions/classroom"
                 },
                 "major": {
                     "$ref": "#/definitions/major"
@@ -1892,7 +1886,7 @@
             ],
             "properties": {
                 "classroom": {
-                    "$ref": "#/definitions/domains.Classroom"
+                    "$ref": "#/definitions/classroom"
                 }
             }
         },
@@ -1990,7 +1984,7 @@
                 "classrooms": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/domains.Classroom"
+                        "$ref": "#/definitions/classroom"
                     }
                 }
             }
@@ -2032,7 +2026,7 @@
                 "classrooms": {
                     "type": "array",
                     "items": {
-                        "$ref": "#/definitions/domains.Classroom"
+                        "$ref": "#/definitions/classroom"
                     }
                 }
             }
@@ -2203,7 +2197,7 @@
             ],
             "properties": {
                 "classroom": {
-                    "$ref": "#/definitions/domains.Classroom"
+                    "$ref": "#/definitions/classroom"
                 }
             }
         },
