@@ -28,9 +28,9 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 import com.rizalanggoro.presensigo.core.Routes
-import com.rizalanggoro.presensigo.presentation.pages.home.teacher.attendance.HomeAttendanceScreen
-import com.rizalanggoro.presensigo.presentation.pages.home.teacher.lateness.HomeLatenessScreen
-import com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting.HomeSettingScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.general.TeacherHomeGeneralAttendanceScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting.TeacherHomeSettingScreen
+import com.rizalanggoro.presensigo.presentation.pages.home.teacher.subject.TeacherHomeSubjectAttendanceScreen
 
 private data class NavigationItem<T : Any>(
     val title: String,
@@ -41,28 +41,28 @@ private data class NavigationItem<T : Any>(
 
 private val navigationItems = listOf(
     NavigationItem(
-        title = "Presensi",
+        title = "Mata Pelajaran",
         icon = Icons.Outlined.Checklist,
         iconSelected = Icons.Filled.Checklist,
-        route = Routes.Home.Attendance
+        route = Routes.Home.Teacher.SubjectAttendance
     ),
     NavigationItem(
-        title = "Keterlambatan",
+        title = "Kehadiran",
         icon = Icons.Outlined.MoreTime,
         iconSelected = Icons.Filled.MoreTime,
-        route = Routes.Home.Lateness
+        route = Routes.Home.Teacher.GeneralAttendance
     ),
     NavigationItem(
         title = "Pengaturan",
         icon = Icons.Outlined.Settings,
         iconSelected = Icons.Filled.Settings,
-        route = Routes.Home.Setting
+        route = Routes.Home.Teacher.Setting
     )
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeScreen() {
+fun TeacherHomeScreen() {
     val homeNavController = rememberNavController()
     val navBackStackEntry by homeNavController.currentBackStackEntryAsState()
     val currentDestination = navBackStackEntry?.destination
@@ -106,11 +106,11 @@ fun HomeScreen() {
         NavHost(
             modifier = Modifier.padding(it),
             navController = homeNavController,
-            startDestination = Routes.Home.Attendance
+            startDestination = Routes.Home.Teacher.SubjectAttendance
         ) {
-            composable<Routes.Home.Attendance> { HomeAttendanceScreen() }
-            composable<Routes.Home.Lateness> { HomeLatenessScreen() }
-            composable<Routes.Home.Setting> { HomeSettingScreen() }
+            composable<Routes.Home.Teacher.SubjectAttendance> { TeacherHomeSubjectAttendanceScreen() }
+            composable<Routes.Home.Teacher.GeneralAttendance> { TeacherHomeGeneralAttendanceScreen() }
+            composable<Routes.Home.Teacher.Setting> { TeacherHomeSettingScreen() }
         }
     }
 }

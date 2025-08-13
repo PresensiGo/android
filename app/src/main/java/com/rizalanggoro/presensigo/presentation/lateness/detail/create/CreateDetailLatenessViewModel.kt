@@ -3,8 +3,6 @@ package com.rizalanggoro.presensigo.presentation.lateness.detail.create
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import androidx.navigation.toRoute
-import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.data.repositories.LatenessRepository
 import com.rizalanggoro.presensigo.data.repositories.StudentRepository
@@ -57,7 +55,7 @@ class CreateDetailLatenessViewModel(
             initialValue = emptyList()
         )
 
-    val params = savedStateHandle.toRoute<Routes.Lateness.Detail.Create>()
+//    val params = savedStateHandle.toRoute<Routes.Lateness.Detail.Create>()
 
     fun resetState() = _state.update {
         it.copy(
@@ -103,15 +101,15 @@ class CreateDetailLatenessViewModel(
                 status = StateStatus.Loading
             )
         }
-        latenessRepository.createDetail(
-            latenessId = params.latenessId,
-            studentIds = state.value.selectedStudentIds,
-        )
-            .onLeft {
-                _state.update { it.copy(status = StateStatus.Success) }
-            }
-            .onRight {
-                _state.update { it.copy(status = StateStatus.Failure) }
-            }
+//        latenessRepository.createDetail(
+//            latenessId = params.latenessId,
+//            studentIds = state.value.selectedStudentIds,
+//        )
+//            .onLeft {
+//                _state.update { it.copy(status = StateStatus.Success) }
+//            }
+//            .onRight {
+//                _state.update { it.copy(status = StateStatus.Failure) }
+//            }
     }
 }

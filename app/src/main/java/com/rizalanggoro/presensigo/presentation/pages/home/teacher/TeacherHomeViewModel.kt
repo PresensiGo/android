@@ -4,7 +4,7 @@ import androidx.lifecycle.ViewModel
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.data.repositories.BatchRepository
 
-class HomeViewModel(
+class TeacherHomeViewModel(
     private val batchRepository: BatchRepository,
     private val tokenManager: TokenManager
 ) : ViewModel() {

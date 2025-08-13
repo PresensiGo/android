@@ -43,7 +43,6 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.BuildConfig
-import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
@@ -53,7 +52,7 @@ import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun HomeSettingScreen() {
+fun TeacherHomeSettingScreen() {
     val viewModel = koinViewModel<HomeSettingViewModel>()
     val state by viewModel.state.collectAsState()
 
@@ -69,9 +68,9 @@ fun HomeSettingScreen() {
                 State.Action.Logout -> {
                     if (status.isSuccess()) {
                         isLogoutDialogOpen = false
-                        navController.navigate(Routes.Auth) {
-                            popUpTo<Routes.Home> { inclusive = true }
-                        }
+//                        navController.navigate(Routes.Auth) {
+//                            popUpTo<Routes.TeacherHome> { inclusive = true }
+//                        }
                     }
                 }
 

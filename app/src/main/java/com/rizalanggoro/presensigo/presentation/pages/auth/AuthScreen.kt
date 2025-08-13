@@ -47,9 +47,15 @@ fun AuthScreen() {
     val navController = LocalNavController.current
     val context = LocalContext.current
 
+
+    var isLoginAsTeacher by remember { mutableStateOf(false) }
+
     LaunchedEffect(state.status) {
         if (state.status.isSuccess())
-            navController.navigate(Routes.Home) {
+            navController.navigate(
+                if (isLoginAsTeacher) Routes.Home.Teacher
+                else Routes.Home.Student
+            ) {
                 popUpTo<Routes.Auth> {
                     inclusive = true
                 }
@@ -57,8 +63,6 @@ fun AuthScreen() {
         else if (state.status.isFailure())
             Toast.makeText(context, state.message, Toast.LENGTH_SHORT).show()
     }
-
-    var isLoginAsTeacher by remember { mutableStateOf(false) }
 
     var nis by remember { mutableStateOf("130603") }
     var schoolCode by remember { mutableStateOf("SMAP001") }
@@ -90,23 +94,22 @@ fun AuthScreen() {
                 )
             }
 
-            Column(modifier = Modifier.padding(horizontal = 16.dp)) {
+            Column(
+                modifier = Modifier.padding(horizontal = 16.dp),
+                verticalArrangement = Arrangement.spacedBy(8.dp)
+            ) {
                 if (isLoginAsTeacher) {
                     TextField(
                         value = email,
                         onValueChange = { email = it },
                         placeholder = { Text("Masukkan Alamat Email") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 8.dp)
+                        modifier = Modifier.fillMaxWidth()
                     )
                     TextField(
                         value = password,
                         onValueChange = { password = it },
                         placeholder = { Text("Masukkan Kata Sandi") },
-                        modifier = Modifier
-                            .fillMaxWidth()
-                            .padding(top = 8.dp)
+                        modifier = Modifier.fillMaxWidth()
                     )
                 } else {
                     TextField(

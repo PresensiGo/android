@@ -43,6 +43,7 @@ class AuthViewModel(
     fun loginStudent(nis: String, schoolCode: String) = viewModelScope.launch {
         try {
             _state.update { it.copy(status = StateStatus.Loading) }
+
             val androidId = Settings.Secure.getString(
                 application.contentResolver,
                 Settings.Secure.ANDROID_ID
@@ -63,6 +64,7 @@ class AuthViewModel(
                     refreshToken = body.refreshToken
                 )
             )
+
             _state.update { it.copy(status = StateStatus.Success) }
         } catch (e: ResponseException) {
             e.printStackTrace()
@@ -73,26 +75,52 @@ class AuthViewModel(
                     message = e.response.bodyAsText().toFailure().message
                 )
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+            _state.update {
+                it.copy(
+                    status = StateStatus.Failure,
+                    message = "Terjadi kesalahan tak terduga!"
+                )
+            }
         }
     }
 
     fun loginTeacher(email: String, password: String) = viewModelScope.launch {
-        _state.update { it.copy(status = StateStatus.Loading) }
-        val response = authApi.login(LoginReq(email = email, password = password))
-        when (response.success) {
-            true -> {
-                val body = response.body()
-                tokenManager.set(
-                    Token(
-                        tokenType = TokenType.Teacher,
-                        accessToken = body.accessToken,
-                        refreshToken = body.refreshToken
-                    )
-                )
-                _state.update { it.copy(status = StateStatus.Success) }
-            }
+        try {
+            _state.update { it.copy(status = StateStatus.Loading) }
 
-            else -> _state.update { it.copy(status = StateStatus.Failure) }
+            val response = authApi.login(LoginReq(email = email, password = password))
+            val body = response.body()
+
+            tokenManager.set(
+                Token(
+                    tokenType = TokenType.Teacher,
+                    accessToken = body.accessToken,
+                    refreshToken = body.refreshToken
+                )
+            )
+
+            _state.update { it.copy(status = StateStatus.Success) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+
+            _state.update {
+                it.copy(
+                    status = StateStatus.Failure,
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+
+            _state.update {
+                it.copy(
+                    status = StateStatus.Failure,
+                    message = "Terjadi kesalahan tak terduga!"
+                )
+            }
         }
     }
 }

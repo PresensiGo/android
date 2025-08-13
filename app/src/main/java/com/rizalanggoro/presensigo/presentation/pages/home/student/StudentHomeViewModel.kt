@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
 import com.rizalanggoro.presensigo.core.constants.StateStatus
+import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.QrData
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq
@@ -22,6 +23,7 @@ data class State(
 class StudentHomeViewModel(
     savedStateHandle: SavedStateHandle,
     private val attendanceApi: AttendanceApi,
+    private val tokenManager: TokenManager
 ) : ViewModel() {
     private val _state = MutableStateFlow(State())
     val state get() = _state.asStateFlow()
@@ -55,5 +57,9 @@ class StudentHomeViewModel(
             e.printStackTrace()
             _state.update { it.copy(status = StateStatus.Failure) }
         }
+    }
+
+    fun logout() = viewModelScope.launch {
+        tokenManager.clear()
     }
 }

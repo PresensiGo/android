@@ -36,7 +36,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.domain.combined.StudentMajorClassroom
@@ -74,11 +73,11 @@ fun DetailLatenessScreen() {
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
-                    navController.navigate(
-                        Routes.Lateness.Detail.Create(
-                            latenessId = viewModel.params.latenessId
-                        )
-                    )
+//                    navController.navigate(
+//                        Routes.Lateness.Detail.Create(
+//                            latenessId = viewModel.params.latenessId
+//                        )
+//                    )
                 }
             ) {
                 Icon(Icons.Rounded.PersonAdd, contentDescription = null)
