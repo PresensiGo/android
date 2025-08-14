@@ -6,7 +6,8 @@ on:
 
 jobs:
   build:
-    runs-on: ubuntu-latest
+    # runs-on: ubuntu-latest
+    runs-on: self-hosted
     
     permissions:
       contents: write
@@ -48,16 +49,23 @@ jobs:
           KEY_ALIAS: ${{ secrets.KEY_ALIAS }}
           KEY_PASSWORD: ${{ secrets.KEY_PASSWORD }}
 
-      - name: Create Release using gh CLI
-        env:
-          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
-        run: |
-          TAG_NAME="build-${{ steps.date_and_hash.outputs.date }}-${{ steps.date_and_hash.outputs.hash }}"
-          RELEASE_NAME="Continuous Integration Build"
+      # - name: Create Release using gh CLI
+      #   env:
+      #     GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+      #   run: |
+      #     TAG_NAME="build-${{ steps.date_and_hash.outputs.date }}-${{ steps.date_and_hash.outputs.hash }}"
+      #     RELEASE_NAME="Continuous Integration Build"
           
-          gh release create "$TAG_NAME" \
-            --repo "$GITHUB_REPOSITORY" \
-            --title "$RELEASE_NAME" \
-            --notes "Automated release from commit ${{ github.sha }}" \
-            --target "$GITHUB_SHA" \
-            "app/build/outputs/apk/release/*.apk"
+      #     gh release create "$TAG_NAME" \
+      #       --repo "$GITHUB_REPOSITORY" \
+      #       --title "$RELEASE_NAME" \
+      #       --notes "Automated release from commit ${{ github.sha }}" \
+      #       --target "$GITHUB_SHA" \
+      #       "app/build/outputs/apk/release/*.apk"
+
+      - name: Move APK to Local VPS Directory
+        run: |
+          APK_PATH=$(find app/build/outputs/apk/release/ -name "*.apk")
+          DESTINATION_PATH="/home/presensigo"
+          mkdir -p "$DESTINATION_PATH"
+          mv "$APK_PATH" "$DESTINATION_PATH"
