@@ -1,14 +1,17 @@
 package com.rizalanggoro.presensigo.presentation.pages.home.teacher.general
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.WindowInsets
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.QrCode
@@ -19,13 +22,13 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
-import androidx.compose.material3.TopAppBar
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.clip
 import androidx.compose.ui.text.style.TextOverflow
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -53,10 +56,8 @@ fun TeacherHomeGeneralAttendanceScreen() {
     }
 
     Scaffold(
+        containerColor = MaterialTheme.colorScheme.primaryContainer,
         contentWindowInsets = WindowInsets.statusBars,
-        topBar = {
-            TopAppBar(title = { Text("Presensi Kehadiran") })
-        },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -67,17 +68,44 @@ fun TeacherHomeGeneralAttendanceScreen() {
             }
         }
     ) {
-        LazyColumn(
+        Column(
             modifier = Modifier.padding(it),
-            verticalArrangement = Arrangement.spacedBy(4.dp)
         ) {
-            items(state.attendances) {
-                AttendanceItem(data = it) {
-                    navController.navigate(
-                        Routes.Attendance.General.Detail(
-                            attendanceId = it.id
-                        )
-                    )
+            // top bar
+            Column(modifier = Modifier.padding(24.dp)) {
+                Text(
+                    "Presensi Kehadiran",
+                    style = MaterialTheme.typography.titleLarge,
+                    color = MaterialTheme.colorScheme.onPrimary
+                )
+                Text(
+                    "Senin, 12 Agustus 2021",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onPrimaryContainer
+                )
+            }
+
+            // content
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .weight(1f)
+                    .clip(RoundedCornerShape(topEnd = 24.dp, topStart = 24.dp))
+                    .background(MaterialTheme.colorScheme.background)
+                    .padding(24.dp),
+            ) {
+                LazyColumn(
+                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                ) {
+                    items(state.attendances) {
+                        AttendanceItem(data = it) {
+                            navController.navigate(
+                                Routes.Attendance.General.Detail(
+                                    attendanceId = it.id
+                                )
+                            )
+                        }
+                    }
                 }
             }
         }

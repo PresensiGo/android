@@ -112,7 +112,7 @@ fun TeacherHomeScreen() {
         NavHost(
             modifier = Modifier.padding(it),
             navController = homeNavController,
-            startDestination = Routes.Home.Teacher.SubjectAttendance
+            startDestination = Routes.Home.Teacher.GeneralAttendance
         ) {
             composable<Routes.Home.Teacher.SubjectAttendance> { TeacherHomeSubjectAttendanceScreen() }
             composable<Routes.Home.Teacher.GeneralAttendance> { TeacherHomeGeneralAttendanceScreen() }
