@@ -49,7 +49,8 @@ fun MyComposeApplication(
 //                        )
 
 //                        else -> Routes.Auth
-                        else -> Routes.Home.Teacher
+//                        else -> Routes.Home.Teacher
+                        else -> Routes.Attendance.General.Create
                     }
                 ) {
                     // auth
