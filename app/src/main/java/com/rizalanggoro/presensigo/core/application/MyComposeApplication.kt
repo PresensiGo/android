@@ -48,7 +48,8 @@ fun MyComposeApplication(
 ////                            attendanceId = 1
 //                        )
 
-                        else -> Routes.Auth
+//                        else -> Routes.Auth
+                        else -> Routes.Home.Teacher
                     }
                 ) {
                     // auth

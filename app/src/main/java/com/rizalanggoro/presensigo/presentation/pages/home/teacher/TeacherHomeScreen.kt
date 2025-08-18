@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.presentation.pages.home.teacher
 
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.WindowInsets
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
@@ -10,7 +11,9 @@ import androidx.compose.material.icons.outlined.Checklist
 import androidx.compose.material.icons.outlined.MoreTime
 import androidx.compose.material.icons.outlined.Settings
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.NavigationBar
 import androidx.compose.material3.NavigationBarItem
 import androidx.compose.material3.Scaffold
@@ -70,33 +73,38 @@ fun TeacherHomeScreen() {
     Scaffold(
         contentWindowInsets = WindowInsets(top = 0.dp),
         bottomBar = {
-            NavigationBar {
-                navigationItems.map { item ->
-                    val isSelected = currentDestination?.hierarchy?.any {
-                        it.hasRoute(item.route::class)
-                    } == true
+            Column {
+                HorizontalDivider()
+                NavigationBar(
+                    containerColor = MaterialTheme.colorScheme.background
+                ) {
+                    navigationItems.map { item ->
+                        val isSelected = currentDestination?.hierarchy?.any {
+                            it.hasRoute(item.route::class)
+                        } == true
 
-                    NavigationBarItem(
-                        selected = isSelected,
-                        onClick = {
-                            homeNavController.navigate(item.route) {
-                                popUpTo(homeNavController.graph.findStartDestination().id) {
-                                    saveState = true
+                        NavigationBarItem(
+                            selected = isSelected,
+                            onClick = {
+                                homeNavController.navigate(item.route) {
+                                    popUpTo(homeNavController.graph.findStartDestination().id) {
+                                        saveState = true
+                                    }
+                                    launchSingleTop = true
+                                    restoreState = true
                                 }
-                                launchSingleTop = true
-                                restoreState = true
-                            }
-                        },
-                        icon = {
-                            Icon(
-                                when (isSelected) {
-                                    true -> item.iconSelected
-                                    else -> item.icon
-                                }, contentDescription = null
-                            )
-                        },
-                        label = { Text(item.title) }
-                    )
+                            },
+                            icon = {
+                                Icon(
+                                    when (isSelected) {
+                                        true -> item.iconSelected
+                                        else -> item.icon
+                                    }, contentDescription = null
+                                )
+                            },
+                            label = { Text(item.title) }
+                        )
+                    }
                 }
             }
         }
