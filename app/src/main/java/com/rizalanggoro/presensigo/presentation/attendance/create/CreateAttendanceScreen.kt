@@ -23,7 +23,6 @@ import androidx.compose.material3.DatePicker
 import androidx.compose.material3.DatePickerDialog
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
-import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
@@ -47,15 +46,6 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.Dialog
-import com.composables.icons.lucide.ArrowLeft
-import com.composables.icons.lucide.Box
-import com.composables.icons.lucide.Calendar
-import com.composables.icons.lucide.Check
-import com.composables.icons.lucide.CheckCheck
-import com.composables.icons.lucide.ChevronRight
-import com.composables.icons.lucide.Lucide
-import com.composables.icons.lucide.RefreshCw
-import com.composables.icons.lucide.User
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.constants.isLoading
@@ -100,21 +90,21 @@ fun CreateAttendanceScreen() {
                 TopAppBar(
                     navigationIcon = {
                         IconButton(onClick = { navController.popBackStack() }) {
-                            Icon(
-                                Lucide.ArrowLeft,
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp)
-                            )
+//                            Icon(
+//                                Lucide.ArrowLeft,
+//                                contentDescription = null,
+//                                modifier = Modifier.size(20.dp)
+//                            )
                         }
                     },
                     title = { Text("Kehadiran Baru") },
                     actions = {
                         IconButton(onClick = { viewModel.getAllStudents() }) {
-                            Icon(
-                                Lucide.RefreshCw,
-                                contentDescription = null,
-                                modifier = Modifier.size(20.dp)
-                            )
+//                            Icon(
+//                                Lucide.RefreshCw,
+//                                contentDescription = null,
+//                                modifier = Modifier.size(20.dp)
+//                            )
                         }
                     }
                 )
@@ -158,11 +148,11 @@ fun CreateAttendanceScreen() {
                     ) {
                         TextButton(onClick = { viewModel.changeSelectedAll(!isSelectedAll) }) {
                             Row(horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-                                Icon(
-                                    Lucide.CheckCheck,
-                                    contentDescription = null,
-                                    modifier = Modifier.size(20.dp)
-                                )
+//                                Icon(
+//                                    Lucide.CheckCheck,
+//                                    contentDescription = null,
+//                                    modifier = Modifier.size(20.dp)
+//                                )
                                 Text(
                                     when (isSelectedAll) {
                                         true -> "Hapus pilihan"
@@ -201,12 +191,12 @@ fun CreateAttendanceScreen() {
                             Alignment.CenterVertically
                         )
                     ) {
-                        Icon(
-                            Lucide.Box,
-                            contentDescription = null,
-                            modifier = Modifier.size(96.dp),
-                            tint = MaterialTheme.colorScheme.outlineVariant
-                        )
+//                        Icon(
+//                            Lucide.Box,
+//                            contentDescription = null,
+//                            modifier = Modifier.size(96.dp),
+//                            tint = MaterialTheme.colorScheme.outlineVariant
+//                        )
                         Text(
                             "Belum ada siswa dalam daftar ${state.selectedFilter.title.lowercase()}",
                             style = MaterialTheme.typography.bodyMedium
@@ -241,20 +231,20 @@ fun CreateAttendanceScreen() {
                                             )
 
                                     ) {
-                                        Icon(
-                                            when (isSelected) {
-                                                true -> Lucide.Check
-                                                else -> Lucide.User
-                                            },
-                                            contentDescription = null,
-                                            modifier = Modifier
-                                                .align(Alignment.Center)
-                                                .size(20.dp),
-                                            tint = when (isSelected) {
-                                                true -> MaterialTheme.colorScheme.onPrimary
-                                                else -> MaterialTheme.colorScheme.onPrimaryContainer
-                                            }
-                                        )
+//                                        Icon(
+//                                            when (isSelected) {
+//                                                true -> Lucide.Check
+//                                                else -> Lucide.User
+//                                            },
+//                                            contentDescription = null,
+//                                            modifier = Modifier
+//                                                .align(Alignment.Center)
+//                                                .size(20.dp),
+//                                            tint = when (isSelected) {
+//                                                true -> MaterialTheme.colorScheme.onPrimary
+//                                                else -> MaterialTheme.colorScheme.onPrimaryContainer
+//                                            }
+//                                        )
                                     }
                                 },
                                 headlineContent = { Text(item.student.name) },
@@ -280,14 +270,14 @@ fun CreateAttendanceScreen() {
                                 .background(MaterialTheme.colorScheme.primaryContainer)
                                 .size(40.dp)
                         ) {
-                            Icon(
-                                Lucide.Calendar,
-                                contentDescription = null,
-                                modifier = Modifier
-                                    .size(20.dp)
-                                    .align(Alignment.Center),
-                                tint = MaterialTheme.colorScheme.onPrimaryContainer
-                            )
+//                            Icon(
+//                                Lucide.Calendar,
+//                                contentDescription = null,
+//                                modifier = Modifier
+//                                    .size(20.dp)
+//                                    .align(Alignment.Center),
+//                                tint = MaterialTheme.colorScheme.onPrimaryContainer
+//                            )
                         }
                     },
                     headlineContent = { Text("Tanggal") },
@@ -300,11 +290,11 @@ fun CreateAttendanceScreen() {
                         })
                     },
                     trailingContent = {
-                        Icon(
-                            Lucide.ChevronRight,
-                            contentDescription = null,
-                            modifier = Modifier.size(20.dp)
-                        )
+//                        Icon(
+//                            Lucide.ChevronRight,
+//                            contentDescription = null,
+//                            modifier = Modifier.size(20.dp)
+//                        )
                     },
                     modifier = Modifier
                         .padding(top = 8.dp)
