@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.core.application
 
+import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
@@ -49,8 +50,28 @@ fun MyComposeApplication(
 //                        )
 
 //                        else -> Routes.Auth
-//                        else -> Routes.Home.Teacher
-                        else -> Routes.Attendance.General.Create
+                        else -> Routes.Home.Teacher
+//                        else -> Routes.Attendance.General.Create
+                    },
+                    enterTransition = {
+                        slideIntoContainer(
+                            AnimatedContentTransitionScope.SlideDirection.Start,
+                        )
+                    },
+                    exitTransition = {
+                        slideOutOfContainer(
+                            AnimatedContentTransitionScope.SlideDirection.Start,
+                        )
+                    },
+                    popEnterTransition = {
+                        slideIntoContainer(
+                            AnimatedContentTransitionScope.SlideDirection.End,
+                        )
+                    },
+                    popExitTransition = {
+                        slideOutOfContainer(
+                            AnimatedContentTransitionScope.SlideDirection.End,
+                        )
                     }
                 ) {
                     // auth
