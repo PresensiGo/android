@@ -30,13 +30,14 @@ import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.components.CustomTab
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.sections.Section1
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.sections.Section2
+import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.sections.Section3
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailGeneralAttendanceScreen() {
     val navController = LocalNavController.current
 
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(1) }
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(2) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
@@ -86,7 +87,7 @@ fun DetailGeneralAttendanceScreen() {
                 when (selectedTabIndex) {
                     0 -> Section1()
                     1 -> Section2()
-                    2 -> Unit
+                    2 -> Section3()
                 }
             }
         }

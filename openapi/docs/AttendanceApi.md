@@ -8,7 +8,7 @@ All URIs are relative to *http://localhost*
 | [**createGeneralAttendanceRecordStudent**](AttendanceApi.md#createGeneralAttendanceRecordStudent) | **POST** /api/v1/general-attendances/records/student |  |
 | [**createSubjectAttendance**](AttendanceApi.md#createSubjectAttendance) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | [**createSubjectAttendanceRecordStudent**](AttendanceApi.md#createSubjectAttendanceRecordStudent) | **POST** /api/v1/subject-attendances/records/student |  |
-| [**deleteGeneralAttendance**](AttendanceApi.md#deleteGeneralAttendance) | **DELETE** /api/v1/general_attendances/{general_attendance_id} |  |
+| [**deleteGeneralAttendance**](AttendanceApi.md#deleteGeneralAttendance) | **DELETE** /api/v1/general-attendances/{general_attendance_id} |  |
 | [**getAllGeneralAttendanceRecords**](AttendanceApi.md#getAllGeneralAttendanceRecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | [**getAllGeneralAttendances**](AttendanceApi.md#getAllGeneralAttendances) | **GET** /api/v1/general-attendances |  |
 | [**getAllSubjectAttendanceRecords**](AttendanceApi.md#getAllSubjectAttendanceRecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |

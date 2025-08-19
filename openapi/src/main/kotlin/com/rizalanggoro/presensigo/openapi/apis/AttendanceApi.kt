@@ -190,7 +190,7 @@ import java.text.DateFormat
             }
 
         /**
-        * DELETE /api/v1/general_attendances/{general_attendance_id}
+        * DELETE /api/v1/general-attendances/{general_attendance_id}
         * 
         * 
          * @param generalAttendanceId general attendance id 
@@ -210,7 +210,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.DELETE,
-            "/api/v1/general_attendances/{general_attendance_id}".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
+            "/api/v1/general-attendances/{general_attendance_id}".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

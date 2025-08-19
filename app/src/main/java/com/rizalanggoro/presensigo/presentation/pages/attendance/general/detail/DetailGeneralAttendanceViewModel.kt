@@ -30,6 +30,9 @@ data class State(
     val records: List<GetAllGeneralAttendanceRecordsItem> = emptyList(),
     val getAttendanceRecordsMessage: String = "",
 
+    val deleteStatus: StateStatus = StateStatus.Initial,
+    val deleteMessage: String = "",
+
     val qrCodeBitmap: Bitmap? = null
 )
 
@@ -121,6 +124,32 @@ class DetailGeneralAttendanceViewModel(
                 it.copy(
                     getAttendanceRecordsStatus = StateStatus.Failure,
                     getAttendanceRecordsMessage = "Terjadi kesalahan tak terduga!"
+                )
+            }
+        }
+    }
+
+    fun deleteAttendance() = viewModelScope.launch {
+        try {
+            _state.update { it.copy(deleteStatus = StateStatus.Loading) }
+
+            attendanceApi.deleteGeneralAttendance(params.attendanceId)
+
+            _state.update { it.copy(deleteStatus = StateStatus.Success) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _state.update {
+                it.copy(
+                    deleteStatus = StateStatus.Failure,
+                    deleteMessage = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _state.update {
+                it.copy(
+                    deleteStatus = StateStatus.Failure,
+                    deleteMessage = "Terjadi kesalahan tak terduga!"
                 )
             }
         }

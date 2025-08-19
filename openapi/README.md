@@ -56,7 +56,7 @@ All URIs are relative to *http://localhost*
 | *AttendanceApi* | [**createGeneralAttendanceRecordStudent**](docs/AttendanceApi.md#creategeneralattendancerecordstudent) | **POST** /api/v1/general-attendances/records/student |  |
 | *AttendanceApi* | [**createSubjectAttendance**](docs/AttendanceApi.md#createsubjectattendance) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | *AttendanceApi* | [**createSubjectAttendanceRecordStudent**](docs/AttendanceApi.md#createsubjectattendancerecordstudent) | **POST** /api/v1/subject-attendances/records/student |  |
-| *AttendanceApi* | [**deleteGeneralAttendance**](docs/AttendanceApi.md#deletegeneralattendance) | **DELETE** /api/v1/general_attendances/{general_attendance_id} |  |
+| *AttendanceApi* | [**deleteGeneralAttendance**](docs/AttendanceApi.md#deletegeneralattendance) | **DELETE** /api/v1/general-attendances/{general_attendance_id} |  |
 | *AttendanceApi* | [**getAllGeneralAttendanceRecords**](docs/AttendanceApi.md#getallgeneralattendancerecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | *AttendanceApi* | [**getAllGeneralAttendances**](docs/AttendanceApi.md#getallgeneralattendances) | **GET** /api/v1/general-attendances |  |
 | *AttendanceApi* | [**getAllSubjectAttendanceRecords**](docs/AttendanceApi.md#getallsubjectattendancerecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
