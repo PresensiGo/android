@@ -13,6 +13,8 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.statusBars
 import androidx.compose.foundation.lazy.LazyColumn
+import androidx.compose.foundation.lazy.items
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
@@ -24,15 +26,21 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.isLoading
+import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.openapi.models.Batch
+import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -72,43 +80,56 @@ fun TeacherHomeSubjectAttendanceScreen() {
                     .fillMaxWidth()
                     .weight(1f)
                     .clip(RoundedCornerShape(topEnd = 24.dp, topStart = 24.dp))
-                    .background(MaterialTheme.colorScheme.background)
-                    .padding(24.dp),
+                    .background(MaterialTheme.colorScheme.background),
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
-                Column {
-                    Text(
-                        "Daftar Angkatan",
-                        style = MaterialTheme.typography.titleMedium,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                    Text(
-                        "Silahkan pilih angkatan yang akan dilakukan presensi mata pelajaran.",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
-                    )
-                }
-                LazyColumn(
-                    verticalArrangement = Arrangement.spacedBy(4.dp)
+                PullToRefreshBox(
+                    isRefreshing = state.status.isLoading(),
+                    onRefresh = { viewModel.getAllBatches() }
                 ) {
-                    items(3) {
-                        BatchItem(
-                            batch = Batch(
-                                id = 1,
-                                name = "Nama Angkatan",
-                                schoolId = 1
-                            )
-                        ) { }
+                    LazyColumn(
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        item {
+                            Column(
+                                modifier = Modifier.padding(
+                                    start = 24.dp,
+                                    end = 24.dp,
+                                    top = 24.dp,
+                                    bottom = 8.dp
+                                )
+                            ) {
+                                Text(
+                                    "Daftar Angkatan",
+                                    style = MaterialTheme.typography.titleMedium,
+                                    color = MaterialTheme.colorScheme.onBackground
+                                )
+                                Text(
+                                    "Silahkan pilih angkatan yang akan dilakukan presensi mata pelajaran.",
+                                    style = MaterialTheme.typography.bodyMedium,
+                                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                                )
+                            }
+                        }
+
+                        // loading state
+                        if (state.status.isLoading())
+                            items(3) {
+                                BatchItem(isLoading = true)
+                            }
+
+                        // success state
+                        if (state.status.isSuccess())
+                            items(state.batches) {
+                                BatchItem(batch = it) {
+                                    navController.navigate(
+                                        Routes.Attendance.Subject.Major(
+                                            batchId = it.id
+                                        )
+                                    )
+                                }
+                            }
                     }
-//                    items(state.batches) {
-//                        BatchItem(batch = it) {
-//                            navController.navigate(
-//                                Routes.Attendance.Subject.Major(
-//                                    batchId = it.id
-//                                )
-//                            )
-//                        }
-//                    }
                 }
             }
         }
@@ -116,12 +137,16 @@ fun TeacherHomeSubjectAttendanceScreen() {
 }
 
 @Composable
-private fun BatchItem(batch: Batch, onClick: () -> Unit) {
+private fun BatchItem(
+    isLoading: Boolean = false,
+    batch: Batch? = null,
+    onClick: () -> Unit = {}
+) {
     OutlinedCard(
         modifier = Modifier
-            .fillMaxWidth()
+            .padding(horizontal = 24.dp)
             .clip(CardDefaults.outlinedShape)
-            .clickable { onClick() }
+            .clickable(enabled = isLoading == false) { onClick() }
     ) {
         Column(
             modifier = Modifier.padding(16.dp),
@@ -134,20 +159,51 @@ private fun BatchItem(batch: Batch, onClick: () -> Unit) {
                 Box(
                     modifier = Modifier
                         .size(32.dp)
-                        .clip(RoundedCornerShape(8.dp))
-                        .background(MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = .5f))
+                        .then(
+                            when (isLoading) {
+                                true -> Modifier
+                                    .clip(CircleShape)
+                                    .shimmer()
+                                    .background(MaterialTheme.colorScheme.outlineVariant)
+
+                                else -> Modifier
+                                    .clip(RoundedCornerShape(8.dp))
+                                    .background(
+                                        MaterialTheme.colorScheme.onPrimaryContainer.copy(
+                                            alpha = .48f
+                                        )
+                                    )
+                            }
+                        )
                 ) {
                     Icon(
                         Icons.Rounded.Domain,
                         contentDescription = null,
-                        tint = MaterialTheme.colorScheme.primaryContainer,
                         modifier = Modifier
-                            .align(Alignment.Center)
+                            .align(Alignment.Center),
+                        tint = when (isLoading) {
+                            true -> MaterialTheme.colorScheme.outlineVariant
+                            else -> MaterialTheme.colorScheme.primaryContainer
+                        },
                     )
                 }
                 Text(
-                    batch.name,
+                    batch?.name ?: "nama angkatan",
                     style = MaterialTheme.typography.titleMedium,
+                    modifier = Modifier.then(
+                        when (isLoading) {
+                            true -> Modifier
+                                .shimmer()
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.outlineVariant)
+
+                            else -> Modifier
+                        }
+                    ),
+                    color = when (isLoading) {
+                        true -> MaterialTheme.colorScheme.outlineVariant
+                        else -> Color.Unspecified
+                    }
                 )
             }
             Row(
@@ -158,12 +214,38 @@ private fun BatchItem(batch: Batch, onClick: () -> Unit) {
                 Text(
                     "2 Jurusan",
                     style = MaterialTheme.typography.bodyMedium,
-                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                    modifier = Modifier.then(
+                        when (isLoading) {
+                            true -> Modifier
+                                .shimmer()
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.outlineVariant)
+
+                            else -> Modifier
+                        }
+                    ),
+                    color = when (isLoading) {
+                        true -> MaterialTheme.colorScheme.outlineVariant
+                        else -> MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                    }
                 )
                 Icon(
                     Icons.AutoMirrored.Rounded.ArrowRightAlt,
                     contentDescription = null,
-                    tint = MaterialTheme.colorScheme.outline
+                    modifier = Modifier.then(
+                        when (isLoading) {
+                            true -> Modifier
+                                .shimmer()
+                                .clip(CircleShape)
+                                .background(MaterialTheme.colorScheme.outlineVariant)
+
+                            else -> Modifier
+                        }
+                    ),
+                    tint = when (isLoading) {
+                        true -> MaterialTheme.colorScheme.outlineVariant
+                        else -> MaterialTheme.colorScheme.outline
+                    }
                 )
             }
         }

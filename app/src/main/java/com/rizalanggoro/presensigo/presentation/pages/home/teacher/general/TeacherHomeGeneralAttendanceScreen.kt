@@ -168,7 +168,7 @@ private fun AttendanceItem(
 ) {
     OutlinedCard(
         modifier = Modifier
-            .padding(horizontal = 16.dp)
+            .padding(horizontal = 24.dp)
             .clip(CardDefaults.outlinedShape)
             .clickable(enabled = isLoading == false) { onClick() }
     ) {
