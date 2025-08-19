@@ -42,7 +42,7 @@ fun MyComposeApplication(
 //                            TokenType.Teacher -> Routes.Home.Teacher
 //                            TokenType.Student -> Routes.Home.Student
 //                        }
-                        true -> Routes.Attendance.Subject.Index(
+                        true -> Routes.Attendance.Subject.Create(
                             batchId = 3,
                             majorId = 6,
                             classroomId = 14,
