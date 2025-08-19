@@ -21,14 +21,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param message 
+ * @param name 
  */
 
 
-data class ResponsesImportTeacher (
+data class RequestsCreateBatch (
 
-    @SerializedName("message")
-    val message: kotlin.String
+    @SerializedName("name")
+    val name: kotlin.String? = null
 
 ) {
 

@@ -6,10 +6,10 @@ import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Checklist
 import androidx.compose.material.icons.filled.MoreTime
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.Person
 import androidx.compose.material.icons.outlined.Checklist
 import androidx.compose.material.icons.outlined.MoreTime
-import androidx.compose.material.icons.outlined.Settings
+import androidx.compose.material.icons.outlined.Person
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -56,9 +56,9 @@ private val navigationItems = listOf(
         route = Routes.Home.Teacher.GeneralAttendance
     ),
     NavigationItem(
-        title = "Pengaturan",
-        icon = Icons.Outlined.Settings,
-        iconSelected = Icons.Filled.Settings,
+        title = "Profil",
+        icon = Icons.Outlined.Person,
+        iconSelected = Icons.Filled.Person,
         route = Routes.Home.Teacher.Setting
     )
 )
@@ -112,7 +112,7 @@ fun TeacherHomeScreen() {
         NavHost(
             modifier = Modifier.padding(it),
             navController = homeNavController,
-            startDestination = Routes.Home.Teacher.GeneralAttendance
+            startDestination = Routes.Home.Teacher.Setting
         ) {
             composable<Routes.Home.Teacher.SubjectAttendance> { TeacherHomeSubjectAttendanceScreen() }
             composable<Routes.Home.Teacher.GeneralAttendance> { TeacherHomeGeneralAttendanceScreen() }

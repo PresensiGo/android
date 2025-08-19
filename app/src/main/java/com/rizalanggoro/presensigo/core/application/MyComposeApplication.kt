@@ -37,11 +37,11 @@ fun MyComposeApplication(
                 NavHost(
                     navController = navController,
                     startDestination = when (isAuthenticated) {
-//                        true -> when (tokenType) {
-//                            TokenType.Unset -> Routes.Auth
-//                            TokenType.Teacher -> Routes.Home.Teacher
-//                            TokenType.Student -> Routes.Home.Student
-//                        }
+                        true -> when (tokenType) {
+                            TokenType.Unset -> Routes.Auth
+                            TokenType.Teacher -> Routes.Home.Teacher
+                            TokenType.Student -> Routes.Home.Student
+                        }
 //                        true -> Routes.Attendance.Subject.Create(
 //                            batchId = 3,
 //                            majorId = 6,
@@ -49,9 +49,7 @@ fun MyComposeApplication(
 ////                            attendanceId = 1
 //                        )
 
-//                        else -> Routes.Auth
-                        else -> Routes.Home.Teacher
-//                        else -> Routes.Attendance.General.Create
+                        else -> Routes.Auth
                     },
                     enterTransition = {
                         slideIntoContainer(

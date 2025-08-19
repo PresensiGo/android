@@ -15,24 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
+import com.rizalanggoro.presensigo.openapi.models.DomainsUser
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param batchId 
- * @param name 
+ * @param user 
  */
 
 
-data class ApiInternalFeaturesMajorDtoRequestsUpdate (
+data class ResponsesUpdateAccountRole (
 
-    @SerializedName("batch_id")
-    val batchId: kotlin.Int,
-
-    @SerializedName("name")
-    val name: kotlin.String
+    @SerializedName("user")
+    val user: DomainsUser
 
 ) {
 

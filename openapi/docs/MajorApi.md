@@ -4,16 +4,16 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**createMajor**](MajorApi.md#createMajor) | **POST** /api/v1/majors |  |
-| [**deleteMajor**](MajorApi.md#deleteMajor) | **DELETE** /api/v1/majors/{major_id} |  |
+| [**createMajor**](MajorApi.md#createMajor) | **POST** /api/v1/batches/{batch_id}/majors |  |
+| [**deleteMajor**](MajorApi.md#deleteMajor) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id} |  |
 | [**getAllMajors**](MajorApi.md#getAllMajors) | **GET** /api/v1/majors |  |
 | [**getAllMajorsByBatchId**](MajorApi.md#getAllMajorsByBatchId) | **GET** /api/v1/batches/{batch_id}/majors |  |
-| [**updateMajor**](MajorApi.md#updateMajor) | **PUT** /api/v1/majors/{major_id} |  |
+| [**updateMajor**](MajorApi.md#updateMajor) | **PUT** /api/v1/batches/{batch_id}/majors/{major_id} |  |
 
 
 <a id="createMajor"></a>
 # **createMajor**
-> Major createMajor(body)
+> Major createMajor(batchId, body)
 
 
 
@@ -24,9 +24,10 @@ All URIs are relative to *http://localhost*
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = MajorApi()
-val body : CreateGeneralAttendanceReq =  // CreateGeneralAttendanceReq | body
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val body : RequestsCreateMajor =  // RequestsCreateMajor | body
 try {
-    val result : Major = apiInstance.createMajor(body)
+    val result : Major = apiInstance.createMajor(batchId, body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MajorApi#createMajor")
@@ -38,9 +39,10 @@ try {
 ```
 
 ### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**CreateGeneralAttendanceReq**](CreateGeneralAttendanceReq.md)| body | |
+| **body** | [**RequestsCreateMajor**](RequestsCreateMajor.md)| body | |
 
 ### Return type
 
@@ -57,7 +59,7 @@ No authorization required
 
 <a id="deleteMajor"></a>
 # **deleteMajor**
-> kotlin.String deleteMajor(majorId)
+> kotlin.String deleteMajor(batchId, majorId)
 
 
 
@@ -68,9 +70,10 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = MajorApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
 val majorId : kotlin.Int = 56 // kotlin.Int | major id
 try {
-    val result : kotlin.String = apiInstance.deleteMajor(majorId)
+    val result : kotlin.String = apiInstance.deleteMajor(batchId, majorId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MajorApi#deleteMajor")
@@ -82,6 +85,7 @@ try {
 ```
 
 ### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
 | **majorId** | **kotlin.Int**| major id | |
@@ -186,7 +190,7 @@ No authorization required
 
 <a id="updateMajor"></a>
 # **updateMajor**
-> Major updateMajor(majorId, body)
+> Major updateMajor(batchId, majorId, body)
 
 
 
@@ -197,10 +201,11 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = MajorApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
 val majorId : kotlin.Int = 56 // kotlin.Int | major id
-val body : ApiInternalFeaturesMajorDtoRequestsUpdate =  // ApiInternalFeaturesMajorDtoRequestsUpdate | body
+val body : RequestsUpdateMajor =  // RequestsUpdateMajor | body
 try {
-    val result : Major = apiInstance.updateMajor(majorId, body)
+    val result : Major = apiInstance.updateMajor(batchId, majorId, body)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MajorApi#updateMajor")
@@ -212,10 +217,11 @@ try {
 ```
 
 ### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
 | **majorId** | **kotlin.Int**| major id | |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**ApiInternalFeaturesMajorDtoRequestsUpdate**](ApiInternalFeaturesMajorDtoRequestsUpdate.md)| body | |
+| **body** | [**RequestsUpdateMajor**](RequestsUpdateMajor.md)| body | |
 
 ### Return type
 

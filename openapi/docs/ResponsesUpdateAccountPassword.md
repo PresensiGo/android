@@ -1,10 +1,10 @@
 
-# ApiInternalFeaturesBatchDtoRequestsUpdate
+# ResponsesUpdateAccountPassword
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **name** | **kotlin.String** |  |  [optional] |
+| **user** | [**DomainsUser**](DomainsUser.md) |  |  |
 
 
 

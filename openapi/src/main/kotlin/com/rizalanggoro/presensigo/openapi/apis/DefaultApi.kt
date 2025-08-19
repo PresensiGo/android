@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.ResponsesImportTeacher
+import com.rizalanggoro.presensigo.openapi.models.ResponsesImportAccounts
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -39,14 +39,14 @@ import java.text.DateFormat
     ) {
 
         /**
-        * POST /api/v1/teachers/import
+        * POST /api/v1/accounts/import
         * 
         * 
          * @param file file 
-         * @return ResponsesImportTeacher
+         * @return ResponsesImportAccounts
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun apiV1TeachersImportPost(file: io.ktor.client.request.forms.FormPart<io.ktor.client.request.forms.InputProvider>): HttpResponse<ResponsesImportTeacher> {
+        open suspend fun apiV1AccountsImportPost(file: io.ktor.client.request.forms.FormPart<io.ktor.client.request.forms.InputProvider>): HttpResponse<ResponsesImportAccounts> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -61,7 +61,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
-            "/api/v1/teachers/import",
+            "/api/v1/accounts/import",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

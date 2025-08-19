@@ -68,7 +68,7 @@ No authorization required
 //import com.rizalanggoro.presensigo.openapi.models.*
 
 val apiInstance = BatchApi()
-val body : CreateGeneralAttendanceReq =  // CreateGeneralAttendanceReq | body
+val body : RequestsCreateBatch =  // RequestsCreateBatch | body
 try {
     val result : Batch = apiInstance.createBatch(body)
     println(result)
@@ -84,7 +84,7 @@ try {
 ### Parameters
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**CreateGeneralAttendanceReq**](CreateGeneralAttendanceReq.md)| body | |
+| **body** | [**RequestsCreateBatch**](RequestsCreateBatch.md)| body | |
 
 ### Return type
 
@@ -198,7 +198,7 @@ No authorization required
 
 val apiInstance = BatchApi()
 val batchId : kotlin.Int = 56 // kotlin.Int | batch id
-val body : ApiInternalFeaturesBatchDtoRequestsUpdate =  // ApiInternalFeaturesBatchDtoRequestsUpdate | body
+val body : RequestsUpdateBatch =  // RequestsUpdateBatch | body
 try {
     val result : Batch = apiInstance.updateBatch(batchId, body)
     println(result)
@@ -215,7 +215,7 @@ try {
 | **batchId** | **kotlin.Int**| batch id | |
 | Name | Type | Description  | Notes |
 | ------------- | ------------- | ------------- | ------------- |
-| **body** | [**ApiInternalFeaturesBatchDtoRequestsUpdate**](ApiInternalFeaturesBatchDtoRequestsUpdate.md)| body | |
+| **body** | [**RequestsUpdateBatch**](RequestsUpdateBatch.md)| body | |
 
 ### Return type
 

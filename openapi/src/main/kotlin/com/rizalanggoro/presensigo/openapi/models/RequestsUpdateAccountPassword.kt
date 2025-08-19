@@ -21,14 +21,14 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param name 
+ * @param password 
  */
 
 
-data class ApiInternalFeaturesBatchDtoRequestsUpdate (
+data class RequestsUpdateAccountPassword (
 
-    @SerializedName("name")
-    val name: kotlin.String? = null
+    @SerializedName("password")
+    val password: kotlin.String
 
 ) {
 
