@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.presentation.pages.home.teacher.subject
 
+import android.icu.util.Calendar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -39,6 +40,7 @@ import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
+import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.openapi.models.Batch
 import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
@@ -68,7 +70,7 @@ fun TeacherHomeSubjectAttendanceScreen() {
                     color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
-                    "Senin, 12 Agustus 2021",
+                    Calendar.getInstance().timeInMillis.formatDateTime(),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -85,10 +87,12 @@ fun TeacherHomeSubjectAttendanceScreen() {
             ) {
                 PullToRefreshBox(
                     isRefreshing = state.status.isLoading(),
-                    onRefresh = { viewModel.getAllBatches() }
+                    onRefresh = { viewModel.getAllBatches() },
+                    modifier = Modifier.fillMaxSize()
                 ) {
                     LazyColumn(
-                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                        verticalArrangement = Arrangement.spacedBy(8.dp),
+                        modifier = Modifier.fillMaxSize()
                     ) {
                         item {
                             Column(

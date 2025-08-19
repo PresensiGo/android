@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.presentation.pages.home.teacher.general
 
+import android.icu.util.Calendar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
@@ -72,7 +73,8 @@ fun TeacherHomeGeneralAttendanceScreen() {
             FloatingActionButton(
                 onClick = {
                     navController.navigate(Routes.Attendance.General.Create)
-                }
+                },
+                modifier = Modifier.padding(end = 8.dp, bottom = 8.dp)
             ) {
                 Icon(Icons.Rounded.Add, contentDescription = null)
             }
@@ -89,7 +91,7 @@ fun TeacherHomeGeneralAttendanceScreen() {
                     color = MaterialTheme.colorScheme.onPrimary
                 )
                 Text(
-                    "Senin, 12 Agustus 2021",
+                    Calendar.getInstance().timeInMillis.formatDateTime(),
                     style = MaterialTheme.typography.bodyMedium,
                     color = MaterialTheme.colorScheme.onPrimaryContainer
                 )
@@ -151,7 +153,7 @@ fun TeacherHomeGeneralAttendanceScreen() {
                             }
 
                         item {
-                            Spacer(modifier = Modifier.height((48 + 32).dp))
+                            Spacer(modifier = Modifier.height((48 + 48).dp))
                         }
                     }
                 }
