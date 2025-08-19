@@ -104,9 +104,9 @@ fun MajorScreen() {
                                 color = MaterialTheme.colorScheme.onBackground
                             )
                             Text(
-                                "Silahkan pilih jurusan yang akan dilakukan presensi mata pelajaran.",
+                                "Berikut adalah daftar jurusan untuk angkatan 2022. Silahkan pilih jurusan yang akan dilakukan presensi mata pelajaran.",
                                 style = MaterialTheme.typography.bodyMedium,
-                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f),
                             )
                         }
                     }
