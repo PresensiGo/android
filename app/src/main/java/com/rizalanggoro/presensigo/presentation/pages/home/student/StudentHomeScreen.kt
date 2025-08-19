@@ -85,7 +85,7 @@ fun StudentHomeScreen() {
                 }
 
                 IconButton(
-                    onClick = {},
+                    onClick = { navController.navigate(Routes.ProfileStudent) },
                     modifier = Modifier
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.background.copy(alpha = .16f)),

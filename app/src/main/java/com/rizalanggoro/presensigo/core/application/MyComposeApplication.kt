@@ -21,6 +21,7 @@ import com.rizalanggoro.presensigo.presentation.pages.auth.AuthScreen
 import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeScreen
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.TeacherHomeScreen
 import com.rizalanggoro.presensigo.presentation.pages.qrscanner.QRScannerScreen
+import com.rizalanggoro.presensigo.presentation.pages.student.profile.ProfileStudentScreen
 import com.rizalanggoro.presensigo.presentation.student.StudentScreen
 import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
 
@@ -42,6 +43,7 @@ fun MyComposeApplication(
                             TokenType.Teacher -> Routes.Home.Teacher
                             TokenType.Student -> Routes.Home.Student
                         }
+//                        true -> Routes.ProfileStudent
 //                        true -> Routes.Attendance.General.Detail(
 ////                            batchId = 3,
 ////                            majorId = 6,
@@ -89,6 +91,9 @@ fun MyComposeApplication(
                     // attendance - general
                     composable<Routes.Attendance.General.Detail> { DetailGeneralAttendanceScreen() }
                     composable<Routes.Attendance.General.Create> { CreateGeneralAttendanceScreen() }
+
+                    // student profile
+                    composable<Routes.ProfileStudent> { ProfileStudentScreen() }
 
                     composable<Routes.Student> { StudentScreen() }
                     composable<Routes.QrScanner> { QRScannerScreen() }

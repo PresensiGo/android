@@ -105,6 +105,9 @@ object Routes {
     data object QrScanner
 
     @Serializable
+    data object ProfileStudent
+
+    @Serializable
     data class Classroom(
         val batchId: Int,
         val majorId: Int
