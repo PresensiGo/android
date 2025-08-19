@@ -15,12 +15,15 @@ fun String.formatDateTime(pattern: String = "EEEE, dd MMMM yyyy"): String {
             val isoFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
             val zonedDateTime = ZonedDateTime.parse(this, isoFormatter)
 
+            val targetZoneId = ZoneId.systemDefault()
+            val zonedDateTimeInWib = zonedDateTime.withZoneSameInstant(targetZoneId)
+
             val outputFormatter = DateTimeFormatter.ofPattern(
                 pattern,
                 Locale("id", "ID")
             )
 
-            return zonedDateTime.format(outputFormatter).toString()
+            return zonedDateTimeInWib.format(outputFormatter).toString()
         } else {
             return this
         }
