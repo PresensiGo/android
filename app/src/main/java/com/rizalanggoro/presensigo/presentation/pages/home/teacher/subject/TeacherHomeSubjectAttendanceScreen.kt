@@ -158,7 +158,7 @@ private fun BatchItem(
             ) {
                 Box(
                     modifier = Modifier
-                        .size(32.dp)
+                        .size(40.dp)
                         .then(
                             when (isLoading) {
                                 true -> Modifier
@@ -167,7 +167,7 @@ private fun BatchItem(
                                     .background(MaterialTheme.colorScheme.outlineVariant)
 
                                 else -> Modifier
-                                    .clip(RoundedCornerShape(8.dp))
+                                    .clip(CircleShape)
                                     .background(
                                         MaterialTheme.colorScheme.onPrimaryContainer.copy(
                                             alpha = .48f

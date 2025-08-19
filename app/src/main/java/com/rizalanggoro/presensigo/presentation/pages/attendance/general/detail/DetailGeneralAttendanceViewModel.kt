@@ -22,18 +22,16 @@ import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
 data class State(
-    val status: StateStatus = StateStatus.Initial,
-    val action: Action = Action.Initial,
-    val message: String = "",
-
+    val getAttendanceStatus: StateStatus = StateStatus.Initial,
     val attendance: GeneralAttendance? = null,
+    val getAttendanceMessage: String = "",
+
+    val getAttendanceRecordsStatus: StateStatus = StateStatus.Initial,
     val records: List<GetAllGeneralAttendanceRecordsItem> = emptyList(),
+    val getAttendanceRecordsMessage: String = "",
+
     val qrCodeBitmap: Bitmap? = null
-) {
-    enum class Action {
-        Initial, GetGeneralAttendance, GetAllGeneralAttendanceRecords
-    }
-}
+)
 
 class DetailGeneralAttendanceViewModel(
     savedStateHandle: SavedStateHandle,
@@ -53,8 +51,7 @@ class DetailGeneralAttendanceViewModel(
         try {
             _state.update {
                 it.copy(
-                    status = StateStatus.Loading,
-                    action = State.Action.GetGeneralAttendance
+                    getAttendanceStatus = StateStatus.Loading,
                 )
             }
 
@@ -72,8 +69,7 @@ class DetailGeneralAttendanceViewModel(
 
             _state.update {
                 it.copy(
-                    status = StateStatus.Success,
-                    action = State.Action.GetGeneralAttendance,
+                    getAttendanceStatus = StateStatus.Success,
                     attendance = body.generalAttendance,
                     qrCodeBitmap = QrGenerator.generateBitmap(qrCodeData)
                 )
@@ -81,16 +77,14 @@ class DetailGeneralAttendanceViewModel(
         } catch (e: ResponseException) {
             e.printStackTrace()
             _state.value = _state.value.copy(
-                status = StateStatus.Failure,
-                action = State.Action.GetGeneralAttendance,
-                message = e.response.bodyAsText().toFailure().message
+                getAttendanceStatus = StateStatus.Failure,
+                getAttendanceMessage = e.response.bodyAsText().toFailure().message
             )
         } catch (e: Exception) {
             e.printStackTrace()
             _state.value = _state.value.copy(
-                status = StateStatus.Failure,
-                action = State.Action.GetGeneralAttendance,
-                message = "Terjadi kesalahan tak terduga!"
+                getAttendanceStatus = StateStatus.Failure,
+                getAttendanceMessage = "Terjadi kesalahan tak terduga!"
             )
         }
     }
@@ -99,8 +93,7 @@ class DetailGeneralAttendanceViewModel(
         try {
             _state.update {
                 it.copy(
-                    status = StateStatus.Loading,
-                    action = State.Action.GetAllGeneralAttendanceRecords
+                    getAttendanceRecordsStatus = StateStatus.Loading,
                 )
             }
 
@@ -110,8 +103,7 @@ class DetailGeneralAttendanceViewModel(
 
             _state.update {
                 it.copy(
-                    status = StateStatus.Success,
-                    action = State.Action.GetAllGeneralAttendanceRecords,
+                    getAttendanceRecordsStatus = StateStatus.Success,
                     records = body.items
                 )
             }
@@ -119,18 +111,16 @@ class DetailGeneralAttendanceViewModel(
             e.printStackTrace()
             _state.update {
                 it.copy(
-                    status = StateStatus.Failure,
-                    action = State.Action.GetAllGeneralAttendanceRecords,
-                    message = e.response.bodyAsText().toFailure().message
+                    getAttendanceRecordsStatus = StateStatus.Failure,
+                    getAttendanceRecordsMessage = e.response.bodyAsText().toFailure().message
                 )
             }
         } catch (e: Exception) {
             e.printStackTrace()
             _state.update {
                 it.copy(
-                    status = StateStatus.Failure,
-                    action = State.Action.GetAllGeneralAttendanceRecords,
-                    message = "Terjadi kesalahan tak terduga!"
+                    getAttendanceRecordsStatus = StateStatus.Failure,
+                    getAttendanceRecordsMessage = "Terjadi kesalahan tak terduga!"
                 )
             }
         }
