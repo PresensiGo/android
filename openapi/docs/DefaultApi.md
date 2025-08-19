@@ -4,12 +4,12 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
-| [**apiV1TeachersImportPost**](DefaultApi.md#apiV1TeachersImportPost) | **POST** /api/v1/teachers/import |  |
+| [**apiV1AccountsImportPost**](DefaultApi.md#apiV1AccountsImportPost) | **POST** /api/v1/accounts/import |  |
 
 
-<a id="apiV1TeachersImportPost"></a>
-# **apiV1TeachersImportPost**
-> ResponsesImportTeacher apiV1TeachersImportPost(file)
+<a id="apiV1AccountsImportPost"></a>
+# **apiV1AccountsImportPost**
+> ResponsesImportAccounts apiV1AccountsImportPost(file)
 
 
 
@@ -22,13 +22,13 @@ All URIs are relative to *http://localhost*
 val apiInstance = DefaultApi()
 val file : io.ktor.client.request.forms.FormPart<io.ktor.client.request.forms.InputProvider> = BINARY_DATA_HERE // io.ktor.client.request.forms.FormPart<io.ktor.client.request.forms.InputProvider> | file
 try {
-    val result : ResponsesImportTeacher = apiInstance.apiV1TeachersImportPost(file)
+    val result : ResponsesImportAccounts = apiInstance.apiV1AccountsImportPost(file)
     println(result)
 } catch (e: ClientException) {
-    println("4xx response calling DefaultApi#apiV1TeachersImportPost")
+    println("4xx response calling DefaultApi#apiV1AccountsImportPost")
     e.printStackTrace()
 } catch (e: ServerException) {
-    println("5xx response calling DefaultApi#apiV1TeachersImportPost")
+    println("5xx response calling DefaultApi#apiV1AccountsImportPost")
     e.printStackTrace()
 }
 ```
@@ -40,7 +40,7 @@ try {
 
 ### Return type
 
-[**ResponsesImportTeacher**](ResponsesImportTeacher.md)
+[**ResponsesImportAccounts**](ResponsesImportAccounts.md)
 
 ### Authorization
 

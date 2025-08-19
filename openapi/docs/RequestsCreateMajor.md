@@ -1,10 +1,10 @@
 
-# ResponsesImportTeacher
+# RequestsCreateMajor
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **message** | **kotlin.String** |  |  |
+| **name** | **kotlin.String** |  |  |
 
 
 

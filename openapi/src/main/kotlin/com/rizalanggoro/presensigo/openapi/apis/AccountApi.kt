@@ -20,8 +20,13 @@ import com.rizalanggoro.presensigo.openapi.models.LoginRes
 import com.rizalanggoro.presensigo.openapi.models.LogoutReq
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenRes
+import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateAccountPassword
+import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateAccountRole
+import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteAccount
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllUsers
 import com.rizalanggoro.presensigo.openapi.models.ResponsesLogout
+import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateAccountPassword
+import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateAccountRole
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -43,6 +48,108 @@ import java.text.DateFormat
         httpClientConfig,
         jsonBlock,
     ) {
+
+        /**
+        * DELETE /api/v1/accounts/{account_id}
+        * 
+        * 
+         * @param accountId account id 
+         * @return ResponsesDeleteAccount
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1AccountsAccountIdDelete(accountId: kotlin.Int): HttpResponse<ResponsesDeleteAccount> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.DELETE,
+            "/api/v1/accounts/{account_id}".replace("{" + "account_id" + "}", "$accountId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * PUT /api/v1/accounts/{account_id}/password
+        * 
+        * 
+         * @param accountId account id 
+         * @param body body 
+         * @return ResponsesUpdateAccountPassword
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1AccountsAccountIdPasswordPut(accountId: kotlin.Int, body: RequestsUpdateAccountPassword): HttpResponse<ResponsesUpdateAccountPassword> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.PUT,
+            "/api/v1/accounts/{account_id}/password".replace("{" + "account_id" + "}", "$accountId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * PUT /api/v1/accounts/{account_id}/role
+        * 
+        * 
+         * @param accountId account id 
+         * @param body body 
+         * @return ResponsesUpdateAccountRole
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1AccountsAccountIdRolePut(accountId: kotlin.Int, body: RequestsUpdateAccountRole): HttpResponse<ResponsesUpdateAccountRole> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.PUT,
+            "/api/v1/accounts/{account_id}/role".replace("{" + "account_id" + "}", "$accountId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
 
         /**
         * GET /api/v1/accounts

@@ -1,11 +1,10 @@
 
-# ApiInternalFeaturesMajorDtoRequestsUpdate
+# ResponsesUpdateAccountRole
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **batchId** | **kotlin.Int** |  |  |
-| **name** | **kotlin.String** |  |  |
+| **user** | [**DomainsUser**](DomainsUser.md) |  |  |
 
 
 

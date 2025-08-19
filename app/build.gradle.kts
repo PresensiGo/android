@@ -111,7 +111,6 @@ dependencies {
     implementation("io.arrow-kt:arrow-core:2.1.0")
 
     // lucide icons for jetpack compose
-    implementation("com.composables:icons-lucide:1.0.0")
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
     // zxing
@@ -122,4 +121,7 @@ dependencies {
     implementation("androidx.camera:camera-camera2:${camerax_version}")
     implementation("androidx.camera:camera-view:${camerax_version}")
     implementation("androidx.camera:camera-lifecycle:${camerax_version}")
+
+    // shimmer
+    implementation("com.valentinilk.shimmer:compose-shimmer:1.3.3")
 }

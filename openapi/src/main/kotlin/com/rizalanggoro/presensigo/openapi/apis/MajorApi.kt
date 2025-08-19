@@ -15,9 +15,9 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
-import com.rizalanggoro.presensigo.openapi.models.ApiInternalFeaturesMajorDtoRequestsUpdate
-import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.Major
+import com.rizalanggoro.presensigo.openapi.models.RequestsCreateMajor
+import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateMajor
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
@@ -42,14 +42,15 @@ import java.text.DateFormat
     ) {
 
         /**
-        * POST /api/v1/majors
+        * POST /api/v1/batches/{batch_id}/majors
         * 
         * 
+         * @param batchId batch id 
          * @param body body 
          * @return Major
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun createMajor(body: CreateGeneralAttendanceReq): HttpResponse<Major> {
+        open suspend fun createMajor(batchId: kotlin.Int, body: RequestsCreateMajor): HttpResponse<Major> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -61,7 +62,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
-            "/api/v1/majors",
+            "/api/v1/batches/{batch_id}/majors".replace("{" + "batch_id" + "}", "$batchId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -75,14 +76,15 @@ import java.text.DateFormat
             }
 
         /**
-        * DELETE /api/v1/majors/{major_id}
+        * DELETE /api/v1/batches/{batch_id}/majors/{major_id}
         * 
         * 
+         * @param batchId batch id 
          * @param majorId major id 
          * @return kotlin.String
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun deleteMajor(majorId: kotlin.Int): HttpResponse<kotlin.String> {
+        open suspend fun deleteMajor(batchId: kotlin.Int, majorId: kotlin.Int): HttpResponse<kotlin.String> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -95,7 +97,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.DELETE,
-            "/api/v1/majors/{major_id}".replace("{" + "major_id" + "}", "$majorId"),
+            "/api/v1/batches/{batch_id}/majors/{major_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
@@ -176,15 +178,16 @@ import java.text.DateFormat
             }
 
         /**
-        * PUT /api/v1/majors/{major_id}
+        * PUT /api/v1/batches/{batch_id}/majors/{major_id}
         * 
         * 
+         * @param batchId batch id 
          * @param majorId major id 
          * @param body body 
          * @return Major
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun updateMajor(majorId: kotlin.Int, body: ApiInternalFeaturesMajorDtoRequestsUpdate): HttpResponse<Major> {
+        open suspend fun updateMajor(batchId: kotlin.Int, majorId: kotlin.Int, body: RequestsUpdateMajor): HttpResponse<Major> {
 
             val localVariableAuthNames = listOf<String>()
 
@@ -196,7 +199,7 @@ import java.text.DateFormat
 
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.PUT,
-            "/api/v1/majors/{major_id}".replace("{" + "major_id" + "}", "$majorId"),
+            "/api/v1/batches/{batch_id}/majors/{major_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

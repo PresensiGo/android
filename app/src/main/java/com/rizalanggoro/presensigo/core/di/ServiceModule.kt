@@ -98,7 +98,7 @@ val serviceModule = module {
                         } catch (e: ResponseException) {
                             e.printStackTrace()
                             tokenManager.clear()
-                            null
+                            throw e
                         }
                     }
                 }
