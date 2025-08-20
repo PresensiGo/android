@@ -43,8 +43,8 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
-import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesItem
 import com.valentinilk.shimmer.shimmer
@@ -54,7 +54,10 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun SubjectAttendanceScreen() {
     val viewModel = koinViewModel<SubjectAttendanceViewModel>()
-    val state by viewModel.state.collectAsState()
+    val batchState by viewModel.batchState.collectAsState()
+    val majorState by viewModel.majorState.collectAsState()
+    val classroomState by viewModel.classroomState.collectAsState()
+    val attendancesState by viewModel.attendancesState.collectAsState()
 
     val navController = LocalNavController.current
     val backStackEntry by navController.currentBackStackEntryAsState()
@@ -147,8 +150,13 @@ fun SubjectAttendanceScreen() {
 //                    }
 //                }
                 PullToRefreshBox(
-                    isRefreshing = state.status.isLoading(),
-                    onRefresh = { viewModel.getAllAttendances() },
+                    isRefreshing = batchState.isLoading() || majorState.isLoading() || classroomState.isLoading() || attendancesState.isLoading(),
+                    onRefresh = {
+                        viewModel.getBatch()
+                        viewModel.getMajor()
+                        viewModel.getClassroom()
+                        viewModel.getAllAttendances()
+                    },
                 ) {
                     LazyColumn(
                         modifier = Modifier.fillMaxSize(),
@@ -169,33 +177,56 @@ fun SubjectAttendanceScreen() {
                                     color = MaterialTheme.colorScheme.onBackground
                                 )
                                 Text(
-                                    "Berikut adalah daftar presensi mata pelajaran kelas A, jurusan Matematika, angkatan 2022.",
+                                    "Berikut adalah daftar presensi mata pelajaran, ${
+                                        with(classroomState) {
+                                            when (this) {
+                                                is UiState.Success -> data.classroom.name
+                                                else -> "-"
+                                            }
+                                        }
+                                    }, ${
+                                        with(majorState) {
+                                            when (this) {
+                                                is UiState.Success -> data.major.name
+                                                else -> "-"
+                                            }
+                                        }
+                                    }, ${
+                                        with(batchState) {
+                                            when (this) {
+                                                is UiState.Success -> data.batch.name
+                                                else -> "-"
+                                            }
+                                        }
+                                    }.",
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f),
                                 )
                             }
                         }
 
-                        // loading state
-                        if (state.status.isLoading())
-                            items(3) {
-                                SubjectAttendanceItem(isLoading = true)
-                            }
-
-                        // success state
-                        if (state.status.isSuccess())
-                            items(state.items) {
-                                SubjectAttendanceItem(data = it) {
-                                    navController.navigate(
-                                        Routes.Attendance.Subject.Detail(
-                                            batchId = viewModel.params.batchId,
-                                            majorId = viewModel.params.majorId,
-                                            classroomId = viewModel.params.classroomId,
-                                            attendanceId = it.subjectAttendance.id
-                                        )
-                                    )
+                        with(attendancesState) {
+                            when (this) {
+                                is UiState.Loading -> items(3) {
+                                    SubjectAttendanceItem(isLoading = true)
                                 }
+
+                                is UiState.Success -> items(data.items) {
+                                    SubjectAttendanceItem(data = it) {
+                                        navController.navigate(
+                                            Routes.Attendance.Subject.Detail(
+                                                batchId = viewModel.params.batchId,
+                                                majorId = viewModel.params.majorId,
+                                                classroomId = viewModel.params.classroomId,
+                                                attendanceId = it.subjectAttendance.id
+                                            )
+                                        )
+                                    }
+                                }
+
+                                else -> Unit
                             }
+                        }
 
                         item {
                             Spacer(modifier = Modifier.height((48 + 48).dp))

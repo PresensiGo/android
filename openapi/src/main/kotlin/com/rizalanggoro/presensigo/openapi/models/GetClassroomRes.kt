@@ -15,21 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesItem
+import com.rizalanggoro.presensigo.openapi.models.Classroom
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param items 
+ * @param classroom 
  */
 
 
-data class ResponsesGetAllSubjectAttendances (
+data class GetClassroomRes (
 
-    @SerializedName("items")
-    val items: kotlin.collections.List<GetAllSubjectAttendancesItem>
+    @SerializedName("classroom")
+    val classroom: Classroom
 
 ) {
 

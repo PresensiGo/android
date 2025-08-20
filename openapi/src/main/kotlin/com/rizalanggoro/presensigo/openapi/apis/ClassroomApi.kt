@@ -16,6 +16,7 @@
 package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.GetAllClassroomsByMajorIdRes
+import com.rizalanggoro.presensigo.openapi.models.GetClassroomRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateClassroom
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateClassroom
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateClassroom
@@ -207,6 +208,42 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @return GetClassroomRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getClassroom(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<GetClassroomRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

@@ -9,6 +9,7 @@ All URIs are relative to *http://localhost*
 | [**getAllClassroomWithMajors**](ClassroomApi.md#getAllClassroomWithMajors) | **GET** /api/v1/classrooms/batches/{batch_id} |  |
 | [**getAllClassrooms**](ClassroomApi.md#getAllClassrooms) | **GET** /api/v1/classrooms |  |
 | [**getAllClassroomsByMajorId**](ClassroomApi.md#getAllClassroomsByMajorId) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
+| [**getClassroom**](ClassroomApi.md#getClassroom) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id} |  |
 
 
 <a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut"></a>
@@ -234,6 +235,54 @@ try {
 ### Return type
 
 [**GetAllClassroomsByMajorIdRes**](GetAllClassroomsByMajorIdRes.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getClassroom"></a>
+# **getClassroom**
+> GetClassroomRes getClassroom(batchId, majorId, classroomId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = ClassroomApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+try {
+    val result : GetClassroomRes = apiInstance.getClassroom(batchId, majorId, classroomId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling ClassroomApi#getClassroom")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling ClassroomApi#getClassroom")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| **majorId** | **kotlin.Int**| major id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **classroomId** | **kotlin.Int**| classroom id | |
+
+### Return type
+
+[**GetClassroomRes**](GetClassroomRes.md)
 
 ### Authorization
 

@@ -381,7 +381,7 @@ No authorization required
 
 <a id="getAllSubjectAttendances"></a>
 # **getAllSubjectAttendances**
-> ResponsesGetAllSubjectAttendances getAllSubjectAttendances(batchId, majorId, classroomId)
+> GetAllSubjectAttendancesRes getAllSubjectAttendances(batchId, majorId, classroomId)
 
 
 
@@ -396,7 +396,7 @@ val batchId : kotlin.Int = 56 // kotlin.Int | batch id
 val majorId : kotlin.Int = 56 // kotlin.Int | major id
 val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
 try {
-    val result : ResponsesGetAllSubjectAttendances = apiInstance.getAllSubjectAttendances(batchId, majorId, classroomId)
+    val result : GetAllSubjectAttendancesRes = apiInstance.getAllSubjectAttendances(batchId, majorId, classroomId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling AttendanceApi#getAllSubjectAttendances")
@@ -416,7 +416,7 @@ try {
 
 ### Return type
 
-[**ResponsesGetAllSubjectAttendances**](ResponsesGetAllSubjectAttendances.md)
+[**GetAllSubjectAttendancesRes**](GetAllSubjectAttendancesRes.md)
 
 ### Authorization
 

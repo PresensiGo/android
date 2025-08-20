@@ -19,6 +19,7 @@ import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordS
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceReq
+import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent
@@ -28,7 +29,6 @@ import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendan
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceRecords
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendances
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendanceRecords
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendances
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance
@@ -334,10 +334,10 @@ import java.text.DateFormat
          * @param batchId batch id 
          * @param majorId major id 
          * @param classroomId classroom id 
-         * @return ResponsesGetAllSubjectAttendances
+         * @return GetAllSubjectAttendancesRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllSubjectAttendances(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<ResponsesGetAllSubjectAttendances> {
+        open suspend fun getAllSubjectAttendances(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<GetAllSubjectAttendancesRes> {
 
             val localVariableAuthNames = listOf<String>()
 
