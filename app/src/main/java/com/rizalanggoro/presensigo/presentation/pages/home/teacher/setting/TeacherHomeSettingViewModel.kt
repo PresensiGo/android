@@ -6,8 +6,6 @@ import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.data.managers.TokenPayloadManager
-import com.rizalanggoro.presensigo.data.repositories.AuthRepository
-import com.rizalanggoro.presensigo.data.repositories.ResetRepository
 import com.rizalanggoro.presensigo.domain.TeacherTokenPayload
 import com.rizalanggoro.presensigo.openapi.apis.AccountApi
 import com.rizalanggoro.presensigo.openapi.models.LogoutReq
@@ -34,8 +32,6 @@ class TeacherHomeSettingViewModel(
     private val accountApi: AccountApi,
     private val tokenManager: TokenManager,
 
-    private val authRepository: AuthRepository,
-    private val resetRepository: ResetRepository,
     private val tokenPayloadManager: TokenPayloadManager,
 ) : ViewModel() {
     private val _state = MutableStateFlow(State())

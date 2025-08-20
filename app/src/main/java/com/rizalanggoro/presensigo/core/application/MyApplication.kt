@@ -2,7 +2,6 @@ package com.rizalanggoro.presensigo.core.application
 
 import android.app.Application
 import com.rizalanggoro.presensigo.core.di.managerModule
-import com.rizalanggoro.presensigo.core.di.repositoryModule
 import com.rizalanggoro.presensigo.core.di.serviceModule
 import com.rizalanggoro.presensigo.core.di.viewModelModule
 import org.koin.android.ext.koin.androidContext
@@ -17,7 +16,6 @@ class MyApplication : Application() {
             modules(
                 managerModule,
                 serviceModule,
-                repositoryModule,
                 viewModelModule,
             )
         }
