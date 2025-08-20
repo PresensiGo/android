@@ -45,9 +45,9 @@ val attendanceStatuses = listOf<AttendanceStatus>(
         ConstantsAttendanceStatus.AttendanceStatusPermission,
         AppAttendanceStatus.Permission
     ),
-    AttendanceStatus(
-        "Alpha",
-        ConstantsAttendanceStatus.AttendanceStatusAlpha,
-        AppAttendanceStatus.Alpha
-    )
+//    AttendanceStatus(
+//        "Alpha",
+//        ConstantsAttendanceStatus.AttendanceStatusAlpha,
+//        AppAttendanceStatus.Alpha
+//    )
 )

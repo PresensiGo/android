@@ -172,7 +172,9 @@ class DetailSubjectAttendanceViewModel(
                         permissionItems = hasRecordItems.filter {
                             it.record.status == ConstantsAttendanceStatus.AttendanceStatusPermission
                         },
-                        alphaItems = body.items.filter { it.record.id == 0 }
+                        alphaItems = body.items.filter {
+                            it.record.id == 0 || it.record.status == ConstantsAttendanceStatus.AttendanceStatusAlpha
+                        }
                     )
                 )
             }

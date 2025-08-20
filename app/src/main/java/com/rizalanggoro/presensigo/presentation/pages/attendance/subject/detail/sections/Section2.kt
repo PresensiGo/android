@@ -15,8 +15,9 @@ import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
+import androidx.compose.material.icons.rounded.Person
+import androidx.compose.material.icons.rounded.PersonOff
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -45,6 +46,8 @@ import com.rizalanggoro.presensigo.core.constants.attendanceStatuses
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
+import com.rizalanggoro.presensigo.core.extensions.isAfterDateTime
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
 import com.rizalanggoro.presensigo.openapi.models.Student
 import com.rizalanggoro.presensigo.presentation.components.PrimaryButton
@@ -63,6 +66,7 @@ private data class SelectedStudent(
 @Composable
 fun Section2() {
     val viewModel = koinViewModel<DetailSubjectAttendanceViewModel>()
+    val attendanceState by viewModel.attendanceState.collectAsState()
     val recordsState by viewModel.recordsState.collectAsState()
     val createRecordState by viewModel.createRecordState.collectAsState()
 
@@ -115,14 +119,99 @@ fun Section2() {
             }
             with(recordsState) {
                 when (this) {
-                    is UiState.Success -> items(data.presentItems) {
-                        Item(data = it) {
+                    is UiState.Success ->
+                        if (data.presentItems.isEmpty()) item { Empty() }
+                        else items(data.presentItems) {
+                            Item(
+                                data = it, isLate = when (attendanceState.isSuccess()) {
+                                    true -> it.record.dateTime.isAfterDateTime(
+                                        (attendanceState as UiState.Success)
+                                            .data
+                                            .subjectAttendance
+                                            .dateTime
+                                    )
+
+                                    else -> false
+                                }
+                            ) {
+                            }
                         }
-                    }
 
                     else -> items(3) {
                         Item(isLoading = true)
                     }
+                }
+            }
+
+            item {
+                Text(
+                    "Sakit",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = when (recordsState.isLoading()) {
+                        true -> MaterialTheme.colorScheme.outlineVariant
+                        else -> MaterialTheme.colorScheme.onBackground
+                    },
+                    modifier = Modifier
+                        .padding(start = 24.dp, top = 24.dp, bottom = 8.dp)
+                        .then(
+                            when (recordsState.isLoading()) {
+                                true -> Modifier
+                                    .clip(CircleShape)
+                                    .shimmer()
+                                    .background(MaterialTheme.colorScheme.outlineVariant)
+
+                                else -> Modifier
+                            }
+                        )
+                )
+            }
+            with(recordsState) {
+                when (this) {
+                    is UiState.Success ->
+                        if (data.sickItems.isEmpty()) item { Empty() }
+                        else items(data.sickItems) {
+                            Item(data = it) {
+                            }
+                        }
+
+                    else -> items(3) {
+                        Item(isLoading = true)
+                    }
+                }
+            }
+
+            item {
+                Text(
+                    "Izin",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = when (recordsState.isLoading()) {
+                        true -> MaterialTheme.colorScheme.outlineVariant
+                        else -> MaterialTheme.colorScheme.onBackground
+                    },
+                    modifier = Modifier
+                        .padding(start = 24.dp, top = 24.dp, bottom = 8.dp)
+                        .then(
+                            when (recordsState.isLoading()) {
+                                true -> Modifier
+                                    .clip(CircleShape)
+                                    .shimmer()
+                                    .background(MaterialTheme.colorScheme.outlineVariant)
+
+                                else -> Modifier
+                            }
+                        )
+                )
+            }
+            with(recordsState) {
+                when (this) {
+                    is UiState.Success ->
+                        if (data.permissionItems.isEmpty()) item { Empty() }
+                        else items(data.permissionItems) {
+                            Item(data = it) {
+                            }
+                        }
+
+                    else -> items(3) { Item(isLoading = true) }
                 }
             }
 
@@ -150,17 +239,17 @@ fun Section2() {
             }
             with(recordsState) {
                 when (this) {
-                    is UiState.Success -> items(data.alphaItems) {
-                        Item(data = it) {
-                            selectedStudent = SelectedStudent(
-                                student = it.student
-                            )
+                    is UiState.Success ->
+                        if (data.alphaItems.isEmpty()) item { Empty() }
+                        else items(data.alphaItems) {
+                            Item(data = it) {
+                                selectedStudent = SelectedStudent(
+                                    student = it.student
+                                )
+                            }
                         }
-                    }
 
-                    else -> items(3) {
-                        Item(isLoading = true)
-                    }
+                    else -> items(3) { Item(isLoading = true) }
                 }
             }
 
@@ -251,8 +340,31 @@ fun Section2() {
 }
 
 @Composable
+private fun Empty() {
+    Column(
+        modifier = Modifier
+            .padding(24.dp)
+            .fillMaxWidth(),
+        verticalArrangement = Arrangement.spacedBy(8.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
+        Icon(
+            Icons.Rounded.PersonOff,
+            contentDescription = null,
+            tint = MaterialTheme.colorScheme.outlineVariant
+        )
+        Text(
+            "Tidak ada data",
+            style = MaterialTheme.typography.labelMedium,
+            color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+        )
+    }
+}
+
+@Composable
 private fun Item(
     isLoading: Boolean = false,
+    isLate: Boolean = false,
     data: GetAllSubjectAttendanceRecordsItem? = null,
     onClick: () -> Unit = {}
 ) {
@@ -263,7 +375,7 @@ private fun Item(
             .clickable(enabled = isLoading == false) { onClick() }
             .padding(horizontal = 24.dp, vertical = 16.dp),
         verticalAlignment = Alignment.CenterVertically,
-        horizontalArrangement = Arrangement.spacedBy(12.dp)
+        horizontalArrangement = Arrangement.spacedBy(16.dp)
     ) {
         Box(
             modifier = Modifier
@@ -277,7 +389,11 @@ private fun Item(
 
                         else -> Modifier.background(
                             when (isAttended) {
-                                true -> MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = .48f)
+                                true -> when (data?.record?.status == ConstantsAttendanceStatus.AttendanceStatusPresent && isLate) {
+                                    true -> MaterialTheme.colorScheme.onTertiaryContainer.copy(alpha = .48f)
+                                    else -> MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = .48f)
+                                }
+
                                 else -> MaterialTheme.colorScheme.errorContainer
                             }
                         )
@@ -287,15 +403,19 @@ private fun Item(
             if (!isLoading)
                 Icon(
                     when (isAttended) {
-                        true -> Icons.Rounded.Check
+                        true -> Icons.Rounded.Person
                         else -> Icons.Rounded.Close
                     },
                     contentDescription = null,
                     modifier = Modifier.align(Alignment.Center),
                     tint = when (isAttended) {
-                        true -> MaterialTheme.colorScheme.primaryContainer
+                        true -> when (data?.record?.status == ConstantsAttendanceStatus.AttendanceStatusPresent && isLate) {
+                            true -> MaterialTheme.colorScheme.tertiaryContainer
+                            else -> MaterialTheme.colorScheme.primaryContainer
+                        }
+
                         else -> MaterialTheme.colorScheme.onErrorContainer
-                    },
+                    }
                 )
         }
         Column(
@@ -324,7 +444,7 @@ private fun Item(
             )
             Text(
                 data?.student?.nis ?: "loading nis siswa",
-                style = MaterialTheme.typography.bodyMedium,
+                style = MaterialTheme.typography.bodySmall,
                 modifier = when (isLoading) {
                     true -> Modifier
                         .shimmer()
