@@ -17,7 +17,6 @@ docs/DomainsStudent.md
 docs/DomainsStudentMajorClassroom.md
 docs/DomainsStudentToken.md
 docs/DomainsSubjectAttendanceRecord.md
-docs/DomainsUser.md
 docs/DtoStudentAccount.md
 docs/GeneralAttendance.md
 docs/GetAllBatchesItem.md
@@ -35,6 +34,8 @@ docs/GetAllSubjectAttendancesRes.md
 docs/GetBatchRes.md
 docs/GetClassroomRes.md
 docs/GetMajorRes.md
+docs/GetSubjectAttendanceRes.md
+docs/GetSubjectRes.md
 docs/LoginReq.md
 docs/LoginRes.md
 docs/LoginStudentReq.md
@@ -78,7 +79,6 @@ docs/ResponsesGetAllSubjectAttendanceRecords.md
 docs/ResponsesGetAllSubjects.md
 docs/ResponsesGetAllUsers.md
 docs/ResponsesGetGeneralAttendance.md
-docs/ResponsesGetSubjectAttendance.md
 docs/ResponsesImportAccounts.md
 docs/ResponsesLogout.md
 docs/ResponsesUpdateAccountPassword.md
@@ -90,6 +90,7 @@ docs/StudentApi.md
 docs/Subject.md
 docs/SubjectApi.md
 docs/SubjectAttendance.md
+docs/User.md
 gradle/wrapper/gradle-wrapper.jar
 gradle/wrapper/gradle-wrapper.properties
 gradlew
@@ -125,7 +126,6 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsStudent.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsStudentMajorClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsStudentToken.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsSubjectAttendanceRecord.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsUser.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DtoStudentAccount.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GeneralAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllBatchesItem.kt
@@ -143,6 +143,8 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllSubjectAttendan
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetBatchRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetClassroomRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetMajorRes.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetSubjectAttendanceRes.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetSubjectRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/LoginReq.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/LoginRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/LoginStudentReq.kt
@@ -184,7 +186,6 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllSubjec
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllSubjects.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllUsers.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetGeneralAttendance.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetSubjectAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesImportAccounts.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesLogout.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateAccountPassword.kt
@@ -194,3 +195,4 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateGenera
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesUpdateSubject.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/Subject.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/SubjectAttendance.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/User.kt

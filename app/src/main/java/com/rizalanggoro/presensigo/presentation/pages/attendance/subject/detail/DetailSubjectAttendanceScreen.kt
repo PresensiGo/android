@@ -33,7 +33,7 @@ import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailSubjectAttendanceScreen() {
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(1) }
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
 
     val navController = LocalNavController.current
 

@@ -16,17 +16,22 @@
 package com.rizalanggoro.presensigo.openapi.models
 
 import com.rizalanggoro.presensigo.openapi.models.SubjectAttendance
+import com.rizalanggoro.presensigo.openapi.models.User
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
+ * @param creator 
  * @param subjectAttendance 
  */
 
 
-data class ResponsesGetSubjectAttendance (
+data class GetSubjectAttendanceRes (
+
+    @SerializedName("creator")
+    val creator: User,
 
     @SerializedName("subject_attendance")
     val subjectAttendance: SubjectAttendance

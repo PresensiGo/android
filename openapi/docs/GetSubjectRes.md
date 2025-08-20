@@ -1,10 +1,10 @@
 
-# ResponsesUpdateAccountPassword
+# GetSubjectRes
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **user** | [**User**](User.md) |  |  |
+| **subject** | [**Subject**](Subject.md) |  |  |
 
 
 

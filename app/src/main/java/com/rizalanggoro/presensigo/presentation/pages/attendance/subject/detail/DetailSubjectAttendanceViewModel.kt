@@ -8,11 +8,17 @@ import androidx.navigation.toRoute
 import com.google.gson.Gson
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.constants.StateStatus
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.core.qr.QrGenerator
 import com.rizalanggoro.presensigo.domain.QrData
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
+import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
+import com.rizalanggoro.presensigo.openapi.apis.SubjectApi
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
+import com.rizalanggoro.presensigo.openapi.models.GetClassroomRes
+import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
+import com.rizalanggoro.presensigo.openapi.models.GetSubjectRes
 import com.rizalanggoro.presensigo.openapi.models.SubjectAttendance
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.statement.bodyAsText
@@ -38,8 +44,24 @@ data class State(
 
 class DetailSubjectAttendanceViewModel(
     savedStateHandle: SavedStateHandle,
-    private val attendanceApi: AttendanceApi
+    private val attendanceApi: AttendanceApi,
+    private val subjectApi: SubjectApi,
+    private val classroomApi: ClassroomApi
 ) : ViewModel() {
+    private val _qrCode = MutableStateFlow<Bitmap?>(null)
+    val qrCode get() = _qrCode.asStateFlow()
+
+    private val _attendanceState = MutableStateFlow<UiState<GetSubjectAttendanceRes>>(
+        UiState.Loading
+    )
+    val attendanceState get() = _attendanceState.asStateFlow()
+
+    private val _subjectState = MutableStateFlow<UiState<GetSubjectRes>>(UiState.Loading)
+    val subjectState get() = _subjectState.asStateFlow()
+
+    private val _classroomState = MutableStateFlow<UiState<GetClassroomRes>>(UiState.Loading)
+    val classroomState get() = _classroomState.asStateFlow()
+
     private val _state = MutableStateFlow(State())
     val state get() = _state.asStateFlow()
 
@@ -52,19 +74,16 @@ class DetailSubjectAttendanceViewModel(
 
     fun getSubjectAttendance() = viewModelScope.launch {
         try {
-            _state.update {
-                it.copy(
-                    status = StateStatus.Loading,
-                    action = State.Action.GetSubjectAttendance
-                )
-            }
-
+            _attendanceState.update { UiState.Loading }
             val body = attendanceApi.getSubjectAttendance(
                 batchId = params.batchId,
                 majorId = params.majorId,
                 classroomId = params.classroomId,
                 subjectAttendanceId = params.attendanceId
             ).body()
+
+            getSubject(subjectId = body.subjectAttendance.subjectId)
+            getClassroom()
 
             // generate qrcode
             val qrCodeData = Gson().toJson(
@@ -74,32 +93,58 @@ class DetailSubjectAttendanceViewModel(
                 )
             )
 
-            _state.update {
-                it.copy(
-                    status = StateStatus.Success,
-                    action = State.Action.GetSubjectAttendance,
-                    attendance = body.subjectAttendance,
-                    qrCodeBitmap = QrGenerator.generateBitmap(qrCodeData)
-                )
-            }
+            _qrCode.update { QrGenerator.generateBitmap(qrCodeData) }
+            _attendanceState.update { UiState.Success(data = body) }
         } catch (e: ResponseException) {
             e.printStackTrace()
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
-                    action = State.Action.GetSubjectAttendance,
+            _attendanceState.update {
+                UiState.Failure(
                     message = e.response.bodyAsText().toFailure().message
                 )
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
-                    action = State.Action.GetSubjectAttendance,
-                    message = "Terjadi kesalahan tak terduga!"
+            _attendanceState.update { UiState.Failure() }
+        }
+    }
+
+    fun getSubject(subjectId: Int) = viewModelScope.launch {
+        try {
+            _subjectState.update { UiState.Loading }
+            val body = subjectApi.getSubject(subjectId = subjectId).body()
+            _subjectState.update { UiState.Success(data = body) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _subjectState.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
                 )
             }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _subjectState.update { UiState.Failure() }
+        }
+    }
+
+    fun getClassroom() = viewModelScope.launch {
+        try {
+            _classroomState.update { UiState.Loading }
+            val body = classroomApi.getClassroom(
+                batchId = params.batchId,
+                majorId = params.majorId,
+                classroomId = params.classroomId
+            ).body()
+            _classroomState.update { UiState.Success(data = body) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _classroomState.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _classroomState.update { UiState.Failure() }
         }
     }
 

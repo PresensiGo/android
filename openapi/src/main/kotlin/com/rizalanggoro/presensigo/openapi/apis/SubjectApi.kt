@@ -15,6 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.GetSubjectRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateSubject
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateSubject
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubject
@@ -131,6 +132,40 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/subjects",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/subjects/{subject_id}
+        * 
+        * 
+         * @param subjectId subject id 
+         * @return GetSubjectRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getSubject(subjectId: kotlin.Int): HttpResponse<GetSubjectRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/subjects/{subject_id}".replace("{" + "subject_id" + "}", "$subjectId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

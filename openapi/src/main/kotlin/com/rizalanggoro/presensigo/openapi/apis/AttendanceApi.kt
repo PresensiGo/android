@@ -20,6 +20,7 @@ import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes
+import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent
@@ -30,7 +31,6 @@ import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendan
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendances
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendanceRecords
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetGeneralAttendance
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
@@ -405,10 +405,10 @@ import java.text.DateFormat
          * @param majorId major id 
          * @param classroomId classroom id 
          * @param subjectAttendanceId subject attendance id 
-         * @return ResponsesGetSubjectAttendance
+         * @return GetSubjectAttendanceRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getSubjectAttendance(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, subjectAttendanceId: kotlin.Int): HttpResponse<ResponsesGetSubjectAttendance> {
+        open suspend fun getSubjectAttendance(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, subjectAttendanceId: kotlin.Int): HttpResponse<GetSubjectAttendanceRes> {
 
             val localVariableAuthNames = listOf<String>()
 

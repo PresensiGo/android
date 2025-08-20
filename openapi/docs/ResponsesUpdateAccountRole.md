@@ -4,7 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **user** | [**DomainsUser**](DomainsUser.md) |  |  |
+| **user** | [**User**](User.md) |  |  |
 
 
 

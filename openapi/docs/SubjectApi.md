@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**createSubject**](SubjectApi.md#createSubject) | **POST** /api/v1/subjects |  |
 | [**deleteSubject**](SubjectApi.md#deleteSubject) | **DELETE** /api/v1/subjects/{subject_id} |  |
 | [**getAllSubjects**](SubjectApi.md#getAllSubjects) | **GET** /api/v1/subjects |  |
+| [**getSubject**](SubjectApi.md#getSubject) | **GET** /api/v1/subjects/{subject_id} |  |
 | [**updateSubject**](SubjectApi.md#updateSubject) | **PUT** /api/v1/subjects/{subject_id} |  |
 
 
@@ -129,6 +130,50 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ResponsesGetAllSubjects**](ResponsesGetAllSubjects.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getSubject"></a>
+# **getSubject**
+> GetSubjectRes getSubject(subjectId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = SubjectApi()
+val subjectId : kotlin.Int = 56 // kotlin.Int | subject id
+try {
+    val result : GetSubjectRes = apiInstance.getSubject(subjectId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling SubjectApi#getSubject")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling SubjectApi#getSubject")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **subjectId** | **kotlin.Int**| subject id | |
+
+### Return type
+
+[**GetSubjectRes**](GetSubjectRes.md)
 
 ### Authorization
 

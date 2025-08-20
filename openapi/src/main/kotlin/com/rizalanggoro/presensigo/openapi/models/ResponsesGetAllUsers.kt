@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsUser
+import com.rizalanggoro.presensigo.openapi.models.User
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class ResponsesGetAllUsers (
 
     @SerializedName("users")
-    val users: kotlin.collections.List<DomainsUser>
+    val users: kotlin.collections.List<User>
 
 ) {
 

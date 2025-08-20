@@ -30,7 +30,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class DomainsUser (
+data class User (
 
     @SerializedName("email")
     val email: kotlin.String,
