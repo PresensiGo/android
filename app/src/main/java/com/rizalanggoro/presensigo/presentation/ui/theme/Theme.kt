@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.ui.theme
+package com.rizalanggoro.presensigo.presentation.ui.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

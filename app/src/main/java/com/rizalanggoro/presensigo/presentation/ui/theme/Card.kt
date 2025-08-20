@@ -1,4 +1,4 @@
-package com.rizalanggoro.presensigo.ui.theme
+package com.rizalanggoro.presensigo.presentation.ui.theme
 
 import androidx.compose.foundation.shape.CornerBasedShape
 import androidx.compose.foundation.shape.RoundedCornerShape
@@ -11,11 +11,11 @@ object CardCornerShape {
     }
 
     fun getPosition(index: Int, size: Int): Position = when (size == 1) {
-        true -> CardCornerShape.Position.Single
+        true -> Position.Single
         else -> when (index) {
-            0 -> CardCornerShape.Position.Top
-            size - 1 -> CardCornerShape.Position.Bottom
-            else -> CardCornerShape.Position.Center
+            0 -> Position.Top
+            size - 1 -> Position.Bottom
+            else -> Position.Center
         }
     }
 

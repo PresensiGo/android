@@ -22,7 +22,7 @@ import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeSc
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.TeacherHomeScreen
 import com.rizalanggoro.presensigo.presentation.pages.qrscanner.QRScannerScreen
 import com.rizalanggoro.presensigo.presentation.pages.student.profile.ProfileStudentScreen
-import com.rizalanggoro.presensigo.ui.theme.PresensiGoTheme
+import com.rizalanggoro.presensigo.presentation.ui.theme.PresensiGoTheme
 
 @Composable
 fun MyComposeApplication(
