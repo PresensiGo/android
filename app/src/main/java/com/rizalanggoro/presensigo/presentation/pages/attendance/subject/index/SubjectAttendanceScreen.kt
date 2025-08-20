@@ -1,7 +1,7 @@
 package com.rizalanggoro.presensigo.presentation.pages.attendance.subject.index
 
 import androidx.compose.foundation.background
-import androidx.compose.foundation.clickable
+import androidx.compose.foundation.combinedClickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
@@ -21,6 +21,9 @@ import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.automirrored.rounded.ArrowRightAlt
 import androidx.compose.material.icons.rounded.Add
 import androidx.compose.material.icons.rounded.Category
+import androidx.compose.material.icons.rounded.Inbox
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -30,11 +33,15 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
@@ -45,8 +52,10 @@ import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
+import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesItem
+import com.rizalanggoro.presensigo.presentation.components.SmallCircularProgressIndicator
 import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
 
@@ -58,9 +67,20 @@ fun SubjectAttendanceScreen() {
     val majorState by viewModel.majorState.collectAsState()
     val classroomState by viewModel.classroomState.collectAsState()
     val attendancesState by viewModel.attendancesState.collectAsState()
+    val deleteState by viewModel.deleteState.collectAsState()
 
     val navController = LocalNavController.current
     val backStackEntry by navController.currentBackStackEntryAsState()
+
+    var attendanceForDelete by remember { mutableStateOf<GetAllSubjectAttendancesItem?>(null) }
+
+    LaunchedEffect(deleteState) {
+        if (deleteState.isSuccess()) {
+            viewModel.getAllAttendances()
+            viewModel.resetDeleteState()
+            attendanceForDelete = null
+        }
+    }
 
     LaunchedEffect(backStackEntry?.savedStateHandle) {
         val savedStateHandle = backStackEntry?.savedStateHandle
@@ -114,41 +134,6 @@ fun SubjectAttendanceScreen() {
                     .clip(RoundedCornerShape(topEnd = 24.dp, topStart = 24.dp))
                     .background(MaterialTheme.colorScheme.background),
             ) {
-//                Row(
-//                    modifier = Modifier
-//                        .clip(CircleShape)
-//                        .background(MaterialTheme.colorScheme.surfaceVariant)
-//                        .fillMaxWidth()
-//                        .height(56.dp)
-//                        .padding(horizontal = 4.dp),
-//                    verticalAlignment = Alignment.CenterVertically
-//                ) {
-//                    listOf("Yang lalu", "Hari ini").mapIndexed { index, item ->
-//                        val isSelected = index == 1
-//                        Button(
-//                            elevation = ButtonDefaults.buttonElevation(
-//                                defaultElevation = 0.dp,
-//                                pressedElevation = 0.dp,
-//                                focusedElevation = 0.dp,
-//                                hoveredElevation = 0.dp,
-//                                disabledElevation = 0.dp
-//                            ),
-//                            colors = ButtonDefaults.buttonColors(
-//                                containerColor = when (isSelected) {
-//                                    true -> MaterialTheme.colorScheme.background
-//                                    else -> MaterialTheme.colorScheme.surfaceVariant
-//                                },
-//                                contentColor = MaterialTheme.colorScheme.onSurfaceVariant
-//                            ),
-//                            onClick = { },
-//                            modifier = Modifier
-//                                .weight(1f)
-//                                .height(48.dp)
-//                        ) {
-//                            Text(item, fontWeight = FontWeight.SemiBold)
-//                        }
-//                    }
-//                }
                 PullToRefreshBox(
                     isRefreshing = batchState.isLoading() || majorState.isLoading() || classroomState.isLoading() || attendancesState.isLoading(),
                     onRefresh = {
@@ -198,7 +183,7 @@ fun SubjectAttendanceScreen() {
                                                 else -> "-"
                                             }
                                         }
-                                    }.",
+                                    }. Tekan dan tahan untuk menghapus presensi.",
                                     style = MaterialTheme.typography.bodyMedium,
                                     color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f),
                                 )
@@ -211,18 +196,48 @@ fun SubjectAttendanceScreen() {
                                     SubjectAttendanceItem(isLoading = true)
                                 }
 
-                                is UiState.Success -> items(data.items) {
-                                    SubjectAttendanceItem(data = it) {
-                                        navController.navigate(
-                                            Routes.Attendance.Subject.Detail(
-                                                batchId = viewModel.params.batchId,
-                                                majorId = viewModel.params.majorId,
-                                                classroomId = viewModel.params.classroomId,
-                                                attendanceId = it.subjectAttendance.id
+                                is UiState.Success ->
+                                    if (data.items.isEmpty()) item {
+                                        Column(
+                                            modifier = Modifier
+                                                .fillMaxWidth()
+                                                .padding(24.dp),
+                                            horizontalAlignment = Alignment.CenterHorizontally,
+                                            verticalArrangement = Arrangement.spacedBy(16.dp)
+                                        ) {
+                                            Icon(
+                                                Icons.Rounded.Inbox,
+                                                contentDescription = null,
+                                                tint = MaterialTheme.colorScheme.outlineVariant,
+                                                modifier = Modifier.size(48.dp)
                                             )
+                                            Text(
+                                                "Tidak ada data presensi",
+                                                style = MaterialTheme.typography.bodyMedium,
+                                                color = MaterialTheme.colorScheme.onBackground.copy(
+                                                    alpha = .8f
+                                                ),
+                                            )
+                                        }
+                                    }
+                                    else items(data.items) {
+                                        SubjectAttendanceItem(
+                                            data = it,
+                                            onClick = {
+                                                navController.navigate(
+                                                    Routes.Attendance.Subject.Detail(
+                                                        batchId = viewModel.params.batchId,
+                                                        majorId = viewModel.params.majorId,
+                                                        classroomId = viewModel.params.classroomId,
+                                                        attendanceId = it.subjectAttendance.id
+                                                    )
+                                                )
+                                            },
+                                            onLongClick = {
+                                                attendanceForDelete = it
+                                            }
                                         )
                                     }
-                                }
 
                                 else -> Unit
                             }
@@ -235,6 +250,43 @@ fun SubjectAttendanceScreen() {
                 }
             }
         }
+
+        // dialogs
+        if (attendanceForDelete != null)
+            AlertDialog(
+                onDismissRequest = {
+                    if (!deleteState.isLoading())
+                        attendanceForDelete = null
+                },
+                title = { Text("Konfirmasi Hapus") },
+                text = {
+                    Text(
+                        "Apakah Anda yakin akan menghapus presensi fisika pada kamis? " +
+                                "Tindakan yang Anda lakukan tidak dapat dipulihkan."
+                    )
+                },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            viewModel.deleteAttendance(
+                                attendanceId = attendanceForDelete!!.subjectAttendance.id
+                            )
+                        },
+                        enabled = !deleteState.isLoading()
+                    ) {
+                        if (deleteState.isLoading()) SmallCircularProgressIndicator()
+                        else Text("Hapus")
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = { attendanceForDelete = null },
+                        enabled = !deleteState.isLoading()
+                    ) {
+                        Text("Batal")
+                    }
+                }
+            )
     }
 }
 
@@ -242,14 +294,19 @@ fun SubjectAttendanceScreen() {
 private fun SubjectAttendanceItem(
     isLoading: Boolean = false,
     data: GetAllSubjectAttendancesItem? = null,
-    onClick: () -> Unit = {}
+    onClick: () -> Unit = {},
+    onLongClick: () -> Unit = {},
 ) {
     OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
             .padding(horizontal = 24.dp)
             .clip(CardDefaults.outlinedShape)
-            .clickable(enabled = isLoading == false) { onClick() }
+            .combinedClickable(
+                enabled = isLoading == false,
+                onClick = { onClick() },
+                onLongClick = { onLongClick() }
+            )
     ) {
         Column(
             modifier = Modifier.padding(16.dp),

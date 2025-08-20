@@ -8,22 +8,17 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.automirrored.rounded.ArrowBack
 import androidx.compose.material.icons.rounded.AccessTime
 import androidx.compose.material.icons.rounded.ChevronRight
 import androidx.compose.material.icons.rounded.Today
-import androidx.compose.material3.Button
-import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TimePickerState
@@ -39,10 +34,10 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
-import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.presentation.components.DatePickerModal
+import com.rizalanggoro.presensigo.presentation.components.PrimaryButton
 import com.rizalanggoro.presensigo.presentation.components.TimePickerDialog
 import org.koin.androidx.compose.koinViewModel
 import java.util.Locale
@@ -60,7 +55,7 @@ fun CreateGeneralAttendanceScreen() {
 
     var date by remember { mutableStateOf<Long?>(null) }
     var time by remember { mutableStateOf<TimePickerState?>(null) }
-    var note by remember { mutableStateOf("") }
+//    var note by remember { mutableStateOf("") }
 
     LaunchedEffect(state.status) {
         if (state.status.isSuccess()) {
@@ -161,48 +156,37 @@ fun CreateGeneralAttendanceScreen() {
                             .padding(horizontal = 8.dp),
                     )
                 }
-                Column(
-                    verticalArrangement = Arrangement.spacedBy(8.dp),
-                    modifier = Modifier.padding(horizontal = 24.dp)
-                ) {
-                    Text(
-                        "Catatan Tambahan",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.onBackground
-                    )
-                    OutlinedTextField(
-                        colors = OutlinedTextFieldDefaults.colors(
-                            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
-                        ),
-                        shape = RoundedCornerShape(8.dp),
-                        value = note,
-                        onValueChange = { note = it },
-                        placeholder = { Text("Masukkan catatan tambahan") },
-                        minLines = 5,
-                        modifier = Modifier
-                            .fillMaxWidth()
-                    )
-                }
-                if (state.status.isLoading())
-                    CircularProgressIndicator()
+//                Column(
+//                    verticalArrangement = Arrangement.spacedBy(8.dp),
+//                    modifier = Modifier.padding(horizontal = 24.dp)
+//                ) {
+//                    Text(
+//                        "Catatan Tambahan",
+//                        style = MaterialTheme.typography.labelLarge,
+//                        color = MaterialTheme.colorScheme.onBackground
+//                    )
+//                    OutlinedTextField(
+//                        colors = OutlinedTextFieldDefaults.colors(
+//                            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
+//                        ),
+//                        shape = RoundedCornerShape(8.dp),
+//                        value = note,
+//                        onValueChange = { note = it },
+//                        placeholder = { Text("Masukkan catatan tambahan") },
+//                        minLines = 5,
+//                        modifier = Modifier
+//                            .fillMaxWidth()
+//                    )
+//                }
+//                if (state.status.isLoading())
+//                    CircularProgressIndicator()
                 Spacer(modifier = Modifier.weight(1f))
-                Button(
-                    enabled = !state.status.isLoading(),
-                    onClick = {
-                        if (date != null && time != null)
-                            viewModel.create(
-                                date = date!!,
-                                time = time!!,
-                                note = note
-                            )
-                    },
-                    modifier = Modifier
-                        .fillMaxWidth()
-                        .padding(horizontal = 24.dp)
-                        .padding(bottom = 24.dp)
-                        .size(48.dp)
-                ) {
-                    Text("Simpan")
+                PrimaryButton(text = "Simpan") {
+                    if (date != null && time != null)
+                        viewModel.create(
+                            date = date!!,
+                            time = time!!,
+                        )
                 }
             }
         }

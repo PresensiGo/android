@@ -28,12 +28,11 @@ import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.presentation.components.CustomTab
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.sections.Section1
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.sections.Section2
-import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.sections.Section3
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun DetailSubjectAttendanceScreen() {
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(1) }
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
 
     val navController = LocalNavController.current
 
@@ -68,7 +67,7 @@ fun DetailSubjectAttendanceScreen() {
                     .background(MaterialTheme.colorScheme.background),
             ) {
                 CustomTab(
-                    items = listOf("QR", "Siswa", "Lainnya"),
+                    items = listOf("QR", "Siswa"),
                     selectedIndex = selectedTabIndex,
                     modifier = Modifier.padding(start = 24.dp, end = 24.dp, top = 24.dp)
                 ) { selectedTabIndex = it }
@@ -77,7 +76,6 @@ fun DetailSubjectAttendanceScreen() {
                 when (selectedTabIndex) {
                     0 -> Section1()
                     1 -> Section2()
-                    2 -> Section3()
                 }
             }
         }

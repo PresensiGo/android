@@ -24,8 +24,6 @@ import androidx.compose.material3.ListItem
 import androidx.compose.material3.ListItemDefaults
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.ModalBottomSheet
-import androidx.compose.material3.OutlinedTextField
-import androidx.compose.material3.OutlinedTextFieldDefaults
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
@@ -74,7 +72,6 @@ fun CreateSubjectAttendanceScreen() {
     var subject by remember { mutableStateOf<Int?>(null) }
     var date by remember { mutableStateOf<Long?>(null) }
     var time by remember { mutableStateOf<TimePickerState?>(null) }
-    var note by remember { mutableStateOf("") }
 
     LaunchedEffect(state.status, state.action) {
         with(state) {
@@ -200,19 +197,6 @@ fun CreateSubjectAttendanceScreen() {
                             .padding(horizontal = 8.dp),
                     )
                 }
-                OutlinedTextField(
-                    colors = OutlinedTextFieldDefaults.colors(
-                        unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
-                    ),
-                    shape = RoundedCornerShape(8.dp),
-                    value = note,
-                    onValueChange = { note = it },
-                    placeholder = { Text("Masukkan catatan tambahan") },
-                    minLines = 5,
-                    modifier = Modifier
-                        .padding(horizontal = 24.dp)
-                        .fillMaxWidth()
-                )
 
                 Spacer(modifier = Modifier.weight(1f))
 
@@ -226,7 +210,6 @@ fun CreateSubjectAttendanceScreen() {
                             subject = subject!!,
                             date = date!!,
                             time = time!!,
-                            note = note
                         )
                 }
             }

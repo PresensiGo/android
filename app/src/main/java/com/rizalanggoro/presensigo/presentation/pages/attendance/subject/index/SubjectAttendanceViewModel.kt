@@ -37,19 +37,22 @@ class SubjectAttendanceViewModel(
     private val classroomApi: ClassroomApi,
     private val attendanceApi: AttendanceApi
 ) : ViewModel() {
-    private val _batchState = MutableStateFlow<UiState<GetBatchRes>>(UiState.Initial)
+    private val _batchState = MutableStateFlow<UiState<GetBatchRes>>(UiState.Loading)
     val batchState get() = _batchState.asStateFlow()
 
-    private val _majorState = MutableStateFlow<UiState<GetMajorRes>>(UiState.Initial)
+    private val _majorState = MutableStateFlow<UiState<GetMajorRes>>(UiState.Loading)
     val majorState get() = _majorState.asStateFlow()
 
-    private val _classroomState = MutableStateFlow<UiState<GetClassroomRes>>(UiState.Initial)
+    private val _classroomState = MutableStateFlow<UiState<GetClassroomRes>>(UiState.Loading)
     val classroomState get() = _classroomState.asStateFlow()
 
     private val _attendancesState = MutableStateFlow<UiState<GetAllSubjectAttendancesRes>>(
-        UiState.Initial
+        UiState.Loading
     )
     val attendancesState get() = _attendancesState.asStateFlow()
+
+    private val _deleteState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
+    val deleteState get() = _deleteState.asStateFlow()
 
     val params = savedStateHandle.toRoute<Routes.Attendance.Subject.Index>()
 
@@ -144,4 +147,29 @@ class SubjectAttendanceViewModel(
             _attendancesState.update { UiState.Failure() }
         }
     }
+
+    fun deleteAttendance(attendanceId: Int) = viewModelScope.launch {
+        try {
+            _deleteState.update { UiState.Loading }
+            attendanceApi.deleteSubjectAttendance(
+                batchId = params.batchId,
+                majorId = params.majorId,
+                classroomId = params.classroomId,
+                subjectAttendanceId = attendanceId
+            )
+            _deleteState.update { UiState.Success(Unit) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _deleteState.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _deleteState.update { UiState.Failure() }
+        }
+    }
+
+    fun resetDeleteState() = _deleteState.update { UiState.Initial }
 }

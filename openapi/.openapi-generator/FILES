@@ -71,6 +71,7 @@ docs/ResponsesCreateSubjectAttendanceRecordStudent.md
 docs/ResponsesDeleteAccount.md
 docs/ResponsesDeleteGeneralAttendance.md
 docs/ResponsesDeleteSubject.md
+docs/ResponsesDeleteSubjectAttendance.md
 docs/ResponsesDeleteSubjectAttendanceRecord.md
 docs/ResponsesEjectStudentToken.md
 docs/ResponsesGetAll.md
@@ -182,6 +183,7 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesCreateSubjec
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesDeleteAccount.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesDeleteGeneralAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesDeleteSubject.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesDeleteSubjectAttendance.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesDeleteSubjectAttendanceRecord.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesEjectStudentToken.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAll.kt

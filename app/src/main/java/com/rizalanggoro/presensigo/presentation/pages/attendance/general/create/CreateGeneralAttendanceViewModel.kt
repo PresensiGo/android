@@ -29,7 +29,7 @@ class CreateGeneralAttendanceViewModel(
     val state get() = _state.asStateFlow()
 
     @OptIn(ExperimentalMaterial3Api::class)
-    fun create(date: Long, time: TimePickerState, note: String) = viewModelScope.launch {
+    fun create(date: Long, time: TimePickerState) = viewModelScope.launch {
         try {
             _state.update {
                 it.copy(
@@ -46,7 +46,6 @@ class CreateGeneralAttendanceViewModel(
             attendanceApi.createGeneralAttendance(
                 CreateGeneralAttendanceReq(
                     datetime = datetime,
-                    note = note
                 )
             )
 

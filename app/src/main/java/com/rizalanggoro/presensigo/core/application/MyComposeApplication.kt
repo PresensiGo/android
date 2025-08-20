@@ -43,11 +43,11 @@ fun MyComposeApplication(
 //                            TokenType.Student -> Routes.Home.Student
 //                        }
 //                        true -> Routes.ProfileStudent
-                        true -> Routes.Attendance.Subject.Detail(
+                        true -> Routes.Attendance.Subject.Index(
                             batchId = 3,
                             majorId = 6,
                             classroomId = 14,
-                            attendanceId = 1
+//                            attendanceId = 1
                         )
 
                         else -> Routes.Auth

@@ -88,7 +88,7 @@ class CreateSubjectAttendanceViewModel(
     }
 
     @OptIn(ExperimentalMaterial3Api::class)
-    fun create(subject: Int, date: Long, time: TimePickerState, note: String) =
+    fun create(subject: Int, date: Long, time: TimePickerState) =
         viewModelScope.launch {
             try {
                 _state.update {
@@ -110,8 +110,8 @@ class CreateSubjectAttendanceViewModel(
                     classroomId = params.classroomId,
                     body = CreateSubjectAttendanceReq(
                         datetime = datetime,
-                        note = note,
-                        subjectId = subject
+                        subjectId = subject,
+                        note = ""
                     )
                 )
 
