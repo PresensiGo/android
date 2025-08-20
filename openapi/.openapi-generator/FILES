@@ -20,6 +20,8 @@ docs/DomainsSubjectAttendanceRecord.md
 docs/DomainsUser.md
 docs/DtoStudentAccount.md
 docs/GeneralAttendance.md
+docs/GetAllBatchesItem.md
+docs/GetAllBatchesRes.md
 docs/GetAllGeneralAttendanceRecordsItem.md
 docs/GetAllStudentsByClassroomIdRes.md
 docs/GetAllStudentsRes.md
@@ -60,7 +62,6 @@ docs/ResponsesDeleteGeneralAttendance.md
 docs/ResponsesDeleteSubject.md
 docs/ResponsesEjectStudentToken.md
 docs/ResponsesGetAll.md
-docs/ResponsesGetAllBatches.md
 docs/ResponsesGetAllClassroomWithMajors.md
 docs/ResponsesGetAllClassroomsByMajorId.md
 docs/ResponsesGetAllGeneralAttendanceRecords.md
@@ -123,6 +124,8 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsSubjectAttenda
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DomainsUser.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/DtoStudentAccount.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GeneralAttendance.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllBatchesItem.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllBatchesRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendanceRecordsItem.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllStudentsByClassroomIdRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllStudentsRes.kt
@@ -161,7 +164,6 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesDeleteGenera
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesDeleteSubject.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesEjectStudentToken.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAll.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllBatches.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllClassroomWithMajors.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllClassroomsByMajorId.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllGeneralAttendanceRecords.kt

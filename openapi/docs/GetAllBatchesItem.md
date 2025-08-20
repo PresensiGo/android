@@ -1,10 +1,11 @@
 
-# ResponsesGetAllBatches
+# GetAllBatchesItem
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **batches** | [**kotlin.collections.List&lt;Batch&gt;**](Batch.md) |  |  |
+| **batch** | [**Batch**](Batch.md) |  |  |
+| **majorCount** | **kotlin.Int** |  |  |
 
 
 

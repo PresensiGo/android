@@ -145,7 +145,7 @@ No authorization required
 
 <a id="getAllBatches"></a>
 # **getAllBatches**
-> ResponsesGetAllBatches getAllBatches()
+> GetAllBatchesRes getAllBatches()
 
 
 
@@ -157,7 +157,7 @@ No authorization required
 
 val apiInstance = BatchApi()
 try {
-    val result : ResponsesGetAllBatches = apiInstance.getAllBatches()
+    val result : GetAllBatchesRes = apiInstance.getAllBatches()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling BatchApi#getAllBatches")
@@ -173,7 +173,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResponsesGetAllBatches**](ResponsesGetAllBatches.md)
+[**GetAllBatchesRes**](GetAllBatchesRes.md)
 
 ### Authorization
 

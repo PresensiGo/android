@@ -38,10 +38,10 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
-import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
-import com.rizalanggoro.presensigo.openapi.models.Batch
+import com.rizalanggoro.presensigo.openapi.models.GetAllBatchesItem
 import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
 
@@ -86,7 +86,7 @@ fun TeacherHomeSubjectAttendanceScreen() {
                 verticalArrangement = Arrangement.spacedBy(8.dp)
             ) {
                 PullToRefreshBox(
-                    isRefreshing = state.status.isLoading(),
+                    isRefreshing = state.isLoading(),
                     onRefresh = { viewModel.getAllBatches() },
                     modifier = Modifier.fillMaxSize()
                 ) {
@@ -116,23 +116,25 @@ fun TeacherHomeSubjectAttendanceScreen() {
                             }
                         }
 
-                        // loading state
-                        if (state.status.isLoading())
-                            items(3) {
-                                BatchItem(isLoading = true)
-                            }
-
-                        // success state
-                        if (state.status.isSuccess())
-                            items(state.batches) {
-                                BatchItem(batch = it) {
-                                    navController.navigate(
-                                        Routes.Attendance.Subject.Major(
-                                            batchId = it.id
-                                        )
-                                    )
+                        with(state) {
+                            when (this) {
+                                is UiState.Loading -> items(3) {
+                                    BatchItem(isLoading = true)
                                 }
+
+                                is UiState.Success -> items(data.items) {
+                                    BatchItem(data = it) {
+                                        navController.navigate(
+                                            Routes.Attendance.Subject.Major(
+                                                batchId = it.batch.id
+                                            )
+                                        )
+                                    }
+                                }
+
+                                else -> Unit
                             }
+                        }
                     }
                 }
             }
@@ -143,7 +145,7 @@ fun TeacherHomeSubjectAttendanceScreen() {
 @Composable
 private fun BatchItem(
     isLoading: Boolean = false,
-    batch: Batch? = null,
+    data: GetAllBatchesItem? = null,
     onClick: () -> Unit = {}
 ) {
     OutlinedCard(
@@ -192,7 +194,7 @@ private fun BatchItem(
                     )
                 }
                 Text(
-                    batch?.name ?: "nama angkatan",
+                    data?.batch?.name ?: "nama angkatan",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.then(
                         when (isLoading) {
@@ -216,7 +218,7 @@ private fun BatchItem(
                 horizontalArrangement = Arrangement.SpaceBetween
             ) {
                 Text(
-                    "2 Jurusan",
+                    "${data?.majorCount ?: 0} Jurusan",
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.then(
                         when (isLoading) {
