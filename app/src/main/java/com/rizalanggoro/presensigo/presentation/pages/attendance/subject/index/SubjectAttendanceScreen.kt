@@ -367,7 +367,10 @@ private fun SubjectAttendanceItem(
                     }
 
                     Text(
-                        "Rizal Dwi Anggoro",
+                        data?.creator?.name.let {
+                            if (it.isNullOrBlank()) "Nama guru tidak ditemukan!"
+                            else it
+                        },
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.then(
                             when (isLoading) {

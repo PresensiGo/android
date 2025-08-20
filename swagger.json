@@ -1458,6 +1458,7 @@
             "type": "object",
             "required": [
                 "code",
+                "creator_id",
                 "datetime",
                 "id",
                 "note",
@@ -1466,6 +1467,9 @@
             "properties": {
                 "code": {
                     "type": "string"
+                },
+                "creator_id": {
+                    "type": "integer"
                 },
                 "datetime": {
                     "type": "string"
@@ -1629,10 +1633,14 @@
         "GetAllSubjectAttendancesItem": {
             "type": "object",
             "required": [
+                "creator",
                 "subject",
                 "subject_attendance"
             ],
             "properties": {
+                "creator": {
+                    "$ref": "#/definitions/domains.User"
+                },
                 "subject": {
                     "$ref": "#/definitions/Subject"
                 },
@@ -1833,6 +1841,7 @@
             "required": [
                 "classroom_id",
                 "code",
+                "creator_id",
                 "date_time",
                 "id",
                 "note",
@@ -1844,6 +1853,9 @@
                 },
                 "code": {
                     "type": "string"
+                },
+                "creator_id": {
+                    "type": "integer"
                 },
                 "date_time": {
                     "type": "string"

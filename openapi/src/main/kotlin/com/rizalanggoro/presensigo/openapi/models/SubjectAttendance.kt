@@ -23,6 +23,7 @@ import com.google.gson.annotations.SerializedName
  *
  * @param classroomId 
  * @param code 
+ * @param creatorId 
  * @param dateTime 
  * @param id 
  * @param note 
@@ -37,6 +38,9 @@ data class SubjectAttendance (
 
     @SerializedName("code")
     val code: kotlin.String,
+
+    @SerializedName("creator_id")
+    val creatorId: kotlin.Int,
 
     @SerializedName("date_time")
     val dateTime: kotlin.String,
