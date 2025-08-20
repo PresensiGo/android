@@ -18,6 +18,8 @@ import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.PersonOff
+import androidx.compose.material3.AlertDialog
+import androidx.compose.material3.Button
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.ListItem
@@ -26,6 +28,7 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextButton
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
@@ -52,6 +55,7 @@ import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecords
 import com.rizalanggoro.presensigo.openapi.models.Student
 import com.rizalanggoro.presensigo.presentation.components.PrimaryButton
 import com.rizalanggoro.presensigo.presentation.components.SecondaryButton
+import com.rizalanggoro.presensigo.presentation.components.SmallCircularProgressIndicator
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.DetailSubjectAttendanceViewModel
 import com.valentinilk.shimmer.shimmer
 import kotlinx.coroutines.launch
@@ -69,11 +73,17 @@ fun Section2() {
     val attendanceState by viewModel.attendanceState.collectAsState()
     val recordsState by viewModel.recordsState.collectAsState()
     val createRecordState by viewModel.createRecordState.collectAsState()
+    val deleteRecordState by viewModel.deleteRecordState.collectAsState()
 
     val scope = rememberCoroutineScope()
     val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
     var selectedStudent by remember { mutableStateOf<SelectedStudent?>(null) }
+    var selectedStudentForDelete by remember {
+        mutableStateOf<GetAllSubjectAttendanceRecordsItem?>(
+            null
+        )
+    }
 
     LaunchedEffect(createRecordState) {
         if (createRecordState.isSuccess()) {
@@ -83,6 +93,14 @@ fun Section2() {
                     viewModel.getAllRecords()
                 }
             viewModel.resetCreateRecordState()
+        }
+    }
+
+    LaunchedEffect(deleteRecordState) {
+        if (deleteRecordState.isSuccess()) {
+            selectedStudentForDelete = null
+            viewModel.getAllRecords()
+            viewModel.resetDeleteRecordState()
         }
     }
 
@@ -133,13 +151,10 @@ fun Section2() {
 
                                     else -> false
                                 }
-                            ) {
-                            }
+                            ) { selectedStudentForDelete = it }
                         }
 
-                    else -> items(3) {
-                        Item(isLoading = true)
-                    }
+                    else -> items(3) { Item(isLoading = true) }
                 }
             }
 
@@ -170,8 +185,7 @@ fun Section2() {
                     is UiState.Success ->
                         if (data.sickItems.isEmpty()) item { Empty() }
                         else items(data.sickItems) {
-                            Item(data = it) {
-                            }
+                            Item(data = it) { selectedStudentForDelete = it }
                         }
 
                     else -> items(3) {
@@ -207,8 +221,7 @@ fun Section2() {
                     is UiState.Success ->
                         if (data.permissionItems.isEmpty()) item { Empty() }
                         else items(data.permissionItems) {
-                            Item(data = it) {
-                            }
+                            Item(data = it) { selectedStudentForDelete = it }
                         }
 
                     else -> items(3) { Item(isLoading = true) }
@@ -258,7 +271,7 @@ fun Section2() {
             }
         }
 
-        // bottom sheet
+        // bottom sheets
         if (selectedStudent != null)
             ModalBottomSheet(
                 containerColor = MaterialTheme.colorScheme.background,
@@ -336,6 +349,38 @@ fun Section2() {
                     }
                 }
             }
+
+        // dialogs
+        if (selectedStudentForDelete != null)
+            AlertDialog(
+                onDismissRequest = {
+                    if (!deleteRecordState.isLoading())
+                        selectedStudentForDelete = null
+                },
+                title = { Text("Konfirmasi Hapus") },
+                text = { Text("Apakah Anda yakin akan menghapus presensi dari ${selectedStudentForDelete!!.student.name}?") },
+                confirmButton = {
+                    Button(
+                        onClick = {
+                            viewModel.deleteRecord(
+                                recordId = selectedStudentForDelete!!.record.id
+                            )
+                        },
+                        enabled = !deleteRecordState.isLoading()
+                    ) {
+                        if (deleteRecordState.isLoading()) SmallCircularProgressIndicator()
+                        else Text("Hapus")
+                    }
+                },
+                dismissButton = {
+                    TextButton(
+                        onClick = { selectedStudentForDelete = null },
+                        enabled = !deleteRecordState.isLoading()
+                    ) {
+                        Text("Batal")
+                    }
+                }
+            )
     }
 }
 

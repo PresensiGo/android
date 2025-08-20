@@ -10,6 +10,7 @@ All URIs are relative to *http://localhost*
 | [**createSubjectAttendanceRecord**](AttendanceApi.md#createSubjectAttendanceRecord) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | [**createSubjectAttendanceRecordStudent**](AttendanceApi.md#createSubjectAttendanceRecordStudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | [**deleteGeneralAttendance**](AttendanceApi.md#deleteGeneralAttendance) | **DELETE** /api/v1/general-attendances/{general_attendance_id} |  |
+| [**deleteSubjectAttendanceRecord**](AttendanceApi.md#deleteSubjectAttendanceRecord) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records/{record_id} |  |
 | [**getAllGeneralAttendanceRecords**](AttendanceApi.md#getAllGeneralAttendanceRecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | [**getAllGeneralAttendances**](AttendanceApi.md#getAllGeneralAttendances) | **GET** /api/v1/general-attendances |  |
 | [**getAllSubjectAttendanceRecords**](AttendanceApi.md#getAllSubjectAttendanceRecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
@@ -287,6 +288,58 @@ try {
 ### Return type
 
 [**ResponsesDeleteGeneralAttendance**](ResponsesDeleteGeneralAttendance.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="deleteSubjectAttendanceRecord"></a>
+# **deleteSubjectAttendanceRecord**
+> ResponsesDeleteSubjectAttendanceRecord deleteSubjectAttendanceRecord(batchId, majorId, classroomId, subjectAttendanceId, recordId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+val subjectAttendanceId : kotlin.Int = 56 // kotlin.Int | subject attendance id
+val recordId : kotlin.Int = 56 // kotlin.Int | record id
+try {
+    val result : ResponsesDeleteSubjectAttendanceRecord = apiInstance.deleteSubjectAttendanceRecord(batchId, majorId, classroomId, subjectAttendanceId, recordId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#deleteSubjectAttendanceRecord")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#deleteSubjectAttendanceRecord")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| **majorId** | **kotlin.Int**| major id | |
+| **classroomId** | **kotlin.Int**| classroom id | |
+| **subjectAttendanceId** | **kotlin.Int**| subject attendance id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **recordId** | **kotlin.Int**| record id | |
+
+### Return type
+
+[**ResponsesDeleteSubjectAttendanceRecord**](ResponsesDeleteSubjectAttendanceRecord.md)
 
 ### Authorization
 

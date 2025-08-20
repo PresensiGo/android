@@ -64,6 +64,9 @@ class DetailSubjectAttendanceViewModel(
     private val _createRecordState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
     val createRecordState get() = _createRecordState.asStateFlow()
 
+    private val _deleteRecordState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
+    val deleteRecordState get() = _deleteRecordState.asStateFlow()
+
     val params = savedStateHandle.toRoute<Routes.Attendance.Subject.Detail>()
 
     init {
@@ -226,5 +229,30 @@ class DetailSubjectAttendanceViewModel(
         }
     }
 
+    fun deleteRecord(recordId: Int) = viewModelScope.launch {
+        try {
+            _deleteRecordState.update { UiState.Loading }
+            attendanceApi.deleteSubjectAttendanceRecord(
+                batchId = params.batchId,
+                majorId = params.majorId,
+                classroomId = params.classroomId,
+                subjectAttendanceId = params.attendanceId,
+                recordId = recordId
+            )
+            _deleteRecordState.update { UiState.Success(Unit) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _deleteRecordState.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _deleteRecordState.update { UiState.Failure() }
+        }
+    }
+
     fun resetCreateRecordState() = _createRecordState.update { UiState.Initial }
+    fun resetDeleteRecordState() = _deleteRecordState.update { UiState.Initial }
 }
