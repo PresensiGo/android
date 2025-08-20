@@ -7,6 +7,7 @@ import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -18,29 +19,68 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
+import androidx.compose.material3.ListItem
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
+import androidx.compose.material3.OutlinedCard
+import androidx.compose.material3.RadioButton
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
+import com.rizalanggoro.presensigo.core.constants.AppAttendanceStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
+import com.rizalanggoro.presensigo.core.constants.attendanceStatuses
 import com.rizalanggoro.presensigo.core.constants.isLoading
+import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
+import com.rizalanggoro.presensigo.openapi.models.Student
+import com.rizalanggoro.presensigo.presentation.components.PrimaryButton
+import com.rizalanggoro.presensigo.presentation.components.SecondaryButton
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.DetailSubjectAttendanceViewModel
 import com.valentinilk.shimmer.shimmer
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
+
+private data class SelectedStudent(
+    val student: Student,
+    val status: AppAttendanceStatus? = null
+)
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun Section2() {
     val viewModel = koinViewModel<DetailSubjectAttendanceViewModel>()
     val recordsState by viewModel.recordsState.collectAsState()
+    val createRecordState by viewModel.createRecordState.collectAsState()
+
+    val scope = rememberCoroutineScope()
+    val sheetState = rememberModalBottomSheetState(skipPartiallyExpanded = true)
+
+    var selectedStudent by remember { mutableStateOf<SelectedStudent?>(null) }
+
+    LaunchedEffect(createRecordState) {
+        if (createRecordState.isSuccess()) {
+            scope.launch { sheetState.hide() }
+                .invokeOnCompletion {
+                    selectedStudent = null
+                    viewModel.getAllRecords()
+                }
+            viewModel.resetCreateRecordState()
+        }
+    }
 
     PullToRefreshBox(
         isRefreshing = recordsState.isLoading(),
@@ -53,7 +93,7 @@ fun Section2() {
 
             item {
                 Text(
-                    "Sudah Presensi",
+                    "Hadir",
                     style = MaterialTheme.typography.titleSmall,
                     color = when (recordsState.isLoading()) {
                         true -> MaterialTheme.colorScheme.outlineVariant
@@ -76,7 +116,8 @@ fun Section2() {
             with(recordsState) {
                 when (this) {
                     is UiState.Success -> items(data.presentItems) {
-                        Item(data = it)
+                        Item(data = it) {
+                        }
                     }
 
                     else -> items(3) {
@@ -109,8 +150,12 @@ fun Section2() {
             }
             with(recordsState) {
                 when (this) {
-                    is UiState.Success -> items(data.notYetItems) {
-                        Item(data = it)
+                    is UiState.Success -> items(data.alphaItems) {
+                        Item(data = it) {
+                            selectedStudent = SelectedStudent(
+                                student = it.student
+                            )
+                        }
                     }
 
                     else -> items(3) {
@@ -123,6 +168,85 @@ fun Section2() {
                 Spacer(modifier = Modifier.height(24.dp))
             }
         }
+
+        // bottom sheet
+        if (selectedStudent != null)
+            ModalBottomSheet(
+                containerColor = MaterialTheme.colorScheme.background,
+                onDismissRequest = {
+                    selectedStudent = null
+                },
+                sheetState = sheetState
+            ) {
+                Column(verticalArrangement = Arrangement.spacedBy(16.dp)) {
+                    OutlinedCard(
+                        modifier = Modifier
+                            .padding(horizontal = 24.dp)
+                            .fillMaxWidth()
+                    ) {
+                        Column(modifier = Modifier.padding(16.dp)) {
+                            Text(
+                                selectedStudent!!.student.name,
+                                style = MaterialTheme.typography.titleMedium
+                            )
+                            Text(
+                                selectedStudent!!.student.nis,
+                                style = MaterialTheme.typography.bodySmall,
+                                color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                            )
+                        }
+                    }
+
+                    Column {
+                        attendanceStatuses.mapIndexed { index, it ->
+                            ListItem(
+                                leadingContent = {
+                                    RadioButton(
+                                        selected = selectedStudent!!.status == it.appStatus,
+                                        onClick = null
+                                    )
+                                },
+                                headlineContent = { Text(it.title) },
+                                modifier = Modifier
+                                    .clickable {
+                                        selectedStudent = selectedStudent!!.copy(
+                                            status = it.appStatus
+                                        )
+                                    }
+                                    .padding(horizontal = 8.dp),
+                            )
+                        }
+                    }
+                    Column(
+                        modifier = Modifier.padding(
+                            start = 24.dp,
+                            end = 24.dp,
+                            bottom = 24.dp
+                        ),
+                        verticalArrangement = Arrangement.spacedBy(8.dp)
+                    ) {
+                        PrimaryButton(
+                            text = "Simpan",
+                            isLoading = createRecordState.isLoading()
+                        ) {
+                            if (selectedStudent!!.status != null)
+                                viewModel.createRecord(
+                                    studentId = selectedStudent!!.student.id,
+                                    status = selectedStudent!!.status!!
+                                )
+                        }
+                        SecondaryButton(
+                            text = "Batal",
+                        ) {
+                            scope.launch { sheetState.hide() }.invokeOnCompletion {
+                                if (!sheetState.isVisible) {
+                                    selectedStudent = null
+                                }
+                            }
+                        }
+                    }
+                }
+            }
     }
 }
 
@@ -134,99 +258,96 @@ private fun Item(
 ) {
     val isAttended = (data?.record?.id ?: 0) > 0
 
-    Box(
+    Row(
         modifier = Modifier
             .clickable(enabled = isLoading == false) { onClick() }
+            .padding(horizontal = 24.dp, vertical = 16.dp),
+        verticalAlignment = Alignment.CenterVertically,
+        horizontalArrangement = Arrangement.spacedBy(12.dp)
     ) {
-        Row(
-            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
-            verticalAlignment = Alignment.CenterVertically,
-            horizontalArrangement = Arrangement.spacedBy(12.dp)
-        ) {
-            Box(
-                modifier = Modifier
-                    .size(40.dp)
-                    .clip(CircleShape)
-                    .then(
-                        when (isLoading) {
-                            true -> Modifier
-                                .shimmer()
-                                .background(MaterialTheme.colorScheme.outlineVariant)
-
-                            else -> Modifier.background(
-                                when (isAttended) {
-                                    true -> MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = .48f)
-                                    else -> MaterialTheme.colorScheme.errorContainer
-                                }
-                            )
-                        }
-                    )
-            ) {
-                if (!isLoading)
-                    Icon(
-                        when (isAttended) {
-                            true -> Icons.Rounded.Check
-                            else -> Icons.Rounded.Close
-                        },
-                        contentDescription = null,
-                        modifier = Modifier.align(Alignment.Center),
-                        tint = when (isAttended) {
-                            true -> MaterialTheme.colorScheme.primaryContainer
-                            else -> MaterialTheme.colorScheme.onErrorContainer
-                        },
-                    )
-            }
-            Column(
-                modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(
+        Box(
+            modifier = Modifier
+                .size(40.dp)
+                .clip(CircleShape)
+                .then(
                     when (isLoading) {
-                        true -> 4.dp
-                        else -> 0.dp
-                    }
-                )
-            ) {
-                Text(
-                    data?.student?.name ?: "loading nama siswa",
-                    style = MaterialTheme.typography.titleMedium,
-                    modifier = when (isLoading) {
                         true -> Modifier
                             .shimmer()
-                            .clip(CircleShape)
                             .background(MaterialTheme.colorScheme.outlineVariant)
 
-                        else -> Modifier
-                    },
-                    color = when (isLoading) {
-                        true -> MaterialTheme.colorScheme.outlineVariant
-                        else -> MaterialTheme.colorScheme.onBackground
+                        else -> Modifier.background(
+                            when (isAttended) {
+                                true -> MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = .48f)
+                                else -> MaterialTheme.colorScheme.errorContainer
+                            }
+                        )
                     }
                 )
-                Text(
-                    data?.student?.nis ?: "loading nis siswa",
-                    style = MaterialTheme.typography.bodyMedium,
-                    modifier = when (isLoading) {
-                        true -> Modifier
-                            .shimmer()
-                            .clip(CircleShape)
-                            .background(MaterialTheme.colorScheme.outlineVariant)
-
-                        else -> Modifier
+        ) {
+            if (!isLoading)
+                Icon(
+                    when (isAttended) {
+                        true -> Icons.Rounded.Check
+                        else -> Icons.Rounded.Close
                     },
-                    color = when (isLoading) {
-                        true -> MaterialTheme.colorScheme.outlineVariant
-                        else -> MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
-                    }
+                    contentDescription = null,
+                    modifier = Modifier.align(Alignment.Center),
+                    tint = when (isAttended) {
+                        true -> MaterialTheme.colorScheme.primaryContainer
+                        else -> MaterialTheme.colorScheme.onErrorContainer
+                    },
                 )
-                if (isAttended) {
-                    Text(
-                        "${data?.record?.createdAt?.formatDateTime("EEEE, d MMMM yyyy") ?: "-"} - ${
-                            data?.record?.createdAt?.formatDateTime(
-                                "HH:mm"
-                            ) ?: "-"
-                        }",
-                        style = MaterialTheme.typography.bodyMedium,
-                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
-                    )
+        }
+        Column(
+            modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(
+                when (isLoading) {
+                    true -> 4.dp
+                    else -> 0.dp
                 }
+            )
+        ) {
+            Text(
+                data?.student?.name ?: "loading nama siswa",
+                style = MaterialTheme.typography.titleMedium,
+                modifier = when (isLoading) {
+                    true -> Modifier
+                        .shimmer()
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.outlineVariant)
+
+                    else -> Modifier
+                },
+                color = when (isLoading) {
+                    true -> MaterialTheme.colorScheme.outlineVariant
+                    else -> MaterialTheme.colorScheme.onBackground
+                }
+            )
+            Text(
+                data?.student?.nis ?: "loading nis siswa",
+                style = MaterialTheme.typography.bodyMedium,
+                modifier = when (isLoading) {
+                    true -> Modifier
+                        .shimmer()
+                        .clip(CircleShape)
+                        .background(MaterialTheme.colorScheme.outlineVariant)
+
+                    else -> Modifier
+                },
+                color = when (isLoading) {
+                    true -> MaterialTheme.colorScheme.outlineVariant
+                    else -> MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                }
+            )
+            if (isAttended) {
+                Text(
+                    "${data?.record?.dateTime?.formatDateTime("EEEE, d MMMM yyyy") ?: "-"} - ${
+                        data?.record?.dateTime?.formatDateTime(
+                            "HH:mm"
+                        ) ?: "-"
+                    }",
+                    style = MaterialTheme.typography.bodyMedium,
+                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                )
             }
         }
     }

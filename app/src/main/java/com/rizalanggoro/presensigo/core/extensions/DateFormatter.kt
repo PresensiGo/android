@@ -8,6 +8,21 @@ import java.time.format.DateTimeFormatter
 import java.time.format.TextStyle
 import java.util.Locale
 
+fun String.isAfterDateTime(other: String): Boolean = try {
+    if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.isNotEmpty() && other.isNotEmpty()) {
+        val isoFormatter = DateTimeFormatter.ISO_OFFSET_DATE_TIME
+        val zonedDateTime1 = ZonedDateTime.parse(this, isoFormatter)
+        val zonedDateTime2 = ZonedDateTime.parse(other, isoFormatter)
+
+        zonedDateTime1.isAfter(zonedDateTime2)
+    } else {
+        false
+    }
+} catch (e: Exception) {
+    e.printStackTrace()
+    false
+}
+
 fun String.formatDateTime(pattern: String = "EEEE, dd MMMM yyyy"): String {
     try {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O && this.isNotEmpty()) {

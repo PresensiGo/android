@@ -17,6 +17,7 @@ package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
+import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes
@@ -25,6 +26,7 @@ import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendanc
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecord
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecordStudent
 import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceRecords
@@ -144,6 +146,43 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
             "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param subjectAttendanceId subject attendance id 
+         * @param body body 
+         * @return ResponsesCreateSubjectAttendanceRecord
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun createSubjectAttendanceRecord(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, subjectAttendanceId: kotlin.Int, body: CreateSubjectAttendanceRecordReq): HttpResponse<ResponsesCreateSubjectAttendanceRecord> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId").replace("{" + "subject_attendance_id" + "}", "$subjectAttendanceId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

@@ -1,19 +1,25 @@
 package com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail
 
 import android.graphics.Bitmap
+import android.icu.util.Calendar
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.google.gson.Gson
 import com.rizalanggoro.presensigo.core.Routes
+import com.rizalanggoro.presensigo.core.constants.AppAttendanceStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
+import com.rizalanggoro.presensigo.core.constants.toConstantsAttendanceStatus
+import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.core.qr.QrGenerator
 import com.rizalanggoro.presensigo.domain.QrData
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
 import com.rizalanggoro.presensigo.openapi.apis.SubjectApi
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
+import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordReq
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
 import com.rizalanggoro.presensigo.openapi.models.GetClassroomRes
 import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
@@ -27,7 +33,9 @@ import kotlinx.coroutines.launch
 
 data class RecordsState(
     val presentItems: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
-    val notYetItems: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
+    val sickItems: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
+    val permissionItems: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
+    val alphaItems: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
 )
 
 class DetailSubjectAttendanceViewModel(
@@ -52,6 +60,9 @@ class DetailSubjectAttendanceViewModel(
 
     private val _recordsState = MutableStateFlow<UiState<RecordsState>>(UiState.Loading)
     val recordsState get() = _recordsState.asStateFlow()
+
+    private val _createRecordState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
+    val createRecordState get() = _createRecordState.asStateFlow()
 
     val params = savedStateHandle.toRoute<Routes.Attendance.Subject.Detail>()
 
@@ -147,11 +158,21 @@ class DetailSubjectAttendanceViewModel(
                 subjectAttendanceId = params.attendanceId
             ).body()
 
+            val hasRecordItems = body.items.filter { it.record.id > 0 }
+
             _recordsState.update {
                 UiState.Success(
                     data = RecordsState(
-                        presentItems = body.items.filter { it.record.id > 0 },
-                        notYetItems = body.items.filter { it.record.id == 0 }
+                        presentItems = hasRecordItems.filter {
+                            it.record.status == ConstantsAttendanceStatus.AttendanceStatusPresent
+                        },
+                        sickItems = hasRecordItems.filter {
+                            it.record.status == ConstantsAttendanceStatus.AttendanceStatusSick
+                        },
+                        permissionItems = hasRecordItems.filter {
+                            it.record.status == ConstantsAttendanceStatus.AttendanceStatusPermission
+                        },
+                        alphaItems = body.items.filter { it.record.id == 0 }
                     )
                 )
             }
@@ -167,4 +188,41 @@ class DetailSubjectAttendanceViewModel(
             _recordsState.update { UiState.Failure() }
         }
     }
+
+    fun createRecord(studentId: Int, status: AppAttendanceStatus) = viewModelScope.launch {
+        try {
+            if (attendanceState.value is UiState.Success) {
+                val attendance = (attendanceState.value as UiState.Success).data.subjectAttendance
+
+                _createRecordState.update { UiState.Loading }
+                attendanceApi.createSubjectAttendanceRecord(
+                    batchId = params.batchId,
+                    majorId = params.majorId,
+                    classroomId = params.classroomId,
+                    subjectAttendanceId = params.attendanceId,
+                    body = CreateSubjectAttendanceRecordReq(
+                        datetime = when (status) {
+                            AppAttendanceStatus.Present -> attendance.dateTime.formatDateTime("yyyy-MM-dd HH:mm:ss")
+                            else -> Calendar.getInstance().timeInMillis.formatDateTime("yyyy-MM-dd HH:mm:ss")
+                        },
+                        status = status.toConstantsAttendanceStatus(),
+                        studentId = studentId
+                    )
+                )
+                _createRecordState.update { UiState.Success(Unit) }
+            }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _createRecordState.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _createRecordState.update { UiState.Failure() }
+        }
+    }
+
+    fun resetCreateRecordState() = _createRecordState.update { UiState.Initial }
 }

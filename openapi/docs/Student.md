@@ -1,5 +1,5 @@
 
-# DomainsStudent
+# Student
 
 ## Properties
 | Name | Type | Description | Notes |

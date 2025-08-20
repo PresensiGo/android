@@ -16,8 +16,8 @@
 package com.rizalanggoro.presensigo.openapi.models
 
 import com.rizalanggoro.presensigo.openapi.models.Classroom
-import com.rizalanggoro.presensigo.openapi.models.DomainsStudent
 import com.rizalanggoro.presensigo.openapi.models.Major
+import com.rizalanggoro.presensigo.openapi.models.Student
 
 import com.google.gson.annotations.SerializedName
 
@@ -39,7 +39,7 @@ data class DomainsStudentMajorClassroom (
     val major: Major,
 
     @SerializedName("student")
-    val student: DomainsStudent
+    val student: Student
 
 ) {
 

@@ -15,8 +15,8 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsStudent
 import com.rizalanggoro.presensigo.openapi.models.DomainsStudentToken
+import com.rizalanggoro.presensigo.openapi.models.Student
 
 import com.google.gson.annotations.SerializedName
 
@@ -31,7 +31,7 @@ import com.google.gson.annotations.SerializedName
 data class DtoStudentAccount (
 
     @SerializedName("student")
-    val student: DomainsStudent,
+    val student: Student,
 
     @SerializedName("student_token")
     val studentToken: DomainsStudentToken

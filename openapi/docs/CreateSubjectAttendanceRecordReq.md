@@ -1,14 +1,12 @@
 
-# DomainsSubjectAttendanceRecord
+# CreateSubjectAttendanceRecordReq
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **dateTime** | **kotlin.String** |  |  |
-| **id** | **kotlin.Int** |  |  |
+| **datetime** | **kotlin.String** |  |  |
 | **status** | [**ConstantsAttendanceStatus**](ConstantsAttendanceStatus.md) |  |  |
 | **studentId** | **kotlin.Int** |  |  |
-| **subjectAttendanceId** | **kotlin.Int** |  |  |
 
 
 

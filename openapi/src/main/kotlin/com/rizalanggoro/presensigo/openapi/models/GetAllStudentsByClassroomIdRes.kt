@@ -15,7 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.DomainsStudent
+import com.rizalanggoro.presensigo.openapi.models.Student
 
 import com.google.gson.annotations.SerializedName
 
@@ -29,7 +29,7 @@ import com.google.gson.annotations.SerializedName
 data class GetAllStudentsByClassroomIdRes (
 
     @SerializedName("students")
-    val students: kotlin.collections.List<DomainsStudent>
+    val students: kotlin.collections.List<Student>
 
 ) {
 

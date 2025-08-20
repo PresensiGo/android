@@ -1,5 +1,6 @@
 package com.rizalanggoro.presensigo.core.constants
 
+@Deprecated("use ui state instead")
 enum class StateStatus {
     Initial,
     Loading,

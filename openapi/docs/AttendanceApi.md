@@ -7,6 +7,7 @@ All URIs are relative to *http://localhost*
 | [**createGeneralAttendance**](AttendanceApi.md#createGeneralAttendance) | **POST** /api/v1/general-attendances |  |
 | [**createGeneralAttendanceRecordStudent**](AttendanceApi.md#createGeneralAttendanceRecordStudent) | **POST** /api/v1/general-attendances/records/student |  |
 | [**createSubjectAttendance**](AttendanceApi.md#createSubjectAttendance) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
+| [**createSubjectAttendanceRecord**](AttendanceApi.md#createSubjectAttendanceRecord) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | [**createSubjectAttendanceRecordStudent**](AttendanceApi.md#createSubjectAttendanceRecordStudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | [**deleteGeneralAttendance**](AttendanceApi.md#deleteGeneralAttendance) | **DELETE** /api/v1/general-attendances/{general_attendance_id} |  |
 | [**getAllGeneralAttendanceRecords**](AttendanceApi.md#getAllGeneralAttendanceRecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
@@ -146,6 +147,58 @@ try {
 ### Return type
 
 [**ResponsesCreateSubjectAttendance**](ResponsesCreateSubjectAttendance.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="createSubjectAttendanceRecord"></a>
+# **createSubjectAttendanceRecord**
+> ResponsesCreateSubjectAttendanceRecord createSubjectAttendanceRecord(batchId, majorId, classroomId, subjectAttendanceId, body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+val subjectAttendanceId : kotlin.Int = 56 // kotlin.Int | subject attendance id
+val body : CreateSubjectAttendanceRecordReq =  // CreateSubjectAttendanceRecordReq | body
+try {
+    val result : ResponsesCreateSubjectAttendanceRecord = apiInstance.createSubjectAttendanceRecord(batchId, majorId, classroomId, subjectAttendanceId, body)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#createSubjectAttendanceRecord")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#createSubjectAttendanceRecord")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| **majorId** | **kotlin.Int**| major id | |
+| **classroomId** | **kotlin.Int**| classroom id | |
+| **subjectAttendanceId** | **kotlin.Int**| subject attendance id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**CreateSubjectAttendanceRecordReq**](CreateSubjectAttendanceRecordReq.md)| body | |
+
+### Return type
+
+[**ResponsesCreateSubjectAttendanceRecord**](ResponsesCreateSubjectAttendanceRecord.md)
 
 ### Authorization
 

@@ -6,7 +6,7 @@
 | ------------ | ------------- | ------------- | ------------- |
 | **classroom** | [**Classroom**](Classroom.md) |  |  |
 | **major** | [**Major**](Major.md) |  |  |
-| **student** | [**DomainsStudent**](DomainsStudent.md) |  |  |
+| **student** | [**Student**](Student.md) |  |  |
 
 
 

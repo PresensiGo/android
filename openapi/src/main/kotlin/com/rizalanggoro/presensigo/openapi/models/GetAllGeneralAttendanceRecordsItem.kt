@@ -16,7 +16,7 @@
 package com.rizalanggoro.presensigo.openapi.models
 
 import com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendanceRecord
-import com.rizalanggoro.presensigo.openapi.models.DomainsStudent
+import com.rizalanggoro.presensigo.openapi.models.Student
 
 import com.google.gson.annotations.SerializedName
 
@@ -34,7 +34,7 @@ data class GetAllGeneralAttendanceRecordsItem (
     val record: DomainsGeneralAttendanceRecord,
 
     @SerializedName("student")
-    val student: DomainsStudent
+    val student: Student
 
 ) {
 
