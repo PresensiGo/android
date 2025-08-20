@@ -15,12 +15,12 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.GetAllClassroomsByMajorIdRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateClassroom
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateClassroom
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateClassroom
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAll
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomsByMajorId
 import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateClassroom
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
@@ -190,10 +190,10 @@ import java.text.DateFormat
         * 
          * @param batchId batch id 
          * @param majorId major id 
-         * @return ResponsesGetAllClassroomsByMajorId
+         * @return GetAllClassroomsByMajorIdRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllClassroomsByMajorId(batchId: kotlin.Int, majorId: kotlin.Int): HttpResponse<ResponsesGetAllClassroomsByMajorId> {
+        open suspend fun getAllClassroomsByMajorId(batchId: kotlin.Int, majorId: kotlin.Int): HttpResponse<GetAllClassroomsByMajorIdRes> {
 
             val localVariableAuthNames = listOf<String>()
 

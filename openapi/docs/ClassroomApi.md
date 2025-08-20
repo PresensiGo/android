@@ -200,7 +200,7 @@ No authorization required
 
 <a id="getAllClassroomsByMajorId"></a>
 # **getAllClassroomsByMajorId**
-> ResponsesGetAllClassroomsByMajorId getAllClassroomsByMajorId(batchId, majorId)
+> GetAllClassroomsByMajorIdRes getAllClassroomsByMajorId(batchId, majorId)
 
 
 
@@ -214,7 +214,7 @@ val apiInstance = ClassroomApi()
 val batchId : kotlin.Int = 56 // kotlin.Int | batch id
 val majorId : kotlin.Int = 56 // kotlin.Int | major id
 try {
-    val result : ResponsesGetAllClassroomsByMajorId = apiInstance.getAllClassroomsByMajorId(batchId, majorId)
+    val result : GetAllClassroomsByMajorIdRes = apiInstance.getAllClassroomsByMajorId(batchId, majorId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling ClassroomApi#getAllClassroomsByMajorId")
@@ -233,7 +233,7 @@ try {
 
 ### Return type
 
-[**ResponsesGetAllClassroomsByMajorId**](ResponsesGetAllClassroomsByMajorId.md)
+[**GetAllClassroomsByMajorIdRes**](GetAllClassroomsByMajorIdRes.md)
 
 ### Authorization
 

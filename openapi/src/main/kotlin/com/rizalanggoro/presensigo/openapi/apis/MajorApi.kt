@@ -16,6 +16,7 @@
 package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdRes
+import com.rizalanggoro.presensigo.openapi.models.GetMajorRes
 import com.rizalanggoro.presensigo.openapi.models.Major
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateMajor
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateMajor
@@ -165,6 +166,41 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/batches/{batch_id}/majors".replace("{" + "batch_id" + "}", "$batchId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}/majors/{major_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @return GetMajorRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getMajor(batchId: kotlin.Int, majorId: kotlin.Int): HttpResponse<GetMajorRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}/majors/{major_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

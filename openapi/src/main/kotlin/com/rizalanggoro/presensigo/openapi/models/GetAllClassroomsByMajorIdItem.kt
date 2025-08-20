@@ -22,14 +22,18 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
- * @param classrooms 
+ * @param classroom 
+ * @param studentCount 
  */
 
 
-data class ResponsesGetAllClassroomsByMajorId (
+data class GetAllClassroomsByMajorIdItem (
 
-    @SerializedName("classrooms")
-    val classrooms: kotlin.collections.List<Classroom>
+    @SerializedName("classroom")
+    val classroom: Classroom,
+
+    @SerializedName("student_count")
+    val studentCount: kotlin.Int
 
 ) {
 

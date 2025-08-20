@@ -39,9 +39,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
-import com.rizalanggoro.presensigo.core.constants.isSuccess
-import com.rizalanggoro.presensigo.openapi.models.Classroom
+import com.rizalanggoro.presensigo.openapi.models.GetAllClassroomsByMajorIdItem
 import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
 
@@ -49,7 +49,9 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun ClassroomScreen() {
     val viewModel = koinViewModel<ClassroomViewModel>()
-    val state by viewModel.state.collectAsState()
+    val batchState by viewModel.batchState.collectAsState()
+    val majorState by viewModel.majorState.collectAsState()
+    val classroomsState by viewModel.classroomsState.collectAsState()
 
     val navController = LocalNavController.current
 
@@ -75,8 +77,12 @@ fun ClassroomScreen() {
 
             // content
             PullToRefreshBox(
-                isRefreshing = state.status.isLoading(),
-                onRefresh = { viewModel.getAllClassrooms() },
+                isRefreshing = batchState.isLoading() || majorState.isLoading() || classroomsState.isLoading(),
+                onRefresh = {
+                    viewModel.getBatch()
+                    viewModel.getMajor()
+                    viewModel.getAllClassrooms()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -102,32 +108,48 @@ fun ClassroomScreen() {
                                 color = MaterialTheme.colorScheme.onBackground
                             )
                             Text(
-                                "Berikut adalah kelas untuk jurusan Matematika angkatan 2022. Silahkan pilih kelas yang akan dilakukan presensi mata pelajaran.",
+                                "Berikut adalah kelas untuk ${
+                                    with(majorState) {
+                                        when (this) {
+                                            is UiState.Success -> data.major.name
+                                            else -> "-"
+                                        }
+                                    }
+                                } ${
+                                    with(batchState) {
+                                        when (this) {
+                                            is UiState.Success -> data.batch.name
+                                            else -> "-"
+                                        }
+                                    }
+                                }. " + "Silahkan pilih kelas yang akan dilakukan presensi mata pelajaran.",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f),
                             )
                         }
                     }
 
-                    // loading state
-                    if (state.status.isLoading())
-                        items(3) {
-                            ClassroomItem(isLoading = true)
-                        }
-
-                    // success state
-                    if (state.status.isSuccess())
-                        items(state.classrooms) {
-                            ClassroomItem(classroom = it) {
-                                navController.navigate(
-                                    Routes.Attendance.Subject.Index(
-                                        batchId = viewModel.params.batchId,
-                                        majorId = viewModel.params.majorId,
-                                        classroomId = it.id,
-                                    )
-                                )
+                    with(classroomsState) {
+                        when (this) {
+                            is UiState.Loading -> items(3) {
+                                ClassroomItem(isLoading = true)
                             }
+
+                            is UiState.Success -> items(data.items) {
+                                ClassroomItem(data = it) {
+                                    navController.navigate(
+                                        Routes.Attendance.Subject.Index(
+                                            batchId = viewModel.params.batchId,
+                                            majorId = viewModel.params.majorId,
+                                            classroomId = it.classroom.id,
+                                        )
+                                    )
+                                }
+                            }
+
+                            else -> Unit
                         }
+                    }
 
                     item {
                         Spacer(modifier = Modifier.height(24.dp))
@@ -141,7 +163,7 @@ fun ClassroomScreen() {
 @Composable
 private fun ClassroomItem(
     isLoading: Boolean = false,
-    classroom: Classroom? = null,
+    data: GetAllClassroomsByMajorIdItem? = null,
     onClick: () -> Unit = {}
 ) {
     OutlinedCard(
@@ -193,7 +215,7 @@ private fun ClassroomItem(
                     )
                 ) {
                     Text(
-                        classroom?.name ?: "loading nama kelas",
+                        data?.classroom?.name ?: "loading nama kelas",
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.then(
                             when (isLoading) {
@@ -211,7 +233,7 @@ private fun ClassroomItem(
                         }
                     )
                     Text(
-                        "36 Siswa",
+                        "${data?.studentCount ?: 0} Siswa",
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.then(
                             when (isLoading) {

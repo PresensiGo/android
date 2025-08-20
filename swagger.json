@@ -477,6 +477,36 @@
             }
         },
         "/api/v1/batches/{batch_id}/majors/{major_id}": {
+            "get": {
+                "tags": [
+                    "major"
+                ],
+                "operationId": "getMajor",
+                "parameters": [
+                    {
+                        "type": "integer",
+                        "description": "batch id",
+                        "name": "batch_id",
+                        "in": "path",
+                        "required": true
+                    },
+                    {
+                        "type": "integer",
+                        "description": "major id",
+                        "name": "major_id",
+                        "in": "path",
+                        "required": true
+                    }
+                ],
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GetMajorRes"
+                        }
+                    }
+                }
+            },
             "put": {
                 "tags": [
                     "major"
@@ -573,7 +603,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.GetAllClassroomsByMajorId"
+                            "$ref": "#/definitions/GetAllClassroomsByMajorIdRes"
                         }
                     }
                 }
@@ -1443,6 +1473,35 @@
                 }
             }
         },
+        "GetAllClassroomsByMajorIdItem": {
+            "type": "object",
+            "required": [
+                "classroom",
+                "student_count"
+            ],
+            "properties": {
+                "classroom": {
+                    "$ref": "#/definitions/classroom"
+                },
+                "student_count": {
+                    "type": "integer"
+                }
+            }
+        },
+        "GetAllClassroomsByMajorIdRes": {
+            "type": "object",
+            "required": [
+                "items"
+            ],
+            "properties": {
+                "items": {
+                    "type": "array",
+                    "items": {
+                        "$ref": "#/definitions/GetAllClassroomsByMajorIdItem"
+                    }
+                }
+            }
+        },
         "GetAllGeneralAttendanceRecordsItem": {
             "type": "object",
             "required": [
@@ -1553,6 +1612,17 @@
             "properties": {
                 "batch": {
                     "$ref": "#/definitions/batch"
+                }
+            }
+        },
+        "GetMajorRes": {
+            "type": "object",
+            "required": [
+                "major"
+            ],
+            "properties": {
+                "major": {
+                    "$ref": "#/definitions/major"
                 }
             }
         },
@@ -2210,20 +2280,6 @@
                     "type": "array",
                     "items": {
                         "$ref": "#/definitions/responses.ClassroomMajor"
-                    }
-                }
-            }
-        },
-        "responses.GetAllClassroomsByMajorId": {
-            "type": "object",
-            "required": [
-                "classrooms"
-            ],
-            "properties": {
-                "classrooms": {
-                    "type": "array",
-                    "items": {
-                        "$ref": "#/definitions/classroom"
                     }
                 }
             }

@@ -5,26 +5,18 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.rizalanggoro.presensigo.core.Routes
-import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdRes
 import com.rizalanggoro.presensigo.openapi.models.GetBatchRes
-import com.rizalanggoro.presensigo.openapi.models.Major
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
-
-data class State(
-    val status: StateStatus = StateStatus.Initial,
-    val majors: List<Major> = emptyList(),
-    val message: String = ""
-)
 
 class MajorViewModel(
     savedStateHandle: SavedStateHandle,

@@ -43,9 +43,9 @@ fun MyComposeApplication(
 //                            TokenType.Student -> Routes.Home.Student
 //                        }
 //                        true -> Routes.ProfileStudent
-                        true -> Routes.Attendance.Subject.Major(
+                        true -> Routes.Attendance.Subject.Classroom(
                             batchId = 3,
-//                            majorId = 6,
+                            majorId = 6,
 //                            classroomId = 14,
 //                            attendanceId = 1
                         )
