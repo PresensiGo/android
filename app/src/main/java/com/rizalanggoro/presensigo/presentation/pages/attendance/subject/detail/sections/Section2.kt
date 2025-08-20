@@ -16,11 +16,9 @@ import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
-import androidx.compose.material3.CardDefaults
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
-import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
@@ -29,10 +27,9 @@ import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
-import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
 import com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail.DetailSubjectAttendanceViewModel
@@ -43,28 +40,84 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun Section2() {
     val viewModel = koinViewModel<DetailSubjectAttendanceViewModel>()
-    val state by viewModel.state.collectAsState()
+    val recordsState by viewModel.recordsState.collectAsState()
 
     PullToRefreshBox(
-        isRefreshing = state.status.isLoading(),
-        onRefresh = { viewModel.getAllSubjectAttendanceRecords() }
+        isRefreshing = recordsState.isLoading(),
+        onRefresh = { viewModel.getAllRecords() }
     ) {
-        LazyColumn(verticalArrangement = Arrangement.spacedBy(8.dp)) {
+        LazyColumn {
             item {
                 Spacer(modifier = Modifier.height(16.dp))
             }
 
-            // loading state
-            if (state.status.isLoading())
-                items(3) {
-                    Item(isLoading = true)
-                }
+            item {
+                Text(
+                    "Sudah Presensi",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = when (recordsState.isLoading()) {
+                        true -> MaterialTheme.colorScheme.outlineVariant
+                        else -> MaterialTheme.colorScheme.onBackground
+                    },
+                    modifier = Modifier
+                        .padding(start = 24.dp, bottom = 8.dp)
+                        .then(
+                            when (recordsState.isLoading()) {
+                                true -> Modifier
+                                    .clip(CircleShape)
+                                    .shimmer()
+                                    .background(MaterialTheme.colorScheme.outlineVariant)
 
-            // success state
-            if (state.status.isSuccess())
-                items(state.records) {
-                    Item(data = it) {}
+                                else -> Modifier
+                            }
+                        )
+                )
+            }
+            with(recordsState) {
+                when (this) {
+                    is UiState.Success -> items(data.presentItems) {
+                        Item(data = it)
+                    }
+
+                    else -> items(3) {
+                        Item(isLoading = true)
+                    }
                 }
+            }
+
+            item {
+                Text(
+                    "Belum Presensi",
+                    style = MaterialTheme.typography.titleSmall,
+                    color = when (recordsState.isLoading()) {
+                        true -> MaterialTheme.colorScheme.outlineVariant
+                        else -> MaterialTheme.colorScheme.onBackground
+                    },
+                    modifier = Modifier
+                        .padding(start = 24.dp, top = 24.dp, bottom = 8.dp)
+                        .then(
+                            when (recordsState.isLoading()) {
+                                true -> Modifier
+                                    .clip(CircleShape)
+                                    .shimmer()
+                                    .background(MaterialTheme.colorScheme.outlineVariant)
+
+                                else -> Modifier
+                            }
+                        )
+                )
+            }
+            with(recordsState) {
+                when (this) {
+                    is UiState.Success -> items(data.notYetItems) {
+                        Item(data = it)
+                    }
+
+                    else -> items(3) {
+                        Item(isLoading = true)
+                    }
+                }
+            }
 
             item {
                 Spacer(modifier = Modifier.height(24.dp))
@@ -81,14 +134,12 @@ private fun Item(
 ) {
     val isAttended = (data?.record?.id ?: 0) > 0
 
-    OutlinedCard(
+    Box(
         modifier = Modifier
-            .padding(horizontal = 24.dp)
-            .clip(CardDefaults.outlinedShape)
             .clickable(enabled = isLoading == false) { onClick() }
     ) {
         Row(
-            modifier = Modifier.padding(16.dp),
+            modifier = Modifier.padding(horizontal = 24.dp, vertical = 16.dp),
             verticalAlignment = Alignment.CenterVertically,
             horizontalArrangement = Arrangement.spacedBy(12.dp)
         ) {
@@ -146,7 +197,7 @@ private fun Item(
                     },
                     color = when (isLoading) {
                         true -> MaterialTheme.colorScheme.outlineVariant
-                        else -> Color.Unspecified
+                        else -> MaterialTheme.colorScheme.onBackground
                     }
                 )
                 Text(

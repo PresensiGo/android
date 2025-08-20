@@ -7,7 +7,6 @@ import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.google.gson.Gson
 import com.rizalanggoro.presensigo.core.Routes
-import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.core.qr.QrGenerator
@@ -19,7 +18,6 @@ import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecords
 import com.rizalanggoro.presensigo.openapi.models.GetClassroomRes
 import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.GetSubjectRes
-import com.rizalanggoro.presensigo.openapi.models.SubjectAttendance
 import io.ktor.client.plugins.ResponseException
 import io.ktor.client.statement.bodyAsText
 import kotlinx.coroutines.flow.MutableStateFlow
@@ -27,20 +25,10 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class State(
-    val status: StateStatus = StateStatus.Initial,
-    val action: Action = Action.Initial,
-    val message: String = "",
-
-    val attendance: SubjectAttendance? = null,
-    val records: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
-
-    val qrCodeBitmap: Bitmap? = null
-) {
-    enum class Action {
-        Initial, GetSubjectAttendance, GetAllSubjectAttendanceRecords
-    }
-}
+data class RecordsState(
+    val presentItems: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
+    val notYetItems: List<GetAllSubjectAttendanceRecordsItem> = emptyList(),
+)
 
 class DetailSubjectAttendanceViewModel(
     savedStateHandle: SavedStateHandle,
@@ -62,17 +50,17 @@ class DetailSubjectAttendanceViewModel(
     private val _classroomState = MutableStateFlow<UiState<GetClassroomRes>>(UiState.Loading)
     val classroomState get() = _classroomState.asStateFlow()
 
-    private val _state = MutableStateFlow(State())
-    val state get() = _state.asStateFlow()
+    private val _recordsState = MutableStateFlow<UiState<RecordsState>>(UiState.Loading)
+    val recordsState get() = _recordsState.asStateFlow()
 
     val params = savedStateHandle.toRoute<Routes.Attendance.Subject.Detail>()
 
     init {
-        getSubjectAttendance()
-        getAllSubjectAttendanceRecords()
+        getAttendance()
+        getAllRecords()
     }
 
-    fun getSubjectAttendance() = viewModelScope.launch {
+    fun getAttendance() = viewModelScope.launch {
         try {
             _attendanceState.update { UiState.Loading }
             val body = attendanceApi.getSubjectAttendance(
@@ -148,14 +136,9 @@ class DetailSubjectAttendanceViewModel(
         }
     }
 
-    fun getAllSubjectAttendanceRecords() = viewModelScope.launch {
+    fun getAllRecords() = viewModelScope.launch {
         try {
-            _state.update {
-                it.copy(
-                    status = StateStatus.Loading,
-                    action = State.Action.GetAllSubjectAttendanceRecords
-                )
-            }
+            _recordsState.update { UiState.Loading }
 
             val body = attendanceApi.getAllSubjectAttendanceRecords(
                 batchId = params.batchId,
@@ -164,31 +147,24 @@ class DetailSubjectAttendanceViewModel(
                 subjectAttendanceId = params.attendanceId
             ).body()
 
-            _state.update {
-                it.copy(
-                    status = StateStatus.Success,
-                    action = State.Action.GetAllSubjectAttendanceRecords,
-                    records = body.items
+            _recordsState.update {
+                UiState.Success(
+                    data = RecordsState(
+                        presentItems = body.items.filter { it.record.id > 0 },
+                        notYetItems = body.items.filter { it.record.id == 0 }
+                    )
                 )
             }
         } catch (e: ResponseException) {
             e.printStackTrace()
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
-                    action = State.Action.GetAllSubjectAttendanceRecords,
+            _recordsState.update {
+                UiState.Failure(
                     message = e.response.bodyAsText().toFailure().message
                 )
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
-                    action = State.Action.GetAllSubjectAttendanceRecords,
-                    message = "Terjadi kesalahan tak terduga!"
-                )
-            }
+            _recordsState.update { UiState.Failure() }
         }
     }
 }
