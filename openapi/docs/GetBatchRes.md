@@ -1,5 +1,5 @@
 
-# ResponsesGetBatch
+# GetBatchRes
 
 ## Properties
 | Name | Type | Description | Notes |

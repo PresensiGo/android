@@ -15,10 +15,10 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdRes
 import com.rizalanggoro.presensigo.openapi.models.Major
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateMajor
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateMajor
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllMajorsByBatchId
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -148,10 +148,10 @@ import java.text.DateFormat
         * 
         * 
          * @param batchId batch id 
-         * @return ResponsesGetAllMajorsByBatchId
+         * @return GetAllMajorsByBatchIdRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllMajorsByBatchId(batchId: kotlin.Int): HttpResponse<ResponsesGetAllMajorsByBatchId> {
+        open suspend fun getAllMajorsByBatchId(batchId: kotlin.Int): HttpResponse<GetAllMajorsByBatchIdRes> {
 
             val localVariableAuthNames = listOf<String>()
 

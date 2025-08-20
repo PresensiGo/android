@@ -15,21 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.Major
+import com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdItem
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param majors 
+ * @param items 
  */
 
 
-data class ResponsesGetAllMajorsByBatchId (
+data class GetAllMajorsByBatchIdRes (
 
-    @SerializedName("majors")
-    val majors: kotlin.collections.List<Major>
+    @SerializedName("items")
+    val items: kotlin.collections.List<GetAllMajorsByBatchIdItem>
 
 ) {
 

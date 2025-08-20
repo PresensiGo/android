@@ -1,10 +1,11 @@
 
-# ResponsesGetAllMajorsByBatchId
+# GetAllMajorsByBatchIdItem
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **majors** | [**kotlin.collections.List&lt;Major&gt;**](Major.md) |  |  |
+| **classroomCount** | **kotlin.Int** |  |  |
+| **major** | [**Major**](Major.md) |  |  |
 
 
 

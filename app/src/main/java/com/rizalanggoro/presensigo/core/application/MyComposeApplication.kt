@@ -37,18 +37,18 @@ fun MyComposeApplication(
                 NavHost(
                     navController = navController,
                     startDestination = when (isAuthenticated) {
-                        true -> when (tokenType) {
-                            TokenType.Unset -> Routes.Auth
-                            TokenType.Teacher -> Routes.Home.Teacher
-                            TokenType.Student -> Routes.Home.Student
-                        }
+//                        true -> when (tokenType) {
+//                            TokenType.Unset -> Routes.Auth
+//                            TokenType.Teacher -> Routes.Home.Teacher
+//                            TokenType.Student -> Routes.Home.Student
+//                        }
 //                        true -> Routes.ProfileStudent
-//                        true -> Routes.Attendance.General.Detail(
-////                            batchId = 3,
-////                            majorId = 6,
-////                            classroomId = 14,
+                        true -> Routes.Attendance.Subject.Major(
+                            batchId = 3,
+//                            majorId = 6,
+//                            classroomId = 14,
 //                            attendanceId = 1
-//                        )
+                        )
 
                         else -> Routes.Auth
                     },

@@ -146,7 +146,7 @@ No authorization required
 
 <a id="getAllMajorsByBatchId"></a>
 # **getAllMajorsByBatchId**
-> ResponsesGetAllMajorsByBatchId getAllMajorsByBatchId(batchId)
+> GetAllMajorsByBatchIdRes getAllMajorsByBatchId(batchId)
 
 
 
@@ -159,7 +159,7 @@ No authorization required
 val apiInstance = MajorApi()
 val batchId : kotlin.Int = 56 // kotlin.Int | batch id
 try {
-    val result : ResponsesGetAllMajorsByBatchId = apiInstance.getAllMajorsByBatchId(batchId)
+    val result : GetAllMajorsByBatchIdRes = apiInstance.getAllMajorsByBatchId(batchId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling MajorApi#getAllMajorsByBatchId")
@@ -177,7 +177,7 @@ try {
 
 ### Return type
 
-[**ResponsesGetAllMajorsByBatchId**](ResponsesGetAllMajorsByBatchId.md)
+[**GetAllMajorsByBatchIdRes**](GetAllMajorsByBatchIdRes.md)
 
 ### Authorization
 

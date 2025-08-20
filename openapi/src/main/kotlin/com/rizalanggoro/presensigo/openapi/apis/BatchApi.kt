@@ -17,9 +17,9 @@ package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.Batch
 import com.rizalanggoro.presensigo.openapi.models.GetAllBatchesRes
+import com.rizalanggoro.presensigo.openapi.models.GetBatchRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateBatch
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateBatch
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetBatch
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -41,40 +41,6 @@ import java.text.DateFormat
         httpClientConfig,
         jsonBlock,
     ) {
-
-        /**
-        * GET /api/v1/batches/{batch_id}
-        * 
-        * 
-         * @param batchId batch id 
-         * @return ResponsesGetBatch
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun apiV1BatchesBatchIdGet(batchId: kotlin.Int): HttpResponse<ResponsesGetBatch> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = 
-                    io.ktor.client.utils.EmptyContent
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.GET,
-            "/api/v1/batches/{batch_id}".replace("{" + "batch_id" + "}", "$batchId"),
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return request(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
 
         /**
         * POST /api/v1/batches
@@ -164,6 +130,40 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/batches",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/batches/{batch_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @return GetBatchRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getBatch(batchId: kotlin.Int): HttpResponse<GetBatchRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/batches/{batch_id}".replace("{" + "batch_id" + "}", "$batchId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

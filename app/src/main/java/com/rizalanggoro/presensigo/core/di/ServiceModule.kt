@@ -23,9 +23,12 @@ import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import kotlinx.coroutines.sync.Mutex
+import kotlinx.coroutines.sync.withLock
 import org.koin.dsl.module
 
 private const val API_BASE_URL = BuildConfig.API_BASE_URL
+private val refreshMutex = Mutex()
 
 val serviceModule = module {
     single<((HttpClientConfig<*>) -> Unit)> {
@@ -50,68 +53,67 @@ val serviceModule = module {
                     }
 
                     refreshTokens {
-                        val tokenManager = get<TokenManager>()
-                        val oldToken = tokenManager.get()
+                        refreshMutex.withLock {
+                            val tokenManager = get<TokenManager>()
+                            val oldToken = tokenManager.get()
 
-                        try {
-                            if (oldToken.tokenType == TokenType.Teacher) {
-                                val client = get<AccountApi>()
-                                val body = client.refreshToken(
-                                    RefreshTokenReq(
-                                        refreshToken = oldToken.refreshToken
+                            try {
+                                if (oldToken.tokenType == TokenType.Teacher) {
+                                    val client = get<AccountApi>()
+                                    val body = client.refreshToken(
+                                        RefreshTokenReq(
+                                            refreshToken = oldToken.refreshToken
+                                        )
+                                    ).body()
+
+                                    tokenManager.set(
+                                        Token(
+                                            tokenType = TokenType.Teacher,
+                                            accessToken = body.accessToken,
+                                            refreshToken = body.refreshToken
+                                        )
                                     )
-                                ).body()
 
-                                tokenManager.set(
-                                    Token(
-                                        tokenType = TokenType.Teacher,
+                                    BearerTokens(
                                         accessToken = body.accessToken,
                                         refreshToken = body.refreshToken
                                     )
-                                )
+                                } else {
+                                    val client = get<StudentApi>()
+                                    val body = client.refreshTokenStudent(
+                                        RefreshTokenStudentReq(
+                                            refreshToken = oldToken.refreshToken
+                                        )
+                                    ).body()
 
-                                BearerTokens(
-                                    accessToken = body.accessToken,
-                                    refreshToken = body.refreshToken
-                                )
-                            } else {
-                                val client = get<StudentApi>()
-                                val body = client.refreshTokenStudent(
-                                    RefreshTokenStudentReq(
-                                        refreshToken = oldToken.refreshToken
+                                    tokenManager.set(
+                                        Token(
+                                            tokenType = TokenType.Student,
+                                            accessToken = body.accessToken,
+                                            refreshToken = body.refreshToken
+                                        )
                                     )
-                                ).body()
 
-                                tokenManager.set(
-                                    Token(
-                                        tokenType = TokenType.Student,
+                                    BearerTokens(
                                         accessToken = body.accessToken,
                                         refreshToken = body.refreshToken
                                     )
-                                )
-
-                                BearerTokens(
-                                    accessToken = body.accessToken,
-                                    refreshToken = body.refreshToken
-                                )
+                                }
+                            } catch (e: ResponseException) {
+                                e.printStackTrace()
+                                tokenManager.clear()
+                                throw e
                             }
-                        } catch (e: ResponseException) {
-                            e.printStackTrace()
-                            tokenManager.clear()
-                            throw e
                         }
                     }
                 }
             }
         }
     }
-//    single { AuthApi(API_BASE_URL, httpClientConfig = get()) }
     single { AccountApi(API_BASE_URL, httpClientConfig = get()) }
     single { AttendanceApi(API_BASE_URL, httpClientConfig = get()) }
     single { BatchApi(API_BASE_URL, httpClientConfig = get()) }
     single { ClassroomApi(API_BASE_URL, httpClientConfig = get()) }
-//    single { ExcelApi(API_BASE_URL, httpClientConfig = get()) }
-//    single { LatenessApi(API_BASE_URL, httpClientConfig = get()) }
     single { MajorApi(API_BASE_URL, httpClientConfig = get()) }
     single { ResetApi(API_BASE_URL, httpClientConfig = get()) }
     single { StudentApi(API_BASE_URL, httpClientConfig = get()) }

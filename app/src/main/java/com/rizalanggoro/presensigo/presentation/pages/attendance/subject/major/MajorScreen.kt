@@ -39,9 +39,9 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
-import com.rizalanggoro.presensigo.core.constants.isSuccess
-import com.rizalanggoro.presensigo.openapi.models.Major
+import com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdItem
 import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
 
@@ -49,7 +49,8 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun MajorScreen() {
     val viewModel = koinViewModel<MajorViewModel>()
-    val state by viewModel.state.collectAsState()
+    val batchState by viewModel.batchState.collectAsState()
+    val majorsState by viewModel.majorsState.collectAsState()
 
     val navController = LocalNavController.current
 
@@ -77,8 +78,11 @@ fun MajorScreen() {
 
             // content
             PullToRefreshBox(
-                isRefreshing = state.status.isLoading(),
-                onRefresh = { viewModel.getAllMajors() },
+                isRefreshing = batchState.isLoading() || majorsState.isLoading(),
+                onRefresh = {
+                    viewModel.getBatch()
+                    viewModel.getAllMajors()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
@@ -104,31 +108,41 @@ fun MajorScreen() {
                                 color = MaterialTheme.colorScheme.onBackground
                             )
                             Text(
-                                "Berikut adalah daftar jurusan untuk angkatan 2022. Silahkan pilih jurusan yang akan dilakukan presensi mata pelajaran.",
+                                "Berikut adalah daftar jurusan untuk ${
+                                    with(batchState) {
+                                        when (this) {
+                                            is UiState.Success -> data.batch.name
+                                            else -> "-"
+                                        }
+                                    }
+                                }. Silahkan pilih " +
+                                        "jurusan yang akan dilakukan presensi mata pelajaran.",
                                 style = MaterialTheme.typography.bodyMedium,
                                 color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f),
                             )
                         }
                     }
 
-                    // loading state
-                    if (state.status.isLoading())
-                        items(3) {
-                            MajorItem(isLoading = true)
-                        }
-
-                    // success state
-                    if (state.status.isSuccess())
-                        items(state.majors) {
-                            MajorItem(major = it) {
-                                navController.navigate(
-                                    Routes.Attendance.Subject.Classroom(
-                                        batchId = viewModel.params.batchId,
-                                        majorId = it.id,
-                                    )
-                                )
+                    with(majorsState) {
+                        when (this) {
+                            is UiState.Loading -> items(3) {
+                                MajorItem(isLoading = true)
                             }
+
+                            is UiState.Success -> items(data.items) {
+                                MajorItem(data = it) {
+                                    navController.navigate(
+                                        Routes.Attendance.Subject.Classroom(
+                                            batchId = viewModel.params.batchId,
+                                            majorId = it.major.id,
+                                        )
+                                    )
+                                }
+                            }
+
+                            else -> Unit
                         }
+                    }
 
                     item {
                         Spacer(modifier = Modifier.height(24.dp))
@@ -142,7 +156,7 @@ fun MajorScreen() {
 @Composable
 private fun MajorItem(
     isLoading: Boolean = false,
-    major: Major? = null,
+    data: GetAllMajorsByBatchIdItem? = null,
     onClick: () -> Unit = {}
 ) {
     OutlinedCard(
@@ -198,7 +212,7 @@ private fun MajorItem(
                     )
                 ) {
                     Text(
-                        major?.name ?: "loading nama jurusan",
+                        data?.major?.name ?: "loading nama jurusan",
                         style = MaterialTheme.typography.titleMedium,
                         modifier = Modifier.then(
                             when (isLoading) {
@@ -216,7 +230,7 @@ private fun MajorItem(
                         }
                     )
                     Text(
-                        "5 Kelas",
+                        "${data?.classroomCount ?: 0} Kelas",
                         style = MaterialTheme.typography.bodyMedium,
                         modifier = Modifier.then(
                             when (isLoading) {

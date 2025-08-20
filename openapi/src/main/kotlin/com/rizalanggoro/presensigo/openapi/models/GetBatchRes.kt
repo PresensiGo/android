@@ -26,7 +26,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class ResponsesGetBatch (
+data class GetBatchRes (
 
     @SerializedName("batch")
     val batch: Batch
