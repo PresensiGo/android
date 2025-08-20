@@ -34,6 +34,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.presentation.components.DatePickerModal
@@ -55,10 +56,9 @@ fun CreateGeneralAttendanceScreen() {
 
     var date by remember { mutableStateOf<Long?>(null) }
     var time by remember { mutableStateOf<TimePickerState?>(null) }
-//    var note by remember { mutableStateOf("") }
 
-    LaunchedEffect(state.status) {
-        if (state.status.isSuccess()) {
+    LaunchedEffect(state) {
+        if (state.isSuccess()) {
             navController.previousBackStackEntry?.savedStateHandle?.set("success", true)
             navController.popBackStack()
         }
@@ -156,32 +156,14 @@ fun CreateGeneralAttendanceScreen() {
                             .padding(horizontal = 8.dp),
                     )
                 }
-//                Column(
-//                    verticalArrangement = Arrangement.spacedBy(8.dp),
-//                    modifier = Modifier.padding(horizontal = 24.dp)
-//                ) {
-//                    Text(
-//                        "Catatan Tambahan",
-//                        style = MaterialTheme.typography.labelLarge,
-//                        color = MaterialTheme.colorScheme.onBackground
-//                    )
-//                    OutlinedTextField(
-//                        colors = OutlinedTextFieldDefaults.colors(
-//                            unfocusedBorderColor = MaterialTheme.colorScheme.outlineVariant
-//                        ),
-//                        shape = RoundedCornerShape(8.dp),
-//                        value = note,
-//                        onValueChange = { note = it },
-//                        placeholder = { Text("Masukkan catatan tambahan") },
-//                        minLines = 5,
-//                        modifier = Modifier
-//                            .fillMaxWidth()
-//                    )
-//                }
-//                if (state.status.isLoading())
-//                    CircularProgressIndicator()
+
                 Spacer(modifier = Modifier.weight(1f))
-                PrimaryButton(text = "Simpan") {
+
+                PrimaryButton(
+                    text = "Simpan",
+                    isLoading = state.isLoading(),
+                    modifier = Modifier.padding(24.dp)
+                ) {
                     if (date != null && time != null)
                         viewModel.create(
                             date = date!!,
