@@ -59,6 +59,7 @@ All URIs are relative to *http://localhost*
 | *AttendanceApi* | [**createSubjectAttendanceRecord**](docs/AttendanceApi.md#createsubjectattendancerecord) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | *AttendanceApi* | [**createSubjectAttendanceRecordStudent**](docs/AttendanceApi.md#createsubjectattendancerecordstudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | *AttendanceApi* | [**deleteGeneralAttendance**](docs/AttendanceApi.md#deletegeneralattendance) | **DELETE** /api/v1/general-attendances/{general_attendance_id} |  |
+| *AttendanceApi* | [**deleteGeneralAttendanceRecord**](docs/AttendanceApi.md#deletegeneralattendancerecord) | **DELETE** /api/v1/general-attendances/{general_attendance_id}/records/{record_id} |  |
 | *AttendanceApi* | [**deleteSubjectAttendance**](docs/AttendanceApi.md#deletesubjectattendance) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | *AttendanceApi* | [**deleteSubjectAttendanceRecord**](docs/AttendanceApi.md#deletesubjectattendancerecord) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records/{record_id} |  |
 | *AttendanceApi* | [**getAllGeneralAttendanceRecords**](docs/AttendanceApi.md#getallgeneralattendancerecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
@@ -171,6 +172,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecordStudent](docs/ResponsesCreateSubjectAttendanceRecordStudent.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteAccount](docs/ResponsesDeleteAccount.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendance](docs/ResponsesDeleteGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendanceRecord](docs/ResponsesDeleteGeneralAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubject](docs/ResponsesDeleteSubject.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubjectAttendance](docs/ResponsesDeleteSubjectAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubjectAttendanceRecord](docs/ResponsesDeleteSubjectAttendanceRecord.md)

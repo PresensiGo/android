@@ -35,9 +35,11 @@ import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.isAfterDateTime
+import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsByClassroomIdItem
 import com.rizalanggoro.presensigo.openapi.models.Student
 import com.rizalanggoro.presensigo.presentation.pages.attendance.components.AttendanceRecordItem
 import com.rizalanggoro.presensigo.presentation.pages.attendance.components.CreateAttendanceRecordBottomSheet
+import com.rizalanggoro.presensigo.presentation.pages.attendance.components.DeleteAttendanceRecordDialog
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.DetailGeneralAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.sections.components.FilterBottomSheet
 import com.valentinilk.shimmer.shimmer
@@ -57,23 +59,21 @@ fun Section2() {
     val recordsState by viewModel.attendanceRecords.collectAsState()
     val selectedClassroom by viewModel.selectedClassroom.collectAsState()
     val isFilterOpen by viewModel.isFilterOpen.collectAsState()
-    val createRecordState by viewModel.createRecordState.collectAsState()
-//    val deleteRecordState by viewModel.deleteRecordState.collectAsState()
+    val createRecord by viewModel.createRecordState.collectAsState()
+    val deleteRecordState by viewModel.deleteRecordState.collectAsState()
 
     var selectedForCreateRecord by remember { mutableStateOf<CreateRecord?>(null) }
+    var selectedForDelete by remember {
+        mutableStateOf<GetAllGeneralAttendanceRecordsByClassroomIdItem?>(
+            null
+        )
+    }
 
     val scope = rememberCoroutineScope()
     val sheetStateForCreateRecord = rememberModalBottomSheetState(skipPartiallyExpanded = true)
 
-//    var selectedStudent by remember { mutableStateOf<SelectedStudent?>(null) }
-//    var selectedStudentForDelete by remember {
-//        mutableStateOf<GetAllSubjectAttendanceRecordsItem?>(
-//            null
-//        )
-//    }
-
-    LaunchedEffect(createRecordState) {
-        if (createRecordState.isSuccess()) {
+    LaunchedEffect(createRecord) {
+        if (createRecord.isSuccess()) {
             scope.launch { sheetStateForCreateRecord.hide() }
                 .invokeOnCompletion {
                     selectedForCreateRecord = null
@@ -86,14 +86,18 @@ fun Section2() {
             viewModel.resetCreateRecord()
         }
     }
-//
-//    LaunchedEffect(deleteRecordState) {
-//        if (deleteRecordState.isSuccess()) {
-//            selectedStudentForDelete = null
-//            viewModel.getAllRecords()
-//            viewModel.resetDeleteRecordState()
-//        }
-//    }
+
+    LaunchedEffect(deleteRecordState) {
+        if (deleteRecordState.isSuccess()) {
+            selectedForDelete = null
+            if (selectedClassroom != null) {
+                viewModel.getAttendanceRecords(
+                    classroomId = selectedClassroom!!.classroom.id
+                )
+            }
+            viewModel.resetDeleteRecord()
+        }
+    }
 
     PullToRefreshBox(
         isRefreshing = recordsState.isLoading(),
@@ -154,7 +158,7 @@ fun Section2() {
                                 studentNIS = it.student.nis,
                                 recordDateTime = it.record.dateTime,
                                 recordStatus = it.record.status
-                            ) {/* selectedStudentForDelete = it*/ }
+                            ) { selectedForDelete = it }
                         }
 
                     else -> items(3) { AttendanceRecordItem(isLoading = true) }
@@ -194,7 +198,7 @@ fun Section2() {
                                 studentNIS = it.student.nis,
                                 recordDateTime = it.record.dateTime,
                                 recordStatus = it.record.status
-                            ) { /*selectedStudentForDelete = it*/ }
+                            ) { selectedForDelete = it }
                         }
 
                     else -> items(3) { AttendanceRecordItem(isLoading = true) }
@@ -234,7 +238,7 @@ fun Section2() {
                                 studentNIS = it.student.nis,
                                 recordDateTime = it.record.dateTime,
                                 recordStatus = it.record.status
-                            ) { /*selectedStudentForDelete = it*/ }
+                            ) { selectedForDelete = it }
                         }
 
                     else -> items(3) { AttendanceRecordItem(isLoading = true) }
@@ -297,7 +301,7 @@ fun Section2() {
 
         if (selectedForCreateRecord != null) {
             CreateAttendanceRecordBottomSheet(
-                isLoading = createRecordState.isLoading(),
+                isLoading = createRecord.isLoading(),
                 studentName = selectedForCreateRecord!!.student.name,
                 studentNIS = selectedForCreateRecord!!.student.nis,
                 status = selectedForCreateRecord!!.status,
@@ -322,36 +326,20 @@ fun Section2() {
         }
 
         // dialogs
-//        if (selectedStudentForDelete != null)
-//            AlertDialog(
-//                onDismissRequest = {
-//                    if (!deleteRecordState.isLoading())
-//                        selectedStudentForDelete = null
-//                },
-//                title = { Text("Konfirmasi Hapus") },
-//                text = { Text("Apakah Anda yakin akan menghapus presensi dari ${selectedStudentForDelete!!.student.name}?") },
-//                confirmButton = {
-//                    Button(
-//                        onClick = {
-//                            viewModel.deleteRecord(
-//                                recordId = selectedStudentForDelete!!.record.id
-//                            )
-//                        },
-//                        enabled = !deleteRecordState.isLoading()
-//                    ) {
-//                        if (deleteRecordState.isLoading()) SmallCircularProgressIndicator()
-//                        else Text("Hapus")
-//                    }
-//                },
-//                dismissButton = {
-//                    TextButton(
-//                        onClick = { selectedStudentForDelete = null },
-//                        enabled = !deleteRecordState.isLoading()
-//                    ) {
-//                        Text("Batal")
-//                    }
-//                }
-//            )
+        if (selectedForDelete != null) {
+            DeleteAttendanceRecordDialog(
+                isLoading = deleteRecordState.isLoading(),
+                studentName = selectedForDelete!!.student.name,
+                onClickDelete = {
+                    viewModel.deleteRecord(
+                        recordId = selectedForDelete!!.record.id
+                    )
+                },
+                onDismissRequest = {
+                    selectedForDelete = null
+                }
+            )
+        }
     }
 }
 

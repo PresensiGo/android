@@ -33,6 +33,7 @@ import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendan
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecord
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecordStudent
 import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendanceRecord
 import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubjectAttendanceRecord
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceRecords
@@ -289,6 +290,41 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.DELETE,
             "/api/v1/general-attendances/{general_attendance_id}".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * DELETE /api/v1/general-attendances/{general_attendance_id}/records/{record_id}
+        * 
+        * 
+         * @param generalAttendanceId general attendance id 
+         * @param recordId record id 
+         * @return ResponsesDeleteGeneralAttendanceRecord
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun deleteGeneralAttendanceRecord(generalAttendanceId: kotlin.Int, recordId: kotlin.Int): HttpResponse<ResponsesDeleteGeneralAttendanceRecord> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.DELETE,
+            "/api/v1/general-attendances/{general_attendance_id}/records/{record_id}".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId").replace("{" + "record_id" + "}", "$recordId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

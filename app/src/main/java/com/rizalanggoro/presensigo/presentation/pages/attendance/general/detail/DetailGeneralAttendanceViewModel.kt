@@ -332,8 +332,10 @@ class DetailGeneralAttendanceViewModel(
     fun setFilterOpen(isOpen: Boolean) =
         _isFilterOpen.update { isOpen }
 
+    // create record
     private val _createRecordState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
     val createRecordState get() = _createRecordState.asStateFlow()
+
     fun createRecord(studentId: Int, status: AppAttendanceStatus) = viewModelScope.launch {
         try {
             if (attendance.value is UiState.Success) {
@@ -367,4 +369,31 @@ class DetailGeneralAttendanceViewModel(
     }
 
     fun resetCreateRecord() = _createRecordState.update { UiState.Initial }
+
+    // delete record
+    private val _deleteRecordState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
+    val deleteRecordState get() = _deleteRecordState.asStateFlow()
+
+    fun deleteRecord(recordId: Int) = viewModelScope.launch {
+        try {
+            _deleteRecordState.update { UiState.Loading }
+            attendanceApi.deleteGeneralAttendanceRecord(
+                generalAttendanceId = params.attendanceId,
+                recordId = recordId
+            )
+            _deleteRecordState.update { UiState.Success(Unit) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _deleteRecordState.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _deleteRecordState.update { UiState.Failure() }
+        }
+    }
+
+    fun resetDeleteRecord() = _deleteRecordState.update { UiState.Initial }
 }

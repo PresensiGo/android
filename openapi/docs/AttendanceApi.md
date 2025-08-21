@@ -11,6 +11,7 @@ All URIs are relative to *http://localhost*
 | [**createSubjectAttendanceRecord**](AttendanceApi.md#createSubjectAttendanceRecord) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | [**createSubjectAttendanceRecordStudent**](AttendanceApi.md#createSubjectAttendanceRecordStudent) | **POST** /api/v1/subject-attendances/records/student |  |
 | [**deleteGeneralAttendance**](AttendanceApi.md#deleteGeneralAttendance) | **DELETE** /api/v1/general-attendances/{general_attendance_id} |  |
+| [**deleteGeneralAttendanceRecord**](AttendanceApi.md#deleteGeneralAttendanceRecord) | **DELETE** /api/v1/general-attendances/{general_attendance_id}/records/{record_id} |  |
 | [**deleteSubjectAttendance**](AttendanceApi.md#deleteSubjectAttendance) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | [**deleteSubjectAttendanceRecord**](AttendanceApi.md#deleteSubjectAttendanceRecord) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records/{record_id} |  |
 | [**getAllGeneralAttendanceRecords**](AttendanceApi.md#getAllGeneralAttendanceRecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
@@ -337,6 +338,52 @@ try {
 ### Return type
 
 [**ResponsesDeleteGeneralAttendance**](ResponsesDeleteGeneralAttendance.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="deleteGeneralAttendanceRecord"></a>
+# **deleteGeneralAttendanceRecord**
+> ResponsesDeleteGeneralAttendanceRecord deleteGeneralAttendanceRecord(generalAttendanceId, recordId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val generalAttendanceId : kotlin.Int = 56 // kotlin.Int | general attendance id
+val recordId : kotlin.Int = 56 // kotlin.Int | record id
+try {
+    val result : ResponsesDeleteGeneralAttendanceRecord = apiInstance.deleteGeneralAttendanceRecord(generalAttendanceId, recordId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#deleteGeneralAttendanceRecord")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#deleteGeneralAttendanceRecord")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **generalAttendanceId** | **kotlin.Int**| general attendance id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **recordId** | **kotlin.Int**| record id | |
+
+### Return type
+
+[**ResponsesDeleteGeneralAttendanceRecord**](ResponsesDeleteGeneralAttendanceRecord.md)
 
 ### Authorization
 
