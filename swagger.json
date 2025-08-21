@@ -1277,7 +1277,7 @@
                     "200": {
                         "description": "OK",
                         "schema": {
-                            "$ref": "#/definitions/responses.GetGeneralAttendance"
+                            "$ref": "#/definitions/GetGeneralAttendanceRes"
                         }
                     }
                 }
@@ -1874,6 +1874,17 @@
             "properties": {
                 "classroom": {
                     "$ref": "#/definitions/classroom"
+                }
+            }
+        },
+        "GetGeneralAttendanceRes": {
+            "type": "object",
+            "required": [
+                "general_attendance"
+            ],
+            "properties": {
+                "general_attendance": {
+                    "$ref": "#/definitions/GeneralAttendance"
                 }
             }
         },
@@ -2709,17 +2720,6 @@
                     "items": {
                         "$ref": "#/definitions/User"
                     }
-                }
-            }
-        },
-        "responses.GetGeneralAttendance": {
-            "type": "object",
-            "required": [
-                "general_attendance"
-            ],
-            "properties": {
-                "general_attendance": {
-                    "$ref": "#/definitions/GeneralAttendance"
                 }
             }
         },

@@ -26,7 +26,7 @@ import com.google.gson.annotations.SerializedName
  */
 
 
-data class ResponsesGetGeneralAttendance (
+data class GetGeneralAttendanceRes (
 
     @SerializedName("general_attendance")
     val generalAttendance: GeneralAttendance

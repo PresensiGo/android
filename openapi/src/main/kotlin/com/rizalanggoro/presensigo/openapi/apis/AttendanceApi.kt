@@ -21,6 +21,7 @@ import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordR
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes
+import com.rizalanggoro.presensigo.openapi.models.GetGeneralAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
@@ -34,7 +35,6 @@ import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubjectAttendan
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceRecords
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendances
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendanceRecords
-import com.rizalanggoro.presensigo.openapi.models.ResponsesGetGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
@@ -484,10 +484,10 @@ import java.text.DateFormat
         * 
         * 
          * @param generalAttendanceId general attendance id 
-         * @return ResponsesGetGeneralAttendance
+         * @return GetGeneralAttendanceRes
         */
             @Suppress("UNCHECKED_CAST")
-        open suspend fun getGeneralAttendance(generalAttendanceId: kotlin.Int): HttpResponse<ResponsesGetGeneralAttendance> {
+        open suspend fun getGeneralAttendance(generalAttendanceId: kotlin.Int): HttpResponse<GetGeneralAttendanceRes> {
 
             val localVariableAuthNames = listOf<String>()
 

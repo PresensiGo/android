@@ -36,6 +36,7 @@ import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsItem
 import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.DetailGeneralAttendanceViewModel
+import com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail.sections.components.FilterBottomSheet
 import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
 
@@ -44,6 +45,7 @@ import org.koin.androidx.compose.koinViewModel
 fun Section2() {
     val viewModel = koinViewModel<DetailGeneralAttendanceViewModel>()
     val state by viewModel.state.collectAsState()
+    val isFilterOpen by viewModel.isFilterOpen.collectAsState()
 
     PullToRefreshBox(
         isRefreshing = false,
@@ -72,6 +74,10 @@ fun Section2() {
                 Spacer(modifier = Modifier.height(24.dp))
             }
         }
+
+        // bottom sheet
+        if (isFilterOpen)
+            FilterBottomSheet()
     }
 }
 

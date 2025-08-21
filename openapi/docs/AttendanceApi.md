@@ -586,7 +586,7 @@ No authorization required
 
 <a id="getGeneralAttendance"></a>
 # **getGeneralAttendance**
-> ResponsesGetGeneralAttendance getGeneralAttendance(generalAttendanceId)
+> GetGeneralAttendanceRes getGeneralAttendance(generalAttendanceId)
 
 
 
@@ -599,7 +599,7 @@ No authorization required
 val apiInstance = AttendanceApi()
 val generalAttendanceId : kotlin.Int = 56 // kotlin.Int | general attendance id
 try {
-    val result : ResponsesGetGeneralAttendance = apiInstance.getGeneralAttendance(generalAttendanceId)
+    val result : GetGeneralAttendanceRes = apiInstance.getGeneralAttendance(generalAttendanceId)
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling AttendanceApi#getGeneralAttendance")
@@ -617,7 +617,7 @@ try {
 
 ### Return type
 
-[**ResponsesGetGeneralAttendance**](ResponsesGetGeneralAttendance.md)
+[**GetGeneralAttendanceRes**](GetGeneralAttendanceRes.md)
 
 ### Authorization
 
