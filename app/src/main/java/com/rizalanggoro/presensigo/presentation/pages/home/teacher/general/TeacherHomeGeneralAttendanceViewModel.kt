@@ -40,6 +40,34 @@ class TeacherHomeGeneralAttendanceViewModel(
         }
     }
 
+    // delete general attendance
+    private val _deleteAttendance = MutableStateFlow<UiState<Unit>>(UiState.Initial)
+    val deleteAttendance = _deleteAttendance.asStateFlow()
+
+    fun deleteAttendance(attendanceId: Int) = viewModelScope.launch {
+        try {
+            _deleteAttendance.update { UiState.Loading }
+
+            val body = attendanceApi.deleteGeneralAttendance(
+                generalAttendanceId = attendanceId
+            ).body()
+
+            _deleteAttendance.update { UiState.Success(Unit) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _deleteAttendance.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _deleteAttendance.update { UiState.Failure() }
+        }
+    }
+
+    fun resetDeleteAttendance() = _deleteAttendance.update { UiState.Initial }
+
     init {
         getAllGeneralAttendances()
     }
