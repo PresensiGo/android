@@ -266,7 +266,10 @@ fun StudentHomeScreen() {
                                     attendanceDateTime = it.subjectAttendance.dateTime,
                                     recordDateTime = it.subjectAttendanceRecord.dateTime,
                                     subjectName = it.subject.name,
-                                    creatorName = "blom ada"
+                                    creatorName = it.creator.name.let {
+                                        if (it.isNotEmpty()) it
+                                        else "Nama guru tidak ditemukan!"
+                                    }
                                 )
                             }
 

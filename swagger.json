@@ -2135,11 +2135,15 @@
         "GetAllSubjectAttendancesStudentItem": {
             "type": "object",
             "required": [
+                "creator",
                 "subject",
                 "subject_attendance",
                 "subject_attendance_record"
             ],
             "properties": {
+                "creator": {
+                    "$ref": "#/definitions/User"
+                },
                 "subject": {
                     "$ref": "#/definitions/Subject"
                 },
