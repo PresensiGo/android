@@ -77,10 +77,10 @@ fun Section1() {
                 )
                 Text(
                     when (this@with) {
-//                        is UiState.Success -> data.creator.name.let {
-//                            if (it.isEmpty()) "Nama guru tidak ditemukan!"
-//                            else it
-//                        }
+                        is UiState.Success -> data.creator.name.let {
+                            if (it.isEmpty()) "Nama guru tidak ditemukan!"
+                            else it
+                        }
 
                         else -> "loading nama guru"
                     },
