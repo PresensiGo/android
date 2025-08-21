@@ -1,13 +1,10 @@
 package com.rizalanggoro.presensigo.presentation.pages.home.student
 
-import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.google.gson.Gson
-import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.failure.toFailure
-import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.QrData
 import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq
@@ -21,53 +18,9 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class State(
-    val status: StateStatus = StateStatus.Initial
-)
-
 class StudentHomeViewModel(
-    savedStateHandle: SavedStateHandle,
     private val attendanceApi: AttendanceApi,
-    private val tokenManager: TokenManager
 ) : ViewModel() {
-    private val _state = MutableStateFlow(State())
-    val state get() = _state.asStateFlow()
-
-    fun processAttendance(data: String) = viewModelScope.launch {
-        try {
-            _state.update { it.copy(status = StateStatus.Loading) }
-
-            val qrData = Gson().fromJson(data, QrData::class.java)
-            if (qrData.type == "general") {
-                // general
-                attendanceApi.createGeneralAttendanceRecordStudent(
-                    CreateGeneralAttendanceRecordStudentReq(
-                        code = qrData.code
-                    )
-                )
-            } else {
-                // subject
-                attendanceApi.createSubjectAttendanceRecordStudent(
-                    CreateSubjectAttendanceRecordStudentReq(
-                        code = qrData.code
-                    )
-                )
-            }
-
-            _state.update { it.copy(status = StateStatus.Success) }
-        } catch (e: ResponseException) {
-            e.printStackTrace()
-            _state.update { it.copy(status = StateStatus.Failure) }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            _state.update { it.copy(status = StateStatus.Failure) }
-        }
-    }
-
-    fun logout() = viewModelScope.launch {
-        tokenManager.clear()
-    }
-
     // subject attendance
     private val _subjectAttendances = MutableStateFlow<UiState<GetAllSubjectAttendancesStudentRes>>(
         UiState.Loading
@@ -113,6 +66,47 @@ class StudentHomeViewModel(
         } catch (e: Exception) {
             e.printStackTrace()
             _generalAttendances.update { UiState.Failure() }
+        }
+    }
+
+    // process attendance
+    private val _processAttendance = MutableStateFlow<UiState<Unit>>(UiState.Initial)
+    val processAttendance get() = _processAttendance.asStateFlow()
+
+    fun resetProcessAttendance() = _processAttendance.update { UiState.Initial }
+
+    fun processAttendance(data: String) = viewModelScope.launch {
+        try {
+            _processAttendance.update { UiState.Loading }
+
+            val qrData = Gson().fromJson(data, QrData::class.java)
+            if (qrData.type == "general") {
+                // general
+                attendanceApi.createGeneralAttendanceRecordStudent(
+                    CreateGeneralAttendanceRecordStudentReq(
+                        code = qrData.code
+                    )
+                )
+            } else {
+                // subject
+                attendanceApi.createSubjectAttendanceRecordStudent(
+                    CreateSubjectAttendanceRecordStudentReq(
+                        code = qrData.code
+                    )
+                )
+            }
+
+            _processAttendance.update { UiState.Success(Unit) }
+        } catch (e: ResponseException) {
+            e.printStackTrace()
+            _processAttendance.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
+                )
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+            _processAttendance.update { UiState.Failure() }
         }
     }
 

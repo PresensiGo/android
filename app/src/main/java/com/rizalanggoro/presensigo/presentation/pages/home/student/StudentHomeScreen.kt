@@ -1,6 +1,7 @@
 package com.rizalanggoro.presensigo.presentation.pages.home.student
 
 import android.icu.util.Calendar
+import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -21,24 +22,34 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.QrCodeScanner
+import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
+import androidx.compose.material3.SheetValue
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
+import androidx.compose.material3.rememberModalBottomSheetState
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.rizalanggoro.presensigo.core.Routes
@@ -47,24 +58,70 @@ import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.valentinilk.shimmer.shimmer
+import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun StudentHomeScreen() {
     val viewModel = koinViewModel<StudentHomeViewModel>()
-    val state by viewModel.state.collectAsState()
     val subjectAttendances by viewModel.subjectAttendances.collectAsState()
     val generalAttendances by viewModel.generalAttendances.collectAsState()
+    val processAttendance by viewModel.processAttendance.collectAsState()
 
+    val context = LocalContext.current
+    val scope = rememberCoroutineScope()
     val navController = LocalNavController.current
     val currentBackStack by navController.currentBackStackEntryAsState()
+
+    var isProcessAttendanceOpen by remember { mutableStateOf(false) }
+
+    val sheetState = rememberModalBottomSheetState(
+        skipPartiallyExpanded = true,
+        confirmValueChange = {
+            it != SheetValue.Hidden
+        }
+    )
 
     LaunchedEffect(currentBackStack?.savedStateHandle) {
         val qrCode = currentBackStack?.savedStateHandle?.get<String>("qrcode")
         if (qrCode != null && qrCode.isNotEmpty()) {
             viewModel.processAttendance(qrCode)
+            isProcessAttendanceOpen = true
             currentBackStack?.savedStateHandle?.remove<String>("qrcode")
+        }
+    }
+
+    LaunchedEffect(processAttendance) {
+        with(processAttendance) {
+            when (this) {
+                is UiState.Success -> {
+                    viewModel.getGeneralAttendances()
+                    viewModel.getSubjectAttendances()
+
+                    scope.launch {
+                        sheetState.hide()
+                    }.invokeOnCompletion {
+                        if (!sheetState.isVisible) {
+                            isProcessAttendanceOpen = false
+                        }
+                    }
+                }
+
+                is UiState.Failure -> {
+                    scope.launch {
+                        sheetState.hide()
+                    }.invokeOnCompletion {
+                        if (!sheetState.isVisible) {
+                            isProcessAttendanceOpen = false
+                        }
+                    }
+                    
+                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
+                }
+
+                else -> Unit
+            }
         }
     }
 
@@ -223,6 +280,42 @@ fun StudentHomeScreen() {
                 }
             }
         }
+
+        if (isProcessAttendanceOpen)
+            ModalBottomSheet(
+                onDismissRequest = {
+                    if (!processAttendance.isLoading()) {
+                        isProcessAttendanceOpen = false
+                    }
+                },
+                sheetState = sheetState
+            ) {
+                Column(
+                    horizontalAlignment = Alignment.CenterHorizontally,
+                    modifier = Modifier
+                        .fillMaxWidth()
+                        .padding(bottom = 24.dp),
+                    verticalArrangement = Arrangement.spacedBy(24.dp)
+                ) {
+                    Column(
+                        horizontalAlignment = Alignment.CenterHorizontally,
+                        verticalArrangement = Arrangement.spacedBy(4.dp),
+                        modifier = Modifier.padding(horizontal = 24.dp)
+                    ) {
+                        Text(
+                            "Loading...",
+                            style = MaterialTheme.typography.titleLarge,
+                        )
+                        Text(
+                            "Mohon tunggu sebentar, kami sedang memproses presensi Anda",
+                            style = MaterialTheme.typography.bodyMedium,
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f),
+                            textAlign = TextAlign.Center
+                        )
+                    }
+                    CircularProgressIndicator()
+                }
+            }
     }
 }
 
