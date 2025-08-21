@@ -37,11 +37,11 @@ fun MyComposeApplication(
                 NavHost(
                     navController = navController,
                     startDestination = when (isAuthenticated) {
-//                        true -> when (tokenType) {
-//                            TokenType.Unset -> Routes.Auth
-//                            TokenType.Teacher -> Routes.Home.Teacher
-//                            TokenType.Student -> Routes.Home.Student
-//                        }
+                        true -> when (tokenType) {
+                            TokenType.Unset -> Routes.Auth
+                            TokenType.Teacher -> Routes.Home.Teacher
+                            TokenType.Student -> Routes.Home.Student
+                        }
 //                        true -> Routes.ProfileStudent
 //                        true -> Routes.Attendance.Subject.Index(
 //                            batchId = 3,
@@ -50,7 +50,7 @@ fun MyComposeApplication(
 ////                            attendanceId = 1
 //                        )
 //                        true -> Routes.Attendance.General.Create
-                        true -> Routes.Attendance.General.Detail(attendanceId = 36)
+//                        true -> Routes.Attendance.General.Detail(attendanceId = 36)
                         else -> Routes.Auth
                     },
                     enterTransition = {
@@ -95,21 +95,7 @@ fun MyComposeApplication(
                     // student profile
                     composable<Routes.ProfileStudent> { ProfileStudentScreen() }
 
-//                    composable<Routes.Student> { StudentScreen() }
                     composable<Routes.QrScanner> { QRScannerScreen() }
-
-                    // attendance
-//                    composable<Routes.Attendance.Create> { CreateAttendanceScreen() }
-//                    composable<Routes.Attendance.List> {
-//                        AttendanceScreen(
-//                            classroomID = it.toRoute<Routes.Attendance.List>().classroomID
-//                        )
-//                    }
-//                    composable<Routes.Attendance.Detail> { DetailAttendanceScreen() }
-
-                    // lateness
-//                    composable<Routes.Lateness.Detail.Index> { DetailLatenessScreen() }
-//                    composable<Routes.Lateness.Detail.Create> { CreateDetailLatenessScreen() }
                 }
             }
         }

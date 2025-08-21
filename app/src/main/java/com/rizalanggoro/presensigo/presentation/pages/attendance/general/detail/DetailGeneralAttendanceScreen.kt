@@ -40,7 +40,7 @@ fun DetailGeneralAttendanceScreen() {
 
     val navController = LocalNavController.current
 
-    var selectedTabIndex by rememberSaveable { mutableIntStateOf(1) }
+    var selectedTabIndex by rememberSaveable { mutableIntStateOf(0) }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.primaryContainer,

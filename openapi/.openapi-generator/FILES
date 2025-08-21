@@ -28,6 +28,8 @@ docs/GetAllClassroomsByMajorIdRes.md
 docs/GetAllGeneralAttendanceRecordsByClassroomIdItem.md
 docs/GetAllGeneralAttendanceRecordsByClassroomIdRes.md
 docs/GetAllGeneralAttendanceRecordsItem.md
+docs/GetAllGeneralAttendancesItem.md
+docs/GetAllGeneralAttendancesRes.md
 docs/GetAllMajorsByBatchIdItem.md
 docs/GetAllMajorsByBatchIdRes.md
 docs/GetAllStudentsByClassroomIdRes.md
@@ -83,7 +85,6 @@ docs/ResponsesEjectStudentToken.md
 docs/ResponsesGetAll.md
 docs/ResponsesGetAllClassroomWithMajors.md
 docs/ResponsesGetAllGeneralAttendanceRecords.md
-docs/ResponsesGetAllGeneralAttendances.md
 docs/ResponsesGetAllStudentAccountsByClassroomId.md
 docs/ResponsesGetAllSubjectAttendanceRecords.md
 docs/ResponsesGetAllSubjects.md
@@ -147,6 +148,8 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllClassroomsByMaj
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendanceRecordsByClassroomIdItem.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendanceRecordsByClassroomIdRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendanceRecordsItem.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendancesItem.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendancesRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllMajorsByBatchIdItem.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllMajorsByBatchIdRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllStudentsByClassroomIdRes.kt
@@ -200,7 +203,6 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesEjectStudent
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAll.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllClassroomWithMajors.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllGeneralAttendanceRecords.kt
-src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllGeneralAttendances.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllStudentAccountsByClassroomId.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllSubjectAttendanceRecords.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesGetAllSubjects.kt

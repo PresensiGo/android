@@ -4,6 +4,7 @@ import android.icu.util.Calendar
 import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
@@ -42,10 +43,10 @@ import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
 import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
-import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
-import com.rizalanggoro.presensigo.openapi.models.GeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendancesItem
 import com.valentinilk.shimmer.shimmer
 import org.koin.androidx.compose.koinViewModel
 
@@ -53,7 +54,7 @@ import org.koin.androidx.compose.koinViewModel
 @Composable
 fun TeacherHomeGeneralAttendanceScreen() {
     val viewModel = koinViewModel<TeacherHomeGeneralAttendanceViewModel>()
-    val state by viewModel.state.collectAsState()
+    val attendances by viewModel.attendances.collectAsState()
 
     val navController = LocalNavController.current
     val currentBackStackEntry by navController.currentBackStackEntryAsState()
@@ -106,7 +107,7 @@ fun TeacherHomeGeneralAttendanceScreen() {
                     .background(MaterialTheme.colorScheme.background)
             ) {
                 PullToRefreshBox(
-                    isRefreshing = state.status.isLoading(),
+                    isRefreshing = attendances.isLoading(),
                     onRefresh = { viewModel.getAllGeneralAttendances() }
                 ) {
                     LazyColumn(
@@ -134,23 +135,21 @@ fun TeacherHomeGeneralAttendanceScreen() {
                             }
                         }
 
-                        // loading state
-                        if (state.status.isLoading())
-                            items(3) {
-                                AttendanceItem(isLoading = true)
-                            }
-
-                        // success state
-                        if (state.status.isSuccess())
-                            items(state.attendances) {
-                                AttendanceItem(data = it) {
-                                    navController.navigate(
-                                        Routes.Attendance.General.Detail(
-                                            attendanceId = it.id
+                        with(attendances) {
+                            when (this) {
+                                is UiState.Success -> items(data.items) {
+                                    AttendanceItem(data = it) {
+                                        navController.navigate(
+                                            Routes.Attendance.General.Detail(
+                                                attendanceId = it.generalAttendance.id
+                                            )
                                         )
-                                    )
+                                    }
                                 }
+
+                                else -> items(3) { AttendanceItem(isLoading = true) }
                             }
+                        }
 
                         item {
                             Spacer(modifier = Modifier.height((48 + 48).dp))
@@ -165,7 +164,7 @@ fun TeacherHomeGeneralAttendanceScreen() {
 @Composable
 private fun AttendanceItem(
     isLoading: Boolean? = false,
-    data: GeneralAttendance? = null,
+    data: GetAllGeneralAttendancesItem? = null,
     onClick: () -> Unit = {}
 ) {
     OutlinedCard(
@@ -189,7 +188,8 @@ private fun AttendanceItem(
                 )
             ) {
                 Text(
-                    data?.datetime?.formatDateTime() ?: "loading general attendance",
+                    data?.generalAttendance?.datetime?.formatDateTime()
+                        ?: "loading general attendance",
                     style = MaterialTheme.typography.titleMedium,
                     modifier = Modifier.then(
                         when (isLoading) {
@@ -207,7 +207,7 @@ private fun AttendanceItem(
                     }
                 )
                 Text(
-                    data?.datetime?.formatDateTime("HH:mm") ?: "loading",
+                    data?.generalAttendance?.datetime?.formatDateTime("HH:mm") ?: "loading",
                     style = MaterialTheme.typography.bodyMedium,
                     modifier = Modifier.then(
                         when (isLoading) {
@@ -233,30 +233,41 @@ private fun AttendanceItem(
                 Row(
                     modifier = Modifier.weight(1f),
                     verticalAlignment = Alignment.CenterVertically,
-                    horizontalArrangement = Arrangement.spacedBy(4.dp)
+                    horizontalArrangement = Arrangement.spacedBy(8.dp)
                 ) {
-                    Icon(
-                        Icons.Rounded.Person,
-                        contentDescription = null,
+                    Box(
                         modifier = Modifier
-                            .size(16.dp)
-                            .then(
-                                when (isLoading) {
-                                    true -> Modifier
-                                        .shimmer()
-                                        .clip(CircleShape)
-                                        .background(MaterialTheme.colorScheme.outlineVariant)
+                            .size(24.dp)
+                            .clip(CircleShape)
+                            .background(MaterialTheme.colorScheme.onPrimaryContainer.copy(alpha = .48f))
+                    ) {
+                        Icon(
+                            Icons.Rounded.Person,
+                            contentDescription = null,
+                            modifier = Modifier
+                                .size(12.dp)
+                                .align(Alignment.Center)
+                                .then(
+                                    when (isLoading) {
+                                        true -> Modifier
+                                            .shimmer()
+                                            .clip(CircleShape)
+                                            .background(MaterialTheme.colorScheme.outlineVariant)
 
-                                    else -> Modifier
-                                }
-                            ),
-                        tint = when (isLoading) {
-                            true -> MaterialTheme.colorScheme.outlineVariant
-                            else -> MaterialTheme.colorScheme.primary
-                        }
-                    )
+                                        else -> Modifier
+                                    }
+                                ),
+                            tint = when (isLoading) {
+                                true -> MaterialTheme.colorScheme.outlineVariant
+                                else -> MaterialTheme.colorScheme.primary
+                            }
+                        )
+                    }
                     Text(
-                        "Rizal Dwi Anggoro",
+                        data?.creator?.name.let {
+                            if (it.isNullOrBlank()) "Nama guru tidak ditemukan!"
+                            else it
+                        },
                         style = MaterialTheme.typography.bodySmall,
                         modifier = Modifier.then(
                             when (isLoading) {

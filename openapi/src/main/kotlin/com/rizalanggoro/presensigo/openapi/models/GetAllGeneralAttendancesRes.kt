@@ -15,21 +15,21 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
-import com.rizalanggoro.presensigo.openapi.models.GeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendancesItem
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param generalAttendances 
+ * @param items 
  */
 
 
-data class ResponsesGetAllGeneralAttendances (
+data class GetAllGeneralAttendancesRes (
 
-    @SerializedName("general_attendances")
-    val generalAttendances: kotlin.collections.List<GeneralAttendance>
+    @SerializedName("items")
+    val items: kotlin.collections.List<GetAllGeneralAttendancesItem>
 
 ) {
 

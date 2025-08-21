@@ -588,7 +588,7 @@ No authorization required
 
 <a id="getAllGeneralAttendances"></a>
 # **getAllGeneralAttendances**
-> ResponsesGetAllGeneralAttendances getAllGeneralAttendances()
+> GetAllGeneralAttendancesRes getAllGeneralAttendances()
 
 
 
@@ -600,7 +600,7 @@ No authorization required
 
 val apiInstance = AttendanceApi()
 try {
-    val result : ResponsesGetAllGeneralAttendances = apiInstance.getAllGeneralAttendances()
+    val result : GetAllGeneralAttendancesRes = apiInstance.getAllGeneralAttendances()
     println(result)
 } catch (e: ClientException) {
     println("4xx response calling AttendanceApi#getAllGeneralAttendances")
@@ -616,7 +616,7 @@ This endpoint does not need any parameter.
 
 ### Return type
 
-[**ResponsesGetAllGeneralAttendances**](ResponsesGetAllGeneralAttendances.md)
+[**GetAllGeneralAttendancesRes**](GetAllGeneralAttendancesRes.md)
 
 ### Authorization
 
