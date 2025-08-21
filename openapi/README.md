@@ -53,6 +53,7 @@ All URIs are relative to *http://localhost*
 | *AccountApi* | [**logout**](docs/AccountApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | *AccountApi* | [**refreshToken**](docs/AccountApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
 | *AttendanceApi* | [**createGeneralAttendance**](docs/AttendanceApi.md#creategeneralattendance) | **POST** /api/v1/general-attendances |  |
+| *AttendanceApi* | [**createGeneralAttendanceRecord**](docs/AttendanceApi.md#creategeneralattendancerecord) | **POST** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | *AttendanceApi* | [**createGeneralAttendanceRecordStudent**](docs/AttendanceApi.md#creategeneralattendancerecordstudent) | **POST** /api/v1/general-attendances/records/student |  |
 | *AttendanceApi* | [**createSubjectAttendance**](docs/AttendanceApi.md#createsubjectattendance) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | *AttendanceApi* | [**createSubjectAttendanceRecord**](docs/AttendanceApi.md#createsubjectattendancerecord) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
@@ -106,6 +107,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.Batch](docs/Batch.md)
  - [com.rizalanggoro.presensigo.openapi.models.Classroom](docs/Classroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus](docs/ConstantsAttendanceStatus.md)
+ - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordReq](docs/CreateGeneralAttendanceRecordReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq](docs/CreateGeneralAttendanceRecordStudentReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq](docs/CreateGeneralAttendanceReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordReq](docs/CreateSubjectAttendanceRecordReq.md)
@@ -161,6 +163,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesClassroomMajor](docs/ResponsesClassroomMajor.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateClassroom](docs/ResponsesCreateClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance](docs/ResponsesCreateGeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecord](docs/ResponsesCreateGeneralAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent](docs/ResponsesCreateGeneralAttendanceRecordStudent.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubject](docs/ResponsesCreateSubject.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendance](docs/ResponsesCreateSubjectAttendance.md)

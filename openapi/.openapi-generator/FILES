@@ -8,6 +8,7 @@ docs/BatchApi.md
 docs/Classroom.md
 docs/ClassroomApi.md
 docs/ConstantsAttendanceStatus.md
+docs/CreateGeneralAttendanceRecordReq.md
 docs/CreateGeneralAttendanceRecordStudentReq.md
 docs/CreateGeneralAttendanceReq.md
 docs/CreateSubjectAttendanceRecordReq.md
@@ -66,6 +67,7 @@ docs/ResetApi.md
 docs/ResponsesClassroomMajor.md
 docs/ResponsesCreateClassroom.md
 docs/ResponsesCreateGeneralAttendance.md
+docs/ResponsesCreateGeneralAttendanceRecord.md
 docs/ResponsesCreateGeneralAttendanceRecordStudent.md
 docs/ResponsesCreateSubject.md
 docs/ResponsesCreateSubjectAttendance.md
@@ -125,6 +127,7 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/infrastructure/RequestMethod
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/Batch.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/Classroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ConstantsAttendanceStatus.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateGeneralAttendanceRecordReq.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateGeneralAttendanceRecordStudentReq.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateGeneralAttendanceReq.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/CreateSubjectAttendanceRecordReq.kt
@@ -180,6 +183,7 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/RequestsUpdateSubject
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesClassroomMajor.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesCreateClassroom.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesCreateGeneralAttendance.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesCreateGeneralAttendanceRecord.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesCreateGeneralAttendanceRecordStudent.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesCreateSubject.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/ResponsesCreateSubjectAttendance.kt

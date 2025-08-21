@@ -5,6 +5,7 @@ All URIs are relative to *http://localhost*
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
 | [**createGeneralAttendance**](AttendanceApi.md#createGeneralAttendance) | **POST** /api/v1/general-attendances |  |
+| [**createGeneralAttendanceRecord**](AttendanceApi.md#createGeneralAttendanceRecord) | **POST** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | [**createGeneralAttendanceRecordStudent**](AttendanceApi.md#createGeneralAttendanceRecordStudent) | **POST** /api/v1/general-attendances/records/student |  |
 | [**createSubjectAttendance**](AttendanceApi.md#createSubjectAttendance) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
 | [**createSubjectAttendanceRecord**](AttendanceApi.md#createSubjectAttendanceRecord) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
@@ -56,6 +57,52 @@ try {
 ### Return type
 
 [**ResponsesCreateGeneralAttendance**](ResponsesCreateGeneralAttendance.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="createGeneralAttendanceRecord"></a>
+# **createGeneralAttendanceRecord**
+> ResponsesCreateGeneralAttendanceRecord createGeneralAttendanceRecord(generalAttendanceId, body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val generalAttendanceId : kotlin.Int = 56 // kotlin.Int | general attendance id
+val body : CreateGeneralAttendanceRecordReq =  // CreateGeneralAttendanceRecordReq | body
+try {
+    val result : ResponsesCreateGeneralAttendanceRecord = apiInstance.createGeneralAttendanceRecord(generalAttendanceId, body)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#createGeneralAttendanceRecord")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#createGeneralAttendanceRecord")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **generalAttendanceId** | **kotlin.Int**| general attendance id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**CreateGeneralAttendanceRecordReq**](CreateGeneralAttendanceRecordReq.md)| body | |
+
+### Return type
+
+[**ResponsesCreateGeneralAttendanceRecord**](ResponsesCreateGeneralAttendanceRecord.md)
 
 ### Authorization
 

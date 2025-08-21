@@ -15,6 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordReq
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordReq
@@ -26,6 +27,7 @@ import com.rizalanggoro.presensigo.openapi.models.GetGeneralAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecord
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecordStudent
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateSubjectAttendanceRecord
@@ -80,6 +82,40 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
             "/api/v1/general-attendances",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/general-attendances/{general_attendance_id}/records
+        * 
+        * 
+         * @param generalAttendanceId general attendance id 
+         * @param body body 
+         * @return ResponsesCreateGeneralAttendanceRecord
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun createGeneralAttendanceRecord(generalAttendanceId: kotlin.Int, body: CreateGeneralAttendanceRecordReq): HttpResponse<ResponsesCreateGeneralAttendanceRecord> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/general-attendances/{general_attendance_id}/records".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,
