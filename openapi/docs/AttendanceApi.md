@@ -17,8 +17,10 @@ All URIs are relative to *http://localhost*
 | [**getAllGeneralAttendanceRecords**](AttendanceApi.md#getAllGeneralAttendanceRecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | [**getAllGeneralAttendanceRecordsByClassroomId**](AttendanceApi.md#getAllGeneralAttendanceRecordsByClassroomId) | **GET** /api/v1/general-attendances/{general_attendance_id}/classrooms/{classroom_id}/records |  |
 | [**getAllGeneralAttendances**](AttendanceApi.md#getAllGeneralAttendances) | **GET** /api/v1/general-attendances |  |
+| [**getAllGeneralAttendancesStudent**](AttendanceApi.md#getAllGeneralAttendancesStudent) | **GET** /api/v1/general-attendances/student |  |
 | [**getAllSubjectAttendanceRecords**](AttendanceApi.md#getAllSubjectAttendanceRecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | [**getAllSubjectAttendances**](AttendanceApi.md#getAllSubjectAttendances) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
+| [**getAllSubjectAttendancesStudent**](AttendanceApi.md#getAllSubjectAttendancesStudent) | **GET** /api/v1/subject-attendances/student |  |
 | [**getGeneralAttendance**](AttendanceApi.md#getGeneralAttendance) | **GET** /api/v1/general-attendances/{general_attendance_id} |  |
 | [**getSubjectAttendance**](AttendanceApi.md#getSubjectAttendance) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | [**updateGeneralAttendance**](AttendanceApi.md#updateGeneralAttendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
@@ -627,6 +629,47 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: */*
 
+<a id="getAllGeneralAttendancesStudent"></a>
+# **getAllGeneralAttendancesStudent**
+> GetAllGeneralAttendancesStudentRes getAllGeneralAttendancesStudent()
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+try {
+    val result : GetAllGeneralAttendancesStudentRes = apiInstance.getAllGeneralAttendancesStudent()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#getAllGeneralAttendancesStudent")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#getAllGeneralAttendancesStudent")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetAllGeneralAttendancesStudentRes**](GetAllGeneralAttendancesStudentRes.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
 <a id="getAllSubjectAttendanceRecords"></a>
 # **getAllSubjectAttendanceRecords**
 > ResponsesGetAllSubjectAttendanceRecords getAllSubjectAttendanceRecords(batchId, majorId, classroomId, subjectAttendanceId)
@@ -715,6 +758,47 @@ try {
 ### Return type
 
 [**GetAllSubjectAttendancesRes**](GetAllSubjectAttendancesRes.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getAllSubjectAttendancesStudent"></a>
+# **getAllSubjectAttendancesStudent**
+> GetAllSubjectAttendancesStudentRes getAllSubjectAttendancesStudent()
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+try {
+    val result : GetAllSubjectAttendancesStudentRes = apiInstance.getAllSubjectAttendancesStudent()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#getAllSubjectAttendancesStudent")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#getAllSubjectAttendancesStudent")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetAllSubjectAttendancesStudentRes**](GetAllSubjectAttendancesStudentRes.md)
 
 ### Authorization
 

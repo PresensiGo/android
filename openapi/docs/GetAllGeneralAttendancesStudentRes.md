@@ -1,0 +1,10 @@
+
+# GetAllGeneralAttendancesStudentRes
+
+## Properties
+| Name | Type | Description | Notes |
+| ------------ | ------------- | ------------- | ------------- |
+| **items** | [**kotlin.collections.List&lt;GetAllGeneralAttendancesStudentItem&gt;**](GetAllGeneralAttendancesStudentItem.md) |  |  |
+
+
+

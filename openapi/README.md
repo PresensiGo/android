@@ -66,8 +66,10 @@ All URIs are relative to *http://localhost*
 | *AttendanceApi* | [**getAllGeneralAttendanceRecords**](docs/AttendanceApi.md#getallgeneralattendancerecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | *AttendanceApi* | [**getAllGeneralAttendanceRecordsByClassroomId**](docs/AttendanceApi.md#getallgeneralattendancerecordsbyclassroomid) | **GET** /api/v1/general-attendances/{general_attendance_id}/classrooms/{classroom_id}/records |  |
 | *AttendanceApi* | [**getAllGeneralAttendances**](docs/AttendanceApi.md#getallgeneralattendances) | **GET** /api/v1/general-attendances |  |
+| *AttendanceApi* | [**getAllGeneralAttendancesStudent**](docs/AttendanceApi.md#getallgeneralattendancesstudent) | **GET** /api/v1/general-attendances/student |  |
 | *AttendanceApi* | [**getAllSubjectAttendanceRecords**](docs/AttendanceApi.md#getallsubjectattendancerecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | *AttendanceApi* | [**getAllSubjectAttendances**](docs/AttendanceApi.md#getallsubjectattendances) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
+| *AttendanceApi* | [**getAllSubjectAttendancesStudent**](docs/AttendanceApi.md#getallsubjectattendancesstudent) | **GET** /api/v1/subject-attendances/student |  |
 | *AttendanceApi* | [**getGeneralAttendance**](docs/AttendanceApi.md#getgeneralattendance) | **GET** /api/v1/general-attendances/{general_attendance_id} |  |
 | *AttendanceApi* | [**getSubjectAttendance**](docs/AttendanceApi.md#getsubjectattendance) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | *AttendanceApi* | [**updateGeneralAttendance**](docs/AttendanceApi.md#updategeneralattendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
@@ -132,6 +134,8 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsItem](docs/GetAllGeneralAttendanceRecordsItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendancesItem](docs/GetAllGeneralAttendancesItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendancesRes](docs/GetAllGeneralAttendancesRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendancesStudentItem](docs/GetAllGeneralAttendancesStudentItem.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendancesStudentRes](docs/GetAllGeneralAttendancesStudentRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdItem](docs/GetAllMajorsByBatchIdItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdRes](docs/GetAllMajorsByBatchIdRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes](docs/GetAllStudentsByClassroomIdRes.md)
@@ -139,6 +143,8 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem](docs/GetAllSubjectAttendanceRecordsItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesItem](docs/GetAllSubjectAttendancesItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes](docs/GetAllSubjectAttendancesRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesStudentItem](docs/GetAllSubjectAttendancesStudentItem.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesStudentRes](docs/GetAllSubjectAttendancesStudentRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetBatchRes](docs/GetBatchRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetClassroomRes](docs/GetClassroomRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetGeneralAttendanceRes](docs/GetGeneralAttendanceRes.md)
