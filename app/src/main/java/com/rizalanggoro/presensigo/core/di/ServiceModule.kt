@@ -10,6 +10,7 @@ import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.apis.ResetApi
+import com.rizalanggoro.presensigo.openapi.apis.SchoolApi
 import com.rizalanggoro.presensigo.openapi.apis.StudentApi
 import com.rizalanggoro.presensigo.openapi.apis.SubjectApi
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenReq
@@ -118,4 +119,5 @@ val serviceModule = module {
     single { ResetApi(API_BASE_URL, httpClientConfig = get()) }
     single { StudentApi(API_BASE_URL, httpClientConfig = get()) }
     single { SubjectApi(API_BASE_URL, httpClientConfig = get()) }
+    single { SchoolApi(API_BASE_URL, httpClientConfig = get()) }
 }

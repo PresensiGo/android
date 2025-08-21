@@ -49,6 +49,7 @@ All URIs are relative to *http://localhost*
 | *AccountApi* | [**apiV1AccountsAccountIdPasswordPut**](docs/AccountApi.md#apiv1accountsaccountidpasswordput) | **PUT** /api/v1/accounts/{account_id}/password |  |
 | *AccountApi* | [**apiV1AccountsAccountIdRolePut**](docs/AccountApi.md#apiv1accountsaccountidroleput) | **PUT** /api/v1/accounts/{account_id}/role |  |
 | *AccountApi* | [**apiV1AccountsGet**](docs/AccountApi.md#apiv1accountsget) | **GET** /api/v1/accounts |  |
+| *AccountApi* | [**getAccount**](docs/AccountApi.md#getaccount) | **GET** /api/v1/accounts/profile |  |
 | *AccountApi* | [**login**](docs/AccountApi.md#login) | **POST** /api/v1/auth/login |  |
 | *AccountApi* | [**logout**](docs/AccountApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | *AccountApi* | [**refreshToken**](docs/AccountApi.md#refreshtoken) | **POST** /api/v1/auth/refresh-token |  |
@@ -89,6 +90,7 @@ All URIs are relative to *http://localhost*
 | *MajorApi* | [**getMajor**](docs/MajorApi.md#getmajor) | **GET** /api/v1/batches/{batch_id}/majors/{major_id} |  |
 | *MajorApi* | [**updateMajor**](docs/MajorApi.md#updatemajor) | **PUT** /api/v1/batches/{batch_id}/majors/{major_id} |  |
 | *ResetApi* | [**reset**](docs/ResetApi.md#reset) | **GET** /api/v1/reset |  |
+| *SchoolApi* | [**getSchool**](docs/SchoolApi.md#getschool) | **GET** /api/v1/schools/profile |  |
 | *StudentApi* | [**apiV1AuthStudentsAccountsStudentTokenIdEjectPost**](docs/StudentApi.md#apiv1authstudentsaccountsstudenttokenidejectpost) | **POST** /api/v1/auth/students/accounts/{student_token_id}/eject |  |
 | *StudentApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentAccountsGet**](docs/StudentApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidstudentaccountsget) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/student-accounts |  |
 | *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students |  |
@@ -120,6 +122,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendanceRecord](docs/DomainsSubjectAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudentAccount](docs/DtoStudentAccount.md)
  - [com.rizalanggoro.presensigo.openapi.models.GeneralAttendance](docs/GeneralAttendance.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetAccountRes](docs/GetAccountRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllBatchesItem](docs/GetAllBatchesItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllBatchesRes](docs/GetAllBatchesRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllClassroomsByMajorIdItem](docs/GetAllClassroomsByMajorIdItem.md)
@@ -140,6 +143,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.GetClassroomRes](docs/GetClassroomRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetGeneralAttendanceRes](docs/GetGeneralAttendanceRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetMajorRes](docs/GetMajorRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetSchoolRes](docs/GetSchoolRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes](docs/GetSubjectAttendanceRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetSubjectRes](docs/GetSubjectRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.LoginReq](docs/LoginReq.md)
@@ -193,6 +197,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateClassroom](docs/ResponsesUpdateClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance](docs/ResponsesUpdateGeneralAttendance.md)
  - [com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateSubject](docs/ResponsesUpdateSubject.md)
+ - [com.rizalanggoro.presensigo.openapi.models.School](docs/School.md)
  - [com.rizalanggoro.presensigo.openapi.models.Student](docs/Student.md)
  - [com.rizalanggoro.presensigo.openapi.models.Subject](docs/Subject.md)
  - [com.rizalanggoro.presensigo.openapi.models.SubjectAttendance](docs/SubjectAttendance.md)

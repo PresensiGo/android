@@ -8,6 +8,7 @@ All URIs are relative to *http://localhost*
 | [**apiV1AccountsAccountIdPasswordPut**](AccountApi.md#apiV1AccountsAccountIdPasswordPut) | **PUT** /api/v1/accounts/{account_id}/password |  |
 | [**apiV1AccountsAccountIdRolePut**](AccountApi.md#apiV1AccountsAccountIdRolePut) | **PUT** /api/v1/accounts/{account_id}/role |  |
 | [**apiV1AccountsGet**](AccountApi.md#apiV1AccountsGet) | **GET** /api/v1/accounts |  |
+| [**getAccount**](AccountApi.md#getAccount) | **GET** /api/v1/accounts/profile |  |
 | [**login**](AccountApi.md#login) | **POST** /api/v1/auth/login |  |
 | [**logout**](AccountApi.md#logout) | **POST** /api/v1/auth/logout |  |
 | [**refreshToken**](AccountApi.md#refreshToken) | **POST** /api/v1/auth/refresh-token |  |
@@ -180,6 +181,47 @@ This endpoint does not need any parameter.
 ### Return type
 
 [**ResponsesGetAllUsers**](ResponsesGetAllUsers.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getAccount"></a>
+# **getAccount**
+> GetAccountRes getAccount()
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AccountApi()
+try {
+    val result : GetAccountRes = apiInstance.getAccount()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AccountApi#getAccount")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AccountApi#getAccount")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetAccountRes**](GetAccountRes.md)
 
 ### Authorization
 

@@ -15,6 +15,7 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.GetAccountRes
 import com.rizalanggoro.presensigo.openapi.models.LoginReq
 import com.rizalanggoro.presensigo.openapi.models.LoginRes
 import com.rizalanggoro.presensigo.openapi.models.LogoutReq
@@ -172,6 +173,39 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/accounts",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/accounts/profile
+        * 
+        * 
+         * @return GetAccountRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAccount(): HttpResponse<GetAccountRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/accounts/profile",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

@@ -49,6 +49,22 @@
                 }
             }
         },
+        "/api/v1/accounts/profile": {
+            "get": {
+                "tags": [
+                    "account"
+                ],
+                "operationId": "GetAccount",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GetAccountRes"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/accounts/{account_id}": {
             "delete": {
                 "tags": [
@@ -1496,6 +1512,22 @@
                 }
             }
         },
+        "/api/v1/schools/profile": {
+            "get": {
+                "tags": [
+                    "school"
+                ],
+                "operationId": "GetSchool",
+                "responses": {
+                    "200": {
+                        "description": "OK",
+                        "schema": {
+                            "$ref": "#/definitions/GetSchoolRes"
+                        }
+                    }
+                }
+            }
+        },
         "/api/v1/students": {
             "get": {
                 "tags": [
@@ -1792,6 +1824,17 @@
                 }
             }
         },
+        "GetAccountRes": {
+            "type": "object",
+            "required": [
+                "user"
+            ],
+            "properties": {
+                "user": {
+                    "$ref": "#/definitions/User"
+                }
+            }
+        },
         "GetAllBatchesItem": {
             "type": "object",
             "required": [
@@ -2076,6 +2119,17 @@
                 }
             }
         },
+        "GetSchoolRes": {
+            "type": "object",
+            "required": [
+                "school"
+            ],
+            "properties": {
+                "school": {
+                    "$ref": "#/definitions/School"
+                }
+            }
+        },
         "GetSubjectAttendanceRes": {
             "type": "object",
             "required": [
@@ -2219,6 +2273,25 @@
                     "type": "string"
                 },
                 "refresh_token": {
+                    "type": "string"
+                }
+            }
+        },
+        "School": {
+            "type": "object",
+            "required": [
+                "code",
+                "id",
+                "name"
+            ],
+            "properties": {
+                "code": {
+                    "type": "string"
+                },
+                "id": {
+                    "type": "integer"
+                },
+                "name": {
                     "type": "string"
                 }
             }
