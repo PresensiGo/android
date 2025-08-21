@@ -22,6 +22,7 @@ import androidx.compose.material.icons.rounded.Check
 import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.QrCodeScanner
+import androidx.compose.material.icons.rounded.Warning
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.FloatingActionButton
@@ -57,6 +58,7 @@ import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
+import com.rizalanggoro.presensigo.core.extensions.isAfterDateTime
 import com.valentinilk.shimmer.shimmer
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
@@ -116,7 +118,7 @@ fun StudentHomeScreen() {
                             isProcessAttendanceOpen = false
                         }
                     }
-                    
+
                     Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
                 }
 
@@ -328,6 +330,11 @@ private fun AttendanceItem(
     subjectName: String = "",
     creatorName: String = "",
 ) {
+    var isLate = false
+    if (attendanceDateTime.isNotEmpty() && recordDateTime.isNotEmpty()) {
+        isLate = recordDateTime.isAfterDateTime(attendanceDateTime)
+    }
+
     OutlinedCard(
         modifier = Modifier
             .fillMaxWidth()
@@ -351,9 +358,15 @@ private fun AttendanceItem(
 
                                 else -> Modifier.background(
                                     when (isAttended) {
-                                        true -> MaterialTheme.colorScheme.onPrimaryContainer.copy(
-                                            alpha = .48f
-                                        )
+                                        true -> when (isLate) {
+                                            true -> MaterialTheme.colorScheme.onTertiaryContainer.copy(
+                                                alpha = .48f
+                                            )
+
+                                            else -> MaterialTheme.colorScheme.onPrimaryContainer.copy(
+                                                alpha = .48f
+                                            )
+                                        }
 
                                         else -> MaterialTheme.colorScheme.errorContainer
                                     }
@@ -364,24 +377,33 @@ private fun AttendanceItem(
                     if (!isLoading)
                         Icon(
                             when (isAttended) {
-                                true -> Icons.Rounded.Check
+                                true -> when (isLate) {
+                                    true -> Icons.Rounded.Warning
+                                    else -> Icons.Rounded.Check
+                                }
+
                                 else -> Icons.Rounded.Close
                             },
                             contentDescription = null,
                             modifier = Modifier.align(Alignment.Center),
                             tint = when (isAttended) {
-                                true -> MaterialTheme.colorScheme.primaryContainer
+                                true -> when (isLate) {
+                                    true -> MaterialTheme.colorScheme.tertiaryContainer
+                                    else -> MaterialTheme.colorScheme.primaryContainer
+                                }
+
                                 else -> MaterialTheme.colorScheme.onErrorContainer
                             }
                         )
                 }
                 Column(
-                    modifier = Modifier.weight(1f), verticalArrangement = Arrangement.spacedBy(
+                    modifier = Modifier.weight(1f),
+                    verticalArrangement = Arrangement.spacedBy(
                         when (isLoading) {
                             true -> 4.dp
                             else -> 0.dp
                         }
-                    )
+                    ),
                 ) {
                     Text(
                         when (isLoading) {
