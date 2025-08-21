@@ -15,29 +15,34 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
 
 import com.google.gson.annotations.SerializedName
 
 /**
  * 
  *
- * @param createdAt 
+ * @param dateTime 
  * @param generalAttendanceId 
  * @param id 
+ * @param status 
  * @param studentId 
  */
 
 
 data class DomainsGeneralAttendanceRecord (
 
-    @SerializedName("created_at")
-    val createdAt: kotlin.String,
+    @SerializedName("date_time")
+    val dateTime: kotlin.String,
 
     @SerializedName("general_attendance_id")
     val generalAttendanceId: kotlin.Int,
 
     @SerializedName("id")
     val id: kotlin.Int,
+
+    @SerializedName("status")
+    val status: ConstantsAttendanceStatus,
 
     @SerializedName("student_id")
     val studentId: kotlin.Int

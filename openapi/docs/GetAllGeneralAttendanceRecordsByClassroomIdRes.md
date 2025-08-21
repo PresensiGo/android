@@ -1,0 +1,10 @@
+
+# GetAllGeneralAttendanceRecordsByClassroomIdRes
+
+## Properties
+| Name | Type | Description | Notes |
+| ------------ | ------------- | ------------- | ------------- |
+| **items** | [**kotlin.collections.List&lt;GetAllGeneralAttendanceRecordsByClassroomIdItem&gt;**](GetAllGeneralAttendanceRecordsByClassroomIdItem.md) |  |  |
+
+
+

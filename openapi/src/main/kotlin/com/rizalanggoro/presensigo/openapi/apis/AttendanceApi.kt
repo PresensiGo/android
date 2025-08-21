@@ -20,6 +20,7 @@ import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceReq
+import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsByClassroomIdRes
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes
 import com.rizalanggoro.presensigo.openapi.models.GetGeneralAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
@@ -361,6 +362,41 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/general-attendances/{general_attendance_id}/records".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/general-attendances/{general_attendance_id}/classrooms/{classroom_id}/records
+        * 
+        * 
+         * @param generalAttendanceId general attendance id 
+         * @param classroomId classroom id 
+         * @return GetAllGeneralAttendanceRecordsByClassroomIdRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getAllGeneralAttendanceRecordsByClassroomId(generalAttendanceId: kotlin.Int, classroomId: kotlin.Int): HttpResponse<GetAllGeneralAttendanceRecordsByClassroomIdRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/general-attendances/{general_attendance_id}/classrooms/{classroom_id}/records".replace("{" + "general_attendance_id" + "}", "$generalAttendanceId").replace("{" + "classroom_id" + "}", "$classroomId"),
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

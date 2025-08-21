@@ -13,6 +13,7 @@ All URIs are relative to *http://localhost*
 | [**deleteSubjectAttendance**](AttendanceApi.md#deleteSubjectAttendance) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | [**deleteSubjectAttendanceRecord**](AttendanceApi.md#deleteSubjectAttendanceRecord) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records/{record_id} |  |
 | [**getAllGeneralAttendanceRecords**](AttendanceApi.md#getAllGeneralAttendanceRecords) | **GET** /api/v1/general-attendances/{general_attendance_id}/records |  |
+| [**getAllGeneralAttendanceRecordsByClassroomId**](AttendanceApi.md#getAllGeneralAttendanceRecordsByClassroomId) | **GET** /api/v1/general-attendances/{general_attendance_id}/classrooms/{classroom_id}/records |  |
 | [**getAllGeneralAttendances**](AttendanceApi.md#getAllGeneralAttendances) | **GET** /api/v1/general-attendances |  |
 | [**getAllSubjectAttendanceRecords**](AttendanceApi.md#getAllSubjectAttendanceRecords) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id}/records |  |
 | [**getAllSubjectAttendances**](AttendanceApi.md#getAllSubjectAttendances) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances |  |
@@ -435,6 +436,52 @@ try {
 ### Return type
 
 [**ResponsesGetAllGeneralAttendanceRecords**](ResponsesGetAllGeneralAttendanceRecords.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getAllGeneralAttendanceRecordsByClassroomId"></a>
+# **getAllGeneralAttendanceRecordsByClassroomId**
+> GetAllGeneralAttendanceRecordsByClassroomIdRes getAllGeneralAttendanceRecordsByClassroomId(generalAttendanceId, classroomId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val generalAttendanceId : kotlin.Int = 56 // kotlin.Int | general attendance id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+try {
+    val result : GetAllGeneralAttendanceRecordsByClassroomIdRes = apiInstance.getAllGeneralAttendanceRecordsByClassroomId(generalAttendanceId, classroomId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#getAllGeneralAttendanceRecordsByClassroomId")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#getAllGeneralAttendanceRecordsByClassroomId")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **generalAttendanceId** | **kotlin.Int**| general attendance id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **classroomId** | **kotlin.Int**| classroom id | |
+
+### Return type
+
+[**GetAllGeneralAttendanceRecordsByClassroomIdRes**](GetAllGeneralAttendanceRecordsByClassroomIdRes.md)
 
 ### Authorization
 

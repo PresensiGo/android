@@ -24,6 +24,8 @@ docs/GetAllBatchesItem.md
 docs/GetAllBatchesRes.md
 docs/GetAllClassroomsByMajorIdItem.md
 docs/GetAllClassroomsByMajorIdRes.md
+docs/GetAllGeneralAttendanceRecordsByClassroomIdItem.md
+docs/GetAllGeneralAttendanceRecordsByClassroomIdRes.md
 docs/GetAllGeneralAttendanceRecordsItem.md
 docs/GetAllMajorsByBatchIdItem.md
 docs/GetAllMajorsByBatchIdRes.md
@@ -138,6 +140,8 @@ src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllBatchesItem.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllBatchesRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllClassroomsByMajorIdItem.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllClassroomsByMajorIdRes.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendanceRecordsByClassroomIdItem.kt
+src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendanceRecordsByClassroomIdRes.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllGeneralAttendanceRecordsItem.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllMajorsByBatchIdItem.kt
 src/main/kotlin/com/rizalanggoro/presensigo/openapi/models/GetAllMajorsByBatchIdRes.kt

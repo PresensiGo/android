@@ -4,9 +4,10 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **createdAt** | **kotlin.String** |  |  |
+| **dateTime** | **kotlin.String** |  |  |
 | **generalAttendanceId** | **kotlin.Int** |  |  |
 | **id** | **kotlin.Int** |  |  |
+| **status** | [**ConstantsAttendanceStatus**](ConstantsAttendanceStatus.md) |  |  |
 | **studentId** | **kotlin.Int** |  |  |
 
 

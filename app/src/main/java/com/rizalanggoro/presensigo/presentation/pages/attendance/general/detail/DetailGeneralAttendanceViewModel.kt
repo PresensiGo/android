@@ -16,11 +16,13 @@ import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
 import com.rizalanggoro.presensigo.openapi.models.GeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.GetAllBatchesItem
 import com.rizalanggoro.presensigo.openapi.models.GetAllBatchesRes
 import com.rizalanggoro.presensigo.openapi.models.GetAllClassroomsByMajorIdItem
 import com.rizalanggoro.presensigo.openapi.models.GetAllClassroomsByMajorIdRes
+import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsByClassroomIdItem
 import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsItem
 import com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdItem
 import com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdRes
@@ -46,6 +48,13 @@ data class State(
     val deleteMessage: String = "",
 
     val qrCodeBitmap: Bitmap? = null
+)
+
+data class RecordsState(
+    val presentItems: List<GetAllGeneralAttendanceRecordsByClassroomIdItem> = emptyList(),
+    val sickItems: List<GetAllGeneralAttendanceRecordsByClassroomIdItem> = emptyList(),
+    val permissionItems: List<GetAllGeneralAttendanceRecordsByClassroomIdItem> = emptyList(),
+    val alphaItems: List<GetAllGeneralAttendanceRecordsByClassroomIdItem> = emptyList(),
 )
 
 class DetailGeneralAttendanceViewModel(
@@ -87,11 +96,13 @@ class DetailGeneralAttendanceViewModel(
     )
     val classroomState get() = _classroomState.asStateFlow()
 
+    private val _attendanceRecords = MutableStateFlow<UiState<RecordsState>>(UiState.Loading)
+    val attendanceRecords get() = _attendanceRecords.asStateFlow()
+
     val params = savedStateHandle.toRoute<Routes.Attendance.General.Detail>()
 
     init {
         getAttendance()
-        getAllGeneralAttendanceRecords()
         getAllBatches()
 
         viewModelScope.launch {
@@ -100,6 +111,8 @@ class DetailGeneralAttendanceViewModel(
                     if (it != null)
                         getAllMajors(batchId = it.batch.id)
                     else {
+                        _attendanceRecords.update { UiState.Loading }
+                        _selectedBatch.update { null }
                         _selectedMajor.update { null }
                         _selectedClassroom.update { null }
                     }
@@ -118,6 +131,15 @@ class DetailGeneralAttendanceViewModel(
                         )
                     else
                         _selectedClassroom.update { null }
+                }
+            }
+        }
+
+        viewModelScope.launch {
+            selectedClassroom.collect {
+                it.let {
+                    if (it != null)
+                        getAttendanceRecords(classroomId = it.classroom.id)
                 }
             }
         }
@@ -225,40 +247,45 @@ class DetailGeneralAttendanceViewModel(
         }
     }
 
-    fun getAllGeneralAttendanceRecords() = viewModelScope.launch {
+    fun getAttendanceRecords(classroomId: Int) = viewModelScope.launch {
         try {
-            _state.update {
-                it.copy(
-                    getAttendanceRecordsStatus = StateStatus.Loading,
-                )
-            }
+            _attendanceRecords.update { UiState.Loading }
 
-            val body = attendanceApi.getAllGeneralAttendanceRecords(
-                generalAttendanceId = params.attendanceId
+            val body = attendanceApi.getAllGeneralAttendanceRecordsByClassroomId(
+                generalAttendanceId = params.attendanceId,
+                classroomId = classroomId
             ).body()
 
-            _state.update {
-                it.copy(
-                    getAttendanceRecordsStatus = StateStatus.Success,
-                    records = body.items
+            val hasRecordItems = body.items.filter { it.record.id > 0 }
+
+            _attendanceRecords.update {
+                UiState.Success(
+                    data = RecordsState(
+                        presentItems = hasRecordItems.filter {
+                            it.record.status == ConstantsAttendanceStatus.AttendanceStatusPresent
+                        },
+                        sickItems = hasRecordItems.filter {
+                            it.record.status == ConstantsAttendanceStatus.AttendanceStatusSick
+                        },
+                        permissionItems = hasRecordItems.filter {
+                            it.record.status == ConstantsAttendanceStatus.AttendanceStatusPermission
+                        },
+                        alphaItems = body.items.filter {
+                            it.record.id == 0 || it.record.status == ConstantsAttendanceStatus.AttendanceStatusAlpha
+                        }
+                    )
                 )
             }
         } catch (e: ResponseException) {
             e.printStackTrace()
-            _state.update {
-                it.copy(
-                    getAttendanceRecordsStatus = StateStatus.Failure,
-                    getAttendanceRecordsMessage = e.response.bodyAsText().toFailure().message
+            _attendanceRecords.update {
+                UiState.Failure(
+                    message = e.response.bodyAsText().toFailure().message
                 )
             }
         } catch (e: Exception) {
             e.printStackTrace()
-            _state.update {
-                it.copy(
-                    getAttendanceRecordsStatus = StateStatus.Failure,
-                    getAttendanceRecordsMessage = "Terjadi kesalahan tak terduga!"
-                )
-            }
+            _attendanceRecords.update { UiState.Failure() }
         }
     }
 
