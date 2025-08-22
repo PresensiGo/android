@@ -29,7 +29,6 @@ import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.unit.dp
 import com.rizalanggoro.presensigo.core.Routes
@@ -49,7 +48,6 @@ fun AuthScreen() {
     val login by viewModel.loginState.collectAsState()
 
     val navController = LocalNavController.current
-    val context = LocalContext.current
     val scope = rememberCoroutineScope()
 
     val snackbarHostState = remember { SnackbarHostState() }
