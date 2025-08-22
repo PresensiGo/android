@@ -5,7 +5,7 @@ import android.app.Application
 import android.provider.Settings
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
-import com.rizalanggoro.presensigo.core.constants.StateStatus
+import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.domain.Token
@@ -21,42 +21,34 @@ import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
 
-data class State(
-    val status: StateStatus = StateStatus.Initial,
-    val message: String = ""
-)
-
 class AuthViewModel(
     private val application: Application,
     private val accountApi: AccountApi,
     private val studentApi: StudentApi,
     private val tokenManager: TokenManager
 ) : ViewModel() {
-    companion object {
-        const val TAG = "AuthViewModel"
-    }
+    private val _loginState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
+    val loginState = _loginState.asStateFlow()
 
-    private var _state = MutableStateFlow(State())
-    val state get() = _state.asStateFlow()
+    fun resetLoginState() = _loginState.update { UiState.Initial }
 
     @SuppressLint("HardwareIds")
     fun loginStudent(nis: String, schoolCode: String) = viewModelScope.launch {
         try {
-            _state.update { it.copy(status = StateStatus.Loading) }
+            _loginState.update { UiState.Loading }
 
             val androidId = Settings.Secure.getString(
                 application.contentResolver,
                 Settings.Secure.ANDROID_ID
             )
-            val response = studentApi.loginStudent(
+            val body = studentApi.loginStudent(
                 LoginStudentReq(
                     deviceId = androidId,
                     nis = nis,
                     schoolCode = schoolCode
                 )
-            )
+            ).body()
 
-            val body = response.body()
             tokenManager.set(
                 Token(
                     tokenType = TokenType.Student,
@@ -65,34 +57,30 @@ class AuthViewModel(
                 )
             )
 
-            _state.update { it.copy(status = StateStatus.Success) }
+            _loginState.update { UiState.Success(Unit) }
         } catch (e: ResponseException) {
             e.printStackTrace()
-
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
+            _loginState.update {
+                UiState.Failure(
                     message = e.response.bodyAsText().toFailure().message
                 )
             }
         } catch (e: Exception) {
             e.printStackTrace()
-
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
-                    message = "Terjadi kesalahan tak terduga!"
-                )
-            }
+            _loginState.update { UiState.Failure() }
         }
     }
 
     fun loginTeacher(email: String, password: String) = viewModelScope.launch {
         try {
-            _state.update { it.copy(status = StateStatus.Loading) }
+            _loginState.update { UiState.Loading }
 
-            val response = accountApi.login(LoginReq(email = email, password = password))
-            val body = response.body()
+            val body = accountApi.login(
+                LoginReq(
+                    email = email,
+                    password = password
+                )
+            ).body()
 
             tokenManager.set(
                 Token(
@@ -102,25 +90,17 @@ class AuthViewModel(
                 )
             )
 
-            _state.update { it.copy(status = StateStatus.Success) }
+            _loginState.update { UiState.Success(Unit) }
         } catch (e: ResponseException) {
             e.printStackTrace()
-
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
+            _loginState.update {
+                UiState.Failure(
                     message = e.response.bodyAsText().toFailure().message
                 )
             }
         } catch (e: Exception) {
             e.printStackTrace()
-
-            _state.update {
-                it.copy(
-                    status = StateStatus.Failure,
-                    message = "Terjadi kesalahan tak terduga!"
-                )
-            }
+            _loginState.update { UiState.Failure() }
         }
     }
 }
