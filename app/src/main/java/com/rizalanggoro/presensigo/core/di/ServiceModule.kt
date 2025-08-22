@@ -24,6 +24,7 @@ import io.ktor.client.plugins.logging.DEFAULT
 import io.ktor.client.plugins.logging.LogLevel
 import io.ktor.client.plugins.logging.Logger
 import io.ktor.client.plugins.logging.Logging
+import io.ktor.http.HttpStatusCode
 import kotlinx.coroutines.sync.Mutex
 import kotlinx.coroutines.sync.withLock
 import org.koin.dsl.module
@@ -102,7 +103,9 @@ val serviceModule = module {
                                 }
                             } catch (e: ResponseException) {
                                 e.printStackTrace()
-                                tokenManager.clear()
+                                if (e.response.status == HttpStatusCode.Forbidden) {
+                                    tokenManager.clear()
+                                }
                                 throw e
                             }
                         }
