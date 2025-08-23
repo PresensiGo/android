@@ -1,9 +1,13 @@
 package com.rizalanggoro.presensigo.core.application
 
+import android.app.Activity
 import androidx.compose.animation.AnimatedContentTransitionScope
 import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.CompositionLocalProvider
+import androidx.compose.runtime.SideEffect
+import androidx.compose.ui.platform.LocalView
+import androidx.core.view.WindowCompat
 import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
@@ -29,6 +33,13 @@ fun MyComposeApplication(
     isAuthenticated: Boolean = false,
     tokenType: TokenType = TokenType.Unset
 ) {
+    val view = LocalView.current
+
+    SideEffect {
+        val window = (view.context as Activity).window
+        WindowCompat.getInsetsController(window, view).isAppearanceLightNavigationBars = true
+    }
+
     PresensiGoTheme(darkTheme = false) {
         Surface {
             val navController = rememberNavController()
