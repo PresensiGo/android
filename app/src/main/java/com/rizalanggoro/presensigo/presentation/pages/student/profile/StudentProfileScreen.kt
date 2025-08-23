@@ -6,6 +6,7 @@ import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
@@ -27,6 +28,7 @@ import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TextButton
+import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.collectAsState
@@ -86,188 +88,196 @@ fun ProfileStudentScreen() {
             }
 
             // content
-            LazyColumn(
+            PullToRefreshBox(
+                isRefreshing = profile.isLoading(),
+                onRefresh = {
+                    viewModel.getProfile()
+                },
                 modifier = Modifier
                     .fillMaxWidth()
                     .weight(1f)
                     .clip(RoundedCornerShape(topEnd = 24.dp, topStart = 24.dp))
                     .background(MaterialTheme.colorScheme.background),
             ) {
-                item {
-                    Row(
-                        horizontalArrangement = Arrangement.spacedBy(16.dp),
-                        verticalAlignment = Alignment.CenterVertically,
-                        modifier = Modifier.padding(24.dp)
-                    ) {
-                        WithShimmer(isLoading = profile.isLoading()) {
-                            Box(
-                                modifier = Modifier
-                                    .clip(CircleShape)
-                                    .background(
-                                        MaterialTheme.colorScheme.onPrimaryContainer.copy(
-                                            alpha = .48f
-                                        )
-                                    )
-                                    .size(48.dp)
-                            ) {
-                                if (!profile.isLoading())
-                                    Icon(
-                                        Icons.Rounded.Person,
-                                        contentDescription = null,
-                                        tint = MaterialTheme.colorScheme.primary,
-                                        modifier = Modifier.align(Alignment.Center)
-                                    )
-                            }
-                        }
-                        Column(
-                            modifier = Modifier.weight(1f),
-                            verticalArrangement = Arrangement.spacedBy(
-                                if (profile.isLoading()) 4.dp
-                                else 0.dp
-                            )
+                LazyColumn(
+                    modifier = Modifier.fillMaxSize(),
+                ) {
+                    item {
+                        Row(
+                            horizontalArrangement = Arrangement.spacedBy(16.dp),
+                            verticalAlignment = Alignment.CenterVertically,
+                            modifier = Modifier.padding(24.dp)
                         ) {
                             WithShimmer(isLoading = profile.isLoading()) {
-                                Text(
-                                    when (val state = profile) {
-                                        is UiState.Success -> state.data.student.name
-                                        else -> "loading nama siswa"
-                                    },
-                                    style = MaterialTheme.typography.titleMedium,
-                                    color = MaterialTheme.colorScheme.onBackground
-                                )
+                                Box(
+                                    modifier = Modifier
+                                        .clip(CircleShape)
+                                        .background(
+                                            MaterialTheme.colorScheme.onPrimaryContainer.copy(
+                                                alpha = .48f
+                                            )
+                                        )
+                                        .size(48.dp)
+                                ) {
+                                    if (!profile.isLoading())
+                                        Icon(
+                                            Icons.Rounded.Person,
+                                            contentDescription = null,
+                                            tint = MaterialTheme.colorScheme.primary,
+                                            modifier = Modifier.align(Alignment.Center)
+                                        )
+                                }
                             }
-                            WithShimmer(isLoading = profile.isLoading()) {
-                                Text(
-                                    when (val state = profile) {
-                                        is UiState.Success -> state.data.student.nis
-                                        else -> "loading nis"
-                                    },
-                                    style = MaterialTheme.typography.bodyMedium,
-                                    color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                            Column(
+                                modifier = Modifier.weight(1f),
+                                verticalArrangement = Arrangement.spacedBy(
+                                    if (profile.isLoading()) 4.dp
+                                    else 0.dp
                                 )
+                            ) {
+                                WithShimmer(isLoading = profile.isLoading()) {
+                                    Text(
+                                        when (val state = profile) {
+                                            is UiState.Success -> state.data.student.name
+                                            else -> "loading nama siswa"
+                                        },
+                                        style = MaterialTheme.typography.titleMedium,
+                                        color = MaterialTheme.colorScheme.onBackground
+                                    )
+                                }
+                                WithShimmer(isLoading = profile.isLoading()) {
+                                    Text(
+                                        when (val state = profile) {
+                                            is UiState.Success -> state.data.student.nis
+                                            else -> "loading nis"
+                                        },
+                                        style = MaterialTheme.typography.bodyMedium,
+                                        color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                                    )
+                                }
                             }
                         }
+
+                        HorizontalDivider()
                     }
 
-                    HorizontalDivider()
-                }
+                    item {
+                        Text(
+                            "Informasi Siswa",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(start = 24.dp, top = 24.dp)
+                        )
 
-                item {
-                    Text(
-                        "Informasi Siswa",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(start = 24.dp, top = 24.dp)
-                    )
+                        ListItem(
+                            headlineContent = { Text("Sekolah") },
+                            supportingContent = {
+                                WithShimmer(
+                                    isLoading = profile.isLoading(),
+                                    modifier = Modifier.padding(top = 2.dp)
+                                ) {
+                                    Text(
+                                        when (val state = profile) {
+                                            is UiState.Success -> state.data.school.name
+                                            else -> "loading nama sekolah"
+                                        },
+                                    )
+                                }
+                            },
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                        ListItem(
+                            headlineContent = { Text("Kelas") },
+                            supportingContent = {
+                                WithShimmer(
+                                    isLoading = profile.isLoading(),
+                                    modifier = Modifier.padding(top = 2.dp)
+                                ) {
+                                    Text(
+                                        when (val state = profile) {
+                                            is UiState.Success -> state.data.classroom.name
+                                            else -> "loading nama kelas"
+                                        },
+                                    )
+                                }
+                            },
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                        ListItem(
+                            headlineContent = { Text("Jurusan") },
+                            supportingContent = {
+                                WithShimmer(
+                                    isLoading = profile.isLoading(),
+                                    modifier = Modifier.padding(top = 2.dp)
+                                ) {
+                                    Text(
+                                        when (val state = profile) {
+                                            is UiState.Success -> state.data.major.name
+                                            else -> "loading nama jurusan"
+                                        },
+                                    )
+                                }
+                            },
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                        ListItem(
+                            headlineContent = { Text("Angkatan") },
+                            supportingContent = {
+                                WithShimmer(
+                                    isLoading = profile.isLoading(),
+                                    modifier = Modifier.padding(top = 2.dp)
+                                ) {
+                                    Text(
+                                        when (val state = profile) {
+                                            is UiState.Success -> state.data.batch.name
+                                            else -> "loading nama angkatan"
+                                        },
+                                    )
+                                }
+                            },
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                        ListItem(
+                            headlineContent = { Text("Jenis Kelamin") },
+                            supportingContent = {
+                                WithShimmer(
+                                    isLoading = profile.isLoading(),
+                                    modifier = Modifier.padding(top = 2.dp)
+                                ) {
+                                    Text("loading jenis kelamin")
+                                }
+                            },
+                            modifier = Modifier.padding(horizontal = 8.dp)
+                        )
+                    }
 
-                    ListItem(
-                        headlineContent = { Text("Sekolah") },
-                        supportingContent = {
-                            WithShimmer(
-                                isLoading = profile.isLoading(),
-                                modifier = Modifier.padding(top = 2.dp)
-                            ) {
-                                Text(
-                                    when (val state = profile) {
-                                        is UiState.Success -> state.data.school.name
-                                        else -> "loading nama sekolah"
-                                    },
-                                )
-                            }
-                        },
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
-                    ListItem(
-                        headlineContent = { Text("Kelas") },
-                        supportingContent = {
-                            WithShimmer(
-                                isLoading = profile.isLoading(),
-                                modifier = Modifier.padding(top = 2.dp)
-                            ) {
-                                Text(
-                                    when (val state = profile) {
-                                        is UiState.Success -> state.data.classroom.name
-                                        else -> "loading nama kelas"
-                                    },
-                                )
-                            }
-                        },
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
-                    ListItem(
-                        headlineContent = { Text("Jurusan") },
-                        supportingContent = {
-                            WithShimmer(
-                                isLoading = profile.isLoading(),
-                                modifier = Modifier.padding(top = 2.dp)
-                            ) {
-                                Text(
-                                    when (val state = profile) {
-                                        is UiState.Success -> state.data.major.name
-                                        else -> "loading nama jurusan"
-                                    },
-                                )
-                            }
-                        },
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
-                    ListItem(
-                        headlineContent = { Text("Angkatan") },
-                        supportingContent = {
-                            WithShimmer(
-                                isLoading = profile.isLoading(),
-                                modifier = Modifier.padding(top = 2.dp)
-                            ) {
-                                Text(
-                                    when (val state = profile) {
-                                        is UiState.Success -> state.data.batch.name
-                                        else -> "loading nama angkatan"
-                                    },
-                                )
-                            }
-                        },
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
-                    ListItem(
-                        headlineContent = { Text("Jenis Kelamin") },
-                        supportingContent = {
-                            WithShimmer(
-                                isLoading = profile.isLoading(),
-                                modifier = Modifier.padding(top = 2.dp)
-                            ) {
-                                Text("loading jenis kelamin")
-                            }
-                        },
-                        modifier = Modifier.padding(horizontal = 8.dp)
-                    )
-                }
+                    item {
+                        Text(
+                            "Lainnya",
+                            style = MaterialTheme.typography.labelLarge,
+                            color = MaterialTheme.colorScheme.primary,
+                            modifier = Modifier.padding(start = 24.dp, top = 16.dp, bottom = 8.dp)
+                        )
 
-                item {
-                    Text(
-                        "Lainnya",
-                        style = MaterialTheme.typography.labelLarge,
-                        color = MaterialTheme.colorScheme.primary,
-                        modifier = Modifier.padding(start = 24.dp, top = 16.dp, bottom = 8.dp)
-                    )
-
-                    ListItem(
-                        leadingContent = {
-                            Icon(
-                                Icons.AutoMirrored.Rounded.Logout,
-                                contentDescription = null
-                            )
-                        },
-                        headlineContent = { Text("Keluar") },
-                        trailingContent = {
-                            Icon(
-                                Icons.Rounded.ChevronRight,
-                                contentDescription = null
-                            )
-                        },
-                        modifier = Modifier
-                            .clickable { isLogoutDialogOpen = true }
-                            .padding(horizontal = 8.dp)
-                    )
+                        ListItem(
+                            leadingContent = {
+                                Icon(
+                                    Icons.AutoMirrored.Rounded.Logout,
+                                    contentDescription = null
+                                )
+                            },
+                            headlineContent = { Text("Keluar") },
+                            trailingContent = {
+                                Icon(
+                                    Icons.Rounded.ChevronRight,
+                                    contentDescription = null
+                                )
+                            },
+                            modifier = Modifier
+                                .clickable { isLogoutDialogOpen = true }
+                                .padding(horizontal = 8.dp)
+                        )
+                    }
                 }
             }
         }
