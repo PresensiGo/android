@@ -12,7 +12,7 @@ import com.rizalanggoro.presensigo.presentation.pages.home.student.StudentHomeVi
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.general.TeacherHomeGeneralAttendanceViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting.TeacherHomeSettingViewModel
 import com.rizalanggoro.presensigo.presentation.pages.home.teacher.subject.TeacherHomeSubjectAttendanceViewModel
-import com.rizalanggoro.presensigo.presentation.pages.student.profile.ProfileStudentViewModel
+import com.rizalanggoro.presensigo.presentation.pages.student.profile.StudentProfileViewModel
 import org.koin.core.module.dsl.viewModelOf
 import org.koin.dsl.module
 
@@ -32,7 +32,6 @@ val viewModelModule = module {
     viewModelOf(::AuthViewModel)
 
     // home - teacher
-//    viewModelOf(::TeacherHomeViewModel)
     viewModelOf(::TeacherHomeSubjectAttendanceViewModel)
     viewModelOf(::TeacherHomeGeneralAttendanceViewModel)
     viewModelOf(::TeacherHomeSettingViewModel)
@@ -41,18 +40,5 @@ val viewModelModule = module {
     viewModelOf(::StudentHomeViewModel)
 
     // student
-    viewModelOf(::ProfileStudentViewModel)
-
-
-    // old
-
-//    viewModelOf(::StudentViewModel)
-//
-//
-//    viewModelOf(::AttendanceViewModel)
-//    viewModelOf(::CreateAttendanceViewModel)
-//    viewModelOf(::DetailAttendanceViewModel)
-//
-//    viewModelOf(::DetailLatenessViewModel)
-//    viewModelOf(::CreateDetailLatenessViewModel)
+    viewModelOf(::StudentProfileViewModel)
 }

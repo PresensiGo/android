@@ -16,7 +16,7 @@
 package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes
-import com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes
+import com.rizalanggoro.presensigo.openapi.models.GetProfileStudentRes
 import com.rizalanggoro.presensigo.openapi.models.LoginStudentReq
 import com.rizalanggoro.presensigo.openapi.models.LoginStudentRes
 import com.rizalanggoro.presensigo.openapi.models.RefreshTokenStudentReq
@@ -116,41 +116,6 @@ import java.text.DateFormat
             }
 
         /**
-        * GET /api/v1/students
-        * 
-        * 
-         * @param keyword Keyword 
-         * @return GetAllStudentsRes
-        */
-            @Suppress("UNCHECKED_CAST")
-        open suspend fun getAllStudents(keyword: kotlin.String): HttpResponse<GetAllStudentsRes> {
-
-            val localVariableAuthNames = listOf<String>()
-
-            val localVariableBody = 
-                    io.ktor.client.utils.EmptyContent
-
-            val localVariableQuery = mutableMapOf<String, List<String>>()
-            keyword?.apply { localVariableQuery["keyword"] = listOf("$keyword") }
-
-            val localVariableHeaders = mutableMapOf<String, String>()
-
-            val localVariableConfig = RequestConfig<kotlin.Any?>(
-            RequestMethod.GET,
-            "/api/v1/students",
-            query = localVariableQuery,
-            headers = localVariableHeaders,
-            requiresAuthentication = false,
-            )
-
-            return request(
-            localVariableConfig,
-            localVariableBody,
-            localVariableAuthNames
-            ).wrap()
-            }
-
-        /**
         * GET /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students
         * 
         * 
@@ -174,6 +139,39 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.GET,
             "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * GET /api/v1/students/profile
+        * 
+        * 
+         * @return GetProfileStudentRes
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun getProfileStudent(): HttpResponse<GetProfileStudentRes> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.GET,
+            "/api/v1/students/profile",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

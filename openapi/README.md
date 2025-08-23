@@ -95,8 +95,8 @@ All URIs are relative to *http://localhost*
 | *SchoolApi* | [**getSchool**](docs/SchoolApi.md#getschool) | **GET** /api/v1/schools/profile |  |
 | *StudentApi* | [**apiV1AuthStudentsAccountsStudentTokenIdEjectPost**](docs/StudentApi.md#apiv1authstudentsaccountsstudenttokenidejectpost) | **POST** /api/v1/auth/students/accounts/{student_token_id}/eject |  |
 | *StudentApi* | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentAccountsGet**](docs/StudentApi.md#apiv1batchesbatchidmajorsmajoridclassroomsclassroomidstudentaccountsget) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/student-accounts |  |
-| *StudentApi* | [**getAllStudents**](docs/StudentApi.md#getallstudents) | **GET** /api/v1/students |  |
 | *StudentApi* | [**getAllStudentsByClassroomId**](docs/StudentApi.md#getallstudentsbyclassroomid) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students |  |
+| *StudentApi* | [**getProfileStudent**](docs/StudentApi.md#getprofilestudent) | **GET** /api/v1/students/profile |  |
 | *StudentApi* | [**loginStudent**](docs/StudentApi.md#loginstudent) | **POST** /api/v1/auth/students/login |  |
 | *StudentApi* | [**refreshTokenStudent**](docs/StudentApi.md#refreshtokenstudent) | **POST** /api/v1/auth/students/refresh-token |  |
 | *SubjectApi* | [**createSubject**](docs/SubjectApi.md#createsubject) | **POST** /api/v1/subjects |  |
@@ -119,7 +119,6 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordStudentReq](docs/CreateSubjectAttendanceRecordStudentReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceReq](docs/CreateSubjectAttendanceReq.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsGeneralAttendanceRecord](docs/DomainsGeneralAttendanceRecord.md)
- - [com.rizalanggoro.presensigo.openapi.models.DomainsStudentMajorClassroom](docs/DomainsStudentMajorClassroom.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsStudentToken](docs/DomainsStudentToken.md)
  - [com.rizalanggoro.presensigo.openapi.models.DomainsSubjectAttendanceRecord](docs/DomainsSubjectAttendanceRecord.md)
  - [com.rizalanggoro.presensigo.openapi.models.DtoStudentAccount](docs/DtoStudentAccount.md)
@@ -139,7 +138,6 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdItem](docs/GetAllMajorsByBatchIdItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllMajorsByBatchIdRes](docs/GetAllMajorsByBatchIdRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsByClassroomIdRes](docs/GetAllStudentsByClassroomIdRes.md)
- - [com.rizalanggoro.presensigo.openapi.models.GetAllStudentsRes](docs/GetAllStudentsRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem](docs/GetAllSubjectAttendanceRecordsItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesItem](docs/GetAllSubjectAttendancesItem.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes](docs/GetAllSubjectAttendancesRes.md)
@@ -149,6 +147,7 @@ All URIs are relative to *http://localhost*
  - [com.rizalanggoro.presensigo.openapi.models.GetClassroomRes](docs/GetClassroomRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetGeneralAttendanceRes](docs/GetGeneralAttendanceRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetMajorRes](docs/GetMajorRes.md)
+ - [com.rizalanggoro.presensigo.openapi.models.GetProfileStudentRes](docs/GetProfileStudentRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetSchoolRes](docs/GetSchoolRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes](docs/GetSubjectAttendanceRes.md)
  - [com.rizalanggoro.presensigo.openapi.models.GetSubjectRes](docs/GetSubjectRes.md)

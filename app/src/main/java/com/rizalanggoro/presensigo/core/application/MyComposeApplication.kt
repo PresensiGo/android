@@ -37,12 +37,12 @@ fun MyComposeApplication(
                 NavHost(
                     navController = navController,
                     startDestination = when (isAuthenticated) {
-                        true -> when (tokenType) {
-                            TokenType.Unset -> Routes.Auth
-                            TokenType.Teacher -> Routes.Home.Teacher
-                            TokenType.Student -> Routes.Home.Student
-                        }
-//                        true -> Routes.ProfileStudent
+//                        true -> when (tokenType) {
+//                            TokenType.Unset -> Routes.Auth
+//                            TokenType.Teacher -> Routes.Home.Teacher
+//                            TokenType.Student -> Routes.Home.Student
+//                        }
+                        true -> Routes.Student.Profile
 //                        true -> Routes.Attendance.Subject.Index(
 //                            batchId = 3,
 //                            majorId = 6,
@@ -93,7 +93,7 @@ fun MyComposeApplication(
                     composable<Routes.Attendance.General.Create> { CreateGeneralAttendanceScreen() }
 
                     // student profile
-                    composable<Routes.ProfileStudent> { ProfileStudentScreen() }
+                    composable<Routes.Student.Profile> { ProfileStudentScreen() }
 
                     composable<Routes.QrScanner> { QRScannerScreen() }
                 }

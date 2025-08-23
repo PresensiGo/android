@@ -15,8 +15,10 @@
 
 package com.rizalanggoro.presensigo.openapi.models
 
+import com.rizalanggoro.presensigo.openapi.models.Batch
 import com.rizalanggoro.presensigo.openapi.models.Classroom
 import com.rizalanggoro.presensigo.openapi.models.Major
+import com.rizalanggoro.presensigo.openapi.models.School
 import com.rizalanggoro.presensigo.openapi.models.Student
 
 import com.google.gson.annotations.SerializedName
@@ -24,19 +26,27 @@ import com.google.gson.annotations.SerializedName
 /**
  * 
  *
+ * @param batch 
  * @param classroom 
  * @param major 
+ * @param school 
  * @param student 
  */
 
 
-data class DomainsStudentMajorClassroom (
+data class GetProfileStudentRes (
+
+    @SerializedName("batch")
+    val batch: Batch,
 
     @SerializedName("classroom")
     val classroom: Classroom,
 
     @SerializedName("major")
     val major: Major,
+
+    @SerializedName("school")
+    val school: School,
 
     @SerializedName("student")
     val student: Student

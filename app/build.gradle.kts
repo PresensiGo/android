@@ -107,10 +107,7 @@ dependencies {
     // gson serialization
     implementation("com.google.code.gson:gson:2.13.1")
 
-    // kotlin functional programming
-    implementation("io.arrow-kt:arrow-core:2.1.0")
-
-    // lucide icons for jetpack compose
+    // icons for jetpack compose
     implementation("androidx.compose.material:material-icons-extended:1.7.8")
 
     // zxing

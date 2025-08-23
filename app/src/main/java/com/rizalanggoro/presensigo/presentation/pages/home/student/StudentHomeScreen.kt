@@ -1,7 +1,6 @@
 package com.rizalanggoro.presensigo.presentation.pages.home.student
 
 import android.icu.util.Calendar
-import android.widget.Toast
 import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Box
@@ -23,8 +22,10 @@ import androidx.compose.material.icons.rounded.Close
 import androidx.compose.material.icons.rounded.Person
 import androidx.compose.material.icons.rounded.QrCodeScanner
 import androidx.compose.material.icons.rounded.Warning
+import androidx.compose.material3.Button
 import androidx.compose.material3.CircularProgressIndicator
 import androidx.compose.material3.ExperimentalMaterial3Api
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
 import androidx.compose.material3.FloatingActionButton
 import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Icon
@@ -34,6 +35,8 @@ import androidx.compose.material3.ModalBottomSheet
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.SheetValue
+import androidx.compose.material3.SnackbarHost
+import androidx.compose.material3.SnackbarHostState
 import androidx.compose.material3.Text
 import androidx.compose.material3.pulltorefresh.PullToRefreshBox
 import androidx.compose.material3.rememberModalBottomSheetState
@@ -49,7 +52,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.unit.dp
 import androidx.navigation.compose.currentBackStackEntryAsState
@@ -57,13 +59,17 @@ import com.rizalanggoro.presensigo.core.Routes
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
+import com.rizalanggoro.presensigo.core.constants.onFailure
+import com.rizalanggoro.presensigo.core.constants.onLoading
+import com.rizalanggoro.presensigo.core.constants.onSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.core.extensions.isAfterDateTime
+import com.rizalanggoro.presensigo.presentation.components.EmptySpace
 import com.valentinilk.shimmer.shimmer
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun StudentHomeScreen() {
     val viewModel = koinViewModel<StudentHomeViewModel>()
@@ -71,11 +77,11 @@ fun StudentHomeScreen() {
     val generalAttendances by viewModel.generalAttendances.collectAsState()
     val processAttendance by viewModel.processAttendance.collectAsState()
 
-    val context = LocalContext.current
-    val scope = rememberCoroutineScope()
     val navController = LocalNavController.current
     val currentBackStack by navController.currentBackStackEntryAsState()
+    val scope = rememberCoroutineScope()
 
+    val snackbarHostState = remember { SnackbarHostState() }
     var isProcessAttendanceOpen by remember { mutableStateOf(false) }
 
     val sheetState = rememberModalBottomSheetState(
@@ -95,40 +101,37 @@ fun StudentHomeScreen() {
     }
 
     LaunchedEffect(processAttendance) {
-        with(processAttendance) {
-            when (this) {
-                is UiState.Success -> {
-                    viewModel.getGeneralAttendances()
-                    viewModel.getSubjectAttendances()
+        processAttendance
+            .onSuccess {
+                viewModel.getGeneralAttendances()
+                viewModel.getSubjectAttendances()
 
-                    scope.launch {
-                        sheetState.hide()
-                    }.invokeOnCompletion {
-                        if (!sheetState.isVisible) {
-                            isProcessAttendanceOpen = false
-                        }
+                scope.launch {
+                    sheetState.hide()
+                }.invokeOnCompletion {
+                    if (!sheetState.isVisible) {
+                        isProcessAttendanceOpen = false
                     }
                 }
-
-                is UiState.Failure -> {
-                    scope.launch {
-                        sheetState.hide()
-                    }.invokeOnCompletion {
-                        if (!sheetState.isVisible) {
-                            isProcessAttendanceOpen = false
-                        }
-                    }
-
-                    Toast.makeText(context, message, Toast.LENGTH_SHORT).show()
-                }
-
-                else -> Unit
             }
-        }
+            .onFailure {
+                scope.launch {
+                    sheetState.hide()
+                }.invokeOnCompletion {
+                    if (!sheetState.isVisible) {
+                        isProcessAttendanceOpen = false
+                    }
+                }
+
+                snackbarHostState.showSnackbar(
+                    message = it
+                )
+            }
     }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
+        snackbarHost = { SnackbarHost(hostState = snackbarHostState) },
         floatingActionButton = {
             FloatingActionButton(
                 onClick = {
@@ -163,7 +166,7 @@ fun StudentHomeScreen() {
                 }
 
                 IconButton(
-                    onClick = { navController.navigate(Routes.ProfileStudent) },
+                    onClick = { navController.navigate(Routes.Student.Profile) },
                     modifier = Modifier
                         .clip(CircleShape)
                         .background(MaterialTheme.colorScheme.background.copy(alpha = .16f)),
@@ -216,21 +219,23 @@ fun StudentHomeScreen() {
                         )
                     }
 
-                    with(generalAttendances) {
-                        when (this) {
-                            is UiState.Success -> items(data.items) {
-                                AttendanceItem(
-                                    isAttended = it.generalAttendanceRecord.id > 0,
-                                    attendanceDateTime = it.generalAttendance.datetime,
-                                    recordDateTime = it.generalAttendanceRecord.dateTime,
-                                )
-                            }
-
-                            else -> items(1) {
+                    generalAttendances
+                        .onLoading {
+                            items(1) {
                                 AttendanceItem(isLoading = true)
                             }
                         }
-                    }
+                        .onSuccess {
+                            if (it.items.isNotEmpty())
+                                items(it.items) {
+                                    AttendanceItem(
+                                        isAttended = it.generalAttendanceRecord.id > 0,
+                                        attendanceDateTime = it.generalAttendance.datetime,
+                                        recordDateTime = it.generalAttendanceRecord.dateTime,
+                                    )
+                                }
+                            else item { EmptySpace() }
+                        }
 
                     item {
                         Spacer(modifier = Modifier.height(8.dp))
@@ -258,26 +263,28 @@ fun StudentHomeScreen() {
                         )
                     }
 
-                    with(subjectAttendances) {
-                        when (this) {
-                            is UiState.Success -> items(data.items) {
-                                AttendanceItem(
-                                    isAttended = it.subjectAttendanceRecord.id > 0,
-                                    attendanceDateTime = it.subjectAttendance.dateTime,
-                                    recordDateTime = it.subjectAttendanceRecord.dateTime,
-                                    subjectName = it.subject.name,
-                                    creatorName = it.creator.name.let {
-                                        if (it.isNotEmpty()) it
-                                        else "Nama guru tidak ditemukan!"
-                                    }
-                                )
-                            }
-
-                            else -> items(3) {
+                    subjectAttendances
+                        .onLoading {
+                            items(3) {
                                 AttendanceItem(isLoading = true)
                             }
                         }
-                    }
+                        .onSuccess {
+                            if (it.items.isNotEmpty())
+                                items(it.items) {
+                                    AttendanceItem(
+                                        isAttended = it.subjectAttendanceRecord.id > 0,
+                                        attendanceDateTime = it.subjectAttendance.dateTime,
+                                        recordDateTime = it.subjectAttendanceRecord.dateTime,
+                                        subjectName = it.subject.name,
+                                        creatorName = it.creator.name.let {
+                                            if (it.isNotEmpty()) it
+                                            else "Nama guru tidak ditemukan!"
+                                        }
+                                    )
+                                }
+                            else item { EmptySpace() }
+                        }
 
                     item {
                         Spacer(modifier = Modifier.height((48 + 48).dp))
@@ -288,9 +295,11 @@ fun StudentHomeScreen() {
 
         if (isProcessAttendanceOpen)
             ModalBottomSheet(
+                dragHandle = {},
                 onDismissRequest = {
                     if (!processAttendance.isLoading()) {
-                        isProcessAttendanceOpen = false
+                        if (!sheetState.isVisible)
+                            isProcessAttendanceOpen = false
                     }
                 },
                 sheetState = sheetState
@@ -299,9 +308,13 @@ fun StudentHomeScreen() {
                     horizontalAlignment = Alignment.CenterHorizontally,
                     modifier = Modifier
                         .fillMaxWidth()
-                        .padding(bottom = 24.dp),
+                        .padding(vertical = 32.dp),
                     verticalArrangement = Arrangement.spacedBy(24.dp)
                 ) {
+                    Button(onClick = {
+                        scope.launch { sheetState.hide() }
+                            .invokeOnCompletion { isProcessAttendanceOpen = false }
+                    }) { Text("close") }
                     Column(
                         horizontalAlignment = Alignment.CenterHorizontally,
                         verticalArrangement = Arrangement.spacedBy(4.dp),

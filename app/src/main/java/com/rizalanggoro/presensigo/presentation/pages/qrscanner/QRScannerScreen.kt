@@ -35,7 +35,6 @@ import androidx.core.content.ContextCompat
 import androidx.lifecycle.compose.LocalLifecycleOwner
 import com.rizalanggoro.presensigo.core.compositional.LocalNavController
 import com.rizalanggoro.presensigo.core.qr.QrCodeAnalyzer
-import kotlinx.coroutines.delay
 
 @Composable
 fun QRScannerScreen() {
@@ -109,7 +108,7 @@ fun QRScannerScreen() {
         } else {
             LaunchedEffect(isScanCompleted) {
                 if (isScanCompleted) {
-                    delay(100)
+//                    delay(1000)
                     navController.popBackStack()
                 }
             }

@@ -6,8 +6,8 @@ All URIs are relative to *http://localhost*
 | ------------- | ------------- | ------------- |
 | [**apiV1AuthStudentsAccountsStudentTokenIdEjectPost**](StudentApi.md#apiV1AuthStudentsAccountsStudentTokenIdEjectPost) | **POST** /api/v1/auth/students/accounts/{student_token_id}/eject |  |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentAccountsGet**](StudentApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentAccountsGet) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/student-accounts |  |
-| [**getAllStudents**](StudentApi.md#getAllStudents) | **GET** /api/v1/students |  |
 | [**getAllStudentsByClassroomId**](StudentApi.md#getAllStudentsByClassroomId) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students |  |
+| [**getProfileStudent**](StudentApi.md#getProfileStudent) | **GET** /api/v1/students/profile |  |
 | [**loginStudent**](StudentApi.md#loginStudent) | **POST** /api/v1/auth/students/login |  |
 | [**refreshTokenStudent**](StudentApi.md#refreshTokenStudent) | **POST** /api/v1/auth/students/refresh-token |  |
 
@@ -104,50 +104,6 @@ No authorization required
  - **Content-Type**: Not defined
  - **Accept**: */*
 
-<a id="getAllStudents"></a>
-# **getAllStudents**
-> GetAllStudentsRes getAllStudents(keyword)
-
-
-
-### Example
-```kotlin
-// Import classes:
-//import com.rizalanggoro.presensigo.openapi.infrastructure.*
-//import com.rizalanggoro.presensigo.openapi.models.*
-
-val apiInstance = StudentApi()
-val keyword : kotlin.String = keyword_example // kotlin.String | Keyword
-try {
-    val result : GetAllStudentsRes = apiInstance.getAllStudents(keyword)
-    println(result)
-} catch (e: ClientException) {
-    println("4xx response calling StudentApi#getAllStudents")
-    e.printStackTrace()
-} catch (e: ServerException) {
-    println("5xx response calling StudentApi#getAllStudents")
-    e.printStackTrace()
-}
-```
-
-### Parameters
-| Name | Type | Description  | Notes |
-| ------------- | ------------- | ------------- | ------------- |
-| **keyword** | **kotlin.String**| Keyword | |
-
-### Return type
-
-[**GetAllStudentsRes**](GetAllStudentsRes.md)
-
-### Authorization
-
-No authorization required
-
-### HTTP request headers
-
- - **Content-Type**: Not defined
- - **Accept**: */*
-
 <a id="getAllStudentsByClassroomId"></a>
 # **getAllStudentsByClassroomId**
 > GetAllStudentsByClassroomIdRes getAllStudentsByClassroomId(batchId, majorId, classroomId)
@@ -186,6 +142,47 @@ try {
 ### Return type
 
 [**GetAllStudentsByClassroomIdRes**](GetAllStudentsByClassroomIdRes.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="getProfileStudent"></a>
+# **getProfileStudent**
+> GetProfileStudentRes getProfileStudent()
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = StudentApi()
+try {
+    val result : GetProfileStudentRes = apiInstance.getProfileStudent()
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling StudentApi#getProfileStudent")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling StudentApi#getProfileStudent")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+This endpoint does not need any parameter.
+
+### Return type
+
+[**GetProfileStudentRes**](GetProfileStudentRes.md)
 
 ### Authorization
 

@@ -105,21 +105,24 @@ object Routes {
     data object QrScanner
 
     @Serializable
-    data object ProfileStudent
-
-    @Serializable
     data class Classroom(
         val batchId: Int,
         val majorId: Int
     )
 
+    @Serializable
+    data object Student {
+        @Serializable
+        data object Profile
+    }
+
 //    @Serializable
 //    object StudentHome
 
-    @Serializable
-    data class Student(
-        val classroomId: Int
-    )
+//    @Serializable
+//    data class Student(
+//        val classroomId: Int
+//    )
 
 //    @Serializable
 //    object Lateness {
