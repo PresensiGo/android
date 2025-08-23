@@ -6,11 +6,11 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.shape.RoundedCornerShape
-import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.rounded.WavingHand
 import androidx.compose.material3.ExperimentalMaterial3Api
-import androidx.compose.material3.Icon
+import androidx.compose.material3.ExperimentalMaterial3ExpressiveApi
+import androidx.compose.material3.LoadingIndicator
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedTextField
 import androidx.compose.material3.OutlinedTextFieldDefaults
@@ -41,7 +41,7 @@ import com.rizalanggoro.presensigo.presentation.components.PrimaryButton
 import kotlinx.coroutines.launch
 import org.koin.androidx.compose.koinViewModel
 
-@OptIn(ExperimentalMaterial3Api::class)
+@OptIn(ExperimentalMaterial3Api::class, ExperimentalMaterial3ExpressiveApi::class)
 @Composable
 fun AuthScreen() {
     val viewModel = koinViewModel<AuthViewModel>()
@@ -94,10 +94,10 @@ fun AuthScreen() {
                 modifier = Modifier.padding(24.dp),
                 verticalArrangement = Arrangement.spacedBy(24.dp)
             ) {
-                Icon(
-                    Icons.Rounded.WavingHand,
-                    contentDescription = null,
-                    tint = MaterialTheme.colorScheme.onPrimary
+                LoadingIndicator(
+                    color = MaterialTheme.colorScheme.onPrimary,
+                    modifier = Modifier
+                        .size(40.dp)
                 )
                 Column(verticalArrangement = Arrangement.spacedBy(4.dp)) {
                     Text(
