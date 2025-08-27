@@ -76,10 +76,10 @@ fun AuthScreen() {
             }
     }
 
-    var nis by remember { mutableStateOf("130603") }
-    var schoolCode by remember { mutableStateOf("SMAP001") }
-    var email by remember { mutableStateOf("admin@gmail.com") }
-    var password by remember { mutableStateOf("admin123") }
+    var nis by remember { mutableStateOf("") }
+    var schoolCode by remember { mutableStateOf("") }
+    var email by remember { mutableStateOf("") }
+    var password by remember { mutableStateOf("") }
 
     Scaffold(
         containerColor = MaterialTheme.colorScheme.primaryContainer,
