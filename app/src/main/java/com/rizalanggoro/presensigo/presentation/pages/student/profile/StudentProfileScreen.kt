@@ -244,7 +244,12 @@ fun ProfileStudentScreen() {
                                     isLoading = profile.isLoading(),
                                     modifier = Modifier.padding(top = 2.dp)
                                 ) {
-                                    Text("loading jenis kelamin")
+                                    Text(
+                                        when (val state = profile) {
+                                            is UiState.Success -> state.data.student.gender
+                                            else -> "loading jenis kelamin"
+                                        },
+                                    )
                                 }
                             },
                             modifier = Modifier.padding(horizontal = 8.dp)
