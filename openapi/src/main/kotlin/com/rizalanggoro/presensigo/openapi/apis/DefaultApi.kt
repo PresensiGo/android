@@ -15,7 +15,11 @@
 
 package com.rizalanggoro.presensigo.openapi.apis
 
+import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateStudent
+import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteStudent
 import com.rizalanggoro.presensigo.openapi.models.ResponsesImportAccounts
+import com.rizalanggoro.presensigo.openapi.models.ResponsesImportData
+import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateStudent
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -62,6 +66,116 @@ import java.text.DateFormat
             val localVariableConfig = RequestConfig<kotlin.Any?>(
             RequestMethod.POST,
             "/api/v1/accounts/import",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return multipartFormRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * DELETE /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students/{student_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param studentId student id 
+         * @return ResponsesDeleteStudent
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentsStudentIdDelete(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, studentId: kotlin.Int): HttpResponse<ResponsesDeleteStudent> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.DELETE,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students/{student_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId").replace("{" + "student_id" + "}", "$studentId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * PUT /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students/{student_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param studentId student id 
+         * @param body body 
+         * @return ResponsesUpdateStudent
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdStudentsStudentIdPut(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, studentId: kotlin.Int, body: RequestsUpdateStudent): HttpResponse<ResponsesUpdateStudent> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.PUT,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/students/{student_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId").replace("{" + "student_id" + "}", "$studentId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/excel/import-data
+        * 
+        * 
+         * @param file file 
+         * @return ResponsesImportData
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1ExcelImportDataPost(file: io.ktor.client.request.forms.FormPart<io.ktor.client.request.forms.InputProvider>): HttpResponse<ResponsesImportData> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                        formData {
+                        file?.apply { append(file) }
+                        }
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/excel/import-data",
             query = localVariableQuery,
             headers = localVariableHeaders,
             requiresAuthentication = false,

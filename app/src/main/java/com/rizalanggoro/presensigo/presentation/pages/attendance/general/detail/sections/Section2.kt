@@ -30,11 +30,11 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.rizalanggoro.presensigo.core.constants.AppAttendanceStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.isLoading
 import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.isAfterDateTime
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatusType
 import com.rizalanggoro.presensigo.openapi.models.GetAllGeneralAttendanceRecordsByClassroomIdItem
 import com.rizalanggoro.presensigo.openapi.models.Student
 import com.rizalanggoro.presensigo.presentation.pages.attendance.components.AttendanceRecordItem
@@ -48,7 +48,7 @@ import org.koin.androidx.compose.koinViewModel
 
 private data class CreateRecord(
     val student: Student,
-    val status: AppAttendanceStatus? = null
+    val statusType: ConstantsAttendanceStatusType? = null
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -304,17 +304,17 @@ fun Section2() {
                 isLoading = createRecord.isLoading(),
                 studentName = selectedForCreateRecord!!.student.name,
                 studentNIS = selectedForCreateRecord!!.student.nis,
-                status = selectedForCreateRecord!!.status,
+                statusType = selectedForCreateRecord!!.statusType,
                 onClickStatus = {
                     selectedForCreateRecord = selectedForCreateRecord!!.copy(
-                        status = it
+                        statusType = it
                     )
                 },
                 onClickSave = {
-                    if (selectedForCreateRecord!!.status != null) {
+                    if (selectedForCreateRecord!!.statusType != null) {
                         viewModel.createRecord(
                             studentId = selectedForCreateRecord!!.student.id,
-                            status = selectedForCreateRecord!!.status!!
+                            statusType = selectedForCreateRecord!!.statusType!!
                         )
                     }
                 },

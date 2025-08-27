@@ -1,18 +1,14 @@
 package com.rizalanggoro.presensigo.presentation.pages.attendance.general.detail
 
 import android.graphics.Bitmap
-import android.icu.util.Calendar
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.google.gson.Gson
 import com.rizalanggoro.presensigo.core.Routes
-import com.rizalanggoro.presensigo.core.constants.AppAttendanceStatus
 import com.rizalanggoro.presensigo.core.constants.StateStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
-import com.rizalanggoro.presensigo.core.constants.toConstantsAttendanceStatus
-import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.core.qr.QrGenerator
 import com.rizalanggoro.presensigo.domain.QrData
@@ -21,6 +17,7 @@ import com.rizalanggoro.presensigo.openapi.apis.BatchApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
 import com.rizalanggoro.presensigo.openapi.apis.MajorApi
 import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatusType
 import com.rizalanggoro.presensigo.openapi.models.CreateGeneralAttendanceRecordReq
 import com.rizalanggoro.presensigo.openapi.models.GeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.GetAllBatchesItem
@@ -336,37 +333,30 @@ class DetailGeneralAttendanceViewModel(
     private val _createRecordState = MutableStateFlow<UiState<Unit>>(UiState.Initial)
     val createRecordState get() = _createRecordState.asStateFlow()
 
-    fun createRecord(studentId: Int, status: AppAttendanceStatus) = viewModelScope.launch {
-        try {
-            if (attendance.value is UiState.Success) {
-                val attendance = (attendance.value as UiState.Success).data.generalAttendance
-
+    fun createRecord(studentId: Int, statusType: ConstantsAttendanceStatusType) =
+        viewModelScope.launch {
+            try {
                 _createRecordState.update { UiState.Loading }
                 attendanceApi.createGeneralAttendanceRecord(
                     generalAttendanceId = params.attendanceId,
                     body = CreateGeneralAttendanceRecordReq(
-                        datetime = when (status) {
-                            AppAttendanceStatus.Present -> attendance.datetime.formatDateTime("yyyy-MM-dd HH:mm:ss")
-                            else -> Calendar.getInstance().timeInMillis.formatDateTime("yyyy-MM-dd HH:mm:ss")
-                        },
-                        status = status.toConstantsAttendanceStatus(),
+                        status = statusType,
                         studentId = studentId
                     )
                 )
                 _createRecordState.update { UiState.Success(Unit) }
+            } catch (e: ResponseException) {
+                e.printStackTrace()
+                _createRecordState.update {
+                    UiState.Failure(
+                        message = e.response.bodyAsText().toFailure().message
+                    )
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _createRecordState.update { UiState.Failure() }
             }
-        } catch (e: ResponseException) {
-            e.printStackTrace()
-            _createRecordState.update {
-                UiState.Failure(
-                    message = e.response.bodyAsText().toFailure().message
-                )
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            _createRecordState.update { UiState.Failure() }
         }
-    }
 
     fun resetCreateRecord() = _createRecordState.update { UiState.Initial }
 

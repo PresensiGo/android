@@ -17,8 +17,8 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.rememberCoroutineScope
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
-import com.rizalanggoro.presensigo.core.constants.AppAttendanceStatus
 import com.rizalanggoro.presensigo.core.constants.attendanceStatuses
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatusType
 import com.rizalanggoro.presensigo.presentation.components.PrimaryButton
 import com.rizalanggoro.presensigo.presentation.components.SecondaryButton
 import kotlinx.coroutines.launch
@@ -29,8 +29,8 @@ fun CreateAttendanceRecordBottomSheet(
     isLoading: Boolean = false,
     studentName: String = "",
     studentNIS: String = "",
-    status: AppAttendanceStatus? = AppAttendanceStatus.Alpha,
-    onClickStatus: (AppAttendanceStatus) -> Unit = {},
+    statusType: ConstantsAttendanceStatusType? = ConstantsAttendanceStatusType.AttendanceStatusTypeAlpha,
+    onClickStatus: (ConstantsAttendanceStatusType) -> Unit = {},
     onClickSave: () -> Unit = {},
     sheetState: SheetState,
     onDismissRequest: () -> Unit = {},
@@ -66,14 +66,14 @@ fun CreateAttendanceRecordBottomSheet(
                     ListItem(
                         leadingContent = {
                             RadioButton(
-                                selected = status == it.appStatus,
+                                selected = statusType == it.statusType,
                                 onClick = null
                             )
                         },
                         headlineContent = { Text(it.title) },
                         modifier = Modifier
                             .clickable {
-                                onClickStatus(it.appStatus)
+                                onClickStatus(it.statusType)
                             }
                             .padding(horizontal = 8.dp),
                     )

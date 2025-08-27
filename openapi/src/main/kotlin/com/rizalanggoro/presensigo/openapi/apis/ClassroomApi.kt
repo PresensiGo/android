@@ -20,6 +20,7 @@ import com.rizalanggoro.presensigo.openapi.models.GetClassroomRes
 import com.rizalanggoro.presensigo.openapi.models.RequestsCreateClassroom
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateClassroom
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateClassroom
+import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteClassroom
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAll
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllClassroomWithMajors
 import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateClassroom
@@ -44,6 +45,43 @@ import java.text.DateFormat
         httpClientConfig,
         jsonBlock,
     ) {
+
+        /**
+        * DELETE /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param majorId2 major id 
+         * @param classroomId classroom id 
+         * @return ResponsesDeleteClassroom
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete(batchId: kotlin.Int, majorId: kotlin.Int, majorId2: kotlin.Int, classroomId: kotlin.Int): HttpResponse<ResponsesDeleteClassroom> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = 
+                    io.ktor.client.utils.EmptyContent
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.DELETE,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "major_id" + "}", "$majorId2").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return request(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
 
         /**
         * PUT /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}

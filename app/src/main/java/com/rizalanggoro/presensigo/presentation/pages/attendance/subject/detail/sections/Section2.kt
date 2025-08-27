@@ -43,7 +43,6 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.unit.dp
-import com.rizalanggoro.presensigo.core.constants.AppAttendanceStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
 import com.rizalanggoro.presensigo.core.constants.attendanceStatuses
 import com.rizalanggoro.presensigo.core.constants.isLoading
@@ -51,6 +50,7 @@ import com.rizalanggoro.presensigo.core.constants.isSuccess
 import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.core.extensions.isAfterDateTime
 import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatusType
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
 import com.rizalanggoro.presensigo.openapi.models.Student
 import com.rizalanggoro.presensigo.presentation.components.PrimaryButton
@@ -63,7 +63,7 @@ import org.koin.androidx.compose.koinViewModel
 
 private data class SelectedStudent(
     val student: Student,
-    val status: AppAttendanceStatus? = null
+    val statusType: ConstantsAttendanceStatusType? = null
 )
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -304,7 +304,7 @@ fun Section2() {
                             ListItem(
                                 leadingContent = {
                                     RadioButton(
-                                        selected = selectedStudent!!.status == it.appStatus,
+                                        selected = selectedStudent!!.statusType == it.statusType,
                                         onClick = null
                                     )
                                 },
@@ -312,7 +312,7 @@ fun Section2() {
                                 modifier = Modifier
                                     .clickable {
                                         selectedStudent = selectedStudent!!.copy(
-                                            status = it.appStatus
+                                            statusType = it.statusType
                                         )
                                     }
                                     .padding(horizontal = 8.dp),
@@ -331,10 +331,10 @@ fun Section2() {
                             text = "Simpan",
                             isLoading = createRecordState.isLoading()
                         ) {
-                            if (selectedStudent!!.status != null)
+                            if (selectedStudent!!.statusType != null)
                                 viewModel.createRecord(
                                     studentId = selectedStudent!!.student.id,
-                                    status = selectedStudent!!.status!!
+                                    statusType = selectedStudent!!.statusType!!
                                 )
                         }
                         SecondaryButton(

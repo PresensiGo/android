@@ -28,6 +28,8 @@ import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesRes
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendancesStudentRes
 import com.rizalanggoro.presensigo.openapi.models.GetGeneralAttendanceRes
 import com.rizalanggoro.presensigo.openapi.models.GetSubjectAttendanceRes
+import com.rizalanggoro.presensigo.openapi.models.RequestsExportGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.RequestsExportSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesCreateGeneralAttendanceRecord
@@ -39,6 +41,8 @@ import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendan
 import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteGeneralAttendanceRecord
 import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesDeleteSubjectAttendanceRecord
+import com.rizalanggoro.presensigo.openapi.models.ResponsesExportGeneralAttendance
+import com.rizalanggoro.presensigo.openapi.models.ResponsesExportSubjectAttendance
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllGeneralAttendanceRecords
 import com.rizalanggoro.presensigo.openapi.models.ResponsesGetAllSubjectAttendanceRecords
 import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateGeneralAttendance
@@ -63,6 +67,75 @@ import java.text.DateFormat
         httpClientConfig,
         jsonBlock,
     ) {
+
+        /**
+        * POST /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/export
+        * 
+        * 
+         * @param batchId batch id 
+         * @param majorId major id 
+         * @param classroomId classroom id 
+         * @param body body 
+         * @return ResponsesExportSubjectAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost(batchId: kotlin.Int, majorId: kotlin.Int, classroomId: kotlin.Int, body: RequestsExportSubjectAttendance): HttpResponse<ResponsesExportSubjectAttendance> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/export".replace("{" + "batch_id" + "}", "$batchId").replace("{" + "major_id" + "}", "$majorId").replace("{" + "classroom_id" + "}", "$classroomId"),
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
+
+        /**
+        * POST /api/v1/general-attendances/export
+        * 
+        * 
+         * @param body body 
+         * @return ResponsesExportGeneralAttendance
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1GeneralAttendancesExportPost(body: RequestsExportGeneralAttendance): HttpResponse<ResponsesExportGeneralAttendance> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.POST,
+            "/api/v1/general-attendances/export",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
 
         /**
         * POST /api/v1/general-attendances

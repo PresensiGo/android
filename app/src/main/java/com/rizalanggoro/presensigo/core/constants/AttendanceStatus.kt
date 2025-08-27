@@ -1,6 +1,6 @@
 package com.rizalanggoro.presensigo.core.constants
 
-import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatusType
 
 enum class AppAttendanceStatus {
     Present,
@@ -10,44 +10,27 @@ enum class AppAttendanceStatus {
     Alpha
 }
 
-fun AppAttendanceStatus.toConstantsAttendanceStatus(): ConstantsAttendanceStatus = when (this) {
-    AppAttendanceStatus.Present -> ConstantsAttendanceStatus.AttendanceStatusPresent
-    AppAttendanceStatus.Late -> ConstantsAttendanceStatus.AttendanceStatusPresent
-    AppAttendanceStatus.Sick -> ConstantsAttendanceStatus.AttendanceStatusSick
-    AppAttendanceStatus.Permission -> ConstantsAttendanceStatus.AttendanceStatusPermission
-    AppAttendanceStatus.Alpha -> ConstantsAttendanceStatus.AttendanceStatusAlpha
-}
 
 data class AttendanceStatus(
     val title: String,
-    val status: ConstantsAttendanceStatus,
-    val appStatus: AppAttendanceStatus
+    val statusType: ConstantsAttendanceStatusType
 )
 
 val attendanceStatuses = listOf<AttendanceStatus>(
     AttendanceStatus(
         "Hadir tepat waktu",
-        ConstantsAttendanceStatus.AttendanceStatusPresent,
-        AppAttendanceStatus.Present
+        ConstantsAttendanceStatusType.AttendanceStatusTypePresentOnTime
     ),
     AttendanceStatus(
-        "Hadir terlambat",
-        ConstantsAttendanceStatus.AttendanceStatusPresent,
-        AppAttendanceStatus.Late
+        "Hadir waktu saat ini",
+        ConstantsAttendanceStatusType.AttendanceStatusTypePresentLate
     ),
     AttendanceStatus(
         "Sakit",
-        ConstantsAttendanceStatus.AttendanceStatusSick,
-        AppAttendanceStatus.Sick
+        ConstantsAttendanceStatusType.AttendanceStatusTypeSick
     ),
     AttendanceStatus(
         "Izin",
-        ConstantsAttendanceStatus.AttendanceStatusPermission,
-        AppAttendanceStatus.Permission
+        ConstantsAttendanceStatusType.AttendanceStatusTypePermission
     ),
-//    AttendanceStatus(
-//        "Alpha",
-//        ConstantsAttendanceStatus.AttendanceStatusAlpha,
-//        AppAttendanceStatus.Alpha
-//    )
 )

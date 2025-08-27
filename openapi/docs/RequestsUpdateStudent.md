@@ -1,15 +1,12 @@
 
-# Student
+# RequestsUpdateStudent
 
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **classroomId** | **kotlin.Int** |  |  |
 | **gender** | **kotlin.String** |  |  |
-| **id** | **kotlin.Int** |  |  |
 | **name** | **kotlin.String** |  |  |
 | **nis** | **kotlin.String** |  |  |
-| **schoolId** | **kotlin.Int** |  |  |
 
 
 

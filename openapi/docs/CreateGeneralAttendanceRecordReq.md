@@ -4,8 +4,7 @@
 ## Properties
 | Name | Type | Description | Notes |
 | ------------ | ------------- | ------------- | ------------- |
-| **datetime** | **kotlin.String** |  |  |
-| **status** | [**ConstantsAttendanceStatus**](ConstantsAttendanceStatus.md) |  |  |
+| **status** | [**ConstantsAttendanceStatusType**](ConstantsAttendanceStatusType.md) |  |  |
 | **studentId** | **kotlin.Int** |  |  |
 
 

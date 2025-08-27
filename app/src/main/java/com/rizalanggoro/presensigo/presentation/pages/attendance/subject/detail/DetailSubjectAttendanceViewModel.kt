@@ -1,17 +1,13 @@
 package com.rizalanggoro.presensigo.presentation.pages.attendance.subject.detail
 
 import android.graphics.Bitmap
-import android.icu.util.Calendar
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import androidx.navigation.toRoute
 import com.google.gson.Gson
 import com.rizalanggoro.presensigo.core.Routes
-import com.rizalanggoro.presensigo.core.constants.AppAttendanceStatus
 import com.rizalanggoro.presensigo.core.constants.UiState
-import com.rizalanggoro.presensigo.core.constants.toConstantsAttendanceStatus
-import com.rizalanggoro.presensigo.core.extensions.formatDateTime
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.core.qr.QrGenerator
 import com.rizalanggoro.presensigo.domain.QrData
@@ -19,6 +15,7 @@ import com.rizalanggoro.presensigo.openapi.apis.AttendanceApi
 import com.rizalanggoro.presensigo.openapi.apis.ClassroomApi
 import com.rizalanggoro.presensigo.openapi.apis.SubjectApi
 import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatus
+import com.rizalanggoro.presensigo.openapi.models.ConstantsAttendanceStatusType
 import com.rizalanggoro.presensigo.openapi.models.CreateSubjectAttendanceRecordReq
 import com.rizalanggoro.presensigo.openapi.models.GetAllSubjectAttendanceRecordsItem
 import com.rizalanggoro.presensigo.openapi.models.GetClassroomRes
@@ -194,11 +191,9 @@ class DetailSubjectAttendanceViewModel(
         }
     }
 
-    fun createRecord(studentId: Int, status: AppAttendanceStatus) = viewModelScope.launch {
-        try {
-            if (attendanceState.value is UiState.Success) {
-                val attendance = (attendanceState.value as UiState.Success).data.subjectAttendance
-
+    fun createRecord(studentId: Int, statusType: ConstantsAttendanceStatusType) =
+        viewModelScope.launch {
+            try {
                 _createRecordState.update { UiState.Loading }
                 attendanceApi.createSubjectAttendanceRecord(
                     batchId = params.batchId,
@@ -206,28 +201,23 @@ class DetailSubjectAttendanceViewModel(
                     classroomId = params.classroomId,
                     subjectAttendanceId = params.attendanceId,
                     body = CreateSubjectAttendanceRecordReq(
-                        datetime = when (status) {
-                            AppAttendanceStatus.Present -> attendance.dateTime.formatDateTime("yyyy-MM-dd HH:mm:ss")
-                            else -> Calendar.getInstance().timeInMillis.formatDateTime("yyyy-MM-dd HH:mm:ss")
-                        },
-                        status = status.toConstantsAttendanceStatus(),
+                        status = statusType,
                         studentId = studentId
                     )
                 )
                 _createRecordState.update { UiState.Success(Unit) }
+            } catch (e: ResponseException) {
+                e.printStackTrace()
+                _createRecordState.update {
+                    UiState.Failure(
+                        message = e.response.bodyAsText().toFailure().message
+                    )
+                }
+            } catch (e: Exception) {
+                e.printStackTrace()
+                _createRecordState.update { UiState.Failure() }
             }
-        } catch (e: ResponseException) {
-            e.printStackTrace()
-            _createRecordState.update {
-                UiState.Failure(
-                    message = e.response.bodyAsText().toFailure().message
-                )
-            }
-        } catch (e: Exception) {
-            e.printStackTrace()
-            _createRecordState.update { UiState.Failure() }
         }
-    }
 
     fun deleteRecord(recordId: Int) = viewModelScope.launch {
         try {

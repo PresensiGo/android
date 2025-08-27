@@ -4,6 +4,7 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete**](ClassroomApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete) | **DELETE** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id} |  |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut**](ClassroomApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut) | **PUT** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id} |  |
 | [**apiV1BatchesBatchIdMajorsMajorIdClassroomsPost**](ClassroomApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsPost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | [**getAllClassroomWithMajors**](ClassroomApi.md#getAllClassroomWithMajors) | **GET** /api/v1/classrooms/batches/{batch_id} |  |
@@ -11,6 +12,56 @@ All URIs are relative to *http://localhost*
 | [**getAllClassroomsByMajorId**](ClassroomApi.md#getAllClassroomsByMajorId) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms |  |
 | [**getClassroom**](ClassroomApi.md#getClassroom) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id} |  |
 
+
+<a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete"></a>
+# **apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete**
+> ResponsesDeleteClassroom apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete(batchId, majorId, majorId2, classroomId)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = ClassroomApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+val majorId2 : kotlin.Int = 56 // kotlin.Int | major id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+try {
+    val result : ResponsesDeleteClassroom = apiInstance.apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete(batchId, majorId, majorId2, classroomId)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling ClassroomApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling ClassroomApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdDelete")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| **majorId** | **kotlin.Int**| major id | |
+| **majorId2** | **kotlin.Int**| major id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **classroomId** | **kotlin.Int**| classroom id | |
+
+### Return type
+
+[**ResponsesDeleteClassroom**](ResponsesDeleteClassroom.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
 <a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut"></a>
 # **apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdPut**

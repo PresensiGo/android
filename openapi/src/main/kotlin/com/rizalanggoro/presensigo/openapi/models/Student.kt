@@ -22,6 +22,7 @@ import com.google.gson.annotations.SerializedName
  * 
  *
  * @param classroomId 
+ * @param gender 
  * @param id 
  * @param name 
  * @param nis 
@@ -33,6 +34,9 @@ data class Student (
 
     @SerializedName("classroom_id")
     val classroomId: kotlin.Int,
+
+    @SerializedName("gender")
+    val gender: kotlin.String,
 
     @SerializedName("id")
     val id: kotlin.Int,

@@ -4,6 +4,8 @@ All URIs are relative to *http://localhost*
 
 | Method | HTTP request | Description |
 | ------------- | ------------- | ------------- |
+| [**apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost**](AttendanceApi.md#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost) | **POST** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/export |  |
+| [**apiV1GeneralAttendancesExportPost**](AttendanceApi.md#apiV1GeneralAttendancesExportPost) | **POST** /api/v1/general-attendances/export |  |
 | [**createGeneralAttendance**](AttendanceApi.md#createGeneralAttendance) | **POST** /api/v1/general-attendances |  |
 | [**createGeneralAttendanceRecord**](AttendanceApi.md#createGeneralAttendanceRecord) | **POST** /api/v1/general-attendances/{general_attendance_id}/records |  |
 | [**createGeneralAttendanceRecordStudent**](AttendanceApi.md#createGeneralAttendanceRecordStudent) | **POST** /api/v1/general-attendances/records/student |  |
@@ -25,6 +27,100 @@ All URIs are relative to *http://localhost*
 | [**getSubjectAttendance**](AttendanceApi.md#getSubjectAttendance) | **GET** /api/v1/batches/{batch_id}/majors/{major_id}/classrooms/{classroom_id}/subject-attendances/{subject_attendance_id} |  |
 | [**updateGeneralAttendance**](AttendanceApi.md#updateGeneralAttendance) | **PUT** /api/v1/general_attendances/{general_attendance_id} |  |
 
+
+<a id="apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost"></a>
+# **apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost**
+> ResponsesExportSubjectAttendance apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost(batchId, majorId, classroomId, body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val batchId : kotlin.Int = 56 // kotlin.Int | batch id
+val majorId : kotlin.Int = 56 // kotlin.Int | major id
+val classroomId : kotlin.Int = 56 // kotlin.Int | classroom id
+val body : RequestsExportSubjectAttendance =  // RequestsExportSubjectAttendance | body
+try {
+    val result : ResponsesExportSubjectAttendance = apiInstance.apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost(batchId, majorId, classroomId, body)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#apiV1BatchesBatchIdMajorsMajorIdClassroomsClassroomIdSubjectAttendancesExportPost")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| **batchId** | **kotlin.Int**| batch id | |
+| **majorId** | **kotlin.Int**| major id | |
+| **classroomId** | **kotlin.Int**| classroom id | |
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**RequestsExportSubjectAttendance**](RequestsExportSubjectAttendance.md)| body | |
+
+### Return type
+
+[**ResponsesExportSubjectAttendance**](ResponsesExportSubjectAttendance.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
+
+<a id="apiV1GeneralAttendancesExportPost"></a>
+# **apiV1GeneralAttendancesExportPost**
+> ResponsesExportGeneralAttendance apiV1GeneralAttendancesExportPost(body)
+
+
+
+### Example
+```kotlin
+// Import classes:
+//import com.rizalanggoro.presensigo.openapi.infrastructure.*
+//import com.rizalanggoro.presensigo.openapi.models.*
+
+val apiInstance = AttendanceApi()
+val body : RequestsExportGeneralAttendance =  // RequestsExportGeneralAttendance | body
+try {
+    val result : ResponsesExportGeneralAttendance = apiInstance.apiV1GeneralAttendancesExportPost(body)
+    println(result)
+} catch (e: ClientException) {
+    println("4xx response calling AttendanceApi#apiV1GeneralAttendancesExportPost")
+    e.printStackTrace()
+} catch (e: ServerException) {
+    println("5xx response calling AttendanceApi#apiV1GeneralAttendancesExportPost")
+    e.printStackTrace()
+}
+```
+
+### Parameters
+| Name | Type | Description  | Notes |
+| ------------- | ------------- | ------------- | ------------- |
+| **body** | [**RequestsExportGeneralAttendance**](RequestsExportGeneralAttendance.md)| body | |
+
+### Return type
+
+[**ResponsesExportGeneralAttendance**](ResponsesExportGeneralAttendance.md)
+
+### Authorization
+
+No authorization required
+
+### HTTP request headers
+
+ - **Content-Type**: Not defined
+ - **Accept**: */*
 
 <a id="createGeneralAttendance"></a>
 # **createGeneralAttendance**

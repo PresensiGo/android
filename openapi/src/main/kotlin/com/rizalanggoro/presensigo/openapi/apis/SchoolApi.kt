@@ -16,6 +16,8 @@
 package com.rizalanggoro.presensigo.openapi.apis
 
 import com.rizalanggoro.presensigo.openapi.models.GetSchoolRes
+import com.rizalanggoro.presensigo.openapi.models.RequestsUpdateSchool
+import com.rizalanggoro.presensigo.openapi.models.ResponsesUpdateSchool
 
 import com.rizalanggoro.presensigo.openapi.infrastructure.*
 import io.ktor.client.HttpClientConfig
@@ -37,6 +39,39 @@ import java.text.DateFormat
         httpClientConfig,
         jsonBlock,
     ) {
+
+        /**
+        * PUT /api/v1/schools/profile
+        * 
+        * 
+         * @param body body 
+         * @return ResponsesUpdateSchool
+        */
+            @Suppress("UNCHECKED_CAST")
+        open suspend fun apiV1SchoolsProfilePut(body: RequestsUpdateSchool): HttpResponse<ResponsesUpdateSchool> {
+
+            val localVariableAuthNames = listOf<String>()
+
+            val localVariableBody = body
+
+            val localVariableQuery = mutableMapOf<String, List<String>>()
+
+            val localVariableHeaders = mutableMapOf<String, String>()
+
+            val localVariableConfig = RequestConfig<kotlin.Any?>(
+            RequestMethod.PUT,
+            "/api/v1/schools/profile",
+            query = localVariableQuery,
+            headers = localVariableHeaders,
+            requiresAuthentication = false,
+            )
+
+            return jsonRequest(
+            localVariableConfig,
+            localVariableBody,
+            localVariableAuthNames
+            ).wrap()
+            }
 
         /**
         * GET /api/v1/schools/profile
