@@ -103,4 +103,21 @@ class AuthViewModel(
             _loginState.update { UiState.Failure() }
         }
     }
+
+    private val _deviceIdState = MutableStateFlow<String>("")
+    val deviceIdState = _deviceIdState.asStateFlow()
+
+    @SuppressLint("HardwareIds")
+    private fun getDeviceId() {
+        _deviceIdState.update {
+            Settings.Secure.getString(
+                application.contentResolver,
+                Settings.Secure.ANDROID_ID
+            )
+        }
+    }
+
+    init {
+        getDeviceId()
+    }
 }

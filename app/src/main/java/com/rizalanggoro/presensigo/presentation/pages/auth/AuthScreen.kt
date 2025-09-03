@@ -46,6 +46,7 @@ import org.koin.androidx.compose.koinViewModel
 fun AuthScreen() {
     val viewModel = koinViewModel<AuthViewModel>()
     val login by viewModel.loginState.collectAsState()
+    val deviceId by viewModel.deviceIdState.collectAsState()
 
     val navController = LocalNavController.current
     val scope = rememberCoroutineScope()
@@ -199,6 +200,11 @@ fun AuthScreen() {
                             "Perhatian! Setelah Anda menekan tombol masuk, perangkat akan ditautkan " +
                                     "dengan NIS Anda sehingga perangkat ini tidak bisa digunakan untuk masuk " +
                                     "menggunakan akun lainnya.",
+                            style = MaterialTheme.typography.bodySmall,
+                            color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
+                        )
+                        Text(
+                            "ID perangkat: $deviceId",
                             style = MaterialTheme.typography.bodySmall,
                             color = MaterialTheme.colorScheme.onBackground.copy(alpha = .8f)
                         )
