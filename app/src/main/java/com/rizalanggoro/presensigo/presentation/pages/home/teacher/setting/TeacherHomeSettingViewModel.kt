@@ -3,6 +3,7 @@ package com.rizalanggoro.presensigo.presentation.pages.home.teacher.setting
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rizalanggoro.presensigo.core.constants.UiState
+import com.rizalanggoro.presensigo.core.di.serviceModule
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.openapi.apis.AccountApi
@@ -16,6 +17,8 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class TeacherHomeSettingViewModel(
     private val accountApi: AccountApi,
@@ -87,6 +90,9 @@ class TeacherHomeSettingViewModel(
                     refreshToken = token.refreshToken
                 )
             )
+
+            unloadKoinModules(serviceModule)
+            loadKoinModules(serviceModule)
 
             _logout.update { UiState.Success(Unit) }
         } catch (e: ResponseException) {

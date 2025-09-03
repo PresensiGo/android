@@ -3,6 +3,7 @@ package com.rizalanggoro.presensigo.presentation.pages.student.profile
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.rizalanggoro.presensigo.core.constants.UiState
+import com.rizalanggoro.presensigo.core.di.serviceModule
 import com.rizalanggoro.presensigo.core.failure.toFailure
 import com.rizalanggoro.presensigo.data.managers.TokenManager
 import com.rizalanggoro.presensigo.openapi.apis.StudentApi
@@ -13,10 +14,12 @@ import kotlinx.coroutines.flow.MutableStateFlow
 import kotlinx.coroutines.flow.asStateFlow
 import kotlinx.coroutines.flow.update
 import kotlinx.coroutines.launch
+import org.koin.core.context.loadKoinModules
+import org.koin.core.context.unloadKoinModules
 
 class StudentProfileViewModel(
     private val tokenManager: TokenManager,
-    private val studentApi: StudentApi
+    private val studentApi: StudentApi,
 ) : ViewModel() {
     private val _profileState = MutableStateFlow<UiState<GetProfileStudentRes>>(UiState.Loading)
     val profileState = _profileState.asStateFlow()
@@ -46,7 +49,11 @@ class StudentProfileViewModel(
 
     fun logout() = viewModelScope.launch {
         _logoutState.update { UiState.Loading }
+
         tokenManager.clear()
+        unloadKoinModules(serviceModule)
+        loadKoinModules(serviceModule)
+
         _logoutState.update { UiState.Success(Unit) }
     }
 
